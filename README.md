@@ -1,6 +1,6 @@
 # Project Corgi
 
-Angular IMS with Java Hibernate backend hosted on RDS on AWS
+An Inventory Management System built using Angular as the front-end framework with Java back-end that utilize Hibernate to interact with our database hosted on AWS RDS
 
 ## Getting Started
 
@@ -24,10 +24,12 @@ Please follow the steps below:
 npm install 
 ```
 
-And repeat
+Starting the project in a Java IDE will allow maven to auto create and install. 
+Once this is done, please use the command below 
+*The default port ng serve command serves to localhost port 4200*
 
 ```
-until finished
+ng serve
 ```
 
 End with an example of getting some data out of the system or using it for a little demo
@@ -58,6 +60,7 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
+* [Java] - Programming Language
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [Angular](https://angular.io/) - Front-end Framework
 * [Angular Material](https://material.angular.io/) - Angular CSS Framework
@@ -72,8 +75,10 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Steven Hang** - *Front End*
+* **Steven Hang** - *Back End*
 * **Chen Sia** - *Front End*
+* **David Velez** - 
+* **William Shook** - 
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
