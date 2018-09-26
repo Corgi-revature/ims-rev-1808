@@ -1,5 +1,7 @@
 package com.revature.data;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -19,46 +21,78 @@ public class UserHibernate implements UserDAO {
 	private HibernateUtil hu = HibernateUtil.getInstance();
 	
 	@Override
-	public User addUser(User user) {
-		Session session = hu.getSession();
+	public int addUser(User use) {
+		Session se = hu.getSession();
 		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
-			int i = (Integer) session.save(user);
+			tx = se.beginTransaction();
+			int id = (Integer)se.save(use);
 			tx.commit();
-			return user;
+			return id;
 		} catch (Exception e) {
 			tx.rollback();
-			e.printStackTrace();
-			return null;
+			log.trace(e.getMessage());
+			return 0;
 		} finally {
-			session.close();
+			se.close();
 		}
 	}
 	@Override
-	public User getUserByLogin(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
+	public User getUserById(int id) {
+		Session se = hu.getSession();
+		User use = se.get(User.class,  id);
+		return use;
 	}
 	@Override
 	public Set<User> getUsersCriteria() {
-		// TODO Auto-generated method stub
-		return null;
+		Session se = hu.getSession();
+		CriteriaBuilder build = se.getCriteriaBuilder();
+		CriteriaQuery<User> crit = build.createQuery(User.class);
+		Root<User> root = crit.from(User.class);
+		crit.select(root);
+		List<User> users = se.createQuery(crit).getResultList();
+		return new HashSet<User>(users);
 	}
 	@Override
-	public Set<User> getUsersHQL() {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<User> getUsers() {
+		Session se = hu.getSession();
+		String hql = "FROM com.revature.beans.User";
+		Query<User> que = se.createQuery(hql, User.class);
+		List<User> userList = que.getResultList();
+		se.close();
+		return new HashSet<User>(userList);
 	}
 	@Override
-	public User updateUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public void updateUser(User use) {
+		Session se = hu.getSession();
+		Transaction tx = se.beginTransaction();
+		try {
+			se.update(use);
+			tx.commit();
+		} catch(Exception e) {
+			tx.rollback();
+			log.trace(e.getMessage());
+		} finally {
+			se.close();
+		}
 	}
 	@Override
-	public void deleteUser(User user) {
-		// TODO Auto-generated method stub
+	public void deleteUser(User use) {
+		Session se = hu.getSession();
+		Transaction tx = se.beginTransaction();
+		try {
+			se.delete(use);
+			tx.commit();
+		} catch(Exception e) {
+			tx.rollback();
+			log.trace(e.getMessage());
+		}
 		
+	}
+	@Override
+	public User getUserLogin(String email, String password) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
