@@ -9,8 +9,11 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CoreService {
-  private String: Login;
-  constructor(private http: HttpClient) {}
+  private login: Login;
+
+  constructor(private http: HttpClient) {
+    const url = 'http://localhost:8080/p2a/';
+  }
   postLogin(email: String, password: String): Observable<Login> {
     return this.http
       .post('http://localhost:8080/p2a/login', {
