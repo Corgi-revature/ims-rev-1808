@@ -1,6 +1,8 @@
 export class Login {
-    id: number;
-    firstname: String;
-    lastname: String;
-    email: String;
+    userid: number;
+    first: string;
+    last: string;
+    email: string;
+    usertype: string;
+    phone: string;
 }
