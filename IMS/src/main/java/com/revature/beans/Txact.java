@@ -2,10 +2,26 @@ package com.revature.beans;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="transactions")
 public class Txact {
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="txact")
+	@SequenceGenerator(name="txact", sequenceName="tx_seq", allocationSize=1)
 	private int id;
+	@Column(name="created")
 	private Date created;
+	@Column(name="token")
 	private String token;
+	@Column(name="txid")
 	private String txid;
 	public Txact() {
 		super();
