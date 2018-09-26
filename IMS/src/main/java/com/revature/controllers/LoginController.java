@@ -11,42 +11,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.revature.beans.User;
 import com.revature.services.LoginService;
 
-
 @Controller
-@RequestMapping(value="/login")
-@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping(value = "/login")
 public class LoginController {
 	@Autowired
 	private LoginService ls;
-	
-	// Direct someone to the login service if the session has no user
-	@RequestMapping(method=RequestMethod.GET)
-	public String goToLogin(HttpSession session) {
-		if(session.getAttribute("user")!=null) {
-			return "redirect:login";
-		}
-		else {
-			return "static/login.html";
-		}
+
+	@RequestMapping(method = RequestMethod.GET)
+	public String goLogin(HttpSession session) {
+		if (session.getAttribute("user") != null)
+			return "redirect:home";
+		return "static/login.html";
 	}
 
-	// When someone tries to login, direct them to login service
-	@RequestMapping(method=RequestMethod.POST) 
-	public String login(String email, String password, HttpSession session) {
-		User user = ls.login(email, password);
-		if (user==null) {
-			return "redirect:login";
+	@RequestMapping(method = RequestMethod.POST)
+	public String login(String username, String password, HttpSession session) {
+		User u = ls.login(username, password);
+		if (u == null) {
+			return "Login Failed";
 		} else {
-			session.setAttribute("user", user);
-			return "redirect:login";
+			session.setAttribute("user", u);
+			return "Sucess";
 		}
 	}
-	
-	// If someone tries to go to the 'Home' page, take them to login
-	@RequestMapping(value="/home", method=RequestMethod.GET)
+	// will be removed
+	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String byPassLogin() {
-		return "/static/login.html";
+		return "/static/hello.html";
 	}
 }
-
-

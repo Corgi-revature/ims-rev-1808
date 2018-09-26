@@ -1,20 +1,15 @@
 package com.revature.services;
 
-import java.util.List;
+import java.util.Set;
 import com.revature.beans.Txact;
 
 public interface TxactService {
-	List<Txact> getTxacts();
-	Txact getTxactById(Integer id);
-	Txact getTxactCriteria();
 	
-	// Returns no value
-	/*void createTxact();
-	void updateTxact();	
-	void deleteTxact();*/
-	
-	// Returns value
-	Integer createTxact(Integer id);
-	Integer updateTxact(Integer id);	
-	Integer deleteTxact(Integer id);
+	Txact addTxact(Txact txa);
+	Txact getTxactById(int id);
+	Set<Txact> getTxacts();
+	Set<Txact> getTxactsCriteria();	
+	void updateTxact(Txact txa);	
+	void deleteTxact(Txact txa);
+	void deleteTxactById(int id);
 }

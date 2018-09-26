@@ -1,6 +1,6 @@
 package com.revature.controllers;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,35 +19,39 @@ public class TxactController {
 	@Autowired
 	private TxactService ts;
 
-	@RequestMapping(method = RequestMethod.GET)
-	List<Txact> getAllTxacts() {
-		return ts.getTxacts();
-	}
-
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	Txact getTxactById(Integer id) {
 		return ts.getTxactById(id);
 	}
-
+	
+	@RequestMapping(method = RequestMethod.GET)
+	Set<Txact> getTxacts() {
+		return ts.getTxacts();
+	}
+	
 	@RequestMapping(value = "/txact", method = RequestMethod.GET)
-	Txact getTxactCriteria() {
-		return ts.getTxactCriteria();
+	Set<Txact> getTxactCriteria() {
+		return ts.getTxactsCriteria();
 	}
 
 	@RequestMapping(value="/txact", method=RequestMethod.POST)
-	Integer createTxact(@RequestBody Integer id) {
-			ts.createTxact(id);
-			return id;
+	Txact createTxact(@RequestBody Txact txa) {
+			ts.addTxact(txa);
+			return txa;
 	}
 
 	@RequestMapping(value = "/txact", method = RequestMethod.PUT)
-	void updateTxact(@RequestBody Integer id) {
-		ts.updateTxact(id);
+	void updateTxact(@RequestBody Txact txa) {
+		ts.updateTxact(txa);
 	}
 
 	@RequestMapping(value = "/txact", method = RequestMethod.DELETE)
-	void deleteTxact(@RequestBody Integer id) {
-		ts.deleteTxact(id);
+	void deleteTxact(@RequestBody Txact txa) {
+		ts.deleteTxact(txa);
 	}
-
+	
+	@RequestMapping(value = "/txact", method = RequestMethod.DELETE)
+	void deleteTxact(@RequestBody int id) {
+		ts.deleteTxactById(id);
+	}
 }
