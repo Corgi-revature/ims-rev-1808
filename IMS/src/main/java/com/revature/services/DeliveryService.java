@@ -5,9 +5,9 @@ import com.revature.beans.Delivery;
 
 public interface DeliveryService {
 	
-	List<Delivery> getAllDeliveries();
+	List<Delivery> getDeliveries();
 	Delivery getDeliveryById(Integer id);
-	Delivery getDeliveryByCriteria();
+	Delivery getDeliveryCriteria();
 	
 	// Returns no value
 	/*void createDelivery();

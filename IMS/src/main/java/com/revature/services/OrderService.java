@@ -4,9 +4,9 @@ import java.util.List;
 import com.revature.beans.Order;
 
 public interface OrderService {
-	List<Order> getAllOrders();
+	List<Order> getOrders();
 	Order getOrderById(Integer id);
-	Order getOrderByCriteria();
+	Order getOrderCriteria();
 	
 	// Returns no value
 	/*void createOrder();

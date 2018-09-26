@@ -4,9 +4,9 @@ import java.util.List;
 import com.revature.beans.Item;
 
 public interface InventoryService {
-	List<Item> getAllItems();
+	List<Item> getItems();
 	Item getItemById(Integer id);
-	Item getItemByCriteria();
+	Item getItemCriteria();
 	
 	// Returns no value
 	/*void createItem();
