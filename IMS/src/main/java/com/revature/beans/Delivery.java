@@ -26,6 +26,7 @@ public class Delivery {
 		joinColumns=@JoinColumn(name="item"),
 		inverseJoinColumns=@JoinColumn(name="id"))
 	private Set<Item> items;
+	private int amount;
 	private String supplier;
 	public Delivery() {
 		super();
