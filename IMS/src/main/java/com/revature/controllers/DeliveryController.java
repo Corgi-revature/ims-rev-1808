@@ -1,6 +1,6 @@
 package com.revature.controllers;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,33 +19,39 @@ public class DeliveryController {
 	@Autowired
 	private DeliveryService ds;
 
-	@RequestMapping(method = RequestMethod.GET)
-	List<Delivery> getDeliveries(){
-		return ds.getDeliveries();
+	@RequestMapping(value = "/delivery", method = RequestMethod.POST)
+	Delivery addDelivery(@RequestBody Delivery deli) {
+		ds.addDelivery(deli);
+		return deli;
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	Delivery getDeliveryById(Integer id) {
+	Delivery getDeliveryById(int id) {
 		return ds.getDeliveryById(id);
 	}
 	
-	@RequestMapping(value = "/Delivery", method = RequestMethod.GET)
-	Delivery getDeliveryCriteria() {
-		return ds.getDeliveryCriteria();
+		@RequestMapping(method = RequestMethod.GET)
+	Set<Delivery> getDeliverys(){
+		return ds.getDeliverys();
 	}
 	
-	@RequestMapping(value = "/Delivery", method = RequestMethod.POST)
-	Integer createDelivery(@RequestBody Integer id) {
-		ds.createDelivery(id);
-		return id;
-	}
-	@RequestMapping(value = "/Delivery", method = RequestMethod.PUT)
-	void updateDelivery(@RequestBody Integer id) {
-		ds.updateDelivery(id);
+	@RequestMapping(value = "/delivery", method = RequestMethod.GET)
+	Set<Delivery> getDeliverysCriteria() {
+		return ds.getDeliverysCriteria();
 	}
 	
-	@RequestMapping(value = "/Delivery", method = RequestMethod.DELETE)
-	void deleteDelivery(@RequestBody Integer id) {
-		ds.deleteDelivery(id);
+	@RequestMapping(value = "/delivery", method = RequestMethod.PUT)
+	void updateDelivery(@RequestBody Delivery deli) {
+		ds.updateDelivery(deli);
+	}
+	
+	@RequestMapping(value = "/delivery", method = RequestMethod.DELETE)
+	void deleteDelivery(@RequestBody Delivery deli) {
+		ds.deleteDelivery(deli);
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	void deleteDeliveryById(@RequestBody Integer id) {
+		ds.deleteDeliveryById(id);
 	}
 }

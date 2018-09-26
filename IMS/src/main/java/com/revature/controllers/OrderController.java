@@ -1,6 +1,6 @@
 package com.revature.controllers;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,9 +19,10 @@ public class OrderController {
 	@Autowired
 	private OrderService os;
 	
-	@RequestMapping(method = RequestMethod.GET)
-	List<Order> getOrders() {
-		return os.getOrders();
+	@RequestMapping(value="/order", method=RequestMethod.POST)	
+	Order addOrder(@RequestBody Order ord) {
+		os.addOrder(ord);
+		return ord;
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
@@ -29,25 +30,29 @@ public class OrderController {
 		return os.getOrderById(id);
 	}
 	
-	@RequestMapping(value="/order", method=RequestMethod.GET)
-	Order getOrderCriteria() {
-		return os.getOrderCriteria();
+	@RequestMapping(method = RequestMethod.GET)
+	Set<Order> getOrders() {
+		return os.getOrders();
 	}
 	
-	@RequestMapping(value="/order", method=RequestMethod.POST)	
-	Integer createOrder(@RequestBody Integer id) {
-		os.createOrder(id);
-		return id;
+	@RequestMapping(value="/order", method=RequestMethod.GET)
+	Set<Order> getOrdersCriteria() {
+		return os.getOrdersCriteria();
 	}
 	
 	@RequestMapping(value="/order", method=RequestMethod.PUT)
-	void updateOrder(@RequestBody Integer id) {
-		os.updateOrder(id);
+	void updateOrder(@RequestBody Order ord) {
+		os.updateOrder(ord);
 	}
 	
 	@RequestMapping(value="/order", method=RequestMethod.DELETE)
-	void deleteOrder(@RequestBody Integer id) {
-		os.deleteOrder(id);
+	void deleteOrder(@RequestBody Order ord) {
+		os.deleteOrder(ord);
+	}
+	
+	@RequestMapping(value="/order", method=RequestMethod.DELETE)
+	void deleteOrderById(@RequestBody Integer id) {
+		os.deleteOrderById(id);
 	}
 }
 
