@@ -13,61 +13,66 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import com.revature.beans.User;
+import com.revature.beans.Order;
 import com.revature.utils.HibernateUtil;
 
-public class UserHibernate implements UserDAO {
+public class OrderHibernate implements OrderDAO{
 	private Logger log = Logger.getLogger(UserHibernate.class);
-	private HibernateUtil hu = HibernateUtil.getInstance();
-	
+	HibernateUtil hu = HibernateUtil.getInstance();
+	Transaction tx = null;
+
 	@Override
-	public int addUser(User use) {
+	public Order addOrder(Order ord) {
 		Session se = hu.getSession();
-		Transaction tx = null;
 		try {
 			tx = se.beginTransaction();
-			int id = (Integer)se.save(use);
+			se.save(ord);
 			tx.commit();
-			return id;
-		} catch (Exception e) {
+			return ord;
+		} catch(Exception e) {
 			tx.rollback();
 			log.trace(e.getMessage());
-			return 0;
+			return null;
 		} finally {
 			se.close();
 		}
 	}
+
 	@Override
-	public User getUserById(int id) {
+	public Order getOrderById(int id) {
 		Session se = hu.getSession();
-		User use = se.get(User.class,  id);
-		return use;
+		Order ord = se.get(Order.class,  id);
+		return ord;
 	}
+
 	@Override
-	public Set<User> getUsersCriteria() {
+	public Set<Order> getOrdersCriteria() {
 		Session se = hu.getSession();
 		CriteriaBuilder build = se.getCriteriaBuilder();
-		CriteriaQuery<User> crit = build.createQuery(User.class);
-		Root<User> root = crit.from(User.class);
+		CriteriaQuery<Order> crit = build.createQuery(Order.class);
+		Root<Order> root = crit.from(Order.class);
 		crit.select(root);
-		List<User> users = se.createQuery(crit).getResultList();
-		return new HashSet<User>(users);
+		List<Order> orders = se.createQuery(crit).getResultList();
+		return new HashSet<Order>(orders);
+		
 	}
+
 	@Override
-	public Set<User> getUsers() {
+	public Set<Order> getOrders() {
 		Session se = hu.getSession();
-		String hql = "FROM com.revature.beans.User";
-		Query<User> que = se.createQuery(hql, User.class);
-		List<User> userList = que.getResultList();
+		String hql = "FROM com.revature.beans.Order";
+		Query<Order> que = se.createQuery(hql, Order.class);
+		List<Order> orderList = que.getResultList();
 		se.close();
-		return new HashSet<User>(userList);
+		return new HashSet<Order>(orderList);
 	}
+
 	@Override
-	public void updateUser(User use) {
+	public void updateOrder(Order ord) {
 		Session se = hu.getSession();
 		Transaction tx = se.beginTransaction();
 		try {
-			se.update(use);
+			se.update(ord);
 			tx.commit();
 		} catch(Exception e) {
 			tx.rollback();
@@ -75,13 +80,15 @@ public class UserHibernate implements UserDAO {
 		} finally {
 			se.close();
 		}
+		
 	}
+
 	@Override
-	public void deleteUser(User use) {
+	public void deleteOrder(Order ord) {
 		Session se = hu.getSession();
 		Transaction tx = se.beginTransaction();
 		try {
-			se.delete(use);
+			se.delete(ord);
 			tx.commit();
 		} catch(Exception e) {
 			tx.rollback();
@@ -89,6 +96,11 @@ public class UserHibernate implements UserDAO {
 		}
 		
 	}
-	
+
+	@Override
+	public void deleteOrderById(int id) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

@@ -13,14 +13,14 @@ public class User {
 	private int id;
 	private String first;
 	private String last;
-	private int phone;
+	private String phone;
 	private String email;
-	private int usertype;
+	private String usertype;
 	private String password;
 	public User() {
 		super();
 	}
-	public User(int id, String first, String last, int phone, String email, int usertype, String password) {
+	public User(int id, String first, String last, String phone, String email, String usertype, String password) {
 		super();
 		this.id = id;
 		this.first = first;
@@ -48,10 +48,10 @@ public class User {
 	public void setLast(String last) {
 		this.last = last;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public String getEmail() {
@@ -60,10 +60,10 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getUsertype() {
+	public String getUsertype() {
 		return usertype;
 	}
-	public void setUsertype(int usertype) {
+	public void setUsertype(String usertype) {
 		this.usertype = usertype;
 	}
 	public String getPassword() {
@@ -81,8 +81,8 @@ public class User {
 		result = prime * result + id;
 		result = prime * result + ((last == null) ? 0 : last.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + phone;
-		result = prime * result + usertype;
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + ((usertype == null) ? 0 : usertype.hashCode());
 		return result;
 	}
 	@Override
@@ -116,9 +116,15 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (phone != other.phone)
+		if (phone == null) {
+			if (other.phone != null)
+				return false;
+		} else if (!phone.equals(other.phone))
 			return false;
-		if (usertype != other.usertype)
+		if (usertype == null) {
+			if (other.usertype != null)
+				return false;
+		} else if (!usertype.equals(other.usertype))
 			return false;
 		return true;
 	}
