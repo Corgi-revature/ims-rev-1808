@@ -5,10 +5,10 @@ import java.util.Set;
 import com.revature.beans.User;
 
 public interface UserDAO {
-	User addUser(User user);
-	User getUserByLogin(String username, String password);
-	Set<User> getUsersCriteria();
-	Set<User> getUsersHQL();
-	User updateUser(User user);
-	void deleteUser(User user);
+	public int addUser(User user);
+	public User getUserById(int id); 
+	public Set<User> getUsersCriteria();
+	public Set<User> getUsers();
+	public void updateUser(User user);
+	public void deleteUser(User user);
 }
