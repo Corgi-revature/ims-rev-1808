@@ -11,29 +11,30 @@ import com.revature.beans.User;
 import com.revature.services.LoginService;
 
 @Controller
-@RequestMapping(value="/login")
+@RequestMapping(value = "/login")
 public class LoginController {
 	@Autowired
 	private LoginService ls;
-	
-	@RequestMapping(method=RequestMethod.GET)
+
+	@RequestMapping(method = RequestMethod.GET)
 	public String goLogin(HttpSession session) {
-		if(session.getAttribute("user")!=null)
+		if (session.getAttribute("user") != null)
 			return "redirect:home";
 		return "static/login.html";
 	}
-	
-	@RequestMapping(method=RequestMethod.POST)
+
+	@RequestMapping(method = RequestMethod.POST)
 	public String login(String username, String password, HttpSession session) {
-		User u = ls.login(username,  password);
-		if(u==null) {
+		User u = ls.login(username, password);
+		if (u == null) {
 			return "Login Failed";
 		} else {
 			session.setAttribute("user", u);
 			return "Sucess";
 		}
 	}
-	@RequestMapping(value="/hello", method=RequestMethod.GET)
+	// will be removed
+	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String byPassLogin() {
 		return "/static/hello.html";
 	}
