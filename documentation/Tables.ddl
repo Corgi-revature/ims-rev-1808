@@ -1,5 +1,5 @@
 --DDL
-DROP TABLE inventoryitems CASCADE CONSTRAINTS;
+DROP TABLE items CASCADE CONSTRAINTS;
 DROP TABLE usertypes CASCADE CONSTRAINTS;
 DROP TABLE transactions CASCADE CONSTRAINTS;
 DROP TABLE suppliers CASCADE CONSTRAINTS;
@@ -7,6 +7,7 @@ DROP TABLE orders CASCADE CONSTRAINTS;
 DROP TABLE supplieritems CASCADE CONSTRAINTS;
 DROP TABLE deliveries CASCADE CONSTRAINTS;
 DROP TABLE users CASCADE CONSTRAINTS;
+DROP TABLE inventory CASCADE CONSTRAINTS;
 
 
 DROP SEQUENCE user_seq;
@@ -17,15 +18,22 @@ DROP SEQUENCE item_seq;
 DROP SEQUENCE order_seq;
 DROP SEQUENCE usertype_seq;
 DROP SEQUENCE tx_seq;
+DROP SEQUENCE invent_seq;
 
-CREATE TABLE inventoryitems(
+CREATE TABLE items(
 	id number(20) PRIMARY KEY,
 	itemname varchar2(255),
-	price number(10,2),
-	stock number(20),
+	price number(10,2)
+    );
+    
+CREATE TABLE inventory(
+	id number(20) PRIMARY KEY,
+	item number(20),
 	packagedate date,
-	useby date
-);
+	useby date,
+	stock number(20),
+	CONSTRAINT fk_item_inventory FOREIGN KEY (item) REFERENCES items(id)
+	);
 
 CREATE TABLE usertypes(
 	id number(20) PRIMARY KEY,
@@ -64,7 +72,7 @@ CREATE TABLE orders(
 	transaction number(20),
 	address varchar2(255),
 	created date,
-	CONSTRAINT fk_order_item FOREIGN KEY (item) REFERENCES inventoryitems(id),
+	CONSTRAINT fk_order_item FOREIGN KEY (item) REFERENCES items(id),
 	CONSTRAINT fk_order_user FOREIGN KEY (userid) REFERENCES users(id),
 	CONSTRAINT fk_order_transaction FOREIGN KEY (transaction) REFERENCES transactions(id)
 );
@@ -73,7 +81,7 @@ CREATE TABLE supplieritems(
 	id number(20) PRIMARY KEY,
 	supplier number(20),
 	item number(20),
-	CONSTRAINT fk_supplier_item FOREIGN KEY (item) REFERENCES inventoryitems(id),
+	CONSTRAINT fk_supplier_item FOREIGN KEY (item) REFERENCES items(id),
 	CONSTRAINT fk_suppliers FOREIGN KEY (supplier) REFERENCES suppliers(id)
 );
 
@@ -82,7 +90,8 @@ CREATE TABLE deliveries(
 	item number(20),
 	amount number(20),
 	datereceived date,
-	CONSTRAINT fk_deliver_item FOREIGN KEY (item) REFERENCES inventoryitems(id)
+	supplier number(20),
+	CONSTRAINT fk_deliver_item FOREIGN KEY (item) REFERENCES items(id)
 );
 
 
@@ -95,3 +104,4 @@ CREATE SEQUENCE item_seq;
 CREATE SEQUENCE order_seq;
 CREATE SEQUENCE usertype_seq;
 CREATE SEQUENCE tx_seq;
+CREATE SEQUENCE invent_seq;
