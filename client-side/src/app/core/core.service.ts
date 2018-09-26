@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Login } from '../class/login';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -10,13 +10,12 @@ import { map } from 'rxjs/operators';
 })
 export class CoreService {
   private login: Login;
+  private url = 'http://localhost:8080/p2a/';
 
-  constructor(private http: HttpClient) {
-    const url = 'http://localhost:8080/p2a/';
-  }
+  constructor(private http: HttpClient) {}
   postLogin(email: String, password: String): Observable<Login> {
     return this.http
-      .post('http://localhost:8080/p2a/login', {
+      .post(`${this.url}login`, {
         email: email,
         password: password
       })
@@ -24,13 +23,14 @@ export class CoreService {
   }
 
   getLogin(sessionId: string): Observable<Login> {
-    return this.http
-      .get('http://localhost:8080/p2a/login')
-      .pipe(map(resp => resp as Login));
+    return this.http.get(`${this.url}login`).pipe(map(resp => resp as Login));
   }
 
   getForgotten(email: string) {
-    return this.http
-      .get('http://localhost:8080/p2a/register');
+    return this.http.get(`${this.url}forget`);
+  }
+
+  postUser(user: Login): Observable<any> {
+    return this.http.post(`${this.url}register`, user);
   }
 }
