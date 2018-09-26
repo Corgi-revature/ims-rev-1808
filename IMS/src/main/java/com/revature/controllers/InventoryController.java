@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,38 +22,42 @@ import com.revature.services.InventoryService;
 public class InventoryController {
 	@Autowired
 	private InventoryService is;
-
-	@RequestMapping(method = RequestMethod.GET)
-	List<Item> getItems() {
-		return is.getItems();
+	
+	@RequestMapping(value="/item", method=RequestMethod.POST)
+	Item addItem(@RequestBody Item ite) {
+		is.addItem(ite);
+		return ite;
 	}
-
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	Item getItemById(Integer id) {
+	Item getItemById(int id) {
 		return is.getItemById(id);
 	}
 
-	@RequestMapping(value = "/item", method = RequestMethod.GET)
-	Item getItemCriteria() {
-		return is.getItemCriteria();
+	@RequestMapping(method = RequestMethod.GET)
+	Set<Item> getItems() {
+		return is.getItems();
 	}
 
-	@RequestMapping(value="/item", method=RequestMethod.POST)
-	Integer createItem(@RequestBody Integer id) {
-		is.createItem(id);
-		return id;
+	@RequestMapping(value = "/item", method = RequestMethod.GET)
+	Set<Item> getItemsCriteria() {
+		return is.getItemsCriteria();
 	}
 
 	@RequestMapping(value = "/item", method = RequestMethod.PUT)
-	void updateItem(@RequestBody Integer id) {
-		is.updateItem(id);
+	void updateItem(@RequestBody  Item ite) {
+		is.updateItem(ite);
 	}
 
 	@RequestMapping(value = "/item", method = RequestMethod.DELETE)
-	void deleteItem(@RequestBody Integer id) {
-		is.deleteItem(id);
+	void deleteItem(@RequestBody  Item ite) {
+		is.deleteItem(ite);
 	}
 	
+	@RequestMapping(value = "/item", method = RequestMethod.DELETE)
+	void deleteItemById(@RequestBody int id) {
+		is.deleteItemById(id);
+	}
 }
 
 

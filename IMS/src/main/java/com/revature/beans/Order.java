@@ -1,5 +1,19 @@
 package com.revature.beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="orders")
 public class Order {
 /*
  * id
@@ -9,11 +23,25 @@ public class Order {
  * txid
  * address
  */
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="order")
+	@SequenceGenerator(name="order", sequenceName="order_seq", allocationSize=1)
 	private int id;
+	@Column(name="item")
 	private Item item;
+	@Column(name="amount")
 	private int amount;
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="user",
+		joinColumns=@JoinColumn(name="userid"),
+		inverseJoinColumns=@JoinColumn(name="id"))
 	private User user;
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="transactions",
+		joinColumns=@JoinColumn(name="transaction"),
+		inverseJoinColumns=@JoinColumn(name="id"))
 	private Txact tx;
+	@Column(name="address")
 	private String address;
 	public Order() {
 		super();

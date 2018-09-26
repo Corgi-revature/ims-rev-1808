@@ -10,5 +10,5 @@ public interface OrderService {
 	Set<Order> getOrdersCriteria();
 	Order updateOrder(Order ord);	
 	Order deleteOrder(Order ord);
-	Integer deleteOrder(int id);
+	Integer deleteOrderById(int id);
 }

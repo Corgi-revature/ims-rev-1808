@@ -13,6 +13,7 @@ import com.revature.services.LoginService;
 
 @Controller
 @RequestMapping(value = "/login")
+@CrossOrigin(origins = "http://localhost:4200")
 public class LoginController {
 	@Autowired
 	private LoginService ls;
