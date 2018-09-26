@@ -37,3 +37,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+angular-bootstrap-md-6.2.4.tgz

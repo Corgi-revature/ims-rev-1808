@@ -17,15 +17,19 @@ import { ErrorModule } from './views/errors/error.module';
 import { NavigationModule } from './main-layout/navigation/navigation.module';
 
 // functional components
-import { LoginComponent } from './login/login.component';
-
+import { LoginComponent } from './login/login/login.component';
+import { RegisterComponent } from './login/register/register.component';
+import { ForgetPasswordComponent } from './login/forget-password/forget-password.component';
 // services
 import { CoreService } from './core/core.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     HttpClientModule,

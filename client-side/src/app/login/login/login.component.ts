@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Login } from '../class/login';
-import { CoreService } from '../core/core.service';
+import { Login } from '../../class/login';
+import { CoreService } from '../../core/core.service';
 
 
 @Component({
@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
           this.login = result;
         });
     }
+    // testing purpose
     this.coreService.postLogin('user', 'password').subscribe(
       result => {
         this.login = result;
