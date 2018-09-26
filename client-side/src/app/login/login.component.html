@@ -1,43 +1,67 @@
-<div class="text-center center loginPg .background__re" id="loginPg">
-  <div class="row">
-      <div class="section"></div>
-      <h2 class="heading-secondary">Timber & Magnus-TRMS</h2>
-      <h4 class="indigo-text">From Noobie To Master</h4>
+<!-- Material form login -->
+<div class="col-md-6 offset-md-3">
+        <mdb-card>
+            <mdb-card-header class="info-color white-text text-center py-4">
+                <h5>
+                    <strong>Sign in</strong>
+                </h5>
+            </mdb-card-header>
+            <!--Card content-->
+            <mdb-card-body class="px-lg-5 pt-0">
 
-      <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
-          <div id="login_feedback" class="login_feedback card"> </div>
-          <div class="card"></div>
-          <form class="col s12" method="post">
-              <div class='row'>
-                  <div class='col s12'>
-                  </div>
-              </div>
+                <!-- Form -->
+                <form class="text-center" style="color: #757575;">
 
-              <div class='row'>
-                  <div class='input-field col s12'>
-                      <input class='validate' type='text' name='username' id='username' />
-                      <label for='username'>Enter your username</label>
-                  </div>
-              </div>
+                    <!-- Email -->
+                    <div class="md-form">
+                        <input type="email" id="materialLoginFormEmail" class="form-control validated" name="email" [(ngModel)]="email" mdbInputDirective>
+                        <label for="materialLoginFormEmail">E-mail</label>
+                    </div>
 
-              <div class='row'>
-                  <div class='input-field col s12'>
-                      <input class='validate' type='password' name='password' id='password' />
-                      <label for='password'>Enter your password</label>
-                  </div>
-                  <label style='float: right;'>
-                      <a class='pink-text' href='#!'><b>Forgot Password?</b></a>
-                  </label>
-              </div>
+                    <!-- Password -->
+                    <div class="md-form">
+                        <input type="password" id="materialLoginFormPassword" class="form-control" name="password" [(ngModel)]="password" mdbInputDirective>
+                        <label for="materialLoginFormPassword">Password</label>
+                    </div>
 
-              <br />
-              <div>
-                  <div class='row'>
-                      <button type='button' id="loginBtn" name='btn_login' class='col s12 btn btn-large waves-effect indigo'
-                          onclick='console.log("html")'>Login</button>
-                  </div>
-              </div>
-          </form>
-      </div>
-  </div>
+                    <div class="d-flex justify-content-around">
+                        <div>
+                            <!-- Remember me -->
+                            <mdb-checkbox>Remember me</mdb-checkbox>
+                        </div>
+                        <div>
+                            <!-- Forgot password -->
+                            <a href="">Forgot password?</a>
+                        </div>
+                    </div>
+
+                    <!-- Sign in button -->
+                    <button mdbBtn color="info" outline="true" rounded="true" block="true" class="my-4 waves-effect z-depth-0"
+                        mdbWavesEffect (click)="initLogin()">Sign in</button>
+
+                    <!-- Register -->
+                    <p>Not a member?
+                        <a href="">Register</a>
+                    </p>
+
+                    <!-- Social login -->
+                    <!-- <p>or sign in with:</p>
+                    <a type="button" class="btn-floating btn-fb btn-sm">
+                        <mdb-icon icon="facebook"></mdb-icon>
+                    </a>
+                    <a type="button" class="btn-floating btn-tw btn-sm">
+                        <mdb-icon icon="twitter"></mdb-icon>
+                    </a>
+                    <a type="button" class="btn-floating btn-li btn-sm">
+                        <mdb-icon icon="linkedin"></mdb-icon>
+                    </a>
+                    <a type="button" class="btn-floating btn-git btn-sm">
+                        <mdb-icon icon="github"></mdb-icon>
+                    </a> -->
+                </form>
+                <!-- Form -->
+            </mdb-card-body>
+        </mdb-card>>
 </div>
+
+<!-- Material form login -->
