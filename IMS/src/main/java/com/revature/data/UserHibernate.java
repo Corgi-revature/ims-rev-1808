@@ -89,6 +89,11 @@ public class UserHibernate implements UserDAO {
 		}
 		
 	}
+	@Override
+	public User getUserLogin(String email, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

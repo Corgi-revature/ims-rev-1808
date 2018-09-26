@@ -27,10 +27,10 @@ public class LoginController {
 	public String login(String username, String password, HttpSession session) {
 		User u = ls.login(username,  password);
 		if(u==null) {
-			return "redirect:login";
+			return "Login Failed";
 		} else {
 			session.setAttribute("user", u);
-			return "redirect:home";
+			return "Sucess";
 		}
 	}
 	@RequestMapping(value="/hello", method=RequestMethod.GET)
