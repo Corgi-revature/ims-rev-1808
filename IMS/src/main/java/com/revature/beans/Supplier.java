@@ -1,8 +1,23 @@
 package com.revature.beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="suppliers")
 public class Supplier {
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="supplier")
+	@SequenceGenerator(name="supplier", sequenceName="supplier_seq", allocationSize=1)
 	private int id;
+	@Column(name="suppliername")
 	private String name;
+	@Column(name="email")
 	private String email;
 	public Supplier(int id, String name, String email) {
 		super();

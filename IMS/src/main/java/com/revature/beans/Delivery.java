@@ -2,8 +2,29 @@ package com.revature.beans;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="deliveries")
 public class Delivery {
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="deliveries")
+	@SequenceGenerator(name="deliveries", sequenceName="delivery_seq", allocationSize=1)
 	private int id;
+	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable(name="inventoryitems",
+		joinColumns=@JoinColumn(name="item"),
+		inverseJoinColumns=@JoinColumn(name="id"))
 	private Set<Item> items;
 	private String supplier;
 	public Delivery() {
