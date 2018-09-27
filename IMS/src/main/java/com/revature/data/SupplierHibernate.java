@@ -2,9 +2,16 @@ package com.revature.data;
 
 import java.util.Set;
 
-import com.revature.beans.Supplier;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import com.revature.beans.Supplier;
+import com.revature.utils.HibernateUtil;
+
+@Component
 public class SupplierHibernate implements SupplierDAO {
+	@Autowired
+	private HibernateUtil hu;
 
 	@Override
 	public Supplier addSupplier(Supplier sup) {

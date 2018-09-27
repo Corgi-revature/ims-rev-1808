@@ -12,13 +12,17 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.revature.beans.User;
 import com.revature.utils.HibernateUtil;
 
+@Component
 public class UserHibernate implements UserDAO {
 	private Logger log = Logger.getLogger(UserHibernate.class);
-	private HibernateUtil hu = HibernateUtil.getInstance();
+	@Autowired
+	private HibernateUtil hu;
 	
 	@Override
 	public int addUser(User use) {
@@ -91,7 +95,8 @@ public class UserHibernate implements UserDAO {
 	}
 	@Override
 	public User getUserLogin(String email, String password) {
-		// TODO Auto-generated method stub
+//		Session se = hu.getSession();
+//		User use = se.get(User.class,  email, password);
 		return null;
 	}
 	
