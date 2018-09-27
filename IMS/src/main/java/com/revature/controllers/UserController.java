@@ -3,40 +3,41 @@ package com.revature.controllers;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.User;
-import com.revature.services.LoginService;
+import com.revature.services.UserService;
 
-@Controller
+@RestController
 @RequestMapping(value = "/login")
 @CrossOrigin(origins = "http://localhost:4200")
-public class LoginController {
+public class UserController {
 	@Autowired
-	private LoginService ls;
+	private UserService ls;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String goLogin(HttpSession session) {
-		if (session.getAttribute("user") != null)
-			return "redirect:home";
-		return "static/login.html";
+		if (session.getAttribute("user") != null) {
+			
+		}
+		return "";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String login(String username, String password, HttpSession session) {
-		User u = ls.login(username, password);
+	public User login(String email, String password, HttpSession session) {
+		User u = ls.getUserLogin(email, password);
 		if (u == null) {
-			return "Login Failed";
+			return null;
 		} else {
 			session.setAttribute("user", u);
-			return "Sucess";
+			return u;
 		}
 	}
-	// will be removed
-	@RequestMapping(value = "/hello", method = RequestMethod.GET)
+	//	testing
+	@RequestMapping(value="/hello", method=RequestMethod.GET)
 	public String byPassLogin() {
 		return "/static/hello.html";
 	}

@@ -4,7 +4,7 @@ import java.util.Set;
 
 import com.revature.beans.User;
 
-public interface LoginService {
+public interface UserService {
 	public int addUser(User user);
 	public User getUserById(int id); 
 	public Set<User> getUsersCriteria();
