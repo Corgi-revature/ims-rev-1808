@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Set<User> getUsersCriteria() {
+	public List<User> getUsersCriteria(User use) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -38,13 +39,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUserLogin(String email, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void updateUser(User user) {
+	public void updateUser(User use) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -53,6 +48,12 @@ public class UserServiceImpl implements UserService {
 	public void deleteUser(User user) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public User getUserLogin(String email, String password) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

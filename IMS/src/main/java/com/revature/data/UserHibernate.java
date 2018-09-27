@@ -10,11 +10,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-
 import org.hibernate.Criteria;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 
@@ -41,35 +40,12 @@ public class UserHibernate implements UserDAO {
 	}
 	@Override
 	public List<User> getUsersCriteria(User use) {
-		ArrayList<Predicate> preds = new ArrayList<Predicate>();
+		ArrayList<Predicate> preds = null;
 		CriteriaBuilder cb = session.getCriteriaBuilder();
 		CriteriaQuery<User> cr = cb.createQuery(User.class);
 		Root<User> root = cr.from(User.class);
-		
-		if(use.getEmail()!=null) {
-			Predicate pr = cb.like(root.get("email"), use.getEmail());
-			preds.add(pr);
-		}
-		if(use.getPassword()!=null) {
-			crit.add(Restrictions.eq("password",use.getPassword()));
-		}
-		if(use.getId()!=0) {
-			crit.add(Restrictions.eq("id",use.getId()));
-		}
-		if(use.getFirst()!=null) {
-			crit.add(Restrictions.eq("fname",use.getFirst()));
-		}
-		if(use.getLast()!=null) {
-			crit.add(Restrictions.eq("lname",use.getLast()));
-		}
-		if(use.getUsertype()!=null) {
-			crit.add(Restrictions.eq("usertype",use.getUsertype()));
-		}
-		if(use.getPhone()!=null) {
-			crit.add(Restrictions.eq("phone",use.getPhone()));
-		}
-		List<User> userList = cr.select(root).where(preds.toArray());
-		return userList;
+
+		return null;
 	}
 	@Override
 	public Set<User> getUsers() {

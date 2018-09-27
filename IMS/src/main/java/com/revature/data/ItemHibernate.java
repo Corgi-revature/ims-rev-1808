@@ -4,13 +4,20 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+<<<<<<< HEAD
+=======
+import org.hibernate.query.Query;
+>>>>>>> d1a913be051dba857407f5b961cf07736d098787
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+<<<<<<< HEAD
 import org.hibernate.query.Query;
+=======
+>>>>>>> d1a913be051dba857407f5b961cf07736d098787
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.Item;
