@@ -5,7 +5,6 @@ import java.util.Set;
 import com.revature.beans.Delivery;
 
 public interface DeliveryService {
-
 	Delivery addDelivery(Delivery deli);
 	Delivery getDeliveryById(int id);
 	Set<Delivery> getDeliverysCriteria();

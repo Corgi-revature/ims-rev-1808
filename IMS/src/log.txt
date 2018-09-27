@@ -1,0 +1,83 @@
+2018-09-26 23:02:49 TRACE UserHibernate:34 - getting user from database
+2018-09-26 23:13:29 TRACE UserHibernate:34 - getting user from database
+2018-09-26 23:19:12 DEBUG logging:109 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2018-09-26 23:19:12 INFO  Version:45 - HHH000412: Hibernate Core {5.2.12.Final}
+2018-09-26 23:19:12 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2018-09-26 23:19:13 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-09-26 23:19:13 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2018-09-26 23:19:13 INFO  pooling:126 - HHH10001005: using driver [oracle.jdbc.OracleDriver] at URL [jdbc:sah-master.c9ku9awjwpnb.us-west-2.rds.amazonaws.com]
+2018-09-26 23:19:13 INFO  pooling:135 - HHH10001001: Connection properties: {user=imsapp, password=****}
+2018-09-26 23:19:13 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2018-09-26 23:19:13 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 35 (min=1)
+2018-09-26 23:20:33 DEBUG logging:109 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2018-09-26 23:20:33 INFO  Version:45 - HHH000412: Hibernate Core {5.2.12.Final}
+2018-09-26 23:20:33 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2018-09-26 23:20:34 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-09-26 23:20:34 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2018-09-26 23:20:34 INFO  pooling:126 - HHH10001005: using driver [oracle.jdbc.OracleDriver] at URL [sah-master.c9ku9awjwpnb.us-west-2.rds.amazonaws.com]
+2018-09-26 23:20:34 INFO  pooling:135 - HHH10001001: Connection properties: {user=imsapp, password=****}
+2018-09-26 23:20:34 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2018-09-26 23:20:34 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 35 (min=1)
+2018-09-26 23:21:15 DEBUG logging:109 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2018-09-26 23:21:15 INFO  Version:45 - HHH000412: Hibernate Core {5.2.12.Final}
+2018-09-26 23:21:15 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2018-09-26 23:21:16 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-09-26 23:21:16 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2018-09-26 23:21:16 INFO  pooling:126 - HHH10001005: using driver [oracle.jdbc.OracleDriver] at URL [jdbc:sah-master.c9ku9awjwpnb.us-west-2.rds.amazonaws.com]
+2018-09-26 23:21:16 INFO  pooling:135 - HHH10001001: Connection properties: {user=imsapp, password=****}
+2018-09-26 23:21:16 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2018-09-26 23:21:16 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 35 (min=1)
+2018-09-26 23:22:18 TRACE UserHibernate:36 - getting user from database
+2018-09-26 23:23:43 TRACE UserHibernate:36 - getting user from database
+2018-09-26 23:26:12 DEBUG logging:109 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2018-09-26 23:26:13 INFO  Version:45 - HHH000412: Hibernate Core {5.2.12.Final}
+2018-09-26 23:26:13 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2018-09-26 23:26:13 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-09-26 23:26:13 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2018-09-26 23:26:13 INFO  pooling:126 - HHH10001005: using driver [oracle.jdbc.OracleDriver] at URL [jdbc:sah-master.c9ku9awjwpnb.us-west-2.rds.amazonaws.com]
+2018-09-26 23:26:13 INFO  pooling:135 - HHH10001001: Connection properties: {user=imsapp, password=****}
+2018-09-26 23:26:13 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2018-09-26 23:26:13 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 35 (min=1)
+2018-09-26 23:28:08 DEBUG logging:109 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2018-09-26 23:28:08 INFO  Version:45 - HHH000412: Hibernate Core {5.2.12.Final}
+2018-09-26 23:28:08 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2018-09-26 23:28:08 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-09-26 23:28:08 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2018-09-26 23:28:08 INFO  pooling:126 - HHH10001005: using driver [oracle.jdbc.OracleDriver] at URL [jdbc:sah-master.c9ku9awjwpnb.us-west-2.rds.amazonaws.com]
+2018-09-26 23:28:08 INFO  pooling:135 - HHH10001001: Connection properties: {user=imsapp, password=****}
+2018-09-26 23:28:08 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2018-09-26 23:28:09 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 35 (min=1)
+2018-09-26 23:30:00 DEBUG logging:109 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2018-09-26 23:30:00 INFO  Version:45 - HHH000412: Hibernate Core {5.2.12.Final}
+2018-09-26 23:30:00 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2018-09-26 23:30:01 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-09-26 23:30:01 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2018-09-26 23:30:01 INFO  pooling:126 - HHH10001005: using driver [oracle.jdbc.OracleDriver] at URL [jdbc:sah-master.c9ku9awjwpnb.us-west-2.rds.amazonaws.com]
+2018-09-26 23:30:01 INFO  pooling:135 - HHH10001001: Connection properties: {user=imsapp, password=****}
+2018-09-26 23:30:01 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2018-09-26 23:30:01 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 35 (min=1)
+2018-09-27 09:01:28 DEBUG logging:109 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2018-09-27 09:01:28 INFO  Version:45 - HHH000412: Hibernate Core {5.2.12.Final}
+2018-09-27 09:01:28 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2018-09-27 09:01:28 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-09-27 09:01:28 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2018-09-27 09:01:28 INFO  pooling:126 - HHH10001005: using driver [oracle.jdbc.OracleDriver] at URL [jdbc:sah-master.c9ku9awjwpnb.us-west-2.rds.amazonaws.com]
+2018-09-27 09:01:28 INFO  pooling:135 - HHH10001001: Connection properties: {user=imsapp, password=****}
+2018-09-27 09:01:28 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2018-09-27 09:01:28 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 35 (min=1)
+2018-09-27 09:41:22 DEBUG StandardEnvironment:109 - Adding [systemProperties] PropertySource with lowest search precedence
+2018-09-27 09:41:22 DEBUG StandardEnvironment:109 - Adding [systemEnvironment] PropertySource with lowest search precedence
+2018-09-27 09:41:22 DEBUG StandardEnvironment:127 - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+2018-09-27 09:41:22 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3d012ddd: startup date [Thu Sep 27 09:41:22 EDT 2018]; root of context hierarchy
+2018-09-27 09:41:22 DEBUG StandardEnvironment:109 - Adding [systemProperties] PropertySource with lowest search precedence
+2018-09-27 09:41:22 DEBUG StandardEnvironment:109 - Adding [systemEnvironment] PropertySource with lowest search precedence
+2018-09-27 09:41:22 DEBUG StandardEnvironment:127 - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+2018-09-27 09:41:22 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-09-27 09:49:05 DEBUG StandardEnvironment:109 - Adding [systemProperties] PropertySource with lowest search precedence
+2018-09-27 09:49:05 DEBUG StandardEnvironment:109 - Adding [systemEnvironment] PropertySource with lowest search precedence
+2018-09-27 09:49:05 DEBUG StandardEnvironment:127 - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+2018-09-27 09:49:05 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3d012ddd: startup date [Thu Sep 27 09:49:05 EDT 2018]; root of context hierarchy
+2018-09-27 09:49:05 DEBUG StandardEnvironment:109 - Adding [systemProperties] PropertySource with lowest search precedence
+2018-09-27 09:49:05 DEBUG StandardEnvironment:109 - Adding [systemEnvironment] PropertySource with lowest search precedence
+2018-09-27 09:49:05 DEBUG StandardEnvironment:127 - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+2018-09-27 09:49:05 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]

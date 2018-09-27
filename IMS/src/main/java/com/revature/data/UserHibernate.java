@@ -3,6 +3,7 @@ package com.revature.data;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.apache.log4j.Logger;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -14,9 +15,11 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.User;
+import com.revature.utils.HibernateUtil;
 
 @Component
 public class UserHibernate implements UserDAO {
+	private static Logger log = Logger.getLogger(UserHibernate.class);
 	private Session session;
 	@Override
 	public void setSession(Session session) {
@@ -29,6 +32,7 @@ public class UserHibernate implements UserDAO {
 	}
 	@Override
 	public User getUserById(int id) {
+		log.trace("getting user from database");
 		return session.get(User.class, id);
 	}
 	@Override
@@ -70,18 +74,5 @@ public class UserHibernate implements UserDAO {
 			tx.rollback();
 		}
 		
-	}
-	@Override
-	public User getUserLogin(String email, String password) {
-		Set<User> userList = getUsers();
-		for(User user : userList) {
-			if(user.getEmail().equals(email)
-					&& user.getPassword().equals(password)) {
-				return user;
-			}
-		}
-		return null;
-	}
-	
-	
+	}	
 }

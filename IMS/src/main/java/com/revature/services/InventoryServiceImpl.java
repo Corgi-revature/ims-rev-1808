@@ -2,49 +2,50 @@ package com.revature.services;
 
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
 import com.revature.beans.Item;
+import com.revature.data.ItemDAO;
+import com.revature.data.ItemHibernate;
 
+@Service
 public class InventoryServiceImpl implements InventoryService {
-
+	private ItemDAO itemDAO = new ItemHibernate();
+	
 	@Override
-	public Item addItem(Item ite) {
-		return ite;
+	public int addItem(Item ite) {
+		int itemID = itemDAO.addItem(ite);
+		return itemID;
 	}
 
 	@Override
 	public Item getItemById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return itemDAO.getItemById(id);
 	}
 
 	@Override
 	public Set<Item> getItems() {
-		// TODO Auto-generated method stub
-		return null;
+		return itemDAO.getItems();
 	}
 
 	@Override
 	public Set<Item> getItemsCriteria() {
-		// TODO Auto-generated method stub
-		return null;
+		return itemDAO.getItemsCriteria();
 	}
 
 	@Override
 	public void updateItem(Item ite) {
-		// TODO Auto-generated method stub
-		
+		itemDAO.updateItem(ite);
 	}
 
 	@Override
 	public void deleteItem(Item ite) {
-		// TODO Auto-generated method stub
-		
+		itemDAO.deleteItem(ite);
 	}
 
 	@Override
 	public void deleteItemById(int id) {
-		// TODO Auto-generated method stub
-		
+		itemDAO.deleteItemById(id);
 	}
 	
 }
