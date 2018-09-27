@@ -1,22 +1,18 @@
-package com.revature.data;
+package com.revature.services;
 
 import java.util.Set;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.revature.beans.Delivery;
+import com.revature.data.DeliveryDAO;
 
-@Component
-public class DeliveryHibernate implements DeliveryDAO {
-//	@Autowired
-	private Session session;
-	@Override
-	public void setSession(Session session) {
-		this.session = session;
-	}
-	
+@Service
+public class DeliveryServiceImpl implements DeliveryService {
+	@Autowired
+	private DeliveryDAO ds;
+
 	@Override
 	public Delivery addDelivery(Delivery deli) {
 		// TODO Auto-generated method stub
@@ -58,5 +54,4 @@ public class DeliveryHibernate implements DeliveryDAO {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

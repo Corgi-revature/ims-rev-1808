@@ -9,7 +9,7 @@ import com.revature.beans.User;
 import com.revature.data.UserDAO;
 
 @Service
-public class LoginServiceImpl implements LoginService {
+public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO ud;
 
