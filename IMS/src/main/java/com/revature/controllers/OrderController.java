@@ -12,7 +12,7 @@ import com.revature.beans.Order;
 import com.revature.services.OrderService;
 
 @RestController
-@RequestMapping(value="/Order")
+@RequestMapping(value="/order")
 @CrossOrigin(origins = "http://localhost:4200")
 public class OrderController {
 	@Autowired

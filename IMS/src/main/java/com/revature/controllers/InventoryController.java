@@ -12,7 +12,7 @@ import com.revature.beans.Item;
 import com.revature.services.InventoryService;
 
 @RestController
-@RequestMapping(value="/Inventory")
+@RequestMapping(value="/inventory")
 @CrossOrigin(origins = "http://localhost:4200")
 public class InventoryController {
 	@Autowired

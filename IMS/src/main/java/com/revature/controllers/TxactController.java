@@ -12,7 +12,7 @@ import com.revature.beans.Txact;
 import com.revature.services.TxactService;
 
 @RestController
-@RequestMapping(value = "/Txact")
+@RequestMapping(value = "/txact")
 @CrossOrigin(origins = "http://localhost:4200")
 public class TxactController {
 	@Autowired
