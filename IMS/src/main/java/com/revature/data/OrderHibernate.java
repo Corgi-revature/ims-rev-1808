@@ -12,13 +12,17 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.revature.beans.Order;
 import com.revature.utils.HibernateUtil;
 
+@Component
 public class OrderHibernate implements OrderDAO{
 	private Logger log = Logger.getLogger(UserHibernate.class);
-	HibernateUtil hu = HibernateUtil.getInstance();
+	@Autowired
+	private HibernateUtil hu;
 	Transaction tx = null;
 
 	@Override
