@@ -66,6 +66,13 @@ public class UserHibernate implements UserDAO {
 		}
 		List<User> userList = cr.select(root).where(preds.toArray());
 		return userList;
+	public Set<User> getUsersCriteria() {
+		CriteriaBuilder build = session.getCriteriaBuilder();
+		CriteriaQuery<User> crit = build.createQuery(User.class);
+		Root<User> root = crit.from(User.class);
+		crit.select(root);
+		List<User> users = session.createQuery(crit).getResultList();
+		return new HashSet<User>(users);
 	}
 	@Override
 	public Set<User> getUsers() {
