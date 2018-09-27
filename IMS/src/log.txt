@@ -81,3 +81,70 @@
 2018-09-27 09:49:05 DEBUG StandardEnvironment:109 - Adding [systemEnvironment] PropertySource with lowest search precedence
 2018-09-27 09:49:05 DEBUG StandardEnvironment:127 - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
 2018-09-27 09:49:05 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-09-27 13:40:39 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@515f550a: startup date [Thu Sep 27 13:40:39 EDT 2018]; root of context hierarchy
+2018-09-27 13:40:39 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-09-27 13:42:28 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@515f550a: startup date [Thu Sep 27 13:42:28 EDT 2018]; root of context hierarchy
+2018-09-27 13:42:28 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-09-27 13:57:58 INFO  ClassPathXmlApplicationContext:578 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@515f550a: startup date [Thu Sep 27 13:57:58 EDT 2018]; root of context hierarchy
+2018-09-27 13:57:58 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [beans.xml]
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/delivery],methods=[POST]}" onto com.revature.beans.Delivery com.revature.controllers.DeliveryController.addDelivery(com.revature.beans.Delivery)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/delivery/all],methods=[GET]}" onto java.util.Set<com.revature.beans.Delivery> com.revature.controllers.DeliveryController.getDeliveries()
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/delivery],methods=[PUT]}" onto void com.revature.controllers.DeliveryController.updateDelivery(com.revature.beans.Delivery)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/delivery],methods=[DELETE]}" onto void com.revature.controllers.DeliveryController.deleteDelivery(com.revature.beans.Delivery)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/delivery/{id}],methods=[GET]}" onto com.revature.beans.Delivery com.revature.controllers.DeliveryController.getDeliveryById(int)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/delivery/{id}],methods=[DELETE]}" onto void com.revature.controllers.DeliveryController.deleteDeliveryById(java.lang.Integer)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/delivery],methods=[GET]}" onto java.util.Set<com.revature.beans.Delivery> com.revature.controllers.DeliveryController.getDeliveriesCriteria()
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/inventory/{item}],methods=[POST]}" onto com.revature.beans.Item com.revature.controllers.InventoryController.addItem(com.revature.beans.Item)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/inventory/{item}/{id}],methods=[GET]}" onto com.revature.beans.Item com.revature.controllers.InventoryController.getItemById(int)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/inventory/{item}/all],methods=[GET]}" onto java.util.Set<com.revature.beans.Item> com.revature.controllers.InventoryController.getItems()
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/inventory/{item}],methods=[PUT]}" onto void com.revature.controllers.InventoryController.updateItem(com.revature.beans.Item)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/inventory/{item}],methods=[GET]}" onto java.util.Set<com.revature.beans.Item> com.revature.controllers.InventoryController.getItemsCriteria()
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/inventory/{item}/{id}],methods=[DELETE]}" onto void com.revature.controllers.InventoryController.deleteItemById(int)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/inventory/{item}],methods=[DELETE]}" onto void com.revature.controllers.InventoryController.deleteItem(com.revature.beans.Item)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/order],methods=[POST]}" onto com.revature.beans.Order com.revature.controllers.OrderController.addOrder(com.revature.beans.Order)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/order/{uid}/all],methods=[GET]}" onto java.util.Set<com.revature.beans.Order> com.revature.controllers.OrderController.getOrders()
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/order],methods=[DELETE]}" onto void com.revature.controllers.OrderController.deleteOrder(com.revature.beans.Order)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/order/{id}],methods=[DELETE]}" onto void com.revature.controllers.OrderController.deleteOrderById(java.lang.Integer)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/order/{id}],methods=[GET]}" onto com.revature.beans.Order com.revature.controllers.OrderController.getOrderByID(java.lang.Integer)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/order],methods=[PUT]}" onto void com.revature.controllers.OrderController.updateOrder(com.revature.beans.Order)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/order],methods=[GET]}" onto java.util.Set<com.revature.beans.Order> com.revature.controllers.OrderController.getOrdersCriteria()
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/txact/{id}],methods=[GET]}" onto com.revature.beans.Txact com.revature.controllers.TxactController.getTxactById(java.lang.Integer)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/txact],methods=[POST]}" onto com.revature.beans.Txact com.revature.controllers.TxactController.addTxact(com.revature.beans.Txact)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/txact],methods=[PUT]}" onto void com.revature.controllers.TxactController.updateTxact(com.revature.beans.Txact)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/txact/all],methods=[GET]}" onto java.util.Set<com.revature.beans.Txact> com.revature.controllers.TxactController.getTxacts()
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/txact],methods=[DELETE]}" onto void com.revature.controllers.TxactController.deleteTxact(com.revature.beans.Txact)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/txact/{id}],methods=[DELETE]}" onto void com.revature.controllers.TxactController.deleteTxactById(int)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/txact],methods=[GET]}" onto java.util.Set<com.revature.beans.Txact> com.revature.controllers.TxactController.getTxactsCriteria()
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/login],methods=[POST]}" onto public com.revature.beans.User com.revature.controllers.UserController.login(java.lang.String,java.lang.String,javax.servlet.http.HttpSession)
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/login/hello],methods=[GET]}" onto public java.lang.String com.revature.controllers.UserController.byPassLogin()
+2018-09-27 13:57:59 INFO  RequestMappingHandlerMapping:534 - Mapped "{[/login],methods=[GET]}" onto public java.lang.String com.revature.controllers.UserController.goLogin(javax.servlet.http.HttpSession)
+2018-09-27 13:58:00 INFO  RequestMappingHandlerAdapter:532 - Looking for @ControllerAdvice: org.springframework.context.support.ClassPathXmlApplicationContext@515f550a: startup date [Thu Sep 27 13:57:58 EDT 2018]; root of context hierarchy
+2018-09-27 13:58:00 INFO  RequestMappingHandlerAdapter:532 - Looking for @ControllerAdvice: org.springframework.context.support.ClassPathXmlApplicationContext@515f550a: startup date [Thu Sep 27 13:57:58 EDT 2018]; root of context hierarchy
+2018-09-27 13:58:00 INFO  SimpleUrlHandlerMapping:341 - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2018-09-27 13:58:00 TRACE UserHibernate:22 - Method with signature: Set com.revature.data.UserDAO.getUsers()
+2018-09-27 13:58:00 TRACE UserHibernate:23 - With Arguments: []
+2018-09-27 13:58:00 ERROR UserHibernate:28 - 
+2018-09-27 13:58:00 WARN  UserHibernate:30 - com.revature.data.UserHibernate.getUsers(UserHibernate.java:53)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - java.lang.reflect.Method.invoke(Unknown Source)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:85)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - com.revature.aspects.LoggingAspect.log(LoggingAspect.java:26)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - java.lang.reflect.Method.invoke(Unknown Source)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:620)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:609)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:68)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - com.sun.proxy.$Proxy23.getUsers(Unknown Source)
+2018-09-27 13:58:00 WARN  UserHibernate:30 - com.revature.driver.Driver.main(Driver.java:17)
+2018-09-27 13:58:00 INFO  UserHibernate:33 - Set com.revature.data.UserDAO.getUsers() returned: null

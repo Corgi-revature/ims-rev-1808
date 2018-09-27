@@ -44,7 +44,7 @@ public class UserHibernate implements UserDAO {
 		CriteriaBuilder cb = session.getCriteriaBuilder();
 		CriteriaQuery<User> cr = cb.createQuery(User.class);
 		Root<User> root = cr.from(User.class);
-
+		
 		return null;
 	}
 	@Override

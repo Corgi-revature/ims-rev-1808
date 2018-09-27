@@ -17,8 +17,7 @@ public class SupplierHibernate implements SupplierDAO {
 
 	@Override
 	public Supplier addSupplier(Supplier sup) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Supplier) session.save(sup);
 	}
 
 	@Override
