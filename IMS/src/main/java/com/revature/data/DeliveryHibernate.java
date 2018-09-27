@@ -2,16 +2,18 @@ package com.revature.data;
 
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.Delivery;
-import com.revature.utils.HibernateUtil;
 
 @Component
 public class DeliveryHibernate implements DeliveryDAO {
-	@Autowired
-	private HibernateUtil hu;
+	private Session session;
+	@Override
+	public void setSession(Session session) {
+		this.session = session;
+	}
 	
 	@Override
 	public Delivery addDelivery(Delivery deli) {

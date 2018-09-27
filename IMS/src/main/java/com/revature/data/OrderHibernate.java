@@ -8,95 +8,89 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.Order;
-import com.revature.utils.HibernateUtil;
 
 @Component
 public class OrderHibernate implements OrderDAO{
-	private Logger log = Logger.getLogger(UserHibernate.class);
-	@Autowired
-	private HibernateUtil hu;
+	private Session session;
+	@Override
+	public void setSession(Session session) {
+		this.session = session;
+	}
 	Transaction tx = null;
 
 	@Override
 	public Order addOrder(Order ord) {
-		Session se = hu.getSession();
 		try {
-			tx = se.beginTransaction();
-			se.save(ord);
+			tx = session.beginTransaction();
+			session.save(ord);
 			tx.commit();
 			return ord;
 		} catch(Exception e) {
 			tx.rollback();
-			log.trace(e.getMessage());
 			return null;
 		} finally {
-			se.close();
+			session.close();
 		}
 	}
 
 	@Override
 	public Order getOrderById(int id) {
-		Session se = hu.getSession();
-		Order ord = se.get(Order.class,  id);
+
+		Order ord = session.get(Order.class,  id);
 		return ord;
 	}
 
 	@Override
 	public Set<Order> getOrdersCriteria() {
-		Session se = hu.getSession();
-		CriteriaBuilder build = se.getCriteriaBuilder();
+
+		CriteriaBuilder build = session.getCriteriaBuilder();
 		CriteriaQuery<Order> crit = build.createQuery(Order.class);
 		Root<Order> root = crit.from(Order.class);
 		crit.select(root);
-		List<Order> orders = se.createQuery(crit).getResultList();
+		List<Order> orders = session.createQuery(crit).getResultList();
 		return new HashSet<Order>(orders);
 		
 	}
 
-	@Override
+	@Override	
 	public Set<Order> getOrders() {
-		Session se = hu.getSession();
 		String hql = "FROM com.revature.beans.Order";
-		Query<Order> que = se.createQuery(hql, Order.class);
+		Query<Order> que = session.createQuery(hql, Order.class);
 		List<Order> orderList = que.getResultList();
-		se.close();
+		session.close();
 		return new HashSet<Order>(orderList);
 	}
 
 	@Override
 	public void updateOrder(Order ord) {
-		Session se = hu.getSession();
-		Transaction tx = se.beginTransaction();
+
+		Transaction tx = session.beginTransaction();
 		try {
-			se.update(ord);
+			session.update(ord);
 			tx.commit();
 		} catch(Exception e) {
 			tx.rollback();
-			log.trace(e.getMessage());
 		} finally {
-			se.close();
+			session.close();
 		}
 		
 	}
 
 	@Override
 	public void deleteOrder(Order ord) {
-		Session se = hu.getSession();
-		Transaction tx = se.beginTransaction();
+
+		Transaction tx = session.beginTransaction();
 		try {
-			se.delete(ord);
+			session.delete(ord);
 			tx.commit();
 		} catch(Exception e) {
 			tx.rollback();
-			log.trace(e.getMessage());
 		}
 		
 	}

@@ -4,7 +4,7 @@ import java.util.Set;
 
 import com.revature.beans.Delivery;
 
-public interface DeliveryDAO {
+public interface DeliveryDAO extends HibernateSession {
 	public Delivery addDelivery(Delivery deli);
 	public Delivery getDeliveryById(int id);
 	public Set<Delivery> getDeliveriesCriteria();
