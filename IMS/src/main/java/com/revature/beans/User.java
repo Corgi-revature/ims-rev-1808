@@ -37,7 +37,7 @@ public class User {
 	public User() {
 		super();
 	}
-	public User(int id, String first, String last, String phone, String email, String usertype, String password) {
+	public User(int id, String first, String last, String phone, String email, UserType usertype, String password) {
 		super();
 		this.id = id;
 		this.first = first;
@@ -77,10 +77,10 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getUsertype() {
+	public UserType getUsertype() {
 		return usertype;
 	}
-	public void setUsertype(String usertype) {
+	public void setUsertype(UserType usertype) {
 		this.usertype = usertype;
 	}
 	public String getPassword() {
@@ -150,4 +150,5 @@ public class User {
 		return "User [id=" + id + ", first=" + first + ", last=" + last + ", phone=" + phone + ", email=" + email
 				+ ", usertype=" + usertype + ", password=" + password + "]";
 	}
+	
 }
