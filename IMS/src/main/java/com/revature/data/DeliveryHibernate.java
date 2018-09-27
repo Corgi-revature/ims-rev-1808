@@ -27,7 +27,7 @@ public class DeliveryHibernate implements DeliveryDAO {
 	public int addDelivery(Delivery deli) {
 		return (int) session.save(deli);
 	}
-
+	
 	@Override
 	public Delivery getDeliveryById(int id) {
 		return session.get(Delivery.class, id);

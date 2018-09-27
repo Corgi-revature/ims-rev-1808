@@ -1,5 +1,6 @@
 package com.revature.data;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -7,7 +8,9 @@ import org.apache.log4j.Logger;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.hibernate.Criteria;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -36,13 +39,13 @@ public class UserHibernate implements UserDAO {
 		return session.get(User.class, id);
 	}
 	@Override
-	public Set<User> getUsersCriteria() {
-		CriteriaBuilder build = session.getCriteriaBuilder();
-		CriteriaQuery<User> crit = build.createQuery(User.class);
-		Root<User> root = crit.from(User.class);
-		crit.select(root);
-		List<User> users = session.createQuery(crit).getResultList();
-		return new HashSet<User>(users);
+	public List<User> getUsersCriteria(User use) {
+		ArrayList<Predicate> preds = null;
+		CriteriaBuilder cb = session.getCriteriaBuilder();
+		CriteriaQuery<User> cr = cb.createQuery(User.class);
+		Root<User> root = cr.from(User.class);
+
+		return null;
 	}
 	@Override
 	public Set<User> getUsers() {
