@@ -2,16 +2,18 @@ package com.revature.data;
 
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.Item;
-import com.revature.utils.HibernateUtil;
 
 @Component
 public class ItemHibernate implements ItemDAO {
-	@Autowired
-	private HibernateUtil hu;
+	private Session session;
+	@Override
+	public void setSession(Session session) {
+		this.session = session;
+	}
 	
 	@Override
 	public Item addItem(Item ite) {
