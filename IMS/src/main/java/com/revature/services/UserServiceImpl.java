@@ -16,45 +16,31 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int addUser(User user) {
-		// TODO Auto-generated method stub
-		return 0;
+		return ud.addUser(user);
 	}
 
 	@Override
 	public User getUserById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return ud.getUserById(id);
 	}
 
 	@Override
-	public List<User> getUsersCriteria(User use) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<User> getUsersCriteria(User user) {
+		return ud.getUsersCriteria(user);
 	}
 
 	@Override
 	public Set<User> getUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		return ud.getUsers();
 	}
 
 	@Override
-	public void updateUser(User use) {
-		// TODO Auto-generated method stub
-		
+	public void updateUser(User user) {
+		ud.updateUser(user);
 	}
 
 	@Override
 	public void deleteUser(User user) {
-		// TODO Auto-generated method stub
-		
+		ud.deleteUser(user);
 	}
-
-	@Override
-	public User getUserLogin(String email, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 }

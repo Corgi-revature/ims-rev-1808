@@ -21,28 +21,33 @@ import com.revature.beans.User;
 @Component
 public class UserHibernate implements UserDAO {
 	private Session session;
+
 	@Override
 	public void setSession(Session session) {
 		this.session = session;
 	}
-	
+
 	@Override
 	public int addUser(User use) {
 		return (int) session.save(use);
 	}
+
 	@Override
 	public User getUserById(int id) {
 		return session.get(User.class, id);
 	}
+
 	@Override
 	public List<User> getUsersCriteria(User use) {
 		ArrayList<Predicate> preds = null;
 		CriteriaBuilder cb = session.getCriteriaBuilder();
 		CriteriaQuery<User> cr = cb.createQuery(User.class);
 		Root<User> root = cr.from(User.class);
-
-		return null;
+		cr.select(root);
+		List<User> users = session.createQuery(cr).getResultList();
+		return users;
 	}
+
 	@Override
 	public Set<User> getUsers() {
 		String hql = "FROM com.revature.beans.User";
@@ -51,42 +56,30 @@ public class UserHibernate implements UserDAO {
 		session.close();
 		return new HashSet<User>(userList);
 	}
+
 	@Override
-	public void updateUser(User use) {
+	public void updateUser(User user) {
 		Transaction tx = session.beginTransaction();
 		try {
-			session.update(use);
+			session.update(user);
 			tx.commit();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			tx.rollback();
 		} finally {
 			session.close();
 		}
 	}
+
 	@Override
-	public void deleteUser(User use) {
+	public void deleteUser(User user) {
 		Transaction tx = session.beginTransaction();
 		try {
-			session.delete(use);
+			session.delete(user);
 			tx.commit();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			tx.rollback();
+		} finally {
+			session.close();
 		}
-		
 	}
-	@Override
-	public User getUserLogin(String email, String password) {
-//		Session se = hu.getSession();
-//		User use = session.get(User.class,  email, password);
-		Set<User> userList = getUsers();
-		for(User user : userList) {
-			if(user.getEmail().equals(email)
-					&& user.getPassword().equals(password)) {
-				return user;
-			}
-		}
-		return null;
-	}
-	
-	
 }

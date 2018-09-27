@@ -1,5 +1,7 @@
 package com.revature.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +14,11 @@ import com.revature.beans.User;
 import com.revature.services.UserService;
 
 @RestController
-@RequestMapping(value = "/login")
+@RequestMapping(value = "/user")
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 	@Autowired
-	private UserService ls;
+	private UserService us;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String goLogin(HttpSession session) {
@@ -26,9 +28,10 @@ public class UserController {
 		return "";
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public User login(String email, String password, HttpSession session) {
-		User u = ls.getUserLogin(email, password);
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public List<User> login(User user, HttpSession session) {
+		
+		List<User> u = us.getUsersCriteria(user);
 		if (u == null) {
 			return null;
 		} else {

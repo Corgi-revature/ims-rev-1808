@@ -10,7 +10,6 @@ public interface UserDAO extends HibernateSession {
 	public User getUserById(int id); 
 	public List<User> getUsersCriteria(User use);
 	public Set<User> getUsers();
-	public User getUserLogin(String email, String password);
 	public void updateUser(User user);
 	public void deleteUser(User user);
 }
