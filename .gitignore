@@ -127,3 +127,4 @@ AssociateEvaluationSystem/logs/*
 
 # next.js build output
 .next
+*.springBeans
