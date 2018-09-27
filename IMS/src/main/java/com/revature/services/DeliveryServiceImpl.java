@@ -12,7 +12,7 @@ import com.revature.data.DeliveryDAO;
 public class DeliveryServiceImpl implements DeliveryService {
 	@Autowired
 	private DeliveryDAO ds;
-
+	
 	@Override
 	public Delivery addDelivery(Delivery deli) {
 		// TODO Auto-generated method stub
@@ -27,20 +27,17 @@ public class DeliveryServiceImpl implements DeliveryService {
 
 	@Override
 	public Set<Delivery> getDeliveriesCriteria() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Set<Delivery> getDeliveries() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void updateDelivery(Delivery deli) {
-		// TODO Auto-generated method stub
-		
+	
 	}
 
 	@Override
@@ -51,7 +48,6 @@ public class DeliveryServiceImpl implements DeliveryService {
 
 	@Override
 	public void deleteDeliveryById(int id) {
-		// TODO Auto-generated method stub
-		
+
 	}
 }

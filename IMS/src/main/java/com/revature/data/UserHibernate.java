@@ -73,8 +73,13 @@ public class UserHibernate implements UserDAO {
 	}
 	@Override
 	public User getUserLogin(String email, String password) {
-//		Session se = hu.getSession();
-//		User use = session.get(User.class,  email, password);
+		Set<User> userList = getUsers();
+		for(User user : userList) {
+			if(user.getEmail().equals(email)
+					&& user.getPassword().equals(password)) {
+				return user;
+			}
+		}
 		return null;
 	}
 	
