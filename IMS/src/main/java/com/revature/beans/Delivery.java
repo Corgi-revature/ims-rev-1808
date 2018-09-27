@@ -3,6 +3,7 @@ package com.revature.beans;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -26,15 +27,21 @@ public class Delivery {
 		joinColumns=@JoinColumn(name="item"),
 		inverseJoinColumns=@JoinColumn(name="id"))
 	private Set<Item> items;
+	@Column(name="amount")
 	private int amount;
-	private String supplier;
+	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable(name="suppliers",
+			joinColumns=@JoinColumn(name="supplier"),
+			inverseJoinColumns=@JoinColumn(name="id"))
+	private Supplier supplier;
 	public Delivery() {
 		super();
 	}
-	public Delivery(int id, Set<Item> items, String supplier) {
+	public Delivery(int id, Set<Item> items, int amount, Supplier supplier) {
 		super();
 		this.id = id;
 		this.items = items;
+		this.amount = amount;
 		this.supplier = supplier;
 	}
 	public int getId() {
@@ -49,16 +56,23 @@ public class Delivery {
 	public void setItems(Set<Item> items) {
 		this.items = items;
 	}
-	public String getSupplier() {
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+	public Supplier getSupplier() {
 		return supplier;
 	}
-	public void setSupplier(String supplier) {
+	public void setSupplier(Supplier supplier) {
 		this.supplier = supplier;
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + amount;
 		result = prime * result + id;
 		result = prime * result + ((items == null) ? 0 : items.hashCode());
 		result = prime * result + ((supplier == null) ? 0 : supplier.hashCode());
@@ -73,6 +87,8 @@ public class Delivery {
 		if (getClass() != obj.getClass())
 			return false;
 		Delivery other = (Delivery) obj;
+		if (amount != other.amount)
+			return false;
 		if (id != other.id)
 			return false;
 		if (items == null) {
@@ -89,6 +105,6 @@ public class Delivery {
 	}
 	@Override
 	public String toString() {
-		return "Delivery [id=" + id + ", items=" + items + ", supplier=" + supplier + "]";
+		return "Delivery [id=" + id + ", items=" + items + ", amount=" + amount + ", supplier=" + supplier + "]";
 	}
 }
