@@ -76,8 +76,8 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Steven Hang** - *Back End*
-* **Chen Sia** - *Front End*
+* **Steven Hang** 
+* **Chen Sia** 
 * **David Velez** - 
 * **William Shook** - 
 
