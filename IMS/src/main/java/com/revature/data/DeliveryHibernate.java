@@ -4,7 +4,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+<<<<<<< HEAD
 import org.hibernate.Session;
+=======
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -12,6 +14,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+>>>>>>> 9e67316221ca644f9f6176b9c1d2f56a4eb11ba7
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.Delivery;
