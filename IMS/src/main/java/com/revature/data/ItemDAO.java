@@ -5,8 +5,9 @@ import java.util.Set;
 import com.revature.beans.Item;
 
 public interface ItemDAO extends HibernateSession {
-	public int addItem(Item ite);
+
 	public Item getItemById(int id);
+	public int addItem(Item ite);
 	public Set<Item> getItemsCriteria();
 	public Set<Item> getItems();
 	public void updateItem(Item ite);

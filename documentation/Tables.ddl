@@ -59,7 +59,7 @@ CREATE TABLE users(
 	lname varchar2(255),
 	phone varchar2(255),
 	email varchar2(255),
-	password raw(32),
+	password varchar2(255),
 	usertype number(20),
 	CONSTRAINT fk_usertype FOREIGN KEY (usertype) REFERENCES usertypes(id)
 );

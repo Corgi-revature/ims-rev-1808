@@ -20,4 +20,8 @@
 	
 	<!-- Enable annotation configuration for aspects -->
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+<<<<<<< HEAD
 </beans>
+=======
+</beans>
+>>>>>>> 4634f1dcfc170c7c9f5a2351d509a0ad7f78134c
