@@ -60,6 +60,7 @@ typings/
 database.properties
 hibernate.cfg.xml
 .project
+.springBeans
 .idea/
 
 # Mobile Tools for Java (J2ME)
@@ -126,3 +127,4 @@ AssociateEvaluationSystem/logs/*
 
 # next.js build output
 .next
+*.springBeans

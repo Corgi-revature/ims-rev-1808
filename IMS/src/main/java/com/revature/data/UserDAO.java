@@ -1,14 +1,16 @@
 package com.revature.data;
 
+import java.util.List;
 import java.util.Set;
 
 import com.revature.beans.User;
 
-public interface UserDAO {
-	User addUser(User user);
-	User getUserByLogin(String username, String password);
-	Set<User> getUsersCriteria();
-	Set<User> getUsersHQL();
-	User updateUser(User user);
-	void deleteUser(User user);
+public interface UserDAO extends HibernateSession {
+	public int addUser(User user);
+	public User getUserById(int id); 
+	public List<User> getUsersCriteria(User use);
+	public Set<User> getUsers();
+	public User getUserLogin(String email, String password);
+	public void updateUser(User user);
+	public void deleteUser(User user);
 }

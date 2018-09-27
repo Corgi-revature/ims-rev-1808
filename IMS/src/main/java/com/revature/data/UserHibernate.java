@@ -1,64 +1,91 @@
 package com.revature.data;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.hibernate.Criteria;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Component;
 
 import com.revature.beans.User;
-import com.revature.utils.HibernateUtil;
 
+@Component
 public class UserHibernate implements UserDAO {
-	private Logger log = Logger.getLogger(UserHibernate.class);
-	private HibernateUtil hu = HibernateUtil.getInstance();
+	private Session session;
+	@Override
+	public void setSession(Session session) {
+		this.session = session;
+	}
 	
 	@Override
-	public User addUser(User user) {
-		Session session = hu.getSession();
-		Transaction tx = null;
+	public int addUser(User use) {
+		return (int) session.save(use);
+	}
+	@Override
+	public User getUserById(int id) {
+		return session.get(User.class, id);
+	}
+	@Override
+	public List<User> getUsersCriteria(User use) {
+		ArrayList<Predicate> preds = null;
+		CriteriaBuilder cb = session.getCriteriaBuilder();
+		CriteriaQuery<User> cr = cb.createQuery(User.class);
+		Root<User> root = cr.from(User.class);
+
+		return null;
+	}
+	@Override
+	public Set<User> getUsers() {
+		String hql = "FROM com.revature.beans.User";
+		Query<User> que = session.createQuery(hql, User.class);
+		List<User> userList = que.getResultList();
+		session.close();
+		return new HashSet<User>(userList);
+	}
+	@Override
+	public void updateUser(User use) {
+		Transaction tx = session.beginTransaction();
 		try {
-			tx = session.beginTransaction();
-			int i = (Integer) session.save(user);
+			session.update(use);
 			tx.commit();
-			return user;
-		} catch (Exception e) {
+		} catch(Exception e) {
 			tx.rollback();
-			e.printStackTrace();
-			return null;
 		} finally {
 			session.close();
 		}
 	}
 	@Override
-	public User getUserByLogin(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Set<User> getUsersCriteria() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Set<User> getUsersHQL() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public User updateUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void deleteUser(User user) {
-		// TODO Auto-generated method stub
+	public void deleteUser(User use) {
+		Transaction tx = session.beginTransaction();
+		try {
+			session.delete(use);
+			tx.commit();
+		} catch(Exception e) {
+			tx.rollback();
+		}
 		
+	}
+	@Override
+	public User getUserLogin(String email, String password) {
+//		Session se = hu.getSession();
+//		User use = session.get(User.class,  email, password);
+		Set<User> userList = getUsers();
+		for(User user : userList) {
+			if(user.getEmail().equals(email)
+					&& user.getPassword().equals(password)) {
+				return user;
+			}
+		}
+		return null;
 	}
 	
 	

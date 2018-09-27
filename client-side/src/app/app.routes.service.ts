@@ -1,18 +1,22 @@
+import { RouterModule, Route, CanActivate } from '@angular/router';
+import { ModuleWithProviders } from '@angular/core';
 
 import { Map1Component } from './views/maps/map1/map1.component';
 import { ModalsComponent } from './views/modals/modals.component';
 import { BasicTableComponent } from './views/tables/basic-table/basic-table.component';
 import { Profile1Component } from './views/profile/profile1/profile1.component';
-import { RouterModule, Route } from '@angular/router';
-import { ModuleWithProviders } from '@angular/core';
 import { NotFoundComponent } from './views/errors/not-found/not-found.component';
 import { Dashboard1Component } from './views/dashboards/dashboard1/dashboard1.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './login/login/login.component';
+import { RegisterComponent } from './login/register/register.component';
+import { ForgetPasswordComponent } from './login/forget-password/forget-password.component';
 
 
 const routes: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboards/v1' },
   { path: 'login', component: LoginComponent},
+  { path: 'register', component: RegisterComponent},
+  { path: 'forget', component: ForgetPasswordComponent},
   { path: 'dashboards', children:
     [
       { path: 'v1', component: Dashboard1Component },

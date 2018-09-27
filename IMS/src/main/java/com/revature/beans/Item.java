@@ -2,6 +2,16 @@ package com.revature.beans;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="inventoryitems")
 public class Item {
 /*
  * itemid
@@ -11,11 +21,19 @@ public class Item {
  * created
  * expires
  */
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="items")
+	@SequenceGenerator(name="items", sequenceName="item_seq", allocationSize=1)
 	private int id;
+	@Column(name="itemname")
 	private String name;
+	@Column(name="price")
 	private double price;
+	@Column(name="stock")
 	private int stock;
+	@Column(name="packagedate")
 	private Date created;
+	@Column(name="useby")
 	private Date expires;
 	public Item() {
 		super();
