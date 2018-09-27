@@ -27,8 +27,8 @@ public class UserController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public User login(String username, String password, HttpSession session) {
-		User u = ls.getUserLogin(username, password);
+	public User login(String email, String password, HttpSession session) {
+		User u = ls.getUserLogin(email, password);
 		if (u == null) {
 			return null;
 		} else {
