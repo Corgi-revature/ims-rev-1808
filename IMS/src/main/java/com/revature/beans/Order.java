@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -32,14 +31,10 @@ public class Order {
 	@Column(name="amount")
 	private int amount;
 	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="user",
-		joinColumns=@JoinColumn(name="userid"),
-		inverseJoinColumns=@JoinColumn(name="id"))
+	@JoinColumn(name="userid")
 	private User user;
 	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="transactions",
-		joinColumns=@JoinColumn(name="transaction"),
-		inverseJoinColumns=@JoinColumn(name="id"))
+	@JoinColumn(name="transaction")
 	private Txact tx;
 	@Column(name="address")
 	private String address;
