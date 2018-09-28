@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -26,14 +27,15 @@ public class Order {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="order")
 	@SequenceGenerator(name="order", sequenceName="order_seq", allocationSize=1)
 	private int id;
-	@Column(name="item")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="item")
 	private Item item;
 	@Column(name="amount")
 	private int amount;
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="userid")
 	private User user;
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="transaction")
 	private Txact tx;
 	@Column(name="address")
