@@ -11,65 +11,74 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.Item;
+import com.revature.utils.HibernateUtil;
 
 @Component
 public class ItemHibernate implements ItemDAO {
-	private Session session;
-	@Override
-	public void setSession(Session session) {
-		this.session = session;
-	}
+	@Autowired
+	private HibernateUtil hu;
 	
 	@Override
 	public int addItem(Item ite) {
-		return (int) session.save(ite);
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
+		return (int) ss.save(ite);
 	}
 
 	@Override
 	public Item getItemById(int id) {
-		return session.get(Item.class, id);
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
+		return ss.get(Item.class, id);
 	}
 
 	@Override
 	public Set<Item> getItemsCriteria() {
-		CriteriaBuilder build = session.getCriteriaBuilder();
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
+		CriteriaBuilder build = ss.getCriteriaBuilder();
 		CriteriaQuery<Item> crit = build.createQuery(Item.class);
 		Root<Item> root = crit.from(Item.class);
 		crit.select(root);
-		List<Item> items = session.createQuery(crit).getResultList();
+		List<Item> items = ss.createQuery(crit).getResultList();
 		return new HashSet<Item>(items);
 	}
 
 	@Override
 	public Set<Item> getItems() {
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		String hql = "FROM com.revature.beans.Item";
-		Query<Item> que = session.createQuery(hql, Item.class);
+		Query<Item> que = ss.createQuery(hql, Item.class);
 		List<Item> itemList = que.getResultList();
-		session.close();
+		ss.close();
 		return new HashSet<Item>(itemList);
 	}
 
 	@Override
 	public void updateItem(Item ite) {
-		Transaction tx = session.beginTransaction();
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		try {
-			session.update(ite);
+			ss.update(ite);
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
 		} finally {
-			session.close();
+			ss.close();
 		}
 	}
 
 	@Override
 	public void deleteItem(Item ite) {
-		Transaction tx = session.beginTransaction();
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		try {
-			session.delete(ite);
+			ss.delete(ite);
 		} catch (Exception e) {
 			tx.rollback();
 		}
@@ -77,10 +86,11 @@ public class ItemHibernate implements ItemDAO {
 
 	@Override
 	public void deleteItemById(int id) {
-		Transaction tx = session.beginTransaction();
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		try {
 			Item ite = getItemById(id);
-			session.delete(ite);
+			ss.delete(ite);
 		} catch (Exception e) {
 			tx.rollback();
 		}
