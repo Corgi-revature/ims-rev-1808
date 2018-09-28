@@ -14,7 +14,7 @@ public class Driver {
 	public static void main(String[] args) {
 		ac = new ClassPathXmlApplicationContext("beans.xml");
 		UserDAO ud = (UserDAO) ac.getBean(UserDAO.class);
-		System.out.println(ud.getUsers());
+		System.out.println(ud.getUserById(1));
 		System.exit(0);
 	}
 
