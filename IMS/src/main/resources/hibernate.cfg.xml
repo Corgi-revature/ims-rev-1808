@@ -20,6 +20,6 @@
 		<mapping class="com.revature.beans.Delivery"/>
 		<mapping class="com.revature.beans.Txact"/>
 		<mapping class="com.revature.beans.Item"/>
-		<mapping class="com.revature.beans.Usertype"/>
+		<mapping class="com.revature.beans.UserType"/>
 	</session-factory>
 </hibernate-configuration>
