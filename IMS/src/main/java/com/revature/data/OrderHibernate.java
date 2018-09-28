@@ -11,83 +11,87 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.Order;
+import com.revature.utils.HibernateUtil;
 
 @Component
 public class OrderHibernate implements OrderDAO{
-	private Session session;
-	@Override
-	public void setSession(Session session) {
-		this.session = session;
-	}
-	Transaction tx = null;
+	@Autowired
+	private HibernateUtil hu;
 
 	@Override
 	public Order addOrder(Order ord) {
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		try {
-			tx = session.beginTransaction();
-			session.save(ord);
+			tx = ss.beginTransaction();
+			ss.save(ord);
 			tx.commit();
 			return ord;
 		} catch(Exception e) {
 			tx.rollback();
 			return null;
 		} finally {
-			session.close();
+			ss.close();
 		}
 	}
 
 	@Override
 	public Order getOrderById(int id) {
-
-		Order ord = session.get(Order.class,  id);
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
+		Order ord = ss.get(Order.class,  id);
 		return ord;
 	}
 
 	@Override
 	public Set<Order> getOrdersCriteria() {
-
-		CriteriaBuilder build = session.getCriteriaBuilder();
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
+		CriteriaBuilder build = ss.getCriteriaBuilder();
 		CriteriaQuery<Order> crit = build.createQuery(Order.class);
 		Root<Order> root = crit.from(Order.class);
 		crit.select(root);
-		List<Order> orders = session.createQuery(crit).getResultList();
+		List<Order> orders = ss.createQuery(crit).getResultList();
 		return new HashSet<Order>(orders);
 		
 	}
 
 	@Override	
 	public Set<Order> getOrders() {
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		String hql = "FROM com.revature.beans.Order";
-		Query<Order> que = session.createQuery(hql, Order.class);
+		Query<Order> que = ss.createQuery(hql, Order.class);
 		List<Order> orderList = que.getResultList();
-		session.close();
+		ss.close();
 		return new HashSet<Order>(orderList);
 	}
 
 	@Override
 	public void updateOrder(Order ord) {
-
-		Transaction tx = session.beginTransaction();
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		try {
-			session.update(ord);
+			ss.update(ord);
 			tx.commit();
 		} catch(Exception e) {
 			tx.rollback();
 		} finally {
-			session.close();
+			ss.close();
 		}
 		
 	}
 
 	@Override
 	public void deleteOrder(Order ord) {
-
-		Transaction tx = session.beginTransaction();
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		try {
-			session.delete(ord);
+			ss.delete(ord);
 			tx.commit();
 		} catch(Exception e) {
 			tx.rollback();
@@ -97,7 +101,8 @@ public class OrderHibernate implements OrderDAO{
 
 	@Override
 	public void deleteOrderById(int id) {
-		// TODO Auto-generated method stub
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		
 	}
 	

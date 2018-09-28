@@ -6,11 +6,10 @@ import java.util.Set;
 import com.revature.beans.User;
 
 public interface UserService {
-	public int addUser(User use);
+	public int addUser(User user);
 	public User getUserById(int id);
-	public List<User> getUsersCriteria(User use);
+	public List<User> getUsersCriteria(User user);
 	public Set<User> getUsers();
-	public User getUserLogin(String email, String password);
-	public void updateUser(User use);
-	public void deleteUser(User use);
+	public void updateUser(User user);
+	public void deleteUser(User user);
 }
