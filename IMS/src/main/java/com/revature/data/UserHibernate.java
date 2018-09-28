@@ -3,16 +3,7 @@ package com.revature.data;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-<<<<<<< HEAD
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-=======
->>>>>>> a266438b0272fe526255b73a87f8e2ca33e9eaa1
-
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -20,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.User;
+import com.revature.utils.HibernateUtil;
 
 @Component
 public class UserHibernate implements UserDAO {

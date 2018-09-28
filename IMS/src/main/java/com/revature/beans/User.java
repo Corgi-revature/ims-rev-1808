@@ -27,7 +27,7 @@ public class User {
 	@Column(name="email")
 	private String email;
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="id")
+	@JoinColumn(name="usetype")
 	private UserType usertype;
 	@Column(name="password")
 	private String password;
