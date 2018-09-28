@@ -23,51 +23,65 @@ public class Delivery {
 	@SequenceGenerator(name="deliveries", sequenceName="delivery_seq", allocationSize=1)
 	private int id;
 	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinTable(name="inventoryitems",
-		joinColumns=@JoinColumn(name="item"),
-		inverseJoinColumns=@JoinColumn(name="id"))
-	private Set<Item> items;
+	@JoinColumn(name="item")
+	private Item items;
 	@Column(name="amount")
 	private int amount;
 	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinTable(name="suppliers",
-			joinColumns=@JoinColumn(name="supplier"),
-			inverseJoinColumns=@JoinColumn(name="id"))
+	@JoinColumn(name="supplier")
 	private Supplier supplier;
 	public Delivery() {
 		super();
-	}
-	public Delivery(int id, Set<Item> items, int amount, Supplier supplier) {
+	}	
+	
+	public Delivery(int id, Item items, int amount, Supplier supplier) {
 		super();
 		this.id = id;
 		this.items = items;
 		this.amount = amount;
 		this.supplier = supplier;
 	}
+
 	public int getId() {
 		return id;
 	}
+
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Set<Item> getItems() {
+
+
+	public Item getItems() {
 		return items;
 	}
-	public void setItems(Set<Item> items) {
+
+
+	public void setItems(Item items) {
 		this.items = items;
 	}
+
+
 	public int getAmount() {
 		return amount;
 	}
+
+
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
+
+
 	public Supplier getSupplier() {
 		return supplier;
 	}
+
+
 	public void setSupplier(Supplier supplier) {
 		this.supplier = supplier;
 	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -78,6 +92,8 @@ public class Delivery {
 		result = prime * result + ((supplier == null) ? 0 : supplier.hashCode());
 		return result;
 	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -103,8 +119,11 @@ public class Delivery {
 			return false;
 		return true;
 	}
+
+
 	@Override
 	public String toString() {
 		return "Delivery [id=" + id + ", items=" + items + ", amount=" + amount + ", supplier=" + supplier + "]";
 	}
+	
 }
