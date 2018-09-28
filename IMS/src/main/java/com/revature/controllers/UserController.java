@@ -2,8 +2,7 @@ package com.revature.controllers;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,16 +16,18 @@ import com.revature.services.UserService;
 @RequestMapping(value = "/user")
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
+	private Logger log = Logger.getLogger(UserController.class);
 	//checked
 	@Autowired
 	private UserService us;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String goLogin(HttpSession session) {
-		if (session.getAttribute("user") != null) {
-			
+	public String goLogin(String session) {
+		if (session == null) {
+			log.trace(session);
+			log.trace(us.getUsers());
 		}
-		return "";
+		return "RUN";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)

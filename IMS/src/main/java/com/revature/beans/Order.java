@@ -7,45 +7,38 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="orders")
+@Table(name = "orders")
 public class Order {
-/*
- * id
- * itemid
- * amount
- * userid
- * txid
- * address
- */
+	/*
+	 * id itemid amount userid txid address
+	 */
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="order")
-	@SequenceGenerator(name="order", sequenceName="order_seq", allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order")
+	@SequenceGenerator(name = "order", sequenceName = "order_seq", allocationSize = 1)
 	private int id;
-	@Column(name="item")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "item")
 	private Item item;
-	@Column(name="amount")
+	@Column(name = "amount")
 	private int amount;
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="user",
-		joinColumns=@JoinColumn(name="userid"),
-		inverseJoinColumns=@JoinColumn(name="id"))
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "userid")
 	private User user;
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="transactions",
-		joinColumns=@JoinColumn(name="transaction"),
-		inverseJoinColumns=@JoinColumn(name="id"))
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "transaction")
 	private Txact tx;
-	@Column(name="address")
+	@Column(name = "address")
 	private String address;
+
 	public Order() {
 		super();
 	}
+
 	public Order(int id, Item item, int amount, User user, Txact tx, String address) {
 		super();
 		this.id = id;
@@ -55,42 +48,55 @@ public class Order {
 		this.tx = tx;
 		this.address = address;
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public Item getItem() {
 		return item;
 	}
+
 	public void setItem(Item item) {
 		this.item = item;
 	}
+
 	public int getAmount() {
 		return amount;
 	}
+
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
+
 	public User getUser() {
 		return user;
 	}
+
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 	public Txact getTx() {
 		return tx;
 	}
+
 	public void setTx(Txact tx) {
 		this.tx = tx;
 	}
+
 	public String getAddress() {
 		return address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -103,6 +109,7 @@ public class Order {
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -138,6 +145,7 @@ public class Order {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", item=" + item + ", amount=" + amount + ", user=" + user + ", tx=" + tx
