@@ -3,58 +3,63 @@ package com.revature.data;
 import java.util.Set;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.Supplier;
+import com.revature.utils.HibernateUtil;
 
 @Component
 public class SupplierHibernate implements SupplierDAO {
-	private Session session;
-	@Override
-	public void setSession(Session session) {
-		this.session = session;
-	}
+	@Autowired
+	private HibernateUtil hu;
 
 	@Override
 	public Supplier addSupplier(Supplier sup) {
-		// TODO Auto-generated method stub
-		return null;
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
+		return (Supplier) ss.save(sup);
 	}
 
 	@Override
 	public Supplier getSupplierById(int id) {
-		// TODO Auto-generated method stub
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		return null;
 	}
 
 	@Override
 	public Set<Supplier> getSuppliersCriteria() {
-		// TODO Auto-generated method stub
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		return null;
 	}
 
 	@Override
 	public Set<Supplier> getSuppliers() {
-		// TODO Auto-generated method stub
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		return null;
 	}
 
 	@Override
 	public void updateSupplier(Supplier sup) {
-		// TODO Auto-generated method stub
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 
 	}
 
 	@Override
 	public void deleteSupplier(Supplier sup) {
-		// TODO Auto-generated method stub
-
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 	}
 
 	@Override
 	public void deleteSupplierById(int id) {
-		// TODO Auto-generated method stub
-
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 	}
 
 }

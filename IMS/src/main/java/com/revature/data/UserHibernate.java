@@ -1,14 +1,8 @@
 package com.revature.data;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -25,30 +19,46 @@ public class UserHibernate implements UserDAO {
 	private HibernateUtil hu;
 
 	@Override
-	public int addUser(User user) {
+	public int addUser(User use) {
 		Session ss = hu.getSession();
-		Transaction ts = ss.beginTransaction();
-		return (int) ss.save(user);
+		Transaction tx = ss.beginTransaction();
+		return (int) ss.save(use);
 	}
 
 	@Override
 	public User getUserById(int id) {
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		return ss.get(User.class, id);
 	}
 
 	@Override
 	public List<User> getUsersCriteria(User user) {
-		ArrayList<Predicate> preds = null;
-		CriteriaBuilder cb = ss.getCriteriaBuilder();
-		CriteriaQuery<User> cr = cb.createQuery(User.class);
-		Root<User> root = cr.from(User.class);
-		cr.select(root);
-		List<User> users = ss.createQuery(cr).getResultList();
-		return users;
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
+		List<User> result = null;
+		try {
+			String hql = "FROM com.revature.beans.User u "
+					+ "WHERE u.email = ? AND u.password = ?";
+//			Query query = ss.createQuery(hql);
+			result = ss.createQuery(hql)
+					.setParameter(0, user.getEmail())
+					.setParameter(1, user.getPassword()).list();
+		} catch (Exception e) {
+	         e.printStackTrace();
+	         if (tx != null) {
+	            tx.rollback();
+	         }
+		} finally {
+			ss.close();
+		}
+		return result;
 	}
 
 	@Override
 	public Set<User> getUsers() {
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		String hql = "FROM com.revature.beans.User";
 		Query<User> que = ss.createQuery(hql, User.class);
 		List<User> userList = que.getResultList();
@@ -57,10 +67,11 @@ public class UserHibernate implements UserDAO {
 	}
 
 	@Override
-	public void updateUser(User user) {
+	public void updateUser(User use) {
+		Session ss = hu.getSession();
 		Transaction tx = ss.beginTransaction();
 		try {
-			ss.update(user);
+			ss.update(use);
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
@@ -70,10 +81,11 @@ public class UserHibernate implements UserDAO {
 	}
 
 	@Override
-	public void deleteUser(User user) {
+	public void deleteUser(User use) {
+		Session ss = hu.getSession();
 		Transaction tx = ss.beginTransaction();
 		try {
-			ss.delete(user);
+			ss.delete(use);
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();

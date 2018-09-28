@@ -5,7 +5,7 @@ import java.util.Set;
 
 import com.revature.beans.User;
 
-public interface UserDAO {
+public interface UserDAO{
 	public int addUser(User user);
 	public User getUserById(int id); 
 	public List<User> getUsersCriteria(User use);

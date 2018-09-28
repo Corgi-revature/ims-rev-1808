@@ -4,7 +4,7 @@ import java.util.Set;
 import com.revature.beans.Item;
 
 public interface InventoryService {
-	Item addItem(Item ite);
+	int addItem(Item ite);
 	Item getItemById(int id);
 	Set<Item> getItems();
 	Set<Item> getItemsCriteria();

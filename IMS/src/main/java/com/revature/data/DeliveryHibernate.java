@@ -11,65 +11,74 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.Delivery;
+import com.revature.utils.HibernateUtil;
 
 @Component
 public class DeliveryHibernate implements DeliveryDAO {
-	private Session session;
-	@Override
-	public void setSession(Session session) {
-		this.session = session;
-	}
+	@Autowired
+	private HibernateUtil hu;
 	
 	@Override
 	public int addDelivery(Delivery deli) {
-		return (int) session.save(deli);
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
+		return (int) ss.save(deli);
 	}
-
+	
 	@Override
 	public Delivery getDeliveryById(int id) {
-		return session.get(Delivery.class, id);
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
+		return ss.get(Delivery.class, id);
 	}
 
 	@Override
 	public Set<Delivery> getDeliveriesCriteria() {
-		CriteriaBuilder build = session.getCriteriaBuilder();
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
+		CriteriaBuilder build = ss.getCriteriaBuilder();
 		CriteriaQuery<Delivery> crit = build.createQuery(Delivery.class);
 		Root<Delivery> root = crit.from(Delivery.class);
 		crit.select(root);
-		List<Delivery> deliveries = session.createQuery(crit).getResultList();
+		List<Delivery> deliveries = ss.createQuery(crit).getResultList();
 		return new HashSet<Delivery>(deliveries);
 	}
 
 	@Override
 	public Set<Delivery> getDeliveries() {
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		String hql = "FROM com.revature.beans.Delivery";
-		Query<Delivery> que = session.createQuery(hql, Delivery.class);
+		Query<Delivery> que = ss.createQuery(hql, Delivery.class);
 		List<Delivery> deliveries = que.getResultList();
-		session.close();
+		ss.close();
 		return new HashSet<Delivery>(deliveries);
 	}
 
 	@Override
 	public void updateDelivery(Delivery deli) {
-		Transaction tx = session.beginTransaction();
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		try {
-			session.update(deli);
+			ss.update(deli);
 			tx.commit();
 		} catch(Exception e) {
 			tx.rollback();
 		} finally {
-			session.close();
+			ss.close();
 		}
 	}
 
 	@Override
 	public void deleteDelivery(Delivery deli) {
-		Transaction tx = session.beginTransaction();
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		try {
-			session.delete(deli);
+			ss.delete(deli);
 			tx.commit();
 		} catch(Exception e) {
 			tx.rollback();
@@ -78,10 +87,12 @@ public class DeliveryHibernate implements DeliveryDAO {
 
 	@Override
 	public void deleteDeliveryById(int id) {
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		Set<Delivery> deliveries = getDeliveries();
 		for(Delivery deli : deliveries) {
 			if(deli.getId()==id) {
-				session.delete(deli);
+				ss.delete(deli);
 				break;
 			}
 		}

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.revature.beans.User;
 import com.revature.data.UserDAO;
-
+//this is how u do a service?
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired

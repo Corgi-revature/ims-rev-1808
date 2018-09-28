@@ -2,53 +2,49 @@ package com.revature.services;
 
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.Item;
 import com.revature.data.ItemDAO;
+import com.revature.data.ItemHibernate;
 
 @Service
 public class InventoryServiceImpl implements InventoryService {
-	@Autowired
-	// changes required to pan out inventory and item
-	private ItemDAO ds;
-	
+	private ItemDAO itemDAO = new ItemHibernate();
+
 	@Override
-	public Item addItem(Item ite) {
-		return ite;
+	public int addItem(Item ite) {
+		int itemID = itemDAO.addItem(ite);
+		return itemID;
 	}
 
 	@Override
 	public Item getItemById(int id) {
-
-		return null;
+		return itemDAO.getItemById(id);
 	}
 
 	@Override
 	public Set<Item> getItems() {
-
-		return null;
+		return itemDAO.getItems();
 	}
 
 	@Override
 	public Set<Item> getItemsCriteria() {
-
-		return null;
+		return itemDAO.getItemsCriteria();
 	}
 
 	@Override
 	public void updateItem(Item ite) {
-		
+		itemDAO.updateItem(ite);
 	}
 
 	@Override
 	public void deleteItem(Item ite) {
-		
+		itemDAO.deleteItem(ite);
 	}
 
 	@Override
 	public void deleteItemById(int id) {
-
+		itemDAO.deleteItemById(id);
 	}
 }
