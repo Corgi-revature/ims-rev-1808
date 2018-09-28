@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class LoggingAspect {
-	private Logger log;
+	/*private Logger log;
 	
 	@Around("everything()")
 	public Object log(ProceedingJoinPoint pjp) {
@@ -35,5 +35,5 @@ public class LoggingAspect {
 	}
 	
 	@Pointcut("execution(* com.revature..*(..))")
-	private void everything() { /* Empty method */ }
+	private void everything() {  Empty method  }*/
 }

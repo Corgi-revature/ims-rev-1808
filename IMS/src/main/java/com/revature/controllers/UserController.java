@@ -30,15 +30,13 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public List<User> login(User user, HttpSession session) {
+	public List<User> login(User user) {
 		
 		List<User> u = us.getUsersCriteria(user);
 		if (u == null) {
 			return null;
-		} else {
-			session.setAttribute("user", u);
-			return u;
 		}
+		return null;
 	}
 	//	testing
 	@RequestMapping(value="/hello", method=RequestMethod.GET)
