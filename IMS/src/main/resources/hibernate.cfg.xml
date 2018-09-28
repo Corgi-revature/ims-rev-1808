@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- Configure our database -->
+		<property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@sah-master.c9ku9awjwpnb.us-west-2.rds.amazonaws.com:1521:ORCL</property>
+		<property name="hibernate.connection.username">imsapp</property>
+		<property name="hibernate.connection.password">p4ssw0rd</property>
+		<property name="hibernate.connection.pool_size">35</property>
+		
+		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+		
+		<property name="show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+		
+		<mapping class="com.revature.beans.User"/>
+		<mapping class="com.revature.beans.Order"/>
+		<mapping class="com.revature.beans.Supplier"/>
+		<mapping class="com.revature.beans.Delivery"/>
+		<mapping class="com.revature.beans.Txact"/>
+		<mapping class="com.revature.beans.Item"/>
+		<mapping class="com.revature.beans.Usertype"/>
+	</session-factory>
+</hibernate-configuration>
