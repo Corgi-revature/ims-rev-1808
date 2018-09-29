@@ -32,6 +32,7 @@ public class UserHibernate implements UserDAO {
 		return ss.get(User.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> getUsersCriteria(User user) {
 		Session ss = hu.getSession();
