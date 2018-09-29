@@ -28,14 +28,12 @@ public class UserHibernate implements UserDAO {
 	@Override
 	public User getUserById(int id) {
 		Session ss = hu.getSession();
-		Transaction tx = ss.beginTransaction();
 		return ss.get(User.class, id);
 	}
 
 	@Override
 	public List<User> getUsersCriteria(User user) {
 		Session ss = hu.getSession();
-		Transaction tx = ss.beginTransaction();
 		List<User> result = null;
 		try {
 			String hql = "FROM com.revature.beans.User u "
@@ -46,9 +44,7 @@ public class UserHibernate implements UserDAO {
 					.setParameter(1, user.getPassword()).list();
 		} catch (Exception e) {
 	         e.printStackTrace();
-	         if (tx != null) {
-	            tx.rollback();
-	         }
+	         
 		} finally {
 			ss.close();
 		}
@@ -58,7 +54,6 @@ public class UserHibernate implements UserDAO {
 	@Override
 	public Set<User> getUsers() {
 		Session ss = hu.getSession();
-		Transaction tx = ss.beginTransaction();
 		String hql = "FROM com.revature.beans.User";
 		Query<User> que = ss.createQuery(hql, User.class);
 		List<User> userList = que.getResultList();
