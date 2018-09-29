@@ -17,21 +17,21 @@
   },
   "private": true,
   "dependencies": {
-    "@agm/core": "^1.0.0-beta.4",
-    "@angular/animations": "^6.1.0",
+    "@agm/core": "^1.0.0-beta.5",
+    "@angular/animations": "^6.1.9",
     "@angular/cdk": "^6.4.7",
-    "@angular/common": "^6.1.0",
-    "@angular/compiler": "^6.1.0",
-    "@angular/core": "^6.1.0",
-    "@angular/forms": "^6.1.0",
-    "@angular/http": "^6.1.0",
+    "@angular/common": "^6.1.9",
+    "@angular/compiler": "^6.1.9",
+    "@angular/core": "^6.1.9",
+    "@angular/forms": "^6.1.9",
+    "@angular/http": "^6.1.9",
     "@angular/material": "^6.4.7",
-    "@angular/platform-browser": "^6.1.0",
-    "@angular/platform-browser-dynamic": "^6.1.0",
-    "@angular/router": "^6.1.0",
+    "@angular/platform-browser": "^6.1.9",
+    "@angular/platform-browser-dynamic": "^6.1.9",
+    "@angular/router": "^6.1.9",
     "angular-bootstrap-md": "file:angular-bootstrap-md-6.2.4.tgz",
     "angular-calendar": "^0.25.2",
-    "chart.js": "^2.5.0",
+    "chart.js": "^2.7.2",
     "classlist.js": "1.1.x",
     "core-js": "^2.5.4",
     "easy-pie-chart": "2.1.x",
@@ -49,10 +49,10 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.8.0",
     "@angular/cli": "~6.2.1",
-    "@angular/compiler-cli": "^6.1.0",
-    "@angular/language-service": "^6.1.0",
+    "@angular/compiler-cli": "^6.1.9",
+    "@angular/language-service": "^6.1.9",
     "@types/jasmine": "~2.8.8",
-    "@types/jasminewd2": "~2.0.3",
+    "@types/jasminewd2": "^2.0.4",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.3.0",
     "del": "^3.0.0",
@@ -82,7 +82,11 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~2.9.2",
+<<<<<<< HEAD
     "webpack": "^4.3.0",
+=======
+    "webpack": "^4.20.2",
+>>>>>>> a62a9e1d8bf307912529cf5aee423dc561b0397a
     "webpack-sources": "1.1.0"
   }
 }
