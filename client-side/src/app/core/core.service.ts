@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 })
 export class CoreService {
   private login: Login;
-  private url = 'http://localhost:8080/p2a/';
+  private url = 'http://localhost:8080/IMS/';
 
   constructor(private http: HttpClient) {}
   postLogin(email: String, password: String): Observable<Login> {

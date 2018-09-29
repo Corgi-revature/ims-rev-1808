@@ -82,11 +82,7 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~2.9.2",
-<<<<<<< HEAD
-    "webpack": "^4.3.0",
-=======
     "webpack": "^4.20.2",
->>>>>>> a62a9e1d8bf307912529cf5aee423dc561b0397a
     "webpack-sources": "1.1.0"
   }
 }
