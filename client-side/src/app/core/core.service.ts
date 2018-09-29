@@ -33,4 +33,9 @@ export class CoreService {
   postUser(user: Login): Observable<any> {
     return this.http.post(`${this.url}register`, user);
   }
+
+  // Added getURL() method for William
+  public getURL() {
+    return this.url;
+  }
 }
