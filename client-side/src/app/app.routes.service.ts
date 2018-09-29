@@ -10,7 +10,7 @@ import { Dashboard1Component } from './views/dashboards/dashboard1/dashboard1.co
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './login/register/register.component';
 import { ForgetPasswordComponent } from './login/forget-password/forget-password.component';
-
+import { EmployeeComponent } from './views/employee/employee.component';
 
 const routes: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboards/v1' },
@@ -20,6 +20,11 @@ const routes: Route[] = [
   { path: 'dashboards', children:
     [
       { path: 'v1', component: Dashboard1Component },
+    ]
+  },
+  { path: 'employee', children: 
+    [
+      { path: 'inventory', component: EmployeeComponent }
     ]
   },
   { path: 'profiles', children:
