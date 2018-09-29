@@ -13,27 +13,28 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class LoggingAspect {
 	private Logger log;
-	
+
 	@Around("everything()")
 	public Object log(ProceedingJoinPoint pjp) {
 		Object obj = null;
-		
+
 		log = Logger.getLogger(pjp.getTarget().getClass());
-		log.trace("Method with signature: "+pjp.getSignature());
-		log.trace("With Arguments: "+Arrays.toString(pjp.getArgs()));
-		
+		log.trace("Method with signature: " + pjp.getSignature());
+		log.trace("With Arguments: " + Arrays.toString(pjp.getArgs()));
+
 		try {
 			obj = pjp.proceed();
 		} catch (Throwable e) {
 			log.error(e.getMessage());
-			for(StackTraceElement s : e.getStackTrace()) {
+			for (StackTraceElement s : e.getStackTrace()) {
 				log.warn(s);
 			}
 		}
-		log.info(pjp.getSignature()+" returned: "+obj);
+		log.info(pjp.getSignature() + " returned: " + obj);
 		return obj;
 	}
-	
+
 	@Pointcut("execution(* com.revature..*(..))")
-	private void everything() {/* Empty method */}
+	private void everything() {
+		/* Empty method */}
 }
