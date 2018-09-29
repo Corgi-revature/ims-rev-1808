@@ -1,26 +1,40 @@
 package com.revature.beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="users")
 public class User {
-/*
- * userid
- * fname
- * lname
- * phone
- * email
- * usertype
- * password
- */
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="user")
+	@SequenceGenerator(name="user", sequenceName="user_seq", allocationSize=1)
 	private int id;
+	@Column(name="fname")
 	private String first;
+	@Column(name="lname")
 	private String last;
-	private int phone;
+	@Column(name="phone")
+	private String phone;
+	@Column(name="email")
 	private String email;
-	private int usertype;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="usertype")
+	private UserType usertype;
+	@Column(name="password")
 	private String password;
 	public User() {
 		super();
 	}
-	public User(int id, String first, String last, int phone, String email, int usertype, String password) {
+	public User(int id, String first, String last, String phone, String email, UserType usertype, String password) {
 		super();
 		this.id = id;
 		this.first = first;
@@ -48,10 +62,10 @@ public class User {
 	public void setLast(String last) {
 		this.last = last;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public String getEmail() {
@@ -60,10 +74,10 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getUsertype() {
+	public UserType getUsertype() {
 		return usertype;
 	}
-	public void setUsertype(int usertype) {
+	public void setUsertype(UserType usertype) {
 		this.usertype = usertype;
 	}
 	public String getPassword() {
@@ -81,8 +95,8 @@ public class User {
 		result = prime * result + id;
 		result = prime * result + ((last == null) ? 0 : last.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + phone;
-		result = prime * result + usertype;
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + ((usertype == null) ? 0 : usertype.hashCode());
 		return result;
 	}
 	@Override
@@ -116,9 +130,15 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (phone != other.phone)
+		if (phone == null) {
+			if (other.phone != null)
+				return false;
+		} else if (!phone.equals(other.phone))
 			return false;
-		if (usertype != other.usertype)
+		if (usertype == null) {
+			if (other.usertype != null)
+				return false;
+		} else if (!usertype.equals(other.usertype))
 			return false;
 		return true;
 	}
@@ -127,4 +147,5 @@ public class User {
 		return "User [id=" + id + ", first=" + first + ", last=" + last + ", phone=" + phone + ", email=" + email
 				+ ", usertype=" + usertype + ", password=" + password + "]";
 	}
+	
 }
