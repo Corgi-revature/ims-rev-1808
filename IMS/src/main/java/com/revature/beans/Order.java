@@ -28,14 +28,14 @@ public class Order {
 	@SequenceGenerator(name="order", sequenceName="order_seq", allocationSize=1)
 	private int id;
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="item")
-	private Item item;
+	@JoinColumn(name="inventoryitem")
+	private Inventory inventory;
 	@Column(name="amount")
 	private int amount;
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="userid")
 	private User user;
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="transaction")
 	private Txact tx;
 	@Column(name="address")
@@ -43,10 +43,10 @@ public class Order {
 	public Order() {
 		super();
 	}
-	public Order(int id, Item item, int amount, User user, Txact tx, String address) {
+	public Order(int id, Inventory inventory, int amount, User user, Txact tx, String address) {
 		super();
 		this.id = id;
-		this.item = item;
+		this.inventory = inventory;
 		this.amount = amount;
 		this.user = user;
 		this.tx = tx;
@@ -58,11 +58,11 @@ public class Order {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Item getItem() {
-		return item;
+	public Inventory getInventory() {
+		return inventory;
 	}
-	public void setItem(Item item) {
-		this.item = item;
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
 	}
 	public int getAmount() {
 		return amount;
@@ -95,7 +95,7 @@ public class Order {
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + amount;
 		result = prime * result + id;
-		result = prime * result + ((item == null) ? 0 : item.hashCode());
+		result = prime * result + ((inventory == null) ? 0 : inventory.hashCode());
 		result = prime * result + ((tx == null) ? 0 : tx.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
@@ -118,10 +118,10 @@ public class Order {
 			return false;
 		if (id != other.id)
 			return false;
-		if (item == null) {
-			if (other.item != null)
+		if (inventory == null) {
+			if (other.inventory != null)
 				return false;
-		} else if (!item.equals(other.item))
+		} else if (!inventory.equals(other.inventory))
 			return false;
 		if (tx == null) {
 			if (other.tx != null)
@@ -137,7 +137,7 @@ public class Order {
 	}
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", item=" + item + ", amount=" + amount + ", user=" + user + ", tx=" + tx
+		return "Order [id=" + id + ", inventory=" + inventory + ", amount=" + amount + ", user=" + user + ", tx=" + tx
 				+ ", address=" + address + "]";
 	}
 }
