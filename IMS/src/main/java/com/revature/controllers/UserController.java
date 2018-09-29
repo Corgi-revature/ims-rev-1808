@@ -30,13 +30,13 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public List<User> login(User user) {
+	public User login(User user) {
 		
 		List<User> u = us.getUsersCriteria(user);
 		if (u == null) {
 			return null;
 		}
-		return null;
+			return u.get(0);
 	}
 	//	testing
 	@RequestMapping(value="/hello", method=RequestMethod.GET)
