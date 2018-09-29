@@ -22,6 +22,7 @@ import { RegisterComponent } from './login/register/register.component';
 import { ForgetPasswordComponent } from './login/forget-password/forget-password.component';
 // services
 import { CoreService } from './core/core.service';
+import { UserComponent } from './login/user/user.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { CoreService } from './core/core.service';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    UserComponent
   ],
   imports: [
     HttpClientModule,
