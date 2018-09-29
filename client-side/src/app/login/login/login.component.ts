@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Login } from '../../class/login';
 import { CoreService } from '../../core/core.service';
-
+import { DataService } from '../../testing/data.service';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +12,9 @@ export class LoginComponent implements OnInit {
   @Input() email: string;
   @Input() password: string;
   @Input() login: Login;
+  result: object;
   @Input() sessionId: string;
-  constructor(private coreService: CoreService) { }
+  constructor(private coreService: CoreService, private dataService: DataService) { }
 
   ngOnInit() {
     if(this.sessionId) {
@@ -27,6 +28,8 @@ export class LoginComponent implements OnInit {
       result => {
         this.login = result;
       });
+    
+    this.dataService.getData();
   }
 
   initLogin() {

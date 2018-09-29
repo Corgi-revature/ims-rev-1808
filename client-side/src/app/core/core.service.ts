@@ -10,15 +10,26 @@ import { map } from 'rxjs/operators';
 })
 export class CoreService {
   private login: Login;
-  private url = 'http://localhost:8080/p2a/';
+  private url = 'http://localhost:8080/IMS/user/';
 
   constructor(private http: HttpClient) {}
-  postLogin(email: String, password: String): Observable<Login> {
+
+  createAuthHead(header: Headers, basic) {
+    header.append('Authorization', basic);
+  }
+
+  postLogin(email: string, password:string): Observable<Login> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+        // 'Authorization': 'my-auth-token'
+      })
+    };
     return this.http
       .post(`${this.url}login`, {
         email: email,
         password: password
-      })
+      }, httpOptions)
       .pipe(map(resp => resp as Login));
   }
 

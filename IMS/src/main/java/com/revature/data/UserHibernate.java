@@ -38,17 +38,14 @@ public class UserHibernate implements UserDAO {
 		Transaction tx = ss.beginTransaction();
 		List<User> result = null;
 		try {
-			String hql = "FROM com.revature.beans.User u "
-					+ "WHERE u.email = ? AND u.password = ?";
+			String hql = "FROM com.revature.beans.User u " + "WHERE u.email = ? AND u.password = ?";
 //			Query query = ss.createQuery(hql);
-			result = ss.createQuery(hql)
-					.setParameter(0, user.getEmail())
-					.setParameter(1, user.getPassword()).list();
+			result = ss.createQuery(hql).setParameter(0, user.getEmail()).setParameter(1, user.getPassword()).list();
 		} catch (Exception e) {
-	         e.printStackTrace();
-	         if (tx != null) {
-	            tx.rollback();
-	         }
+			e.printStackTrace();
+			if (tx != null) {
+				tx.rollback();
+			}
 		} finally {
 			ss.close();
 		}
