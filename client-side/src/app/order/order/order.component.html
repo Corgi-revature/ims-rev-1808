@@ -1,0 +1,34 @@
+<div class="col-md-6">
+    <mdb-card>
+        <mdb-card-header class="info-color white-text text-center py-4">
+        </mdb-card-header>
+        <!--Card content-->
+        <mdb-card-body class="px-lg-5 pt-0">
+            <div class="container">
+                Search: <input class="well" [(ngModel)]="searchBar" type="text">
+            </div>
+            <!-- Form -->
+            <form class="text-center" style="color: #757575;">
+                <table class="table inventory">
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th></th>
+                    </tr>
+                    <tr *ngFor="let i of items | iFilter: searchBar" [openItems]="i">
+                        <td>{{i.name}}</td>
+                        <td>
+                            <input type="number" id="quantity" min="0" value="0">
+                        </td>
+                        <td>
+                            <button class="btn-primary" (click)="add(i.item)">Add to cart</button>
+                        </td>
+                    </tr>
+                </table>          
+                <button class="btn btn-primary" *ngIf="isOpen()" (click)="checkout()">Checkout</button>
+                <button class="btn btn-danger" *ngIf="isOpen()" (click)="empty()">Cancel</button>   
+            </form>
+            <!-- Form -->
+        </mdb-card-body>
+    </mdb-card>
+</div>
