@@ -2,6 +2,7 @@ package com.revature.beans;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,13 +20,16 @@ public class Inventory {
 	private int id;
 	@JoinColumn(name="id")
 	private Item item;
-	private Date packagedate;
-	private Date useby;
+	@Column(name="packagedate")
+	private String packagedate;
+	@Column(name="useby")
+	private String useby;
+	@Column(name="stock")
 	private int stock;
 	public Inventory() {
 		super();
 	}
-	public Inventory(int id, Item item, Date packagedate, Date useby, int stock) {
+	public Inventory(int id, Item item, String packagedate, String useby, int stock) {
 		super();
 		this.id = id;
 		this.item = item;
@@ -45,16 +49,16 @@ public class Inventory {
 	public void setItem(Item item) {
 		this.item = item;
 	}
-	public Date getPackagedate() {
+	public String getPackagedate() {
 		return packagedate;
 	}
-	public void setPackagedate(Date packagedate) {
+	public void setPackagedate(String packagedate) {
 		this.packagedate = packagedate;
 	}
-	public Date getUseby() {
+	public String getUseby() {
 		return useby;
 	}
-	public void setUseby(Date useby) {
+	public void setUseby(String useby) {
 		this.useby = useby;
 	}
 	public int getStock() {
