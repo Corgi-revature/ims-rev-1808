@@ -13,44 +13,44 @@ import { OrderService } from '../../order/order/order.service';
 })
 export class OrderComponent implements OnInit {
   // I think this is stuff thats imported to the ts. file
-  @Input() curOrder: Order;
-  @Input() curTxact: Txact;
-  @Input() curUser: User; 
-  //@Input() itemlist: Item;
-  @Input() amount: number;
-  @Input() sessionId: string;
+  @Input()
+  curOrder: Order;
+  @Input()
+  curTxact: Txact;
+  @Input()
+  curUser: User;
+  @Input()
+  amount: number;
+  @Input()
+  sessionId: string;
   public orders: Order[];
   public items: Item[];
 
   constructor(
-    private ItemService: ItemService,
-    private OrderService: OrderService
-    ) { }
+    private itemService: ItemService,
+    private orderService: OrderService
+  ) {}
 
   ngOnInit() {
     this.fillItemList();
   }
 
   fillItemList() {
-    this.ItemService.getItems().subscribe(
-      itemList=> this.items=itemList
-    );
+    this.itemService.getItems().subscribe(itemList => (this.items = itemList));
   }
 
   add(ite: Item): void {
-    this.OrderService.addItem(this.curOrder, ite)
-    .subscribe(add => this.curOrder = add);
+    this.orderService.addItem(this.curOrder, ite).subscribe(
+      add => (this.curOrder = add)
+    );
   }
-  
-  checkout(): void {
-  }
+
+  checkout(): void {}
 
   // This should check for a transaction is open
   isOpen(): boolean {
     return this.curTxact != null;
   }
 
-  empty(): void {
-  }
-  
+  empty(): void {}
 }
