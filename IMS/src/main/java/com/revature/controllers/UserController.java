@@ -36,7 +36,7 @@ public class UserController {
 		if (u == null) {
 			return null;
 		}
-		return u.get(0);
+			return u.get(0);
 	}
 	//	testing
 	@RequestMapping(value="/hello", method=RequestMethod.GET)
