@@ -91,6 +91,7 @@ CREATE TABLE deliveries(
 	amount number(20),
 	datereceived date,
 	supplier number(20),
+    CONSTRAINT fk_deliver_supplier FOREIGN KEY (supplier) REFERENCES suppliers(id),
 	CONSTRAINT fk_deliver_item FOREIGN KEY (item) REFERENCES items(id)
 );
 
