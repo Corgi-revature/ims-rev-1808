@@ -11,33 +11,30 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="inventoryitems")
+@Table(name = "inventoryitems")
 public class Item {
-/*
- * itemid
- * itemname
- * price
- * stock
- * created
- * expires
- */
+	/*
+	 * itemid itemname price stock created expires
+	 */
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="items")
-	@SequenceGenerator(name="items", sequenceName="item_seq", allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "items")
+	@SequenceGenerator(name = "items", sequenceName = "item_seq", allocationSize = 1)
 	private int id;
-	@Column(name="itemname")
+	@Column(name = "itemname")
 	private String name;
-	@Column(name="price")
+	@Column(name = "price")
 	private double price;
-	@Column(name="stock")
+	@Column(name = "stock")
 	private int stock;
-	@Column(name="packagedate")
+	@Column(name = "packagedate")
 	private Date created;
-	@Column(name="useby")
+	@Column(name = "useby")
 	private Date expires;
+
 	public Item() {
 		super();
 	}
+
 	public Item(int id, String name, double price, int stock, Date created, Date expires) {
 		super();
 		this.id = id;
@@ -47,42 +44,55 @@ public class Item {
 		this.created = created;
 		this.expires = expires;
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public double getPrice() {
 		return price;
 	}
+
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
 	public int getStock() {
 		return stock;
 	}
+
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
+
 	public Date getCreated() {
 		return created;
 	}
+
 	public void setCreated(Date created) {
 		this.created = created;
 	}
+
 	public Date getExpires() {
 		return expires;
 	}
+
 	public void setExpires(Date expires) {
 		this.expires = expires;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -97,6 +107,7 @@ public class Item {
 		result = prime * result + stock;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -129,10 +140,11 @@ public class Item {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", name=" + name + ", price=" + price + ", stock=" + stock + ", created=" + created
 				+ ", expires=" + expires + "]";
 	}
-	
+
 }
