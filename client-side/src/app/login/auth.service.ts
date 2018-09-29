@@ -9,36 +9,33 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private appUrl = this.coreService.getURL() + '/orders';
-  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  private appUrl = this.coreService.getURL();
+  private headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
 
   constructor(private http: HttpClient, private coreService: CoreService) {}
 
-  createAuthHead(header: Headers, basic) {
-    header.append('Authorization', basic);
-  }
-
   postLogin(email: string, password: string): Observable<Login> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-        // 'Authorization': 'my-auth-token'
-      })
-    };
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type': 'application/x-www-form-urlencoded'
+    //     // 'Authorization': 'my-auth-token'
+    //   })
+    // };
     return this.http
       .post(
-        `${this.appUrl}/login`,
+        `${this.appUrl}/user/login`,
         {
           email: email,
           password: password
         },
-        httpOptions
+        { headers: new HttpHeaders()
+        .set('Content-Type', 'application/x-www-form-urlencoded') }
       )
       .pipe(map(resp => resp as Login));
   }
 
   getLogin(sessionId: string): Observable<Login> {
-    return this.http.get(`${this.appUrl}/login`).pipe(map(resp => resp as Login));
+    return this.http.get(`${this.appUrl}/user/login`).pipe(map(resp => resp as Login));
   }
 
   getForgotten(email: string) {
