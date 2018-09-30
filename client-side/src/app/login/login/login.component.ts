@@ -52,6 +52,9 @@ export class LoginComponent implements OnInit {
 
     // this just check the token and redirect
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    if (localStorage.getItem('token')) {
+      this.router.navigate([this.returnUrl]);
+    }
   }
 
   get val() {
