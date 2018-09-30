@@ -71,6 +71,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authService.postLogin(this.email, this.password).subscribe(
       resp => {
+        localStorage.setItem('token', 'running amok');
         this.login = resp;
         this.router.navigate([this.returnUrl]);
       },
