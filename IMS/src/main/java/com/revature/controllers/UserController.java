@@ -32,11 +32,18 @@ public class UserController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public User login(@RequestBody User user) {
-		List<User> u = us.getUsersCriteria(user);
-		if (u == null) {
+		User newUser = null;
+		try {
+			List<User> u = us.getUsersCriteria(user);
+			if (u.size() != 0) {
+				newUser = u.get(0);
+			}
+		} catch(Exception e) {
 			return null;
+		} finally {
+			
 		}
-		return u.get(0);
+		return newUser;
 	}
 
 	// testing
