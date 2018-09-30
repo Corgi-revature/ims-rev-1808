@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from '../../shared/services/alert/alert.service';
+import { LowerCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -69,11 +70,15 @@ export class LoginComponent implements OnInit {
       return 'try again';
     }
     this.loading = true;
-    this.authService.postLogin(this.email, this.password).subscribe(
+    const email = this.email.toLowerCase();
+    console.log(email)
+    this.authService.postLogin(email, this.password).subscribe(
       resp => {
         localStorage.setItem('token', 'running amok');
         this.login = resp;
-        this.router.navigate([this.returnUrl]);
+        console.log(this.returnUrl);
+        // this.router.navigate([this.returnUrl]);
+        this.router.navigate(['/dashboard']);
       },
       error => (this.error = error)
     );
