@@ -15,6 +15,8 @@ export class AuthService {
   constructor(private http: HttpClient, private coreService: CoreService) {}
 
   postLogin(email: string, password: string): Observable<Login> {
+    console.log(email);
+    console.log(password);
     // const httpOptions = {
     //   headers: new HttpHeaders({
     //     'Content-Type': 'application/x-www-form-urlencoded'
