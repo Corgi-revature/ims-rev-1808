@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
   private appUrl = this.coreService.getURL();
-  private headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient, private coreService: CoreService) {}
 
@@ -30,8 +30,7 @@ export class AuthService {
           email: email,
           password: password
         },
-        { headers: new HttpHeaders()
-        .set('Content-Type', 'application/x-www-form-urlencoded') }
+        { headers: this.headers }
       )
       .pipe(map(resp => resp as Login));
   }
