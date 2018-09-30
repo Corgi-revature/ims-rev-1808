@@ -10,6 +10,7 @@ import { Dashboard1Component } from './views/dashboards/dashboard1/dashboard1.co
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './login/register/register.component';
 import { ForgetPasswordComponent } from './login/forget-password/forget-password.component';
+import { OrderComponent } from './order/order/order.component';
 
 
 const routes: Route[] = [
@@ -17,6 +18,7 @@ const routes: Route[] = [
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'forget', component: ForgetPasswordComponent},
+  { path: 'order', component: OrderComponent},
   { path: 'dashboards', children:
     [
       { path: 'v1', component: Dashboard1Component },

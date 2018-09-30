@@ -18,6 +18,11 @@ public class InventoryController {
 	@Autowired
 	private InventoryService is;
 	
+	@RequestMapping(method=RequestMethod.GET)
+	Set<Item> getItems() {
+		return is.getItems();
+	}
+	
 	@RequestMapping(value="/{item}", method=RequestMethod.POST)
 	Item addItem( Item ite) {
 		is.addItem(ite);
@@ -29,10 +34,10 @@ public class InventoryController {
 		return is.getItemById(id);
 	}
 
-	@RequestMapping(value = "/{item}/all",method = RequestMethod.GET)
-	Set<Item> getItems() {
-		return is.getItems();
-	}
+//	@RequestMapping(value = "/{item}/all",method = RequestMethod.GET)
+//	Set<Item> getItems() {
+//		return is.getItems();
+//	}
 
 	@RequestMapping(value = "/{item}", method = RequestMethod.GET)
 	Set<Item> getItemsCriteria() {

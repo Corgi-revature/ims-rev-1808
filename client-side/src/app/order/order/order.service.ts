@@ -11,11 +11,11 @@ import { Txact } from '../../class/txact';
   providedIn: 'root'
 })
 export class OrderService {
-  private appUrl = this.CoreService.getURL()+'/orders';
+  private appUrl = this.coreService.getURL()+'orders';
   private headers = new HttpHeaders({'Content-Type': 'application/json' });
   constructor(
     private http: HttpClient,
-    private CoreService: CoreService
+    private coreService: CoreService
   ) { }
 
   getOrders(): Observable<Order[]> {

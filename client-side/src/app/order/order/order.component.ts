@@ -23,8 +23,8 @@ export class OrderComponent implements OnInit {
   public items: Item[];
 
   constructor(
-    private ItemService: ItemService,
-    private OrderService: OrderService
+    private itemService: ItemService,
+    private orderService: OrderService
     ) { }
 
   ngOnInit() {
@@ -32,16 +32,16 @@ export class OrderComponent implements OnInit {
   }
 
   fillItemList() {
-    this.ItemService.getItems().subscribe(
+    this.itemService.getItems().subscribe(
       itemList=> this.items=itemList
     );
   }
 
   add(ite: Item): void {
-    this.OrderService.addItem(this.curOrder, ite)
+    this.orderService.addItem(this.curOrder, ite)
     .subscribe(add => this.curOrder = add);
   }
-  
+
   checkout(): void {
   }
 

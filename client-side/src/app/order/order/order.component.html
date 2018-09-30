@@ -15,7 +15,8 @@
                         <th>Quantity</th>
                         <th></th>
                     </tr>
-                    <tr *ngFor="let i of items | iFilter: searchBar" [openItems]="i">
+                    <tr *ngFor="let i of items"> 
+                    
                         <td>{{i.name}}</td>
                         <td>
                             <input type="number" id="quantity" min="0" value="0">

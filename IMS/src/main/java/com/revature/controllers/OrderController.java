@@ -29,12 +29,12 @@ public class OrderController {
 		return os.getOrderById(id);
 	}
 	// user id then get all their orders?
-	@RequestMapping(value="/{uid}/all",  method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	Set<Order> getOrders() {
 		return os.getOrders();
 	}
 	
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(value="/{uid}/all", method=RequestMethod.GET)
 	Set<Order> getOrdersCriteria() {
 		return os.getOrdersCriteria();
 	}
