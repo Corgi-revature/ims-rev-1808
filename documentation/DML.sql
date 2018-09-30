@@ -15,3 +15,8 @@ INSERT INTO suppliers (id,suppliername,email) VALUES (2,'John''s Meat Wagon','Jo
 
 INSERT INTO inventory (id,item,packagedate,useby,stock) VALUES (1,3,TO_DATE('09/10/2018','MM/DD/YYYY'),TO_DATE('10/30/2018','MM/DD/YYYY'),200);
 INSERT INTO inventory (id,item,packagedate,useby,stock) VALUES (2,2,TO_DATE('09/13/2018','MM/DD/YYYY'),TO_DATE('10/30/2018','MM/DD/YYYY'),14);
+
+INSERT INTO supplieritems (id, supplier, item) VALUES (1,1,3);
+INSERT INTO supplieritems (id, supplier, item) VALUES (2,2,2);
+
+commit;
