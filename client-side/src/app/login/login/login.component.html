@@ -1,5 +1,5 @@
 <!-- Material form login -->
-<div class="col-md-6 offset-md-3">
+<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3">
     <mdb-card>
         <mdb-card-header class="info-color white-text text-center py-4">
             <h5>
@@ -8,24 +8,23 @@
         </mdb-card-header>
         <!--Card content-->
         <mdb-card-body class="px-lg-5 pt-0">
-
-            <!-- Form -->
-            <form class="text-center" style="color: #757575;">
-
+            <form class="text-center" #loginForm="ngForm" (ngSubmit)="initLogin()">
                 <!-- Email -->
                 <div class="md-form">
-                    <input type="email" id="materialLoginFormEmail" class="form-control validated" name="email"
-                        [(ngModel)]="email" mdbInputDirective>
-                    <label for="materialLoginFormEmail">E-mail</label>
+                    <input type="email" id="loginEmail" class="form-control" name="email" [(ngModel)]="email"
+                        data-error="Invaild Email" data-success="Vaild Email" mdbInputDirective>
+                    <label for="loginEmail">E-mail</label>
                 </div>
-
                 <!-- Password -->
                 <div class="md-form">
-                    <input type="password" id="materialLoginFormPassword" class="form-control" name="password"
-                        [(ngModel)]="password" mdbInputDirective>
-                    <label for="materialLoginFormPassword">Password</label>
+                    <input type="password" id="loginPassword" class="form-control" name="password" [(ngModel)]="password"
+                    data-success="Good password" mdbInputDirective>
+                    <label for="loginPassword">Password</label>
                 </div>
+                <div>
 
+                </div>
+                <!-- Option Section -->
                 <div class="d-flex justify-content-around">
                     <div>
                         <!-- Remember me -->
@@ -36,30 +35,13 @@
                         <a href="">Forgot password?</a>
                     </div>
                 </div>
-
                 <!-- Sign in button -->
                 <button mdbBtn color="info" outline="true" rounded="true" block="true" class="my-4 waves-effect z-depth-0"
-                    mdbWavesEffect (click)="initLogin()">Sign in</button>
-
+                    mdbWavesEffect>Sign in</button>
                 <!-- Register -->
                 <p>Not a member?
-                    <a href="">Register</a>
+                    <a [routerLink]="['/register']">Register</a>
                 </p>
-
-                <!-- Social login -->
-                <!-- <p>or sign in with:</p>
-                    <a type="button" class="btn-floating btn-fb btn-sm">
-                        <mdb-icon icon="facebook"></mdb-icon>
-                    </a>
-                    <a type="button" class="btn-floating btn-tw btn-sm">
-                        <mdb-icon icon="twitter"></mdb-icon>
-                    </a>
-                    <a type="button" class="btn-floating btn-li btn-sm">
-                        <mdb-icon icon="linkedin"></mdb-icon>
-                    </a>
-                    <a type="button" class="btn-floating btn-git btn-sm">
-                        <mdb-icon icon="github"></mdb-icon>
-                    </a> -->
             </form>
             <!-- Form -->
         </mdb-card-body>

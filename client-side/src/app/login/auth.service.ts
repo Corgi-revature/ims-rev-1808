@@ -14,6 +14,14 @@ export class AuthService {
 
   constructor(private http: HttpClient, private coreService: CoreService) {}
 
+  setToken(token: string): void {
+    localStorage.setItem('token', token);
+  }
+
+  isLogged() {
+    return localStorage.getItem('token') != null;
+  }
+
   postLogin(email: string, password: string): Observable<Login> {
     console.log(email);
     console.log(password);
@@ -23,6 +31,7 @@ export class AuthService {
     //     // 'Authorization': 'my-auth-token'
     //   })
     // };
+    localStorage.setItem('token', 'JSON.stringify(user)');
     return this.http
       .post(
         `${this.appUrl}/user/login`,

@@ -23,6 +23,7 @@ import { ForgetPasswordComponent } from './login/forget-password/forget-password
 // services
 import { CoreService } from './core/core.service';
 import { UserComponent } from './login/user/user.component';
+import { AuthGuard } from './core/_guards';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { UserComponent } from './login/user/user.component';
     MDBBootstrapModule.forRoot()
   ],
   providers: [
-    CoreService
+    CoreService,
+    AuthGuard,
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   bootstrap: [AppComponent]

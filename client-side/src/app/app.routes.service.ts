@@ -15,13 +15,10 @@ const routes: Route[] = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forget', component: ForgetPasswordComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   {
-    path: 'dashboards',
-    children: [
-      { path: 'v', component: DashboardComponent },
-      { path: ':id', component: ProfileComponent }
-    ],
-    canActivate: [AuthGuard]
+    path: 'profile',
+    children: [{ path: ':id', component: ProfileComponent }]
   },
   {
     path: 'employee',
