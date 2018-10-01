@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.beans.Item;
+import com.revature.beans.Inventory;
 import com.revature.services.InventoryService;
 
 @RestController
@@ -18,42 +19,39 @@ public class InventoryController {
 	@Autowired
 	private InventoryService is;
 	
-	@RequestMapping(value="/{item}", method=RequestMethod.POST)
-	Item addItem( Item ite) {
-		is.addItem(ite);
-		return ite;
+	@RequestMapping(value="/{inventory}", method=RequestMethod.POST)
+	public int addInventory(Inventory inv) {
+		int result = is.addInventory(inv);
+		return result;
 	}
 
-	@RequestMapping(value = "/{item}/{id}", method = RequestMethod.GET)
-	Item getItemById(int id) {
-		return is.getItemById(id);
+	@RequestMapping(value = "/{inventory}/{id}", method = RequestMethod.GET)
+	Inventory getItemById(int id) {
+		return is.getInventoryById(id);
 	}
 
-	@RequestMapping(value = "/{item}/all",method = RequestMethod.GET)
-	Set<Item> getItems() {
-		return is.getItems();
+	@RequestMapping(value = "/{inventory}/all",method = RequestMethod.GET)
+	Set<Inventory> getItems() {
+		return is.getInventory();
 	}
 
-	@RequestMapping(value = "/{item}", method = RequestMethod.GET)
-	Set<Item> getItemsCriteria() {
-		return is.getItemsCriteria();
+	@RequestMapping(value = "/{inventory}", method = RequestMethod.GET)
+	List<Inventory> getItemsCriteria() {
+		return is.getInventoryCriteria();
 	}
 
-	@RequestMapping(value = "/{item}", method = RequestMethod.PUT)
-	void updateItem( Item ite) {
-		is.updateItem(ite);
+	@RequestMapping(value = "/{inventory}", method = RequestMethod.PUT)
+	void updateItem(Inventory inv) {
+		is.updateInventory(inv);
 	}
 
-	@RequestMapping(value = "/{item}", method = RequestMethod.DELETE)
-	void deleteItem( Item ite) {
-		is.deleteItem(ite);
+	@RequestMapping(value = "/{inventory}", method = RequestMethod.DELETE)
+	void deleteItem(Inventory inv) {
+		is.deleteInventory(inv);
 	}
 	
-	@RequestMapping(value = "/{item}/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{inventory}/{id}", method = RequestMethod.DELETE)
 	void deleteItemById( int id) {
-		is.deleteItemById(id);
+		is.deleteInventoryById(id);
 	}
 }
-
-
-
