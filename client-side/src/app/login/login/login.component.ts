@@ -34,6 +34,4 @@ export class LoginComponent implements OnInit {
       resp => this.login = resp
     );
   }
-
-
 }

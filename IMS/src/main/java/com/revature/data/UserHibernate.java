@@ -17,20 +17,17 @@ import com.revature.utils.HibernateUtil;
 public class UserHibernate implements UserDAO {
 	@Autowired
 	private HibernateUtil hu;
-
 	@Override
 	public int addUser(User use) {
 		Session ss = hu.getSession();
 		Transaction tx = ss.beginTransaction();
 		return (int) ss.save(use);
 	}
-
 	@Override
 	public User getUserById(int id) {
 		Session ss = hu.getSession();
 		return ss.get(User.class, id);
 	}
-
 	@Override
 	public List<User> getUsersCriteria(User user) {
 		Session ss = hu.getSession();
@@ -50,7 +47,6 @@ public class UserHibernate implements UserDAO {
 		}
 		return result;
 	}
-
 	@Override
 	public Set<User> getUsers() {
 		Session ss = hu.getSession();
@@ -60,7 +56,6 @@ public class UserHibernate implements UserDAO {
 		ss.close();
 		return new HashSet<User>(userList);
 	}
-
 	@Override
 	public void updateUser(User use) {
 		Session ss = hu.getSession();
@@ -74,7 +69,6 @@ public class UserHibernate implements UserDAO {
 			ss.close();
 		}
 	}
-
 	@Override
 	public void deleteUser(User use) {
 		Session ss = hu.getSession();
