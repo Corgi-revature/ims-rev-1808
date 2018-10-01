@@ -33,6 +33,7 @@ public class UserController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public User login(@RequestBody User user) {
 		List<User> u = us.getUsersCriteria(user);
+		System.out.println(user);
 		if (u == null) {
 			return null;
 		}

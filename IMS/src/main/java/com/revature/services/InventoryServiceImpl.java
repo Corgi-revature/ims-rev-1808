@@ -25,7 +25,11 @@ public class InventoryServiceImpl implements InventoryService {
 
 	@Override
 	public Set<Item> getItems() {
-		return itemDAO.getItems();
+		System.out.println("calling getItems: Imple");
+		Set<Item> itemSet = itemDAO.getItems();
+		System.out.println("impl grabbed getItems");
+		System.out.println(itemSet.toString());
+		return itemSet;
 	}
 
 	@Override
