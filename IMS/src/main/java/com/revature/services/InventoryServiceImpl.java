@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.revature.beans.Inventory;
 import com.revature.data.InventoryDAO;
 
+@Service
 public class InventoryServiceImpl implements InventoryService {
 	
 	@Autowired
