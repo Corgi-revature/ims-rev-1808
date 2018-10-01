@@ -66,13 +66,13 @@ CREATE TABLE users(
 
 CREATE TABLE orders(
 	id number(20) PRIMARY KEY,
-	item number(20),
+	inventoryitem number(20),
 	amount number(20),
 	userid number(20),
 	transaction number(20),
 	address varchar2(255),
 	created date,
-	CONSTRAINT fk_order_item FOREIGN KEY (item) REFERENCES items(id),
+	CONSTRAINT fk_order_item FOREIGN KEY (inventoryitem) REFERENCES items(id),
 	CONSTRAINT fk_order_user FOREIGN KEY (userid) REFERENCES users(id),
 	CONSTRAINT fk_order_transaction FOREIGN KEY (transaction) REFERENCES transactions(id)
 );
@@ -91,6 +91,7 @@ CREATE TABLE deliveries(
 	amount number(20),
 	datereceived date,
 	supplier number(20),
+    CONSTRAINT fk_deliver_supplier FOREIGN KEY (supplier) REFERENCES suppliers(id),
 	CONSTRAINT fk_deliver_item FOREIGN KEY (item) REFERENCES items(id)
 );
 

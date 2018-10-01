@@ -1,5 +1,6 @@
 package com.revature.data;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,23 +13,22 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import com.revature.beans.Item;
+import com.revature.beans.Inventory;
 import com.revature.utils.HibernateUtil;
 
-@Component
-public class ItemHibernate implements ItemDAO {
+public class InventoryHibernate implements InventoryDAO {
+
 	@Autowired
 	private HibernateUtil hu;
 	
 	@Override
-	public int addItem(Item ite) {
+	public int addInventory(Inventory inv) {
 		int sa = 0;
 		Session ss = hu.getSession();
 		Transaction tx = ss.beginTransaction();
 		try {
-			sa = (int)ss.save(ite);
+			sa = (int)ss.save(inv);
 			tx.commit();
 			return sa;
 		} catch (Exception e) {
@@ -40,38 +40,38 @@ public class ItemHibernate implements ItemDAO {
 	}
 
 	@Override
-	public Item getItemById(int id) {
+	public Inventory getInventoryById(int id) {
 		Session ss = hu.getSession();
-		return ss.get(Item.class, id);
+		return ss.get(Inventory.class, id);
 	}
 
 	@Override
-	public Set<Item> getItemsCriteria() {
+	public List<Inventory> getInventoryCriteria() {
 		Session ss = hu.getSession();
 		CriteriaBuilder build = ss.getCriteriaBuilder();
-		CriteriaQuery<Item> crit = build.createQuery(Item.class);
-		Root<Item> root = crit.from(Item.class);
+		CriteriaQuery<Inventory> crit = build.createQuery(Inventory.class);
+		Root<Inventory> root = crit.from(Inventory.class);
 		crit.select(root);
-		List<Item> items = ss.createQuery(crit).getResultList();
-		return new HashSet<Item>(items);
+		List<Inventory> items = ss.createQuery(crit).getResultList();
+		return new ArrayList<Inventory>(items);
 	}
 
 	@Override
-	public Set<Item> getItems() {
+	public Set<Inventory> getInventory() {
 		Session ss = hu.getSession();
-		String hql = "FROM com.revature.beans.Item";
-		Query<Item> que = ss.createQuery(hql, Item.class);
-		List<Item> itemList = que.getResultList();
+		String hql = "FROM com.revature.beans.Inventory";
+		Query<Inventory> que = ss.createQuery(hql, Inventory.class);
+		List<Inventory> itemList = que.getResultList();
 		ss.close();
-		return new HashSet<Item>(itemList);
+		return new HashSet<Inventory>(itemList);
 	}
 
 	@Override
-	public void updateItem(Item ite) {
+	public void updateInventory(Inventory inv) {
 		Session ss = hu.getSession();
 		Transaction tx = ss.beginTransaction();
 		try {
-			ss.update(ite);
+			ss.update(inv);
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
@@ -81,23 +81,23 @@ public class ItemHibernate implements ItemDAO {
 	}
 
 	@Override
-	public void deleteItem(Item ite) {
+	public void deleteInventory(Inventory inv) {
 		Session ss = hu.getSession();
 		Transaction tx = ss.beginTransaction();
 		try {
-			ss.delete(ite);
+			ss.delete(inv);
 		} catch (Exception e) {
 			tx.rollback();
 		}
 	}
 
 	@Override
-	public void deleteItemById(int id) {
+	public void deleteInventoryById(int id) {
 		Session ss = hu.getSession();
 		Transaction tx = ss.beginTransaction();
 		try {
-			Item ite = getItemById(id);
-			ss.delete(ite);
+			Inventory inv = getInventoryById(id);
+			ss.delete(inv);
 		} catch (Exception e) {
 			tx.rollback();
 		}

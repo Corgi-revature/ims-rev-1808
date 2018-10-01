@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!DOCTYPE hibernate-configuration SYSTEM 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
 		<!-- Configure our database -->
@@ -21,5 +22,6 @@
 		<mapping class="com.revature.beans.Txact"/>
 		<mapping class="com.revature.beans.Item"/>
 		<mapping class="com.revature.beans.UserType"/>
+		<mapping class="com.revature.beans.Inventory"/>
 	</session-factory>
 </hibernate-configuration>

@@ -1,5 +1,6 @@
 package com.revature.data;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,26 +33,23 @@ public class DeliveryHibernate implements DeliveryDAO {
 	@Override
 	public Delivery getDeliveryById(int id) {
 		Session ss = hu.getSession();
-		Transaction tx = ss.beginTransaction();
 		return ss.get(Delivery.class, id);
 	}
 
 	@Override
-	public Set<Delivery> getDeliveriesCriteria() {
+	public List<Delivery> getDeliveriesCriteria(Delivery deli) {
 		Session ss = hu.getSession();
-		Transaction tx = ss.beginTransaction();
 		CriteriaBuilder build = ss.getCriteriaBuilder();
 		CriteriaQuery<Delivery> crit = build.createQuery(Delivery.class);
 		Root<Delivery> root = crit.from(Delivery.class);
 		crit.select(root);
 		List<Delivery> deliveries = ss.createQuery(crit).getResultList();
-		return new HashSet<Delivery>(deliveries);
+		return new ArrayList<Delivery>(deliveries);
 	}
 
 	@Override
 	public Set<Delivery> getDeliveries() {
 		Session ss = hu.getSession();
-		Transaction tx = ss.beginTransaction();
 		String hql = "FROM com.revature.beans.Delivery";
 		Query<Delivery> que = ss.createQuery(hql, Delivery.class);
 		List<Delivery> deliveries = que.getResultList();

@@ -28,17 +28,19 @@ public class UserHibernate implements UserDAO {
 		Session ss = hu.getSession();
 		return ss.get(User.class, id);
 	}
+<<<<<<< HEAD
+=======
+
+	@SuppressWarnings("unchecked")
+>>>>>>> 661d6509990382f05e12b3968e8c936c55f72f0e
 	@Override
 	public List<User> getUsersCriteria(User user) {
 		Session ss = hu.getSession();
 		List<User> result = null;
 		try {
-			String hql = "FROM com.revature.beans.User u "
-					+ "WHERE u.email = ? AND u.password = ?";
+			String hql = "FROM com.revature.beans.User u " + "WHERE lower(u.email) = ? AND u.password = ?";
 //			Query query = ss.createQuery(hql);
-			result = ss.createQuery(hql)
-					.setParameter(0, user.getEmail())
-					.setParameter(1, user.getPassword()).list();
+			result = ss.createQuery(hql).setParameter(0, user.getEmail().toLowerCase()).setParameter(1, user.getPassword()).list();
 		} catch (Exception e) {
 	         e.printStackTrace();
 	         

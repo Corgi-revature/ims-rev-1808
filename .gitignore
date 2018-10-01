@@ -129,3 +129,5 @@ AssociateEvaluationSystem/logs/*
 *.springBeans
 
 *.code-workspace
+
+client-side/package-lock\.json
