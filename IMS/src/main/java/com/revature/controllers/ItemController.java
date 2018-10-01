@@ -29,7 +29,7 @@ public class ItemController {
 		return is.getItemById(id);
 	}
 
-	@RequestMapping(value = "/{item}/all",method = RequestMethod.GET)
+	@RequestMapping(value = "/item/all",method = RequestMethod.GET)
 	Set<Item> getItems() {
 		return is.getItems();
 	}

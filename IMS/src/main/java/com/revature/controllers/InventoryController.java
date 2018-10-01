@@ -45,11 +45,15 @@ public class InventoryController {
 //	Set<Item> getItems() {
 //		return is.getItems();
 //	}
-
-	@RequestMapping(value = "/{inventory}/all",method = RequestMethod.GET)
+	@RequestMapping(value = "/inventory/all",method = RequestMethod.GET)
 	Set<Inventory> getItems() {
 		return is.getInventory();
 	}
+	
+//	@RequestMapping(value = "/{inventory}/all",method = RequestMethod.GET)
+//	Set<Inventory> getItems() {
+//		return is.getInventory();
+//	}
 
 	@RequestMapping(value = "/{inventory}", method = RequestMethod.GET)
 	List<Inventory> getItemsCriteria() {

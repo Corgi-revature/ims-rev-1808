@@ -15,44 +15,38 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Order addOrder(Order ord) {
-		// TODO Auto-generated method stub
-		return null;
+		ds.addOrder(ord);
+		return ord;
 	}
 
 	@Override
 	public Order getOrderById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return ds.getOrderById(id);
 	}
 
 	@Override
 	public Set<Order> getOrders() {
-		// TODO Auto-generated method stub
-		return null;
+		return ds.getOrders();
 	}
 
 	@Override
 	public Set<Order> getOrdersCriteria() {
-		// TODO Auto-generated method stub
-		return null;
+		return ds.getOrdersCriteria();
 	}
 
 	@Override
-	public Order updateOrder(Order ord) {
-		// TODO Auto-generated method stub
-		return null;
+	public void updateOrder(Order ord) {
+		ds.updateOrder(ord);
 	}
 
 	@Override
-	public Order deleteOrder(Order ord) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteOrder(Order ord) {
+		ds.deleteOrder(ord);
 	}
 
 	@Override
-	public Integer deleteOrderById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteOrderById(int id) {
+		ds.deleteOrderById(id);
 	}
 
 	

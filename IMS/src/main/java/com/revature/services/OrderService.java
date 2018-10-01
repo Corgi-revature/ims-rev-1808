@@ -8,7 +8,7 @@ public interface OrderService {
 	Order getOrderById(int id);
 	Set<Order> getOrders();
 	Set<Order> getOrdersCriteria();
-	Order updateOrder(Order ord);	
-	Order deleteOrder(Order ord);
-	Integer deleteOrderById(int id);
+	void updateOrder(Order ord);	
+	void deleteOrder(Order ord);
+	void deleteOrderById(int id);
 }

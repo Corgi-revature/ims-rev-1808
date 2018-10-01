@@ -1,6 +1,7 @@
 package com.revature.data;
 
 import java.util.ArrayList;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,10 +14,11 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.revature.beans.Inventory;
 import com.revature.utils.HibernateUtil;
-
+@Component
 public class InventoryHibernate implements InventoryDAO {
 
 	@Autowired
@@ -62,7 +64,6 @@ public class InventoryHibernate implements InventoryDAO {
 		String hql = "FROM com.revature.beans.Inventory";
 		Query<Inventory> que = ss.createQuery(hql, Inventory.class);
 		List<Inventory> itemList = que.getResultList();
-		ss.close();
 		return new HashSet<Inventory>(itemList);
 	}
 

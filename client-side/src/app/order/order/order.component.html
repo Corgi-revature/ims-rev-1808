@@ -13,17 +13,17 @@
                     <tr>
                         <th>Item</th>
                         <th>Quantity</th>
-                        <th></th>
+                        <th>In Cart</th>
                     </tr>
                     <tr *ngFor="let i of items"> 
                     
                         <td>{{i.name}}</td>
                         <td>
                             <input type="number" id="quantity" min="0" value="0">
+                        
+                            <button class="btn-primary" (click)="add(i.id, quantity)">Add to cart</button>
                         </td>
-                        <td>
-                            <button class="btn-primary" (click)="add(i.item)">Add to cart</button>
-                        </td>
+                    <td></td>
                     </tr>
                 </table>          
                 <button class="btn btn-primary" *ngIf="isOpen()" (click)="checkout()">Checkout</button>

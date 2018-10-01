@@ -1,9 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Order } from '../../class/order';
 import { Item } from '../../class/item';
+import { Inventory } from '../../class/inventory';
 import { User } from '../../class/user';
 import { Txact } from '../../class/txact';
 import { ItemService } from '../../core/item.service';
+import { InventoryService } from '../../order/inventory/inventory.service'
 import { OrderService } from '../../order/order/order.service';
 
 @Component({
@@ -24,24 +26,33 @@ export class OrderComponent implements OnInit {
   sessionId: string;
   public orders: Order[];
   public items: Item[];
+  //public invents: Inventory[];
 
   constructor(
+    private inventoryService: InventoryService,
     private itemService: ItemService,
     private orderService: OrderService
   ) {}
 
   ngOnInit() {
     this.fillItemList();
+    this.openTransaction();
+   // this.fillInventory();
   }
+
 
   fillItemList() {
     this.itemService.getItems().subscribe(itemList => (this.items = itemList));
   }
+  // fillInventory() {
+  //   this.inventoryService.getInventory().subscribe(inventList => (this.invents = inventList));
+  // }
 
-  add(ite: Item): void {
-    this.orderService.addItem(this.curOrder, ite).subscribe(
+  add(inv: Inventory, amount: Number): void {
+    this.orderService.addItem(this.curOrder, inv).subscribe(
       add => (this.curOrder = add)
     );
+   // document.getElementById("").innerHTML = amount.toString;
   }
 
   checkout(): void {}
@@ -52,4 +63,8 @@ export class OrderComponent implements OnInit {
   }
 
   empty(): void {}
+
+  openTransaction(){
+
+  }
 }
