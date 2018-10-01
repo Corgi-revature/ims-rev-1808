@@ -26,6 +26,7 @@ import { UserComponent } from './login/user/user.component';
 import { AuthGuard } from './core/_guards';
 import { AlertComponent } from './shared/services/alert/alert.component';
 import { AlertService } from './shared/services/alert/alert.service';
+import { OrderComponent } from './order/order/order.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { AlertService } from './shared/services/alert/alert.service';
     LoginComponent,
     RegisterComponent,
     ForgetPasswordComponent,
+    // OrderComponent,
     UserComponent,
     AlertComponent
   ],
