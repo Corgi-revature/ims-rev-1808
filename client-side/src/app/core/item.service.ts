@@ -9,7 +9,8 @@ import { Item } from '../class/item';
   providedIn: 'root'
 })
 export class ItemService {
-  private appUrl = this.coreService.getURL()+'item';
+//  private appUrl = this.coreService.getURL()+'/item';
+private appUrl = this.coreService.getURL()+'/inventory';
   private headers = new HttpHeaders({'Content-Type': 'application/json' });
   constructor(
     private http: HttpClient,

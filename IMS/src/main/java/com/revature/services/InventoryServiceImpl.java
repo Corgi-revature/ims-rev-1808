@@ -1,54 +1,57 @@
 package com.revature.services;
 
+import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.beans.Item;
-import com.revature.data.ItemDAO;
-import com.revature.data.ItemHibernate;
+import com.revature.beans.Inventory;
+import com.revature.data.InventoryDAO;
 
 @Service
 public class InventoryServiceImpl implements InventoryService {
-	private ItemDAO itemDAO = new ItemHibernate();
-
+	
+	@Autowired
+	InventoryDAO ivs;
+	
 	@Override
-	public int addItem(Item ite) {
-		int itemID = itemDAO.addItem(ite);
-		return itemID;
+	public int addInventory(Inventory inv) {
+		int result = ivs.addInventory(inv);
+		return result;
 	}
 
 	@Override
-	public Item getItemById(int id) {
-		return itemDAO.getItemById(id);
+	public Inventory getInventoryById(int id) {
+		return ivs.getInventoryById(id);
 	}
 
 	@Override
-	public Set<Item> getItems() {
-		System.out.println("calling getItems: Imple");
-		Set<Item> itemSet = itemDAO.getItems();
-		System.out.println("impl grabbed getItems");
-		System.out.println(itemSet.toString());
-		return itemSet;
+	public Set<Inventory> getInventory() {
+		return ivs.getInventory();
 	}
 
 	@Override
-	public Set<Item> getItemsCriteria() {
-		return itemDAO.getItemsCriteria();
+	public List<Inventory> getInventoryCriteria() {
+		return ivs.getInventoryCriteria();
 	}
 
 	@Override
-	public void updateItem(Item ite) {
-		itemDAO.updateItem(ite);
+	public void updateInventory(Inventory inv) {
+		ivs.updateInventory(inv);
+
 	}
 
 	@Override
-	public void deleteItem(Item ite) {
-		itemDAO.deleteItem(ite);
+	public void deleteInventory(Inventory inv) {
+		ivs.deleteInventory(inv);
+
 	}
 
 	@Override
-	public void deleteItemById(int id) {
-		itemDAO.deleteItemById(id);
+	public void deleteInventoryById(int id) {
+		ivs.deleteInventoryById(id);
+
 	}
+
 }

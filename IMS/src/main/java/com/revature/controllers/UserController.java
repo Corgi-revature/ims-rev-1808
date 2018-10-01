@@ -35,9 +35,20 @@ public class UserController {
 		List<User> u = us.getUsersCriteria(user);
 		System.out.println(user);
 		if (u == null) {
+		User newUser = null;
+		
+		try {
+			 u = us.getUsersCriteria(user);
+			if (u.size() != 0) {
+				newUser = u.get(0);
+			}
+		} catch(Exception e) {
 			return null;
+		} finally {
+			
 		}
-		return u.get(0);
+		return newUser;
+	}
 	}
 
 	// testing

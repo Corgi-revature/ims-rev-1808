@@ -52,15 +52,11 @@ public class ItemHibernate implements ItemDAO {
 	public Set<Item> getItems() {
 		System.out.println("get Items: Hibernate");
 		Session ss = hu.getSession();
-		System.out.println("A");
 		List<Item> itemList = null;
 		try {
-			System.out.println("B");
 			String hql = "FROM com.revature.beans.Item";
 			//itemList = ss.createQuery(hql).list();
-			System.out.println("C");
 			Query<Item> que = ss.createQuery(hql, Item.class);
-			System.out.println("D");
 			itemList = que.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();

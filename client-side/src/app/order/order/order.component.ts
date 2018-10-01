@@ -12,7 +12,6 @@ import { OrderService } from '../../order/order/order.service';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
-  // I think this is stuff thats imported to the ts. file
   @Input()
   curOrder: Order;
   @Input()

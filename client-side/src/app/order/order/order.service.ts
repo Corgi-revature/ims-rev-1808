@@ -11,7 +11,7 @@ import { Txact } from '../../class/txact';
   providedIn: 'root'
 })
 export class OrderService {
-  private appUrl = this.coreService.getURL() + '/orders';
+  private appUrl = this.coreService.getURL() + '/order';
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient, private coreService: CoreService) {}
