@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Login, User } from '../class';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, pipe } from 'rxjs';
+import { Observable, pipe, BehaviorSubject } from 'rxjs';
 import { CoreService } from '../core/core.service';
 import { map } from 'rxjs/operators';
 
@@ -11,15 +11,17 @@ import { map } from 'rxjs/operators';
 export class AuthService {
   private appUrl = this.coreService.getURL();
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  private loggedIn = false;
 
-  constructor(private http: HttpClient, private coreService: CoreService) {}
+  private error: any;
+  constructor(private http: HttpClient, private coreService: CoreService) { }
 
   setToken(token: string): void {
     localStorage.setItem('token', token);
   }
 
-  isLogged() {
-    return localStorage.getItem('token') != null;
+  get isLoggedIn() {
+    return this.loggedIn; // {2}
   }
 
   postLogin(email: string, password: string): Observable<Login> {
@@ -31,7 +33,6 @@ export class AuthService {
     //     // 'Authorization': 'my-auth-token'
     //   })
     // };
-    localStorage.setItem('token', 'JSON.stringify(user)');
     return this.http
       .post(
         `${this.appUrl}/user/login`,
@@ -41,7 +42,18 @@ export class AuthService {
         },
         { headers: this.headers }
       )
-      .pipe(map(resp => resp as Login));
+      .pipe(
+        map(
+          resp => {
+          if (resp !== null) {
+            this.loggedIn = true;
+            this.setToken('login-200-corgi');
+            return resp as Login;
+          }
+          return this.error;
+          },
+          error => this.error = error)
+      );
   }
 
   getLogin(sessionId: string): Observable<Login> {
@@ -54,5 +66,9 @@ export class AuthService {
 
   postUser(user: User): Observable<any> {
     return this.http.post(`${this.appUrl}/register`, user);
+  }
+
+  logout() {                            // {4}
+
   }
 }

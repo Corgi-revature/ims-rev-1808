@@ -1,5 +1,6 @@
 <!--Main Navigation-->
-<header>
+<div *ngIf="loggedIn">
+  <header>
     <!-- Sidebar -->
     <!-- <div class="sidebar-fixed position-fixed">
         <a class="logo-wrapper waves-effect">
@@ -19,30 +20,34 @@
     <!-- Sidebar -->
     <!--Navbar-->
     <mdb-navbar [containerInside]="false" SideClass="navbar navbar-expand-lg navbar-light white">
-        <!-- Navbar brand -->
-        <logo class="ml-3">
-            <a class="logo-wrapper waves-effect">
-                <img src="../../../../assets/img/corgi-cartoon-png-1.png" class="img-fluid logo-corgi" alt="corgi">
-            </a>
-        </logo>
-        <!-- Collapsible content -->
-        <links>
-            <!-- Links -->
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/dashboard']" mdbWavesEffect>Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/orders']" mdbWavesEffect>Orders</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/profile']" mdbWavesEffect>Profile</a>
-                </li>
-            </ul>
-            <!-- Links -->
-        </links>
-        <!-- Collapsible content -->
+      <!-- Navbar brand -->
+      <logo class="ml-3">
+        <a class="logo-wrapper waves-effect">
+          <img src="../../../../assets/img/corgi-cartoon-png-1.png" class="img-fluid logo-corgi" alt="corgi">
+        </a>
+      </logo>
+      <!-- Collapsible content -->
+      <links>
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/dashboard']" mdbWavesEffect>Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/orders']" mdbWavesEffect>Orders</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/profile']" mdbWavesEffect>Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/login']" mdbWavesEffect>Log Out</a>
+          </li>
+        </ul>
+        <!-- Links -->
+      </links>
+      <!-- Collapsible content -->
     </mdb-navbar>
     <!--/.Navbar-->
-</header>
+  </header>
+</div>
 <!--Main Navigation-->
