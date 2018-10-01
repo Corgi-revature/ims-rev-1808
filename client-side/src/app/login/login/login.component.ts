@@ -74,11 +74,14 @@ export class LoginComponent implements OnInit {
     console.log(email)
     this.authService.postLogin(email, this.password).subscribe(
       resp => {
-        localStorage.setItem('token', 'running amok');
-        this.login = resp;
-        console.log(this.returnUrl);
-        // this.router.navigate([this.returnUrl]);
-        this.router.navigate(['/dashboard']);
+        console.log(resp);
+        if (resp !== null) {
+          localStorage.setItem('token', 'running amok');
+          this.login = resp;
+          console.log(this.returnUrl);
+          // this.router.navigate([this.returnUrl]);
+          this.router.navigate(['/dashboard']);
+        }
       },
       error => (this.error = error)
     );

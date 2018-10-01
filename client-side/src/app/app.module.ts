@@ -24,6 +24,8 @@ import { ForgetPasswordComponent } from './login/forget-password/forget-password
 import { CoreService } from './core/core.service';
 import { UserComponent } from './login/user/user.component';
 import { AuthGuard } from './core/_guards';
+import { AlertComponent } from './shared/services/alert/alert.component';
+import { AlertService } from './shared/services/alert/alert.service';
 
 
 @NgModule({
@@ -32,7 +34,8 @@ import { AuthGuard } from './core/_guards';
     LoginComponent,
     RegisterComponent,
     ForgetPasswordComponent,
-    UserComponent
+    UserComponent,
+    AlertComponent
   ],
   imports: [
     HttpClientModule,
@@ -51,6 +54,7 @@ import { AuthGuard } from './core/_guards';
   ],
   providers: [
     CoreService,
+    AlertService,
     AuthGuard,
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
