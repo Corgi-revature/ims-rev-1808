@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,23 +12,22 @@ import com.revature.data.DeliveryDAO;
 @Service
 public class DeliveryServiceImpl implements DeliveryService {
 	@Autowired
-	private DeliveryDAO ds;
+	private DeliveryDAO dd;
 	
 	@Override
-	public Delivery addDelivery(Delivery deli) {
-		// TODO Auto-generated method stub
-		return null;
+	public int addDelivery(Delivery deli) {
+		int result = dd.addDelivery(deli);
+		return result;
 	}
 
 	@Override
 	public Delivery getDeliveryById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return dd.getDeliveryById(id);
 	}
 
 	@Override
-	public Set<Delivery> getDeliveriesCriteria() {
-		return null;
+	public List<Delivery> getDeliveriesCriteria(Delivery deli) {
+		return dd.getDeliveriesCriteria(deli);
 	}
 
 	@Override

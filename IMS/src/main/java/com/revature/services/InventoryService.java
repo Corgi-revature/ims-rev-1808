@@ -1,14 +1,16 @@
 package com.revature.services;
 
+import java.util.List;
 import java.util.Set;
-import com.revature.beans.Item;
+
+import com.revature.beans.Inventory;
 
 public interface InventoryService {
-	int addItem(Item ite);
-	Item getItemById(int id);
-	Set<Item> getItems();
-	Set<Item> getItemsCriteria();
-	void updateItem(Item ite);	
-	void deleteItem(Item ite);
-	void deleteItemById(int id);
+	int addInventory(Inventory inv);
+	Inventory getInventoryById(int id);
+	Set<Inventory> getInventory();
+	List<Inventory> getInventoryCriteria();
+	void updateInventory(Inventory inv);	
+	void deleteInventory(Inventory inv);
+	void deleteInventoryById(int id);
 }
