@@ -13,10 +13,12 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.revature.beans.Inventory;
 import com.revature.utils.HibernateUtil;
 
+@Component
 public class InventoryHibernate implements InventoryDAO {
 
 	@Autowired

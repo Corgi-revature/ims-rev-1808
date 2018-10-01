@@ -25,21 +25,18 @@ public class SupplierHibernate implements SupplierDAO {
 	@Override
 	public Supplier getSupplierById(int id) {
 		Session ss = hu.getSession();
-		Transaction tx = ss.beginTransaction();
 		return null;
 	}
 
 	@Override
 	public Set<Supplier> getSuppliersCriteria() {
 		Session ss = hu.getSession();
-		Transaction tx = ss.beginTransaction();
 		return null;
 	}
 
 	@Override
 	public Set<Supplier> getSuppliers() {
 		Session ss = hu.getSession();
-		Transaction tx = ss.beginTransaction();
 		return null;
 	}
 

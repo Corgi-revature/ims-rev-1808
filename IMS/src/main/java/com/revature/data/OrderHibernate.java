@@ -42,7 +42,6 @@ public class OrderHibernate implements OrderDAO{
 	@Override
 	public Order getOrderById(int id) {
 		Session ss = hu.getSession();
-		Transaction tx = ss.beginTransaction();
 		Order ord = ss.get(Order.class,  id);
 		return ord;
 	}
@@ -50,7 +49,6 @@ public class OrderHibernate implements OrderDAO{
 	@Override
 	public Set<Order> getOrdersCriteria() {
 		Session ss = hu.getSession();
-		Transaction tx = ss.beginTransaction();
 		CriteriaBuilder build = ss.getCriteriaBuilder();
 		CriteriaQuery<Order> crit = build.createQuery(Order.class);
 		Root<Order> root = crit.from(Order.class);
@@ -63,7 +61,6 @@ public class OrderHibernate implements OrderDAO{
 	@Override	
 	public Set<Order> getOrders() {
 		Session ss = hu.getSession();
-		Transaction tx = ss.beginTransaction();
 		String hql = "FROM com.revature.beans.Order";
 		Query<Order> que = ss.createQuery(hql, Order.class);
 		List<Order> orderList = que.getResultList();
