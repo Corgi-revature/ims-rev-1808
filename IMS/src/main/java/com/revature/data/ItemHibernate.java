@@ -25,9 +25,9 @@ public class ItemHibernate implements ItemDAO {
 	
 	@Override
 	public int addItem(Item ite) {
+		int sa =0;
 		Session ss = hu.getSession();
 		Transaction tx = ss.beginTransaction();
-		int sa =0;
 		try {
 			sa = (int)ss.save(ite);
 			tx.commit();
