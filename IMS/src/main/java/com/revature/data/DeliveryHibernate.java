@@ -26,7 +26,18 @@ public class DeliveryHibernate implements DeliveryDAO {
 	@Override
 	public int addDelivery(Delivery deli) {
 		Session ss = hu.getSession();
-		return (int) ss.save(deli);
+		int result = 0;
+		Transaction tx = ss.beginTransaction();
+		try {
+			tx = ss.beginTransaction();
+			result = (int)ss.save(deli);
+			tx.commit();
+		} catch(Exception e) {
+			tx.rollback();
+		} finally {
+
+		}
+		return result;
 	}
 	
 	@Override

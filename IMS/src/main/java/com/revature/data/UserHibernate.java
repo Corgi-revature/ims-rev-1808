@@ -20,8 +20,18 @@ public class UserHibernate implements UserDAO {
 	@Override
 	public int addUser(User use) {
 		Session ss = hu.getSession();
+		int result = 0;
 		Transaction tx = ss.beginTransaction();
-		return (int) ss.save(use);
+		try {
+			tx = ss.beginTransaction();
+			result = (int)ss.save(use);
+			tx.commit();
+		} catch(Exception e) {
+			tx.rollback();
+		} finally {
+
+		}
+		return result;
 	}
 	@Override
 	public User getUserById(int id) {

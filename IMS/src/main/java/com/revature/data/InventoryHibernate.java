@@ -27,18 +27,19 @@ public class InventoryHibernate implements InventoryDAO {
 	
 	@Override
 	public int addInventory(Inventory inv) {
-		int sa = 0;
 		Session ss = hu.getSession();
+		int result = 0;
 		Transaction tx = ss.beginTransaction();
 		try {
-			sa = (int)ss.save(inv);
+			tx = ss.beginTransaction();
+			result = (int)ss.save(inv);
 			tx.commit();
-			return sa;
-		} catch (Exception e) {
+		} catch(Exception e) {
 			tx.rollback();
 		} finally {
+
 		}
-		return sa;
+		return result;
 	}
 
 	@Override
