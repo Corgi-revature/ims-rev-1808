@@ -1,9 +1,12 @@
 package com.revature.controllers;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,25 +22,23 @@ public class OrderController {
 	private OrderService os;
 	
 	@RequestMapping(method=RequestMethod.POST)	
-	Order addOrder(Order ord) {
-		os.addOrder(ord);
-		return ord;
+	int addOrder(@RequestBody Order ord) {
+		return os.addOrder(ord);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	Order getOrderByID(Integer id) {
+	Order getOrderByID(@PathVariable int id) {
 		return os.getOrderById(id);
 	}
-	// user id then get all their orders?
-	@RequestMapping(value="/{uid}/all",  method = RequestMethod.GET)
+	@RequestMapping(value="/all",  method = RequestMethod.GET)
 	Set<Order> getOrders() {
 		return os.getOrders();
 	}
 	
-	@RequestMapping(method=RequestMethod.GET)
-	Set<Order> getOrdersCriteria() {
-		return os.getOrdersCriteria();
-	}
+	/*@RequestMapping(value="/{ord}", method=RequestMethod.GET)
+	List<Order> getOrdersCriteria(@PathVariable Order ord) {
+		return os.getOrdersCriteria(ord);
+	}*/
 	
 	@RequestMapping(method=RequestMethod.PUT)
 	void updateOrder( Order ord) {

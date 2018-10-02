@@ -18,15 +18,16 @@ import { IconsComponent } from './css/icons/icons.component';
 import { Map1Component } from './maps/map1/map1.component';
 import { StatsCardComponent } from './dashboards/common/stats-card/stats-card.component';
 import { StatsCard2Component } from './dashboards/common/stats-card2/stats-card2.component';
-import { Dashboard1Component } from './dashboards/dashboard1/dashboard1.component';
+import { DashboardComponent } from './dashboards/dashboard/dashboard.component';
 import { GridComponent } from './css/grid/grid.component';
 import { MediaObjectComponent } from './css/media-object/media-object.component';
 import { UtilitiesComponent } from './css/utilities/utilities.component';
 import { ImagesComponent } from './css/images/images.component';
 import { ColorsComponent } from './css/colors/colors.component';
 import { ShadowComponent } from './css/shadow/shadow.component';
-import { Profile1Component } from './profile/profile1/profile1.component';
+import { ProfileComponent } from './profile/profile/profile.component';
 import { HelpComponent } from './help/help.component';
+import { EmployeeComponent } from './employee/employee.component';
 
 
 @NgModule({
@@ -52,15 +53,16 @@ import { HelpComponent } from './help/help.component';
     Map1Component,
     StatsCardComponent,
     StatsCard2Component,
-    Dashboard1Component,
+    DashboardComponent,
     GridComponent,
     MediaObjectComponent,
     UtilitiesComponent,
     ImagesComponent,
     ColorsComponent,
     ShadowComponent,
-    Profile1Component,
+    ProfileComponent,
     HelpComponent,
+    EmployeeComponent,
 
   ],
   exports: [
@@ -72,7 +74,7 @@ import { HelpComponent } from './help/help.component';
     Map1Component,
     StatsCardComponent,
     StatsCard2Component,    
-    Dashboard1Component,
+    DashboardComponent,
     GridComponent,
     MediaObjectComponent,
     UtilitiesComponent,

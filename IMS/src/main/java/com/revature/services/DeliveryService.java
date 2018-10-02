@@ -1,13 +1,14 @@
 package com.revature.services;
 
+import java.util.List;
 import java.util.Set;
 
 import com.revature.beans.Delivery;
 
 public interface DeliveryService {
-	Delivery addDelivery(Delivery deli);
+	int addDelivery(Delivery deli);
 	Delivery getDeliveryById(int id);
-	Set<Delivery> getDeliveriesCriteria();
+	List<Delivery> getDeliveriesCriteria(Delivery deli);
 	Set<Delivery> getDeliveries();
 	void updateDelivery(Delivery deli);
 	void deleteDelivery(Delivery deli);

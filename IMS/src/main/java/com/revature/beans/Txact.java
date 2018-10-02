@@ -1,7 +1,5 @@
 package com.revature.beans;
 
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +16,7 @@ public class Txact {
 	@SequenceGenerator(name="txact", sequenceName="tx_seq", allocationSize=1)
 	private int id;
 	@Column(name="created")
-	private Date created;
+	private String created;
 	@Column(name="token")
 	private String token;
 	@Column(name="txid")
@@ -26,7 +24,7 @@ public class Txact {
 	public Txact() {
 		super();
 	}
-	public Txact(int id, Date created, String token, String txid) {
+	public Txact(int id, String created, String token, String txid) {
 		super();
 		this.id = id;
 		this.created = created;
@@ -39,10 +37,10 @@ public class Txact {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Date getCreated() {
+	public String getCreated() {
 		return created;
 	}
-	public void setCreated(Date created) {
+	public void setCreated(String created) {
 		this.created = created;
 	}
 	public String getToken() {

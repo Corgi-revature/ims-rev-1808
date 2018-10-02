@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +35,10 @@ public class DeliveryController {
 		return ds.getDeliveries();
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
-	Set<Delivery> getDeliveriesCriteria() {
-		return ds.getDeliveriesCriteria();
-	}
+/*	@RequestMapping(method = RequestMethod.GET)
+	List<Delivery> getDeliveriesCriteria(Delivery deli) {
+		return ds.getDeliveriesCriteria(deli);
+	}*/
 	
 	@RequestMapping(method = RequestMethod.PUT)
 	void updateDelivery(Delivery deli) {

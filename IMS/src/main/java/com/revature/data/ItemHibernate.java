@@ -1,16 +1,17 @@
 package com.revature.data;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.hibernate.query.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,9 +25,18 @@ public class ItemHibernate implements ItemDAO {
 	
 	@Override
 	public int addItem(Item ite) {
+		int sa = 0;
 		Session ss = hu.getSession();
 		Transaction tx = ss.beginTransaction();
-		return (int) ss.save(ite);
+		try {
+			sa = (int)ss.save(ite);
+			tx.commit();
+			return sa;
+		} catch (Exception e) {
+			tx.rollback();
+		} finally {
+		}
+		return sa;
 	}
 
 	@Override
@@ -37,7 +47,7 @@ public class ItemHibernate implements ItemDAO {
 	}
 
 	@Override
-	public Set<Item> getItemsCriteria() {
+	public List<Item> getItemsCriteria(Item ite) {
 		Session ss = hu.getSession();
 		Transaction tx = ss.beginTransaction();
 		CriteriaBuilder build = ss.getCriteriaBuilder();
@@ -45,17 +55,15 @@ public class ItemHibernate implements ItemDAO {
 		Root<Item> root = crit.from(Item.class);
 		crit.select(root);
 		List<Item> items = ss.createQuery(crit).getResultList();
-		return new HashSet<Item>(items);
+		return new ArrayList<Item>(items);
 	}
 
 	@Override
 	public Set<Item> getItems() {
 		Session ss = hu.getSession();
-		Transaction tx = ss.beginTransaction();
 		String hql = "FROM com.revature.beans.Item";
 		Query<Item> que = ss.createQuery(hql, Item.class);
 		List<Item> itemList = que.getResultList();
-		ss.close();
 		return new HashSet<Item>(itemList);
 	}
 
@@ -69,7 +77,7 @@ public class ItemHibernate implements ItemDAO {
 		} catch (Exception e) {
 			tx.rollback();
 		} finally {
-			ss.close();
+
 		}
 	}
 

@@ -22,5 +22,6 @@
 		<mapping class="com.revature.beans.Txact"/>
 		<mapping class="com.revature.beans.Item"/>
 		<mapping class="com.revature.beans.UserType"/>
+		<mapping class="com.revature.beans.Inventory"/>
 	</session-factory>
 </hibernate-configuration>

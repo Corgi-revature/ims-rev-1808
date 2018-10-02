@@ -17,22 +17,23 @@ import com.revature.services.TxactService;
 public class TxactController {
 	@Autowired
 	private TxactService ts;
-	
-	@RequestMapping(method=RequestMethod.POST)
+
+	@RequestMapping(method = RequestMethod.POST)
 	Txact addTxact(Txact txa) {
-			ts.addTxact(txa);
-			return txa;
+		ts.addTxact(txa);
+		return txa;
 	}
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	Txact getTxactById(Integer id) {
 		return ts.getTxactById(id);
 	}
-	
+
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	Set<Txact> getTxacts() {
 		return ts.getTxacts();
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	Set<Txact> getTxactsCriteria() {
 		return ts.getTxactsCriteria();
@@ -44,12 +45,12 @@ public class TxactController {
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE)
-	void deleteTxact( Txact txa) {
+	void deleteTxact(Txact txa) {
 		ts.deleteTxact(txa);
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	void deleteTxactById( int id) {
+	void deleteTxactById(int id) {
 		ts.deleteTxactById(id);
 	}
 }

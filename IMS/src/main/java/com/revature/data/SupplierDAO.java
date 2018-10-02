@@ -5,7 +5,7 @@ import java.util.Set;
 import com.revature.beans.Supplier;
 
 public interface SupplierDAO {
-	public Supplier addSupplier(Supplier sup);
+	public int addSupplier(Supplier sup);
 	public Supplier getSupplierById(int id);
 	public Set<Supplier> getSuppliersCriteria();
 	public Set<Supplier> getSuppliers();

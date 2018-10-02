@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,8 +16,7 @@ import com.revature.services.UserService;
 @RequestMapping(value = "/user")
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
-//	private Logger log = Logger.getLogger(UserController.class);
-	// checked
+
 	@Autowired
 	private UserService us;
 
@@ -30,13 +30,19 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public User login(User user) {
-
-		List<User> u = us.getUsersCriteria(user);
-		if (u == null) {
+	public User login(@RequestBody User user) {
+		User newUser = null;
+		try {
+			List<User> u = us.getUsersCriteria(user);
+			if (u.size() != 0) {
+				newUser = u.get(0);
+			}
+		} catch(Exception e) {
 			return null;
+		} finally {
+			
 		}
-		return u.get(0);
+		return newUser;
 	}
 
 	// testing

@@ -1,12 +1,13 @@
 package com.revature.beans;
 
-import java.util.Date;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -17,17 +18,20 @@ public class Inventory {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inventory")
 	@SequenceGenerator(name = "inventory", sequenceName = "invent_seq", allocationSize = 1)
 	private int id;
-	@JoinColumn(name = "id")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="item")
 	private Item item;
-	private Date packagedate;
-	private Date useby;
+	@Column(name="packagedate")
+	private String packagedate;
+	@Column(name="useby")
+	private String useby;
+	@Column(name="stock")
 	private int stock;
 
 	public Inventory() {
 		super();
 	}
-
-	public Inventory(int id, Item item, Date packagedate, Date useby, int stock) {
+	public Inventory(int id, Item item, String packagedate, String useby, int stock) {
 		super();
 		this.id = id;
 		this.item = item;
@@ -51,20 +55,16 @@ public class Inventory {
 	public void setItem(Item item) {
 		this.item = item;
 	}
-
-	public Date getPackagedate() {
+	public String getPackagedate() {
 		return packagedate;
 	}
-
-	public void setPackagedate(Date packagedate) {
+	public void setPackagedate(String packagedate) {
 		this.packagedate = packagedate;
 	}
-
-	public Date getUseby() {
+	public String getUseby() {
 		return useby;
 	}
-
-	public void setUseby(Date useby) {
+	public void setUseby(String useby) {
 		this.useby = useby;
 	}
 

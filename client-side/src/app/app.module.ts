@@ -22,6 +22,12 @@ import { RegisterComponent } from './login/register/register.component';
 import { ForgetPasswordComponent } from './login/forget-password/forget-password.component';
 // services
 import { CoreService } from './core/core.service';
+import { OrderComponent } from './order/order/order.component';
+import { UserComponent } from './login/user/user.component';
+import { AuthGuard } from './core/_guards';
+import { AlertComponent } from './shared/services/alert/alert.component';
+import { AlertService } from './shared/services/alert/alert.service';
+import { OrderComponent } from './order/order/order.component';
 
 
 @NgModule({
@@ -29,7 +35,9 @@ import { CoreService } from './core/core.service';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    OrderComponent,
+    UserComponent
   ],
   imports: [
     HttpClientModule,
@@ -47,7 +55,9 @@ import { CoreService } from './core/core.service';
     MDBBootstrapModule.forRoot()
   ],
   providers: [
-    CoreService
+    CoreService,
+    AlertService,
+    AuthGuard,
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   bootstrap: [AppComponent]
