@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CoreService } from '../../core/core.service';
-import { User } from '../../class';
+import { User, Login } from '../../class';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class UserService {
     return this.http.get(`${this.appUrl}/users/` + id);
   }
 
-  register(user: User) {
+  register(user: Login) {
     return this.http.post(`${this.appUrl}/users/register`, user);
   }
 

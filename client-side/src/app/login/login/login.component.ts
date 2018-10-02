@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   password: string;
   @Input()
   login: Login;
-  loginForm: FormGroup;
   sessionId: string;
   loading = false;
   submitted = false;
@@ -32,55 +31,53 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private alertService: AlertService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      // email: ['', Validators.email],
-      // password: ['', Validators.required]
-    });
-    // if (this.sessionId) {
-    //   this.authService.getLogin(this.sessionId).subscribe(result => {
-    //     this.login = result;
-    //     console.log('you are not in session');
-    //   });
-    // }
-    // // testing purpose
-    // this.authService.postLogin('user', 'password').subscribe(result => {
-    //   this.login = result;
-    //   console.log(`testLogin = ${this.login}`);
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
+    // this.loginForm = this.formBuilder.group({
+    // email: ['', Validators.email],
+    // password: ['', Validators.required]
     // });
-
-    // this just check the token and redirect
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    if (localStorage.getItem('token')) {
-      this.router.navigate([this.returnUrl]);
-    }
+    console.log(this.authService.getToken());
+    this.checkLogged();
   }
 
-  get val() {
-    console.log(this.loginForm.controls);
-    return this.loginForm.controls;
-  }
+  // get val() {
+  //   console.log(this.loginForm.controls);
+  //   return this.loginForm.controls;
+  // }
 
   initLogin() {
     this.submitted = true;
 
-    if (this.loginForm.invalid) {
-      return 'try again';
-    }
+    // if (this.loginForm.invalid) {
+    //   return 'try again';
+    // }
     this.loading = true;
     const email = this.email.toLowerCase();
-    console.log(email)
+    console.log(email);
     this.authService.postLogin(email, this.password).subscribe(
       resp => {
-        localStorage.setItem('token', 'running amok');
-        this.login = resp;
-        console.log(this.returnUrl);
-        // this.router.navigate([this.returnUrl]);
-        this.router.navigate(['/dashboard']);
+        console.log(resp);
+        if (resp !== null) {
+          this.login = resp;
+          this.router.navigate([this.returnUrl]);
+        }
       },
       error => (this.error = error)
     );
+  }
+
+  checkLogged() {
+    if (this.authService.getToken() === 'super-200-corgi') {
+      console.log('test');
+      console.log(this.returnUrl);
+      this.router.navigate([this.returnUrl]);
+    }
+  }
+
+  logOut() {
+    this.router.navigate(['/login']);
   }
 }

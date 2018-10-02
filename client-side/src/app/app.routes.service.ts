@@ -1,6 +1,9 @@
 import { RouterModule, Route, CanActivate } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
+import { Map1Component } from './views/maps/map1/map1.component';
+import { ModalsComponent } from './views/modals/modals.component';
+import { BasicTableComponent } from './views/tables/basic-table/basic-table.component';
 import { ProfileComponent } from './views/profile/profile/profile.component';
 import { NotFoundComponent } from './views/errors/not-found/not-found.component';
 import { DashboardComponent } from './views/dashboards/dashboard/dashboard.component';
@@ -12,21 +15,25 @@ import { OrderComponent } from './order/order/order.component';
 import { AuthGuard } from './core/_guards';
 
 const routes: Route[] = [
-  { path: '', pathMatch: 'full', redirectTo: 'login' },
+  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   { path: 'login', component: LoginComponent },
-  { path: 'order', component: OrderComponent },
+  { path: 'orders', component: OrderComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'forget', component: ForgetPasswordComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   {
     path: 'profile',
-    children: [{ path: ':id', component: ProfileComponent }]
+    children: [{ path: ':id', component: ProfileComponent }],
+    canActivate: [AuthGuard]
   },
   {
     path: 'employee',
-    children: [{ path: 'inventory', component: EmployeeComponent }]
+    children: [{ path: 'inventory', component: EmployeeComponent }],
+    canActivate: [AuthGuard]
+
   },
-  { path: '**', component: NotFoundComponent }
+  { path: '**', component: NotFoundComponent },
+
 ];
 
 export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes);

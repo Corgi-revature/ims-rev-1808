@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../login/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navigation',
@@ -7,19 +8,22 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
-  @ViewChild('sidenav') sidenav: ElementRef;
-
+  isLoggedIn$: Observable<boolean>;
   clicked: boolean;
 
-  constructor() {
+  constructor(private authService: AuthService) {
     this.clicked = this.clicked === undefined ? false : true;
   }
 
   ngOnInit() {
+    this.isLoggedIn$ = this.authService.isLoggedIn;
+  }
+
+  onLogout() {
+    this.authService.logout();                      // {3}
   }
 
   setClicked(val: boolean): void {
     this.clicked = val;
   }
-
 }
