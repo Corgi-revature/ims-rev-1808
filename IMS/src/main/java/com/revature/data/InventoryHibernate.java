@@ -1,6 +1,7 @@
 package com.revature.data;
 
 import java.util.ArrayList;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,7 +37,6 @@ public class InventoryHibernate implements InventoryDAO {
 		} catch (Exception e) {
 			tx.rollback();
 		} finally {
-			ss.close();
 		}
 		return sa;
 	}
@@ -64,7 +64,6 @@ public class InventoryHibernate implements InventoryDAO {
 		String hql = "FROM com.revature.beans.Inventory";
 		Query<Inventory> que = ss.createQuery(hql, Inventory.class);
 		List<Inventory> itemList = que.getResultList();
-		ss.close();
 		return new HashSet<Inventory>(itemList);
 	}
 
@@ -78,7 +77,6 @@ public class InventoryHibernate implements InventoryDAO {
 		} catch (Exception e) {
 			tx.rollback();
 		} finally {
-			ss.close();
 		}
 	}
 

@@ -13,15 +13,18 @@ import { ForgetPasswordComponent } from './login/forget-password/forget-password
 import { EmployeeComponent } from './views/employee/employee.component';
 import { OrderComponent } from './order/order/order.component';
 
+import { AuthGuard } from './core/_guards';
+
 const routes: Route[] = [
-  { path: '', pathMatch: 'full', redirectTo: 'dashboards/v1' },
-  { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'forget', component: ForgetPasswordComponent},
-  { path: 'dashboards', children:
-    [
-      { path: 'v1', component: DashboardComponent },
-    ]
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
+  { path: 'login', component: LoginComponent },
+  { path: 'order', component: OrderComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'forget', component: ForgetPasswordComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  {
+    path: 'profile',
+    children: [{ path: ':id', component: ProfileComponent }]
   },
   { path: 'employee', children: 
     [

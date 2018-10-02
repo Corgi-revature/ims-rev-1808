@@ -35,10 +35,10 @@ public class DeliveryController {
 		return ds.getDeliveries();
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
+/*	@RequestMapping(method = RequestMethod.GET)
 	List<Delivery> getDeliveriesCriteria(Delivery deli) {
 		return ds.getDeliveriesCriteria(deli);
-	}
+	}*/
 	
 	@RequestMapping(method = RequestMethod.PUT)
 	void updateDelivery(Delivery deli) {

@@ -5,13 +5,14 @@ import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Order } from '../../class/order';
 import { Item } from '../../class/item';
+import { Inventory } from '../../class/inventory';
 import { Txact } from '../../class/txact';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  private appUrl = this.coreService.getURL() + '/orders';
+  private appUrl = this.coreService.getURL() + '/order';
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient, private coreService: CoreService) {}
@@ -51,17 +52,17 @@ export class OrderService {
       .pipe(map(resp => resp as Order));
   }
 
-  addItem(ord: Order, ite: Item): Observable<Order> {
+  addItem(ord: Order, ite: Item, amount: Number): Observable<Order> {
     const body = {};
-    const url = this.appUrl + '/' + ord.id + '/item/' + ite.id;
+    const url = this.appUrl + '/' + ord.id + '/inventory/' + ite.id;
     console.log(url);
     return this.http
       .put(url, body, { headers: this.headers, withCredentials: true })
       .pipe(map(resp => resp as Order));
   }
 
-  subItem(ord: Order, ite: Item): Observable<Order> {
-    const url = this.appUrl + '/' + ord.id + '/item/' + ite.id;
+  subItem(ord: Order, inv: Inventory): Observable<Order> {
+    const url = this.appUrl + '/' + ord.id + '/inventory/' + inv.id;
     console.log(url);
     return this.http
       .delete(url, { headers: this.headers, withCredentials: true })

@@ -1,5 +1,6 @@
 package com.revature.data;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -34,7 +35,6 @@ public class ItemHibernate implements ItemDAO {
 		} catch (Exception e) {
 			tx.rollback();
 		} finally {
-			ss.close();
 		}
 		return sa;
 	}
@@ -42,18 +42,20 @@ public class ItemHibernate implements ItemDAO {
 	@Override
 	public Item getItemById(int id) {
 		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		return ss.get(Item.class, id);
 	}
 
 	@Override
-	public Set<Item> getItemsCriteria() {
+	public List<Item> getItemsCriteria(Item ite) {
 		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		CriteriaBuilder build = ss.getCriteriaBuilder();
 		CriteriaQuery<Item> crit = build.createQuery(Item.class);
 		Root<Item> root = crit.from(Item.class);
 		crit.select(root);
 		List<Item> items = ss.createQuery(crit).getResultList();
-		return new HashSet<Item>(items);
+		return new ArrayList<Item>(items);
 	}
 
 	@Override
@@ -62,7 +64,6 @@ public class ItemHibernate implements ItemDAO {
 		String hql = "FROM com.revature.beans.Item";
 		Query<Item> que = ss.createQuery(hql, Item.class);
 		List<Item> itemList = que.getResultList();
-		ss.close();
 		return new HashSet<Item>(itemList);
 	}
 
@@ -76,7 +77,7 @@ public class ItemHibernate implements ItemDAO {
 		} catch (Exception e) {
 			tx.rollback();
 		} finally {
-			ss.close();
+
 		}
 	}
 

@@ -42,7 +42,7 @@ public class UserHibernate implements UserDAO {
 	         e.printStackTrace();
 	         
 		} finally {
-			ss.close();
+
 		}
 		return result;
 	}
@@ -52,7 +52,7 @@ public class UserHibernate implements UserDAO {
 		String hql = "FROM com.revature.beans.User";
 		Query<User> que = ss.createQuery(hql, User.class);
 		List<User> userList = que.getResultList();
-		ss.close();
+
 		return new HashSet<User>(userList);
 	}
 	@Override
@@ -65,7 +65,7 @@ public class UserHibernate implements UserDAO {
 		} catch (Exception e) {
 			tx.rollback();
 		} finally {
-			ss.close();
+
 		}
 	}
 	@Override
@@ -78,7 +78,7 @@ public class UserHibernate implements UserDAO {
 		} catch (Exception e) {
 			tx.rollback();
 		} finally {
-			ss.close();
+
 		}
 	}
 }
