@@ -7,8 +7,8 @@ import { User, Login } from '../../class';
   providedIn: 'root'
 })
 export class UserService {
-  private appUrl = this.coreService.getURL() + '/orders';
-  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  private appUrl = this.coreService.getURL() + '/u';
+  private head = this.coreService.getHeader();
 
   constructor(private http: HttpClient, private coreService: CoreService) {}
 
@@ -20,8 +20,8 @@ export class UserService {
     return this.http.get(`${this.appUrl}/users/` + id);
   }
 
-  register(user: Login) {
-    return this.http.post(`${this.appUrl}/users/register`, user);
+  register(user: User) {
+    return this.http.post(`${this.appUrl}/users/register`, user, {headers: this.head});
   }
 
   update(user: User) {
