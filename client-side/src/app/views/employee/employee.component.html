@@ -4,46 +4,33 @@
       <div class="view gradient-card-header blue darken-2">
         <h4 class="h4-responsive text-white">Inventory Items</h4>
       </div>
-                       <!--Table-->
-                       <table class="table table-striped">
-
-                          <!--Table head-->
-                          <thead class="mdb-color darken-3">
-                              <tr class="text-white">
-                                  <th>#</th>
-                                  <th>Item</th>
-                                  <th>Package Date</th>
-                                  <th>Use By</th>
-                                  <th>Stock</th>
-                              </tr>
-                          </thead>
-                          <!--Table head-->
-      
-                          <!--Table body-->
-                          <tbody>
-                              <tr>
-                                  <th scope="row">1</th>
-                                  <td>Mark</td>
-                                  <td>Otto</td>
-                                  <td>@mdo</td>
-                              </tr>
-                              <tr>
-                                  <th scope="row">2</th>
-                                  <td>Jacob</td>
-                                  <td>Thornton</td>
-                                  <td>@fat</td>
-                              </tr>
-                              <tr>
-                                  <th scope="row">3</th>
-                                  <td>Larry</td>
-                                  <td>the Bird</td>
-                                  <td>@twitter</td>
-                              </tr>
-                          </tbody>
-                          <!--Table body-->
-                      </table>
-                      <!--Table-->
-
+        <table class="table table-striped">
+          <thead class="mdb-color darken-3">
+              <tr class="text-white">
+                  <th>ID</th>
+                  <th>Item</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th>Package Date</th>
+                  <th>Use By</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+              </tr>
+          </thead>
+          <!--Table head-->
+          <tbody>
+            <tr *ngFor="let inventory of inventories">
+              <th scope="row">{{inventory.id}}</th>
+              <td>{{inventory.item.name}}</td>
+              <td>${{EmployeeService.makeItemPriceString(inventory.item)}}</td>
+              <td>{{inventory.stock}}</td>
+              <td>{{inventory.packagedate.substring(0,10)}}</td>
+              <td>{{inventory.useby.substring(0,10)}}</td>
+              <td><button class="btn btn-primary" (click)="editInventory()">Edit</button></td>
+              <td><button class="btn btn-danger" (click)="deleteInventoryAlert()">Delete</button></td>
+            </tr>  
+          </tbody>
+      </table>
     </div>
   </div>
 </div>
