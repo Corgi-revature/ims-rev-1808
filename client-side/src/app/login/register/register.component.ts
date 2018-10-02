@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
     this.loading = true;
-    this.userService.register(this.user)
+    this.userService.register(this.registerForm.value)
       .pipe(first())
       .subscribe(
         (data) => {
