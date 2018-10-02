@@ -17,12 +17,17 @@ export class AuthService {
   private error: any;
   constructor(private http: HttpClient, private coreService: CoreService) { }
 
-  setToken(token: string): void {
+  setToken(token: string): string {
     localStorage.setItem('token', token);
+    return token;
   }
 
   getToken() {
     return localStorage.getItem('token');
+  }
+
+  removeToken() {
+    localStorage.removeItem('token');
   }
 
   get isLoggedIn() {
@@ -36,12 +41,6 @@ export class AuthService {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     });
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type': 'application/x-www-form-urlencoded'
-    //     // 'Authorization': 'my-auth-token'
-    //   })
-    // };
     return this.http
       .post(
         `${this.appUrl}/user/login`,
@@ -77,6 +76,7 @@ export class AuthService {
   }
 
   logout() {                            // {4}
+    this.removeToken();
     this.loggedIn.next(false);
   }
 }

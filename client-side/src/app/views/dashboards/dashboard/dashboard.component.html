@@ -1,1 +1,24 @@
-<p>THIS IS THE DASHBOARD</p>
+<app-stats-card></app-stats-card>
+<div class="row wow fadeIn mt-5">
+
+    <!--Grid column-->
+    <div class="col-md-12 mb-4">
+  
+      <!--Card-->
+      <div class="card">
+  
+        <!--Card content-->
+        <div class="card-body">
+  
+          <div style="display: block">
+            <canvas mdbChart [chartType]="chart1Type" [datasets]="chartDatasets" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
+              [legend]="true">
+            </canvas>
+          </div>
+        </div>
+  
+      </div>
+      <!--/.Card-->
+  
+    </div>
+    <!--Grid column-->
