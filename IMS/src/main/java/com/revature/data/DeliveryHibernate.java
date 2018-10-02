@@ -26,7 +26,6 @@ public class DeliveryHibernate implements DeliveryDAO {
 	@Override
 	public int addDelivery(Delivery deli) {
 		Session ss = hu.getSession();
-		Transaction tx = ss.beginTransaction();
 		return (int) ss.save(deli);
 	}
 	
@@ -53,7 +52,6 @@ public class DeliveryHibernate implements DeliveryDAO {
 		String hql = "FROM com.revature.beans.Delivery";
 		Query<Delivery> que = ss.createQuery(hql, Delivery.class);
 		List<Delivery> deliveries = que.getResultList();
-		ss.close();
 		return new HashSet<Delivery>(deliveries);
 	}
 
@@ -67,7 +65,6 @@ public class DeliveryHibernate implements DeliveryDAO {
 		} catch(Exception e) {
 			tx.rollback();
 		} finally {
-			ss.close();
 		}
 	}
 
