@@ -40,13 +40,14 @@ function inlineStyles(fileContent, filePath) {
   return fileContent.replace(/styleUrls:\s*(\[[\s\S]*?])/gm, (_match, styleUrlsValue) => {
     // The RegExp matches the array of external style files. This is a string right now and
     // can to be parsed using the `eval` method. The value looks like "['AAA.css', 'BBB.css']"
-    const styleUrls = eval(styleUrlsValue);
+    if (styleUrlsValue !== "" || styleUrlsValue !== null) {
+      const styleUrls = eval(styleUrlsValue);
+      const styleContents = styleUrls
+        .map(url => join(dirname(filePath), url).replace(/.scss$/i, ".css"))
+        .map(path => loadResourceFile(path));
 
-    const styleContents = styleUrls
-      .map(url => join(dirname(filePath), url).replace(/.scss$/i, ".css"))
-      .map(path => loadResourceFile(path));
-
-    return `styles: ["${styleContents.join(' ')}"]`;
+      return `styles: ["${styleContents.join(' ')}"]`;
+    }
   });
 }
 

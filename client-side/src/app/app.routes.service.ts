@@ -14,9 +14,10 @@ import { EmployeeComponent } from './views/employee/employee.component';
 import { OrderComponent } from './order/order/order.component';
 
 import { AuthGuard } from './core/_guards';
+import { OrderComponent } from './order/order/order.component';
 
 const routes: Route[] = [
-  { path: '', pathMatch: 'full', redirectTo: 'login' },
+  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   { path: 'login', component: LoginComponent },
   { path: 'order', component: OrderComponent },
   { path: 'register', component: RegisterComponent },
@@ -24,25 +25,14 @@ const routes: Route[] = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   {
     path: 'profile',
-    children: [{ path: ':id', component: ProfileComponent }]
+    children: [{ path: ':id', component: ProfileComponent }],
+    canActivate: [AuthGuard]
   },
-  { path: 'employee', children: 
-    [
-      { path: 'inventory', component: EmployeeComponent }
-    ]
-  },
-  // {
-  //   path: 'orders', component: OrderComponent
-  // },
-  { path: 'profiles', children:
-    [
-      { path: 'profile1', component: ProfileComponent },
-    ]
-  },
-  { path: 'tables', children:
-    [
-      { path: 'table1', component: BasicTableComponent },
-    ]
+  {
+    path: 'employee',
+    children: [{ path: 'inventory', component: EmployeeComponent }],
+    canActivate: [AuthGuard]
+
   },
   { path: 'maps', children:
     [
