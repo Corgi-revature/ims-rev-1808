@@ -1,14 +1,15 @@
 package com.revature.services;
 
+import java.util.List;
 import java.util.Set;
 import com.revature.beans.Order;
 
 public interface OrderService {
-	Order addOrder(Order ord);
-	Order getOrderById(int id);
+	public int addOrder(Order ord);
+	public Order getOrderById(int id);
 	Set<Order> getOrders();
-	Set<Order> getOrdersCriteria();
-	void updateOrder(Order ord);	
-	void deleteOrder(Order ord);
-	void deleteOrderById(int id);
+	List<Order> getOrdersCriteria(Order ord);
+	public void updateOrder(Order ord);	
+	public void deleteOrder(Order ord);
+	public void deleteOrderById(int id);
 }

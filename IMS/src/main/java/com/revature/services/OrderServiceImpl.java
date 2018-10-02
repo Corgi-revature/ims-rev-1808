@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,8 @@ public class OrderServiceImpl implements OrderService {
 	private OrderDAO ds;
 
 	@Override
-	public Order addOrder(Order ord) {
-		ds.addOrder(ord);
-		return ord;
+	public int addOrder(Order ord) {
+		return ds.addOrder(ord);
 	}
 
 	@Override

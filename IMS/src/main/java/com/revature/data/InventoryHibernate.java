@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import com.revature.beans.Inventory;
 import com.revature.utils.HibernateUtil;
+
 @Component
 public class InventoryHibernate implements InventoryDAO {
 
@@ -36,7 +37,6 @@ public class InventoryHibernate implements InventoryDAO {
 		} catch (Exception e) {
 			tx.rollback();
 		} finally {
-			ss.close();
 		}
 		return sa;
 	}
@@ -77,7 +77,6 @@ public class InventoryHibernate implements InventoryDAO {
 		} catch (Exception e) {
 			tx.rollback();
 		} finally {
-			ss.close();
 		}
 	}
 
