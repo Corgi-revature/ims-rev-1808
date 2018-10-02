@@ -14,6 +14,7 @@ import { TxactService } from '../../order/txact/txact.service';
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.css']
 })
+
 export class OrderComponent implements OnInit {
   @Input()
   curOrder: Order;
@@ -51,14 +52,11 @@ export class OrderComponent implements OnInit {
     // this.orderService.addItem(this.curOrder, ite, amount).subscribe(
     //   add => (this.curOrder = add)
     // );
-   console.log((<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value);
    document.getElementById(`${ite.name}_cart`).innerText = (<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value;
-
-   
   }
+  
   checkout(): void {
     this.txactSerivce.updateTransaction;
-
   }
 
   // This should check for a transaction is open
@@ -74,6 +72,5 @@ export class OrderComponent implements OnInit {
     this.curTxact.token = `Token ${this.curTxact.id}`;
     this.curTxact.created = "Now";
     this.curTxact.txid = "012854 0415";
-    
   }
 }
