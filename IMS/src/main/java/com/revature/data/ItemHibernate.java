@@ -60,7 +60,6 @@ public class ItemHibernate implements ItemDAO {
 
 	@Override
 	public Set<Item> getItems() {
-		System.out.println("get Items: Hibernate");
 		Session ss = hu.getSession();
 		String hql = "FROM com.revature.beans.Item";
 		Query<Item> que = ss.createQuery(hql, Item.class);
