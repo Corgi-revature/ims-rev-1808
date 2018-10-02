@@ -14,7 +14,7 @@ export class TxactComponent implements OnInit {
 
   constructor(
     private coreService: CoreService,
-    private OrderService: OrderService
+    private orderService: OrderService
     ) { }
 
   ngOnInit() {
@@ -22,7 +22,7 @@ export class TxactComponent implements OnInit {
   }
 
   showOrdersOfTxact() {
-    this.OrderService.getOrders().subscribe(
+    this.orderService.getOrders().subscribe(
       orderList => this.orders=orderList
     );
   }

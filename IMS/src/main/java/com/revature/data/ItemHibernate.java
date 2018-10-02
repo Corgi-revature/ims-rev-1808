@@ -42,12 +42,14 @@ public class ItemHibernate implements ItemDAO {
 	@Override
 	public Item getItemById(int id) {
 		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		return ss.get(Item.class, id);
 	}
 
 	@Override
 	public List<Item> getItemsCriteria(Item ite) {
 		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
 		CriteriaBuilder build = ss.getCriteriaBuilder();
 		CriteriaQuery<Item> crit = build.createQuery(Item.class);
 		Root<Item> root = crit.from(Item.class);
