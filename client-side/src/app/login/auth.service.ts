@@ -21,6 +21,10 @@ export class AuthService {
     localStorage.setItem('token', token);
   }
 
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
   get isLoggedIn() {
     return this.loggedIn.asObservable(); // {2}
   }
@@ -28,9 +32,6 @@ export class AuthService {
   postLogin(email: string, password: string): Observable<Login> {
     console.log(email);
     console.log(password);
-    // let head: HttpHeaders = new HttpHeaders();
-    // head = head.append('Content-Type', 'application/json');
-    // head = head.append('Access-Control-Allow-Origin', '*' );
     const head = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
@@ -54,7 +55,7 @@ export class AuthService {
           resp => {
             if (resp !== null) {
               this.loggedIn.next(true);
-              this.setToken('login-200-corgi');
+              this.setToken('super-200-corgi');
               return resp as Login;
             }
             return this.error;

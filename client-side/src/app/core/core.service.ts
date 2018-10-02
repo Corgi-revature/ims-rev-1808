@@ -11,11 +11,19 @@ import { map } from 'rxjs/operators';
 export class CoreService {
   private login: Login;
   private url = 'http://localhost:8080/IMS';
+  private head = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*'
+  });
 
   constructor(private http: HttpClient) {}
 
   // Added getURL() method for William
   public getURL() {
     return this.url;
+  }
+
+  public getHeader() {
+   return this.head;
   }
 }
