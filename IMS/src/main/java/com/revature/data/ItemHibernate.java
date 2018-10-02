@@ -27,6 +27,7 @@ public class ItemHibernate implements ItemDAO {
 	public int addItem(Item ite) {
 		Session ss = hu.getSession();
 		Transaction tx = ss.beginTransaction();
+		int sa =0;
 		try {
 			sa = (int)ss.save(ite);
 			tx.commit();

@@ -30,8 +30,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Set<Order> getOrdersCriteria() {
-		return ds.getOrdersCriteria();
+	public 
+	List<Order> getOrdersCriteria(Order ord) {
+		return ds.getOrdersCriteria(ord);
 	}
 
 	@Override
