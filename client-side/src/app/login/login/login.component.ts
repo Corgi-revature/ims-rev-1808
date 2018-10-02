@@ -31,30 +31,16 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private alertService: AlertService
-  ) {}
+  ) { }
 
   ngOnInit() {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
     // this.loginForm = this.formBuilder.group({
-      // email: ['', Validators.email],
-      // password: ['', Validators.required]
+    // email: ['', Validators.email],
+    // password: ['', Validators.required]
     // });
-    // if (this.sessionId) {
-    //   this.authService.getLogin(this.sessionId).subscribe(result => {
-    //     this.login = result;
-    //     console.log('you are not in session');
-    //   });
-    // }
-    // // testing purpose
-    // this.authService.postLogin('user', 'password').subscribe(result => {
-    //   this.login = result;
-    //   console.log(`testLogin = ${this.login}`);
-    // });
-
-    // this just check the token and redirect
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    if (localStorage.getItem('token')) {
-      this.router.navigate([this.returnUrl]);
-    }
+    console.log(this.authService.getToken());
+    this.checkLogged();
   }
 
   // get val() {
@@ -75,16 +61,20 @@ export class LoginComponent implements OnInit {
       resp => {
         console.log(resp);
         if (resp !== null) {
-          localStorage.setItem('token', 'running amok');
           this.login = resp;
-          console.log(this.returnUrl);
-
-          // this.router.navigate([this.returnUrl]);
           this.router.navigate([this.returnUrl]);
         }
       },
       error => (this.error = error)
     );
+  }
+
+  checkLogged() {
+    if (this.authService.getToken() === 'super-200-corgi') {
+      console.log('test');
+      console.log(this.returnUrl);
+      this.router.navigate([this.returnUrl]);
+    }
   }
 
   logOut() {
