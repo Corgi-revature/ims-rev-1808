@@ -36,10 +36,10 @@ public class SupplierController {
 		return sups.getSuppliers();
 	}
 	
-	/*@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(value="/search", method=RequestMethod.GET)
 	List<Supplier> getSuppliersCriteria() {
 		return sups.getSuppliersCriteria();
-	}*/
+	}
 	
 	@RequestMapping(method=RequestMethod.PUT)
 	void updateSupplier( Supplier sup) {
