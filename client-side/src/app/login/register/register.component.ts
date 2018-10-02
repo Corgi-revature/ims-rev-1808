@@ -2,8 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { User, Login } from '../../class';
 import { CoreService } from '../../core/core.service';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 import { UserService } from '../user/user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +19,8 @@ export class RegisterComponent implements OnInit {
   @Input() private password: string;
   @Input() private phone: string;
   @Input() private error: string;
+  submitted = false;
+  loading = false;
   registerForm: FormGroup;
   user: User = {
     id: null,
@@ -31,9 +35,13 @@ export class RegisterComponent implements OnInit {
   constructor(
     private coreService: CoreService,
     private userService: UserService,
+    private router: Router,
     private fb: FormBuilder
   ) {
-    this.registerForm = fb.group({
+  }
+
+  ngOnInit() {
+    this.registerForm = this.fb.group({
       'email': [null, Validators.email],
       'password': [null, Validators.minLength(6)],
       'first': [null, Validators.required],
@@ -42,13 +50,26 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  get f() {
+    return this.registerForm.controls;
   }
 
   register() {
+    this.submitted = true;
+
+    if (this.registerForm.invalid) {
+      return;
+    }
+    this.loading = true;
     this.userService.register(this.user)
+      .pipe(first())
       .subscribe(
-        (data: User) => this.user = { ...data }, // success path
+        (data) => {
+          if (data !== 0) {
+            this.router.navigate(['/login']); // success path
+          }
+          return false;
+        },
         error => this.error = error // error path
       );
   }
