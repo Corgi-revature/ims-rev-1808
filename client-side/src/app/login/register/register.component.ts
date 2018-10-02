@@ -3,6 +3,7 @@ import { User, Login } from '../../class';
 import { CoreService } from '../../core/core.service';
 import { AuthService } from '../auth.service';
 import { UserService } from '../user/user.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -16,6 +17,7 @@ export class RegisterComponent implements OnInit {
   @Input() private password: string;
   @Input() private phone: string;
   @Input() private error: string;
+  registerForm: FormGroup;
   user: User = {
     id: null,
     first: this.first,
@@ -25,11 +27,20 @@ export class RegisterComponent implements OnInit {
     userType: 2,
     phone: this.phone
   };
-  
+
   constructor(
     private coreService: CoreService,
-    private userService: UserService
-    ) { }
+    private userService: UserService,
+    private fb: FormBuilder
+  ) {
+    this.registerForm = fb.group({
+      'email': [null, Validators.email],
+      'password': [null, Validators.minLength(6)],
+      'first': [null, Validators.required],
+      'last': [null, Validators.required],
+      'phone': [null, Validators.minLength(10)],
+    });
+  }
 
   ngOnInit() {
   }
