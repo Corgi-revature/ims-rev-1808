@@ -21,6 +21,10 @@ export class AuthService {
     localStorage.setItem('token', token);
   }
 
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
   get isLoggedIn() {
     return this.loggedIn.asObservable(); // {2}
   }
@@ -54,7 +58,7 @@ export class AuthService {
           resp => {
             if (resp !== null) {
               this.loggedIn.next(true);
-              this.setToken('login-200-corgi');
+              this.setToken('super-200-corgi');
               return resp as Login;
             }
             return this.error;
