@@ -32,9 +32,6 @@ export class AuthService {
   postLogin(email: string, password: string): Observable<Login> {
     console.log(email);
     console.log(password);
-    // let head: HttpHeaders = new HttpHeaders();
-    // head = head.append('Content-Type', 'application/json');
-    // head = head.append('Access-Control-Allow-Origin', '*' );
     const head = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
