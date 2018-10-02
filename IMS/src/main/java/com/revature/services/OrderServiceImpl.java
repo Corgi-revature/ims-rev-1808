@@ -26,29 +26,28 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Set<Order> getOrders() {
-		// TODO Auto-generated method stub
-		return null;
+		return ds.getOrders();
 	}
 
 	@Override
-	public List<Order> getOrdersCriteria(Order ord) {
-		// TODO Auto-generated method stub
-		return null;
+	public 
+	List<Order> getOrdersCriteria(Order ord) {
+		return ds.getOrdersCriteria(ord);
 	}
 
 	@Override
 	public void updateOrder(Order ord) {
-		// TODO Auto-generated method stub
+		ds.updateOrder(ord);
 	}
 
 	@Override
 	public void deleteOrder(Order ord) {
-		// TODO Auto-generated method stub
+		ds.deleteOrder(ord);
 	}
 
 	@Override
 	public void deleteOrderById(int id) {
-		// TODO Auto-generated method stub
+		ds.deleteOrderById(id);
 	}
 
 	
