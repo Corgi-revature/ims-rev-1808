@@ -7,6 +7,7 @@ import { Txact } from '../../class/txact';
 import { ItemService } from '../../core/item.service';
 import { InventoryService } from '../../order/inventory/inventory.service'
 import { OrderService } from '../../order/order/order.service';
+import { TxactService } from '../../order/txact/txact.service';
 
 @Component({
   selector: 'app-order',
@@ -31,7 +32,8 @@ export class OrderComponent implements OnInit {
   constructor(
     private inventoryService: InventoryService,
     private itemService: ItemService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private txactSerivce: TxactService
   ) {}
 
   ngOnInit() {
@@ -44,18 +46,20 @@ export class OrderComponent implements OnInit {
   fillItemList() {
     this.itemService.getItems().subscribe(itemList => (this.items = itemList));
   }
-  // fillInventory() {
-  //   this.inventoryService.getInventory().subscribe(inventList => (this.invents = inventList));
-  // }
 
-  add(inv: Inventory, amount: Number): void {
-    this.orderService.addItem(this.curOrder, inv).subscribe(
-      add => (this.curOrder = add)
-    );
-   // document.getElementById("").innerHTML = amount.toString;
+  add(ite: Item): void {
+    // this.orderService.addItem(this.curOrder, ite, amount).subscribe(
+    //   add => (this.curOrder = add)
+    // );
+   console.log((<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value);
+   document.getElementById(`${ite.name}_cart`).innerText = (<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value;
+
+   
   }
+  checkout(): void {
+    this.txactSerivce.updateTransaction;
 
-  checkout(): void {}
+  }
 
   // This should check for a transaction is open
   isOpen(): boolean {
@@ -65,6 +69,11 @@ export class OrderComponent implements OnInit {
   empty(): void {}
 
   openTransaction(){
-
+    this.txactSerivce.createTransaction();
+    this.curTxact.id = 1;
+    this.curTxact.token = `Token ${this.curTxact.id}`;
+    this.curTxact.created = "Now";
+    this.curTxact.txid = "012854 0415";
+    
   }
 }

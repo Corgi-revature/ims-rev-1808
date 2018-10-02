@@ -52,9 +52,9 @@ export class OrderService {
       .pipe(map(resp => resp as Order));
   }
 
-  addItem(ord: Order, inv: Inventory): Observable<Order> {
+  addItem(ord: Order, ite: Item, amount: Number): Observable<Order> {
     const body = {};
-    const url = this.appUrl + '/' + ord.id + '/inventory/' + inv.id;
+    const url = this.appUrl + '/' + ord.id + '/inventory/' + ite.id;
     console.log(url);
     return this.http
       .put(url, body, { headers: this.headers, withCredentials: true })
