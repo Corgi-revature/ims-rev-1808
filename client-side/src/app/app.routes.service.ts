@@ -1,6 +1,9 @@
 import { RouterModule, Route, CanActivate } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
+import { Map1Component } from './views/maps/map1/map1.component';
+import { ModalsComponent } from './views/modals/modals.component';
+import { BasicTableComponent } from './views/tables/basic-table/basic-table.component';
 import { ProfileComponent } from './views/profile/profile/profile.component';
 import { NotFoundComponent } from './views/errors/not-found/not-found.component';
 import { DashboardComponent } from './views/dashboards/dashboard/dashboard.component';
@@ -9,6 +12,7 @@ import { RegisterComponent } from './login/register/register.component';
 import { ForgetPasswordComponent } from './login/forget-password/forget-password.component';
 import { EmployeeComponent } from './views/employee/employee.component';
 import { OrderComponent } from './order/order/order.component';
+
 import { AuthGuard } from './core/_guards';
 import { OrderComponent } from './order/order/order.component';
 
@@ -28,8 +32,17 @@ const routes: Route[] = [
     path: 'employee',
     children: [{ path: 'inventory', component: EmployeeComponent }],
     canActivate: [AuthGuard]
+
   },
-  { path: '**', component: NotFoundComponent }
+  { path: 'maps', children:
+    [
+      { path: 'map1', component: Map1Component},
+    ]
+  },
+
+  { path: 'modals', component: ModalsComponent},
+  { path: '**', component: NotFoundComponent },
+
 ];
 
 export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes);
