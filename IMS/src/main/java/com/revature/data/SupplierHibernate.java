@@ -42,7 +42,7 @@ public class SupplierHibernate implements SupplierDAO {
 	}
 
 	@Override
-	public Set<Supplier> getSuppliersCriteria() {
+	public List<Supplier> getSuppliersCriteria() {
 		Session ss = hu.getSession();
 		return null;
 	}
