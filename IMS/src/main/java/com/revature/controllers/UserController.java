@@ -16,8 +16,7 @@ import com.revature.services.UserService;
 @RequestMapping(value = "/user")
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
-//	private Logger log = Logger.getLogger(UserController.class);
-	// checked
+
 	@Autowired
 	private UserService us;
 

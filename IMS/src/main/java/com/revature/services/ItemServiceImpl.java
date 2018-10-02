@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,8 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public Set<Item> getItemsCriteria() {
-		return itemDAO.getItemsCriteria();
+	public List<Item> getItemsCriteria(Item ite) {
+		return itemDAO.getItemsCriteria(ite);
 	}
 
 	@Override
