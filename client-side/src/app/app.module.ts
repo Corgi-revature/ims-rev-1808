@@ -25,6 +25,9 @@ import { CoreService } from './core/core.service';
 import { OrderComponent } from './order/order/order.component';
 import { UserComponent } from './login/user/user.component';
 import { AuthGuard } from './core/_guards';
+import { AlertComponent } from './shared/services/alert/alert.component';
+import { AlertService } from './shared/services/alert/alert.service';
+import { OrderComponent } from './order/order/order.component';
 
 
 @NgModule({
@@ -53,6 +56,7 @@ import { AuthGuard } from './core/_guards';
   ],
   providers: [
     CoreService,
+    AlertService,
     AuthGuard,
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
