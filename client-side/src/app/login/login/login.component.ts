@@ -62,8 +62,6 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm.controls);
     return this.loginForm.controls;
   }
-<<<<<<< HEAD
-=======
 
   initLogin() {
     this.submitted = true;
@@ -85,5 +83,4 @@ export class LoginComponent implements OnInit {
       error => (this.error = error)
     );
   }
->>>>>>> 661d6509990382f05e12b3968e8c936c55f72f0e
 }

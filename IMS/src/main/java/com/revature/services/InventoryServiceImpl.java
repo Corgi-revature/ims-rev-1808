@@ -13,7 +13,7 @@ import com.revature.data.InventoryDAO;
 public class InventoryServiceImpl implements InventoryService {
 	
 	@Autowired
-	InventoryDAO ivs;
+	private InventoryDAO ivs;
 	
 	@Override
 	public int addInventory(Inventory inv) {
