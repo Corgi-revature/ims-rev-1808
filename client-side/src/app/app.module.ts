@@ -57,7 +57,7 @@ import { AlertService } from './shared/services/alert/alert.service';
     AlertService,
     AuthGuard,
   ],
-  schemas: [ NO_ERRORS_SCHEMA ],
+  schemas: [NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

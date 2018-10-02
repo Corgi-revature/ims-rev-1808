@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../login/auth.service';
 import { Observable } from 'rxjs';
 
+
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
