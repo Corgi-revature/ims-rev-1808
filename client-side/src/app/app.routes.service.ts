@@ -8,14 +8,15 @@ import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './login/register/register.component';
 import { ForgetPasswordComponent } from './login/forget-password/forget-password.component';
 import { EmployeeComponent } from './views/employee/employee.component';
+import { OrderComponent } from './order/order/order.component';
 import { AuthGuard } from './core/_guards';
 import { OrderComponent } from './order/order/order.component';
 
 const routes: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   { path: 'login', component: LoginComponent },
-  // { path: 'orders', component: OrderComponent },
-  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
+  { path: 'order', component: OrderComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'forget', component: ForgetPasswordComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   {
