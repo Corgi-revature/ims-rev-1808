@@ -1,5 +1,5 @@
 <!--Main Navigation-->
-<div *ngIf="loggedIn">
+<div *ngIf="isLoggedIn$ | async">
   <header>
     <!-- Sidebar -->
     <!-- <div class="sidebar-fixed position-fixed">

@@ -10,8 +10,9 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
   private appUrl = this.coreService.getURL();
-  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  private loggedIn = false;
+  // private headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+  private headers = new HttpHeaders();
+  private loggedIn = new BehaviorSubject<boolean>(false); // {1}
 
   private error: any;
   constructor(private http: HttpClient, private coreService: CoreService) { }
@@ -21,12 +22,19 @@ export class AuthService {
   }
 
   get isLoggedIn() {
-    return this.loggedIn; // {2}
+    return this.loggedIn.asObservable(); // {2}
   }
 
   postLogin(email: string, password: string): Observable<Login> {
     console.log(email);
     console.log(password);
+    // let head: HttpHeaders = new HttpHeaders();
+    // head = head.append('Content-Type', 'application/json');
+    // head = head.append('Access-Control-Allow-Origin', '*' );
+    const head = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
     // const httpOptions = {
     //   headers: new HttpHeaders({
     //     'Content-Type': 'application/x-www-form-urlencoded'
@@ -40,17 +48,16 @@ export class AuthService {
           email: email,
           password: password
         },
-        { headers: this.headers }
-      )
-      .pipe(
+        { headers: head }
+      ).pipe(
         map(
           resp => {
-          if (resp !== null) {
-            this.loggedIn = true;
-            this.setToken('login-200-corgi');
-            return resp as Login;
-          }
-          return this.error;
+            if (resp !== null) {
+              this.loggedIn.next(true);
+              this.setToken('login-200-corgi');
+              return resp as Login;
+            }
+            return this.error;
           },
           error => this.error = error)
       );
@@ -69,6 +76,6 @@ export class AuthService {
   }
 
   logout() {                            // {4}
-
+    this.loggedIn.next(false);
   }
 }
