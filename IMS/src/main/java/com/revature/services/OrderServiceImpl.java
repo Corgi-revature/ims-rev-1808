@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +15,13 @@ public class OrderServiceImpl implements OrderService {
 	private OrderDAO ds;
 
 	@Override
-	public Order addOrder(Order ord) {
-		// TODO Auto-generated method stub
-		return null;
+	public int addOrder(Order ord) {
+		return ds.addOrder(ord);
 	}
 
 	@Override
 	public Order getOrderById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return ds.getOrderById(id);
 	}
 
 	@Override
@@ -32,27 +31,24 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Set<Order> getOrdersCriteria() {
+	public List<Order> getOrdersCriteria(Order ord) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Order updateOrder(Order ord) {
+	public void updateOrder(Order ord) {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
-	public Order deleteOrder(Order ord) {
+	public void deleteOrder(Order ord) {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
-	public Integer deleteOrderById(int id) {
+	public void deleteOrderById(int id) {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 	

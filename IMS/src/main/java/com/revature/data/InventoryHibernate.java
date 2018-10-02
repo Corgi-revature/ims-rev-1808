@@ -36,7 +36,6 @@ public class InventoryHibernate implements InventoryDAO {
 		} catch (Exception e) {
 			tx.rollback();
 		} finally {
-			ss.close();
 		}
 		return sa;
 	}
@@ -64,7 +63,6 @@ public class InventoryHibernate implements InventoryDAO {
 		String hql = "FROM com.revature.beans.Inventory";
 		Query<Inventory> que = ss.createQuery(hql, Inventory.class);
 		List<Inventory> itemList = que.getResultList();
-		ss.close();
 		return new HashSet<Inventory>(itemList);
 	}
 
@@ -78,7 +76,6 @@ public class InventoryHibernate implements InventoryDAO {
 		} catch (Exception e) {
 			tx.rollback();
 		} finally {
-			ss.close();
 		}
 	}
 

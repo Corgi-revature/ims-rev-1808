@@ -5,55 +5,55 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.beans.Order;
-import com.revature.services.OrderService;
+import com.revature.beans.Supplier;
+import com.revature.services.SupplierService;
 
 @RestController
-@RequestMapping(value="/order")
+@RequestMapping(value="/supplier")
 @CrossOrigin(origins = "http://localhost:4200")
-public class OrderController {
+public class SupplierController {
+
 	@Autowired
-	private OrderService os;
+	SupplierService sups;
 	
 	@RequestMapping(method=RequestMethod.POST)	
-	int addOrder(@RequestBody Order ord) {
-		return os.addOrder(ord);
+	Supplier addOrder(Supplier sup) {
+		sups.addSupplier(sup);
+		return sup;
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	Order getOrderByID(@PathVariable int id) {
-		return os.getOrderById(id);
-	}
-	@RequestMapping(value="/all",  method = RequestMethod.GET)
-	Set<Order> getOrders() {
-		return os.getOrders();
+	Supplier getSupplierByID(Integer id) {
+		return sups.getSupplierById(id);
 	}
 	
-	/*@RequestMapping(value="/{ord}", method=RequestMethod.GET)
-	List<Order> getOrdersCriteria(@PathVariable Order ord) {
-		return os.getOrdersCriteria(ord);
+	@RequestMapping(value="/all",  method = RequestMethod.GET)
+	Set<Supplier> getSuppliers() {
+		return sups.getSuppliers();
+	}
+	
+	/*@RequestMapping(method=RequestMethod.GET)
+	List<Supplier> getSuppliersCriteria() {
+		return sups.getSuppliersCriteria();
 	}*/
 	
 	@RequestMapping(method=RequestMethod.PUT)
-	void updateOrder( Order ord) {
-		os.updateOrder(ord);
+	void updateSupplier( Supplier sup) {
+		sups.updateSupplier(sup);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE)
-	void deleteOrder( Order ord) {
-		os.deleteOrder(ord);
+	void deleteSupplier( Supplier sup) {
+		sups.deleteSupplier(sup);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	void deleteOrderById(Integer id) {
-		os.deleteOrderById(id);
+	void deleteSupplierById(Integer id) {
+		sups.deleteSupplierById(id);
 	}
+	
 }
-
-

@@ -1,5 +1,6 @@
 package com.revature.data;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,20 +24,20 @@ public class OrderHibernate implements OrderDAO{
 	private HibernateUtil hu;
 
 	@Override
-	public Order addOrder(Order ord) {
+	public int addOrder(Order ord) {
 		Session ss = hu.getSession();
+		int result = 0;
 		Transaction tx = ss.beginTransaction();
 		try {
 			tx = ss.beginTransaction();
-			ss.save(ord);
+			result = (int)ss.save(ord);
 			tx.commit();
-			return ord;
 		} catch(Exception e) {
 			tx.rollback();
-			return null;
 		} finally {
-			ss.close();
+
 		}
+		return result;
 	}
 
 	@Override
@@ -47,14 +48,14 @@ public class OrderHibernate implements OrderDAO{
 	}
 
 	@Override
-	public Set<Order> getOrdersCriteria() {
+	public List<Order> getOrdersCriteria(Order ord) {
 		Session ss = hu.getSession();
 		CriteriaBuilder build = ss.getCriteriaBuilder();
 		CriteriaQuery<Order> crit = build.createQuery(Order.class);
 		Root<Order> root = crit.from(Order.class);
 		crit.select(root);
 		List<Order> orders = ss.createQuery(crit).getResultList();
-		return new HashSet<Order>(orders);
+		return new ArrayList<Order>(orders);
 		
 	}
 
@@ -64,7 +65,7 @@ public class OrderHibernate implements OrderDAO{
 		String hql = "FROM com.revature.beans.Order";
 		Query<Order> que = ss.createQuery(hql, Order.class);
 		List<Order> orderList = que.getResultList();
-		ss.close();
+
 		return new HashSet<Order>(orderList);
 	}
 
@@ -78,7 +79,7 @@ public class OrderHibernate implements OrderDAO{
 		} catch(Exception e) {
 			tx.rollback();
 		} finally {
-			ss.close();
+
 		}
 		
 	}
