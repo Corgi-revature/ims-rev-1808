@@ -37,10 +37,10 @@ public class ItemController {
 		return is.getItems();
 	}
 
-	/*@RequestMapping(value = "/{item}", method = RequestMethod.GET)
-	List<Item> getItemsCriteria(@PathVariable Item ite) {
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	List<Item> getItemsCriteria(@RequestBody Item ite) {
 		return is.getItemsCriteria(ite);
-	}*/
+	}
 
 	@RequestMapping(value = "/{item}", method = RequestMethod.PUT)
 	void updateItem(@RequestBody Item ite) {
@@ -53,7 +53,7 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	void deleteItemById(int id) {
+	void deleteItemById(@PathVariable int id) {
 		is.deleteItemById(id);
 	}
 }
