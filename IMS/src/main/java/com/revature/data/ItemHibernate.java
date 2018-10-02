@@ -5,13 +5,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.hibernate.query.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,9 +25,9 @@ public class ItemHibernate implements ItemDAO {
 	
 	@Override
 	public int addItem(Item ite) {
+		int sa = 0;
 		Session ss = hu.getSession();
 		Transaction tx = ss.beginTransaction();
-		int sa =0;
 		try {
 			sa = (int)ss.save(ite);
 			tx.commit();
@@ -60,7 +60,6 @@ public class ItemHibernate implements ItemDAO {
 
 	@Override
 	public Set<Item> getItems() {
-		System.out.println("get Items: Hibernate");
 		Session ss = hu.getSession();
 		String hql = "FROM com.revature.beans.Item";
 		Query<Item> que = ss.createQuery(hql, Item.class);
