@@ -13,7 +13,8 @@ export class CoreService {
   private url = 'http://localhost:8080/IMS';
   private head = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
+    'Access-Control-Allow-Origin': '*',
+    // 'Authorization': 'my-auth-token'
   });
 
   constructor(private http: HttpClient) {}
