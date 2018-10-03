@@ -9,7 +9,7 @@ import { CoreService } from '../../../core/core.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  userType: any;
+  userType: number;
   user: User;
   public chart1Type = 'bar';
 
