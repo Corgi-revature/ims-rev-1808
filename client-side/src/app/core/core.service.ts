@@ -17,7 +17,7 @@ export class CoreService {
     // 'Authorization': 'my-auth-token'
   });
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // Added getURL() method for William
   public getURL() {
@@ -25,6 +25,14 @@ export class CoreService {
   }
 
   public getHeader() {
-   return this.head;
+    return this.head;
+  }
+
+  public setLStorage(name: string, value: any) {
+    localStorage.setItem(name, value);
+  }
+
+  public getLStorage(name: string): any {
+    return localStorage.getItem(name);
   }
 }

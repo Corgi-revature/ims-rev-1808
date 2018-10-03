@@ -13,24 +13,25 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  @Input() private first: string;
-  @Input() private last: string;
-  @Input() private email: string;
-  @Input() private password: string;
-  @Input() private phone: string;
-  @Input() private error: string;
+  // @Input() private first: string;
+  // @Input() private last: string;
+  // @Input() private email: string;
+  // @Input() private password: string;
+  // @Input() private phone: string;
+  // @Input() private error: string;
   submitted = false;
   loading = false;
   registerForm: FormGroup;
-  user: User = {
-    id: null,
-    first: this.first,
-    last: this.last,
-    email: this.email,
-    password: this.password,
-    userType: 2,
-    phone: this.phone
-  };
+  error: string;
+  // user: User = {
+  //   id: null,
+  //   first: this.first,
+  //   last: this.last,
+  //   email: this.email,
+  //   password: this.password,
+  //   userType: 2,
+  //   phone: this.phone
+  // };
 
   constructor(
     private coreService: CoreService,
@@ -47,6 +48,7 @@ export class RegisterComponent implements OnInit {
       'first': [null, Validators.required],
       'last': [null, Validators.required],
       'phone': [null, Validators.minLength(10)],
+      'usertype': ['2']
     });
   }
 
@@ -54,12 +56,17 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.controls;
   }
 
+  set f(x) {
+    this.registerForm.setValue(x);
+  }
+
   register() {
     this.submitted = true;
-
     if (this.registerForm.invalid) {
       return;
     }
+    this.registerForm.patchValue({ 'usertype': {'id':2, 'usertype':'Employee' }});
+    console.log(this.f.usertype);
     this.loading = true;
     this.userService.register(this.registerForm.value)
       .pipe(first())
