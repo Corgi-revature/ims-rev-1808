@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.User;
 import com.revature.services.UserService;
+import com.revature.services.UserTypeService;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -19,6 +20,8 @@ public class UserController {
 
 	@Autowired
 	private UserService us;
+	@Autowired
+	private UserTypeService uts;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String goLogin(String session) {
@@ -50,6 +53,7 @@ public class UserController {
 		User newUser = null;
 		try {
 			newUser=user;
+			user.setUsertype(uts.getUserTypeById(2));
 			int result = us.addUser(newUser);
 			return result;
 		} catch(Exception e) {
