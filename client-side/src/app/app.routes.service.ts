@@ -13,7 +13,7 @@ import { ForgetPasswordComponent } from './login/forget-password/forget-password
 import { EmployeeComponent } from './views/employee/employee.component';
 import { OrderComponent } from './order/order/order.component';
 import { AuthGuard } from './core/_guards';
-import { EditInventoryComponent } from './edit-inventory/edit-inventory.component';
+import { EditInventoryComponent } from './inventory/edit-inventory/edit-inventory.component';
 
 const routes: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },

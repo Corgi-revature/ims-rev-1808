@@ -27,7 +27,8 @@ import { UserComponent } from './login/user/user.component';
 import { AuthGuard } from './core/_guards';
 import { AlertComponent } from './shared/services/alert/alert.component';
 import { AlertService } from './shared/services/alert/alert.service';
-import { EditInventoryComponent } from './edit-inventory/edit-inventory.component';
+import { EditInventoryComponent } from './inventory/edit-inventory/edit-inventory.component';
+import { AddInventoryComponent } from './inventory/add-inventory/add-inventory.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { EditInventoryComponent } from './edit-inventory/edit-inventory.componen
     ForgetPasswordComponent,
     OrderComponent,
     UserComponent,
-    EditInventoryComponent
+    EditInventoryComponent,
+    AddInventoryComponent
   ],
   imports: [
     HttpClientModule,
