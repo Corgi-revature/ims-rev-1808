@@ -59,7 +59,7 @@ import { EditInventoryComponent } from './edit-inventory/edit-inventory.componen
     AlertService,
     AuthGuard,
   ],
-  schemas: [ NO_ERRORS_SCHEMA ],
+  schemas: [NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
