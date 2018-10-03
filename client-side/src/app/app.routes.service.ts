@@ -13,6 +13,7 @@ import { ForgetPasswordComponent } from './login/forget-password/forget-password
 import { EmployeeComponent } from './views/employee/employee.component';
 import { OrderComponent } from './order/order/order.component';
 import { AuthGuard } from './core/_guards';
+import { EditInventoryComponent } from './edit-inventory/edit-inventory.component';
 
 const routes: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
@@ -27,10 +28,20 @@ const routes: Route[] = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'modals',
+    children:[{path: 'modal', component: ModalsComponent}]
+  },
+  {
+    path: 'tables',
+    children:[{path: 'table',component: BasicTableComponent}]
+  },
+  {
     path: 'employee',
     children: [{ path: 'inventory', component: EmployeeComponent }],
     canActivate: [AuthGuard]
-
+  },
+  {
+    path:'employee/inventory/:id', component: EditInventoryComponent, canActivate: [AuthGuard]
   },
   { path: '**', component: NotFoundComponent },
 
