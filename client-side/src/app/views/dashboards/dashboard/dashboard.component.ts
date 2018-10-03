@@ -68,7 +68,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     const l = this.coreService.getLStorage('user');
     this.user  = JSON.parse(l);
-    this.usertype = this.user.userType.id;
+    this.usertype = this.user.usertype.id;
   }
 
   superPower() {
