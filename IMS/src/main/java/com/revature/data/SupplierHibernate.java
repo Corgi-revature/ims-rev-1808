@@ -86,6 +86,11 @@ public class SupplierHibernate implements SupplierDAO {
 	public void deleteSupplierById(int id) {
 		Session ss = hu.getSession();
 		Transaction tx = ss.beginTransaction();
+		try {
+			ss.delete(ss.get(Supplier.class, id));
+		} catch (Exception e) {
+			tx.rollback();
+		}
 	}
 
 }

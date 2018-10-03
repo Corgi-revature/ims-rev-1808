@@ -37,17 +37,13 @@ public class InventoryController {
 		return is.getInventory();
 	}
 	
-//	@RequestMapping(value = "/{inventory}/all",method = RequestMethod.GET)
-//	Set<Inventory> getItems() {
-//		return is.getInventory();
-//	}
 
-/*	@RequestMapping(value = "/{inventory}", method = RequestMethod.GET)
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	List<Inventory> getItemsCriteria() {
 		return is.getInventoryCriteria();
-	}*/
+	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@RequestMapping(method = RequestMethod.PUT)
 	void updateItem(@RequestBody Inventory inv) {
 		is.updateInventory(inv);
 	}

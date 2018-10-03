@@ -11,48 +11,53 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.beans.Delivery;
-import com.revature.services.DeliveryService;
+import com.revature.beans.UserType;
+import com.revature.services.UserTypeService;
+
 
 @RestController
-@RequestMapping(value="/delivery")
+@RequestMapping(value = "/usertype")
 @CrossOrigin(origins = "http://localhost:4200")
-public class DeliveryController {
+public class UserTypeController {
+	
 	@Autowired
-	private DeliveryService ds;
-
+	private UserTypeService uts;
+	
 	@RequestMapping(method = RequestMethod.POST)
-	int addDelivery(Delivery deli) {
-		return ds.addDelivery(deli);
+	int addUserType(@RequestBody UserType utype) {
+		return uts.addUserType(utype);
+		
 	}
-
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	Delivery getDeliveryById(@PathVariable int id) {
-		return ds.getDeliveryById(id);
+	UserType getUserTypeById(@PathVariable int id) {
+		return uts.getUserTypeById(id);
 	}
 	
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	Set<Delivery> getDeliveries(){
-		return ds.getDeliveries();
+	Set<UserType> getUserTypes() {
+		return uts.getUserTypes();
 	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	List<Delivery> getDeliveriesCriteria(@RequestBody Delivery deli) {
-		return ds.getDeliveriesCriteria(deli);
+	List<UserType> getUserTypeCriteria(@RequestBody UserType utype) {
+		//return uts.getUserTypeCriteria(utype);
+		return null;
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	void updateDelivery(@RequestBody Delivery deli) {
-		ds.updateDelivery(deli);			
+	void updateItem(@RequestBody UserType utype) {
+		uts.updateUserType(utype);
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE)
-	void deleteDelivery(@RequestBody Delivery deli) {	
-		ds.deleteDelivery(deli);
+	void deleteItem(@RequestBody UserType utype) {
+		uts.deleteUserType(utype);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	void deleteDeliveryById(Integer id) {
-		ds.deleteDeliveryById(id);
+	void deleteItemById(@PathVariable int id) {
+		uts.deleteUserTypeById(id);
 	}
+
 }
