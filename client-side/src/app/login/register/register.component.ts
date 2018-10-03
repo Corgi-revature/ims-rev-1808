@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
       'first': [null, Validators.required],
       'last': [null, Validators.required],
       'phone': [null, Validators.minLength(10)],
-      'usertype': ['2']
+      'usertype': [{id: '2', usertype: 'Customer'}]
     });
   }
 
@@ -65,7 +65,7 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    this.registerForm.patchValue({ 'usertype': this.userService.gettype(2)});
+    // this.registerForm.patchValue({ 'usertype': this.userService.gettype(2)});
     console.log(this.f.usertype);
     this.loading = true;
     this.userService.register(this.registerForm.value)

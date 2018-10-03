@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from '../../../class';
 import { CoreService } from '../../../core/core.service';
+import { UserService } from '../../../login/user/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,13 +10,14 @@ import { CoreService } from '../../../core/core.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  userType: number;
+  usertype: number;
   user: User;
+  users: User[];
   public chart1Type = 'bar';
 
   public chartDatasets: Array<any> = [
     { data: [50, 40, 60, 51, 56, 55, 40], label: 'Coffee' },
-    { data: [28, 80, 40, 69, 36, 37, 60], label: 'Salt' },
+    { data: [68, 80, 60, 69, 36, 37, 60], label: 'Salt' },
     { data: [48, 58, 60, 88, 45, 65, 60], label: 'Meat' }
   ];
 
@@ -61,11 +63,17 @@ export class DashboardComponent implements OnInit {
     }
   };
 
-  constructor(private coreService: CoreService) {}
+  constructor(private coreService: CoreService, private userService: UserService) {}
 
   ngOnInit() {
     const l = this.coreService.getLStorage('user');
     this.user  = JSON.parse(l);
-    this.userType = this.user.userType.id;
+    this.usertype = this.user.usertype.id;
+  }
+
+  superPower() {
+    if (this.usertype === 1) {
+      this.userService.getAll();
+    }
   }
 }

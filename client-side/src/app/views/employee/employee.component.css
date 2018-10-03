@@ -1,6 +1,8 @@
-#title {
+.title {
     float: left;
 }
-#addbutton {
+.addbutton {
     float: right;
+    margin-top:0px;
+    margin-bottom: 1rem;
 }

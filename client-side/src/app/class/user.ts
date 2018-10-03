@@ -7,5 +7,5 @@ export class User {
     phone: string;
     email: string;
     password: string;
-    userType: UserType;
+    usertype: UserType;
 }
