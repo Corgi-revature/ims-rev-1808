@@ -1,65 +1,94 @@
 package com.revature.data;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.revature.beans.User;
 import com.revature.utils.HibernateUtil;
 
+@Component
 public class UserHibernate implements UserDAO {
-	private Logger log = Logger.getLogger(UserHibernate.class);
-	private HibernateUtil hu = HibernateUtil.getInstance();
-	
+	@Autowired
+	private HibernateUtil hu;
 	@Override
-	public User addUser(User user) {
-		Session session = hu.getSession();
+	public int addUser(User use) {
+		Session ss = hu.getSession();
+		int result = 0;
 		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
-			int i = (Integer) session.save(user);
+			tx = ss.beginTransaction();
+			result = (int)ss.save(use);
 			tx.commit();
-			return user;
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+			tx.rollback();
+		} finally {
+			}
+		return result;
+	}
+	@Override
+	public User getUserById(int id) {
+		Session ss = hu.getSession();
+		return ss.get(User.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> getUsersCriteria(User user) {
+		Session ss = hu.getSession();
+		List<User> result = null;
+		try {
+			String hql = "FROM com.revature.beans.User u " + "WHERE lower(u.email) = ? AND u.password = ?";
+//			Query query = ss.createQuery(hql);
+			result = ss.createQuery(hql).setParameter(0, user.getEmail().toLowerCase()).setParameter(1, user.getPassword()).list();
+		} catch (Exception e) {
+	         e.printStackTrace();
+	         
+		} finally {
+
+		}
+		return result;
+	}
+	@Override
+	public Set<User> getUsers() {
+		Session ss = hu.getSession();
+		String hql = "FROM com.revature.beans.User";
+		Query<User> que = ss.createQuery(hql, User.class);
+		List<User> userList = que.getResultList();
+
+		return new HashSet<User>(userList);
+	}
+	@Override
+	public void updateUser(User use) {
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
+		try {
+			ss.update(use);
+			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
-			e.printStackTrace();
-			return null;
 		} finally {
-			session.close();
+
 		}
 	}
 	@Override
-	public User getUserByLogin(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteUser(User use) {
+		Session ss = hu.getSession();
+		Transaction tx = ss.beginTransaction();
+		try {
+			ss.delete(use);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+		} finally {
+
+		}
 	}
-	@Override
-	public Set<User> getUsersCriteria() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Set<User> getUsersHQL() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public User updateUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void deleteUser(User user) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
 }

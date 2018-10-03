@@ -1,21 +1,39 @@
 package com.revature.beans;
 
-import java.sql.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="transactions")
 public class Txact {
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="txact")
+	@SequenceGenerator(name="txact", sequenceName="tx_seq", allocationSize=1)
 	private int id;
-	private Date created;
+	@Column(name="created")
+	private String created;
+	@Column(name="token")
 	private String token;
+	@Column(name="txid")
 	private String txid;
+	@Column(name="status")
+	private String status;
+	
 	public Txact() {
 		super();
 	}
-	public Txact(int id, Date created, String token, String txid) {
+	public Txact(int id, String created, String token, String txid, String status) {
 		super();
 		this.id = id;
 		this.created = created;
 		this.token = token;
 		this.txid = txid;
+		this.status = status;
 	}
 	public int getId() {
 		return id;
@@ -23,10 +41,10 @@ public class Txact {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Date getCreated() {
+	public String getCreated() {
 		return created;
 	}
-	public void setCreated(Date created) {
+	public void setCreated(String created) {
 		this.created = created;
 	}
 	public String getToken() {
@@ -41,12 +59,19 @@ public class Txact {
 	public void setTxid(String txid) {
 		this.txid = txid;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((created == null) ? 0 : created.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((token == null) ? 0 : token.hashCode());
 		result = prime * result + ((txid == null) ? 0 : txid.hashCode());
 		return result;
@@ -67,6 +92,11 @@ public class Txact {
 			return false;
 		if (id != other.id)
 			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
 		if (token == null) {
 			if (other.token != null)
 				return false;
@@ -81,6 +111,7 @@ public class Txact {
 	}
 	@Override
 	public String toString() {
-		return "Txact [id=" + id + ", created=" + created + ", token=" + token + ", txid=" + txid + "]";
+		return "Txact [id=" + id + ", created=" + created + ", token=" + token + ", txid=" + txid + ", status=" + status
+				+ "]";
 	}
 }

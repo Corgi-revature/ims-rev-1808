@@ -1,0 +1,51 @@
+<!-- Material form login -->
+<div class="col-xl-4 offset-xl-4 col-lg-6 offset-lg-3">
+    <mdb-card>
+        <mdb-card-header class="info-color white-text text-center py-4">
+            <h5>
+                <strong>Sign in</strong>
+            </h5>
+        </mdb-card-header>
+        <!--Card content-->
+        <mdb-card-body class="px-lg-5 pt-0">
+            <form class="text-center" #loginForm="ngForm" (ngSubmit)="initLogin()">
+                <!-- Email -->
+                <div class="md-form">
+                    <input type="email" id="loginEmail" class="form-control" name="email" [(ngModel)]="email"
+                        data-error="Invaild Email" data-success="Vaild Email" mdbInputDirective>
+                    <label for="loginEmail">E-mail</label>
+                </div>
+                <!-- Password -->
+                <div class="md-form">
+                    <input type="password" id="loginPassword" class="form-control" name="password" [(ngModel)]="password"
+                    data-success="Good password" mdbInputDirective [mdbValidate]="false">
+                    <label for="loginPassword">Password</label>
+                </div>
+                <div>
+
+                </div>
+                <!-- Option Section -->
+                <div class="d-flex justify-content-around">
+                    <div>
+                        <!-- Remember me -->
+                        <mdb-checkbox>Remember me</mdb-checkbox>
+                    </div>
+                    <div>
+                        <!-- Forgot password -->
+                        <a href="">Forgot password?</a>
+                    </div>
+                </div>
+                <!-- Sign in button -->
+                <button mdbBtn color="info" outline="true" rounded="true" block="true" class="my-4 waves-effect z-depth-0"
+                    mdbWavesEffect>Sign in</button>
+                <!-- Register -->
+                <p>Not a member?
+                    <a [routerLink]="['/register']">Register</a>
+                </p>
+            </form>
+            <!-- Form -->
+        </mdb-card-body>
+    </mdb-card>
+</div>
+
+<!-- Material form login -->
