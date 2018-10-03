@@ -21,7 +21,7 @@ public class TxactHibernate implements TxactDAO {
 	public int addTxact(Txact txa) {
 		Session ss = hu.getSession();
 		int result = 0;
-		Transaction tx = ss.beginTransaction();
+		Transaction tx = null;
 		try {
 			tx = ss.beginTransaction();
 			result = (int)ss.save(txa);

@@ -21,16 +21,16 @@ public class UserHibernate implements UserDAO {
 	public int addUser(User use) {
 		Session ss = hu.getSession();
 		int result = 0;
-		Transaction tx = ss.beginTransaction();
+		Transaction tx = null;
 		try {
 			tx = ss.beginTransaction();
 			result = (int)ss.save(use);
 			tx.commit();
 		} catch(Exception e) {
+			System.out.println(e.getMessage());
 			tx.rollback();
 		} finally {
-
-		}
+			}
 		return result;
 	}
 	@Override
