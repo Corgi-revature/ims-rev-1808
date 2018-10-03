@@ -17,32 +17,38 @@ import { TxactService } from '../../order/txact/txact.service';
 
 export class OrderComponent implements OnInit {
   @Input()
-  curOrder: Order;
+  curOrder:Order=<any>{};
   @Input()
-  curTxact: Txact;
+  curTxact:Txact=<any>{};
   @Input()
-  curUser: User;
-  @Input()
-  amount: number;
+  curUser:User={
+    id: 1,
+    first: "Mr.",
+    last: "Dude",
+    phone: "Nah",
+    email: "Nope",
+    userType: 2,
+    password: "1234"
+  };
   @Input()
   sessionId: string;
-  public orders: Order[];
+  public exists = false;
+  public index = -1;
+  public orders = [];
   public items: Item[];
-  //public invents: Inventory[];
 
   constructor(
-    private inventoryService: InventoryService,
     private itemService: ItemService,
     private orderService: OrderService,
     private txactSerivce: TxactService
   ) {}
 
+ 
+
   ngOnInit() {
     this.fillItemList();
     this.openTransaction();
-   // this.fillInventory();
   }
-
 
   fillItemList() {
     this.itemService.getItems().subscribe(itemList => (this.items = itemList));
@@ -52,25 +58,75 @@ export class OrderComponent implements OnInit {
     // this.orderService.addItem(this.curOrder, ite, amount).subscribe(
     //   add => (this.curOrder = add)
     // );
-   document.getElementById(`${ite.name}_cart`).innerText = (<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value;
+
+    let amount:number = Number((<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value);
+    document.getElementById(`${ite.id}_cart`).innerText = (<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value;
+    this.findOrder(ite);
+    if (this.index != -1){
+      this.updateOrder(amount);
+    }
+    else {
+      this.createOrder(ite, amount);
+    }
+    console.log("curorder");
+    console.log(this.curOrder);
+    console.log("orders");
+    console.log(this.orders);
   }
-  
+
+  createOrder(ite: Item, amount: number){
+    console.log("create");
+    let newOrder:Order=<any>{};
+    newOrder.itemid = ite.id;
+    newOrder.amount = amount;
+    newOrder.txid = this.curTxact.id;
+    newOrder.userid = this.curUser.id;
+    this.orders.push(newOrder);
+  //   this.curOrder.itemid = ite.id;
+  //   this.curOrder.amount = amount;
+  //   this.curOrder.txid = this.curTxact.id;
+  //   this.curOrder.userid = this.curUser.id;
+  //   this.orders.splice(this.index, 1, this.curOrder);
+  //   this.orders.push(this.curOrder);
+  }
+
+  updateOrder(amount:number){
+    console.log("update");
+    this.curOrder.amount = amount;
+    this.orders.splice(this.index, 1, this.curOrder);
+  }
+
+  findOrder(ite: Item){
+    console.log("findOrder");
+    this.index =-1;
+    for (var x = 0; x < this.orders.length; x++){
+          if (this.orders[x].itemid == ite.id){
+          this.curOrder = this.orders[x];
+          let test = this.curOrder;
+         
+          this.index = x;
+          this.exists = true;
+          break;
+        }
+    }
+    console.log(this.curOrder);
+    console.log(this.index);
+  }
+
   checkout(): void {
-    this.txactSerivce.updateTransaction;
   }
 
-  // This should check for a transaction is open
-  isOpen(): boolean {
-    return this.curTxact != null;
-  }
+  empty(): void {
+    for (var x = 0; x < this.orders.length; x++){
+    document.getElementById(`${this.orders[x].itemid}_cart`).innerText = "0";
+    }
 
-  empty(): void {}
+    this.orders.splice(0,this.orders.length);
+    console.log(this.orders);
+  }
 
   openTransaction(){
-    this.txactSerivce.createTransaction();
-    this.curTxact.id = 1;
-    this.curTxact.token = `Token ${this.curTxact.id}`;
-    this.curTxact.created = "Now";
-    this.curTxact.txid = "012854 0415";
+    console.log("open transaction");
+    // this.txactSerivce.createTransaction();
   }
 }
