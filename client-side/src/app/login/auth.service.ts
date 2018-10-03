@@ -13,7 +13,6 @@ export class AuthService {
   // private headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
   private headers = new HttpHeaders();
   private loggedIn = new BehaviorSubject<boolean>(false); // {1}
-
   private error: any;
   constructor(private http: HttpClient, private coreService: CoreService) { }
 
@@ -34,7 +33,7 @@ export class AuthService {
     return this.loggedIn.asObservable(); // {2}
   }
 
-  postLogin(email: string, password: string): Observable<Login> {
+  postLogin(email: string, password: string): Observable<User> {
     console.log(email);
     console.log(password);
     const head = new HttpHeaders({
@@ -54,8 +53,11 @@ export class AuthService {
           resp => {
             if (resp !== null) {
               this.loggedIn.next(true);
+              // this.usertype.next(resp.usertype.id);
+              this.coreService.setLStorage('user', JSON.stringify(resp as User));
+              console.log(resp);
               this.setToken('super-200-corgi');
-              return resp as Login;
+              return resp as User;
             }
             return this.error;
           },
@@ -65,6 +67,12 @@ export class AuthService {
 
   getLogin(sessionId: string): Observable<Login> {
     return this.http.get(`${this.appUrl}/user/login`).pipe(map(resp => resp as Login));
+  }
+
+  checkLogin() {
+    if (localStorage.getItem('token')) {
+      this.loggedIn.next(true);
+    }
   }
 
   getForgotten(email: string) {

@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit {
   submitted = false;
   loading = false;
   registerForm: FormGroup;
+  error: string;
   // user: User = {
   //   id: null,
   //   first: this.first,

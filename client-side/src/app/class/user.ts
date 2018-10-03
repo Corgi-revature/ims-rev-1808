@@ -1,3 +1,5 @@
+import { UserType } from './usertype';
+
 export class User {
     id: number;
     first: string;
@@ -5,5 +7,5 @@ export class User {
     phone: string;
     email: string;
     password: string;
-    userType: number;
+    userType: UserType;
 }

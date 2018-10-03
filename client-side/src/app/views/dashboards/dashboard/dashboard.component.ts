@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { User } from '../../../class';
+import { CoreService } from '../../../core/core.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,19 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  public map: any = { lat: 51.678418, lng: 7.809007 };
-  public chart1Type: string = 'bar';
-  public chart2Type: string = 'pie';
-  public chart3Type: string = 'line';
-  public chart4Type: string = 'radar';
-  public chart5Type: string = 'doughnut';
-
-  public chartType = 'line';
+  userType: any;
+  user: User;
+  public chart1Type = 'bar';
 
   public chartDatasets: Array<any> = [
-    { data: [50, 40, 60, 51, 56, 55, 40], label: '#1' },
-    { data: [28, 80, 40, 69, 36, 37, 110], label: '#2' },
-    { data: [38, 58, 30, 90, 45, 65, 30], label: '#3' }
+    { data: [50, 40, 60, 51, 56, 55, 40], label: 'Coffee' },
+    { data: [28, 80, 40, 69, 36, 37, 60], label: 'Salt' },
+    { data: [48, 58, 60, 88, 45, 65, 60], label: 'Meat' }
   ];
 
   public chartLabels: Array<any> = [
@@ -63,7 +61,11 @@ export class DashboardComponent implements OnInit {
     }
   };
 
-  constructor() {}
+  constructor(private coreService: CoreService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const l = this.coreService.getLStorage('user');
+    this.user  = JSON.parse(l);
+    this.userType = this.user.userType.id;
+  }
 }

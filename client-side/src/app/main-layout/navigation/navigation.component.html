@@ -1,5 +1,5 @@
 <!--Main Navigation-->
-<div *ngIf="isLoggedIn$">
+<div *ngIf="isLoggedIn$ | async">
   <header class="navbar-custom">
     <!-- Sidebar -->
     <!-- <div class="sidebar-fixed position-fixed">
@@ -43,7 +43,7 @@
         <!-- new ul -->
         <ul class="navbar-nav nav-flex-icons">
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/login']" class="ml-1 nav-link white rounded danger-color-dark white-text" mdbWavesEffect>Log Out</a>
+            <a class="nav-link" (click)="onLogout()" class="ml-1 nav-link white rounded danger-color-dark white-text" mdbWavesEffect>Log Out</a>
           </li>
       </ul>
         <!-- Links -->
