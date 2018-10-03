@@ -65,7 +65,7 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    this.registerForm.patchValue({ 'usertype': {'id':2, 'usertype':'Employee' }});
+    this.registerForm.patchValue({ 'usertype': this.userService.gettype(2)});
     console.log(this.f.usertype);
     this.loading = true;
     this.userService.register(this.registerForm.value)

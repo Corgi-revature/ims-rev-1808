@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 })
 export class UserService {
   private appUrl = this.coreService.getURL() + '/user';
+  private appUrl2 = this.coreService.getURL() + '/usertype';
   private head = this.coreService.getHeader();
   private admin = new BehaviorSubject<boolean>(false); // {1}
 
@@ -30,6 +31,9 @@ export class UserService {
 
   register(user: User) {
     return this.http.post(`${this.appUrl}/new`, user, {headers: this.head});
+  }
+  gettype(id: number) {
+    return this.http.get(`${this.appUrl2}`+ id);
   }
 
   update(user: User) {
