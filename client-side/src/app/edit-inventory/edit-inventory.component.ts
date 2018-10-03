@@ -21,8 +21,8 @@ export class EditInventoryComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if(id) {
       this.EmployeeService.getInventoryById(id).subscribe(
-        inv => { this.inventory = inv; }
-      )
+        inv => (this.inventory = inv)
+      );
     }
   }
 }
