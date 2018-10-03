@@ -1,13 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Order } from '../../class/order';
 import { Item } from '../../class/item';
-import { Inventory } from '../../class/inventory';
 import { User } from '../../class/user';
 import { Txact } from '../../class/txact';
 import { ItemService } from '../../core/item.service';
-import { InventoryService } from '../../order/inventory/inventory.service'
 import { OrderService } from '../../order/order/order.service';
 import { TxactService } from '../../order/txact/txact.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -32,12 +31,15 @@ export class OrderComponent implements OnInit {
   };
   @Input()
   sessionId: string;
+  result: object;
   public exists = false;
   public index = -1;
   public orders = [];
   public items: Item[];
 
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private itemService: ItemService,
     private orderService: OrderService,
     private txactSerivce: TxactService
@@ -68,10 +70,6 @@ export class OrderComponent implements OnInit {
     else {
       this.createOrder(ite, amount);
     }
-    console.log("curorder");
-    console.log(this.curOrder);
-    console.log("orders");
-    console.log(this.orders);
   }
 
   createOrder(ite: Item, amount: number){
@@ -82,12 +80,6 @@ export class OrderComponent implements OnInit {
     newOrder.txid = this.curTxact.id;
     newOrder.userid = this.curUser.id;
     this.orders.push(newOrder);
-  //   this.curOrder.itemid = ite.id;
-  //   this.curOrder.amount = amount;
-  //   this.curOrder.txid = this.curTxact.id;
-  //   this.curOrder.userid = this.curUser.id;
-  //   this.orders.splice(this.index, 1, this.curOrder);
-  //   this.orders.push(this.curOrder);
   }
 
   updateOrder(amount:number){
@@ -109,24 +101,23 @@ export class OrderComponent implements OnInit {
           break;
         }
     }
-    console.log(this.curOrder);
-    console.log(this.index);
   }
 
   checkout(): void {
+    this.router.navigate(['/checkout']);
   }
 
   empty(): void {
     for (var x = 0; x < this.orders.length; x++){
     document.getElementById(`${this.orders[x].itemid}_cart`).innerText = "0";
     }
-
     this.orders.splice(0,this.orders.length);
+    console.log("Empty");
     console.log(this.orders);
   }
 
   openTransaction(){
-    console.log("open transaction");
-    // this.txactSerivce.createTransaction();
+    console.log("OpenTransaction");
+    this.txactSerivce.createTransaction();
   }
 }

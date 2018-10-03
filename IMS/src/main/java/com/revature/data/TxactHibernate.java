@@ -16,10 +16,20 @@ public class TxactHibernate implements TxactDAO {
 	private HibernateUtil hu;
 
 	@Override
-	public Txact addTxact(Txact txa) {
+	public int addTxact(Txact txa) {
+		int result = 0;
 		Session ss = hu.getSession();
-		Transaction tx = ss.beginTransaction();
-		return null;
+		Transaction tx = null;
+		try {
+			tx = ss.beginTransaction();
+			result = (int)ss.save(txa);
+			tx.commit();
+		} catch(Exception e) {
+			tx.rollback();
+		} finally {
+			
+		}
+		return result;
 	}
 
 	@Override

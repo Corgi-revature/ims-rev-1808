@@ -5,7 +5,7 @@ import com.revature.beans.Txact;
 
 public interface TxactService {
 	
-	Txact addTxact(Txact txa);
+	int addTxact(Txact txa);
 	Txact getTxactById(int id);
 	Set<Txact> getTxacts();
 	Set<Txact> getTxactsCriteria();	

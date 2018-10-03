@@ -1,6 +1,8 @@
 package com.revature.controllers;
 
+import java.util.Date;
 import java.util.Set;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,9 +21,14 @@ public class TxactController {
 	private TxactService ts;
 
 	@RequestMapping(method = RequestMethod.POST)
-	Txact addTxact(Txact txa) {
-		ts.addTxact(txa);
-		return txa;
+	int addTxact() {
+		System.out.println("here we are in add txact");
+		Txact txa = new Txact();
+		txa.setId(0);
+		txa.setToken("Test");
+		txa.setCreated((new Date()).toString());
+		txa.setTxid(generateUUID());
+		return ts.addTxact(txa);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -52,5 +59,13 @@ public class TxactController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	void deleteTxactById(int id) {
 		ts.deleteTxactById(id);
+	}
+	
+	String generateUUID(){
+		String newID = UUID.randomUUID().toString();
+//		System.out.println(stringID);
+//		int newID = stringID.hashCode();
+//		System.out.println(newID);
+		return newID;
 	}
 }

@@ -9,7 +9,6 @@ import { Item } from '../class/item';
   providedIn: 'root'
 })
 export class ItemService {
-//  private appUrl = this.coreService.getURL()+'/item';
 private appUrl = this.coreService.getURL() +'/item';
   private headers = new HttpHeaders({'Content-Type': 'application/json' });
   constructor(
@@ -19,6 +18,7 @@ private appUrl = this.coreService.getURL() +'/item';
 
   getItems(): Observable<Item[]> {
     const url = this.appUrl + '/all';
+    console.log(url);
     return this.http.get(url, { withCredentials: true }).pipe(
     map(
         resp => resp as Item[]

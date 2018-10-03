@@ -23,6 +23,8 @@ import { ForgetPasswordComponent } from './login/forget-password/forget-password
 // services
 import { CoreService } from './core/core.service';
 import { OrderComponent } from './order/order/order.component';
+import { CheckoutComponent } from './order/checkout/checkout.component';
+import { DeliveryComponent } from './order/delivery/delivery.component';
 import { UserComponent } from './login/user/user.component';
 import { AuthGuard } from './core/_guards';
 import { AlertComponent } from './shared/services/alert/alert.component';
@@ -35,6 +37,8 @@ import { AlertService } from './shared/services/alert/alert.service';
     RegisterComponent,
     ForgetPasswordComponent,
     OrderComponent,
+    CheckoutComponent,
+    DeliveryComponent,
     UserComponent
   ],
   imports: [

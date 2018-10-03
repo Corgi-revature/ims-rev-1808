@@ -11,7 +11,7 @@ import { Txact } from '../../class/txact';
 })
 export class TxactService {
 private appUrl = this.coreService.getURL()+'/txact';
-  private headers = new HttpHeaders({'Content-Type': 'application/json' });
+private headers = new HttpHeaders({'Content-Type': 'application/json' });
   constructor(
     private http: HttpClient,
     private coreService: CoreService
@@ -26,11 +26,12 @@ private appUrl = this.coreService.getURL()+'/txact';
     ));
   }
 
-  createTransaction(): Observable<Txact> {
+  createTransaction(): Observable<Number> {
     const body = '{}';
+    console.log(this.appUrl);
     return this.http.post(this.appUrl, body, { headers: this.headers, withCredentials: true }).pipe(
       map(
-      resp => resp as Txact
+      resp => resp as Number
     ));
   }
 }
