@@ -28,6 +28,24 @@ public class UserController {
 		}
 		return "RUN";
 	}
+	
+	@RequestMapping(value = "/employee/all",method = RequestMethod.GET)
+	public String getEmployee(String session) {
+		if (session == null) {
+//			log.trace(session);
+//			log.trace(us.getUsers());
+		}
+		return "RUN";
+	}
+	
+	@RequestMapping(value = "/customer/all",method = RequestMethod.GET)
+	public String getCust(String session) {
+		if (session == null) {
+//			log.trace(session);
+//			log.trace(us.getUsers());
+		}
+		return "RUN";
+	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public User login(@RequestBody User user) {
@@ -44,10 +62,25 @@ public class UserController {
 		}
 		return newUser;
 	}
+	
+	@RequestMapping(value="/new", method=RequestMethod.POST)
+	public int register(@RequestBody User user) {
+		User newUser = null;
+		try {
+			newUser=user;
+			int result = us.addUser(newUser);
+			return result;
+		} catch(Exception e) {
+			
+		} finally {
+			
+		}
+		return 0;
+	}
 
 	// testing
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String byPassLogin() {
-		return "/static/hello.html";
+		return "User Controller says Hello";
 	}
 }

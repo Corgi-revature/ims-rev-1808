@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class TxactServiceImpl implements TxactService {
 	}
 
 	@Override
-	public Set<Txact> getTxactsCriteria() {
+	public List<Txact> getTxactsCriteria() {
 		// TODO Auto-generated method stub
 		System.out.println("stumbled upone txact Criteria");
 		return null;

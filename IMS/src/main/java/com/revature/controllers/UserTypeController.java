@@ -11,49 +11,53 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.beans.Item;
-import com.revature.services.ItemService;
+import com.revature.beans.UserType;
+import com.revature.services.UserTypeService;
+
 
 @RestController
-@RequestMapping(value = "/item")
+@RequestMapping(value = "/usertype")
 @CrossOrigin(origins = "http://localhost:4200")
-public class ItemController {
+public class UserTypeController {
+	
 	@Autowired
-	private ItemService is;
-
+	private UserTypeService uts;
+	
 	@RequestMapping(method = RequestMethod.POST)
-	Item addItem(@RequestBody Item ite) {
-		is.addItem(ite);
-		return ite;
+	int addUserType(@RequestBody UserType utype) {
+		return uts.addUserType(utype);
+		
 	}
-
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	Item getItemById(@PathVariable int id) {
-		return is.getItemById(id);
+	UserType getUserTypeById(@PathVariable int id) {
+		return uts.getUserTypeById(id);
 	}
-
+	
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	Set<Item> getItems() {
-		return is.getItems();
+	Set<UserType> getUserTypes() {
+		return uts.getUserTypes();
 	}
-
+	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	List<Item> getItemsCriteria(@RequestBody Item ite) {
-		return is.getItemsCriteria(ite);
+	List<UserType> getUserTypeCriteria(@RequestBody UserType utype) {
+		//return uts.getUserTypeCriteria(utype);
+		return null;
 	}
-
-	@RequestMapping(value = "/{item}", method = RequestMethod.PUT)
-	void updateItem(@RequestBody Item ite) {
-		is.updateItem(ite);
+	
+	@RequestMapping(method = RequestMethod.PUT)
+	void updateItem(@RequestBody UserType utype) {
+		uts.updateUserType(utype);
 	}
-
-	@RequestMapping(value = "/{item}", method = RequestMethod.DELETE)
-	void deleteItem(@RequestBody Item ite) {
-		is.deleteItem(ite);
+	
+	@RequestMapping(method = RequestMethod.DELETE)
+	void deleteItem(@RequestBody UserType utype) {
+		uts.deleteUserType(utype);
 	}
-
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	void deleteItemById(@PathVariable int id) {
-		is.deleteItemById(id);
+		uts.deleteUserTypeById(id);
 	}
+
 }
