@@ -18,7 +18,7 @@
                 <!-- Password -->
                 <div class="md-form">
                     <input type="password" id="loginPassword" class="form-control" name="password" [(ngModel)]="password"
-                    data-success="Good password" mdbInputDirective>
+                    data-success="Good password" mdbInputDirective [mdbValidate]="false">
                     <label for="loginPassword">Password</label>
                 </div>
                 <div>

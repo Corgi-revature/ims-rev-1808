@@ -61,7 +61,7 @@ import { AddInventoryComponent } from './inventory/add-inventory/add-inventory.c
     AlertService,
     AuthGuard,
   ],
-  schemas: [ NO_ERRORS_SCHEMA ],
+  schemas: [NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,6 +5,8 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,13 +22,12 @@ public class DeliveryController {
 	private DeliveryService ds;
 
 	@RequestMapping(method = RequestMethod.POST)
-	Delivery addDelivery(Delivery deli) {
-		ds.addDelivery(deli);
-		return deli;
+	int addDelivery(Delivery deli) {
+		return ds.addDelivery(deli);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	Delivery getDeliveryById(int id) {
+	Delivery getDeliveryById(@PathVariable int id) {
 		return ds.getDeliveryById(id);
 	}
 	
@@ -35,18 +36,18 @@ public class DeliveryController {
 		return ds.getDeliveries();
 	}
 	
-/*	@RequestMapping(method = RequestMethod.GET)
-	List<Delivery> getDeliveriesCriteria(Delivery deli) {
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	List<Delivery> getDeliveriesCriteria(@RequestBody Delivery deli) {
 		return ds.getDeliveriesCriteria(deli);
-	}*/
+	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	void updateDelivery(Delivery deli) {
+	void updateDelivery(@RequestBody Delivery deli) {
 		ds.updateDelivery(deli);			
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE)
-	void deleteDelivery(Delivery deli) {	
+	void deleteDelivery(@RequestBody Delivery deli) {	
 		ds.deleteDelivery(deli);
 	}
 	

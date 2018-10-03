@@ -28,6 +28,24 @@ public class UserController {
 		}
 		return "RUN";
 	}
+	
+	@RequestMapping(value = "/employee/all",method = RequestMethod.GET)
+	public String getEmployee(String session) {
+		if (session == null) {
+//			log.trace(session);
+//			log.trace(us.getUsers());
+		}
+		return "RUN";
+	}
+	
+	@RequestMapping(value = "/customer/all",method = RequestMethod.GET)
+	public String getCust(String session) {
+		if (session == null) {
+//			log.trace(session);
+//			log.trace(us.getUsers());
+		}
+		return "RUN";
+	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public User login(@RequestBody User user) {
