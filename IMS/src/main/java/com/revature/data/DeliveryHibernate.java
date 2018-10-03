@@ -27,7 +27,7 @@ public class DeliveryHibernate implements DeliveryDAO {
 	public int addDelivery(Delivery deli) {
 		Session ss = hu.getSession();
 		int result = 0;
-		Transaction tx = ss.beginTransaction();
+		Transaction tx = null;
 		try {
 			tx = ss.beginTransaction();
 			result = (int)ss.save(deli);
