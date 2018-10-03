@@ -16,9 +16,11 @@ import org.hibernate.query.Query;
 import com.revature.beans.Item;
 import com.revature.beans.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.revature.utils.HibernateUtil;
 
+@Component
 public class UserTypeHibernate implements UserTypeDAO {
 
 	@Autowired
