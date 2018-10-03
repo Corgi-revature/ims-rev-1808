@@ -25,6 +25,13 @@ export class EmployeeService {
     );
   }
 
+  getInventoryById(id: string): Observable<Inventory> {
+    const url: string = this.appUrl+'/'+id;
+    return this.http.get(url, {withCredentials: true}).pipe(
+      map(resp=>resp as Inventory)
+    );
+  }
+
   makeItemPriceString(item: Item): string {
     let price = item.price.toString();
     if( price.includes(".") && 
@@ -35,11 +42,14 @@ export class EmployeeService {
         price=price+".00";
       }
     }
-    console.log(price);
     return price;
   }
 
   editInventory(inv: Inventory): void {
-    
+    this.http.put(this.appUrl+"/"+inv.id, inv);
+  }
+
+  deleteInventory(inv: Inventory): void {
+    this.http.delete(this.appUrl+"/"+inv.id);
   }
 }

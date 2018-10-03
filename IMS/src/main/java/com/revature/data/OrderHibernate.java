@@ -27,7 +27,7 @@ public class OrderHibernate implements OrderDAO{
 	public int addOrder(Order ord) {
 		Session ss = hu.getSession();
 		int result = 0;
-		Transaction tx = ss.beginTransaction();
+		Transaction tx = null;
 		try {
 			tx = ss.beginTransaction();
 			result = (int)ss.save(ord);

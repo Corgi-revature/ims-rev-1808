@@ -35,23 +35,23 @@ public class OrderController {
 		return os.getOrders();
 	}
 	
-	/*@RequestMapping(value="/{ord}", method=RequestMethod.GET)
-	List<Order> getOrdersCriteria(@PathVariable Order ord) {
+	@RequestMapping(value="/search", method=RequestMethod.GET)
+	List<Order> getOrdersCriteria(@RequestBody Order ord) {
 		return os.getOrdersCriteria(ord);
-	}*/
+	}
 	
 	@RequestMapping(method=RequestMethod.PUT)
-	void updateOrder( Order ord) {
+	void updateOrder(@RequestBody Order ord) {
 		os.updateOrder(ord);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE)
-	void deleteOrder( Order ord) {
+	void deleteOrder(@RequestBody Order ord) {
 		os.deleteOrder(ord);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	void deleteOrderById(Integer id) {
+	void deleteOrderById(@PathVariable int id) {
 		os.deleteOrderById(id);
 	}
 }

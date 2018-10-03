@@ -5,6 +5,8 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,13 +23,13 @@ public class SupplierController {
 	SupplierService sups;
 	
 	@RequestMapping(method=RequestMethod.POST)	
-	Supplier addOrder(Supplier sup) {
+	Supplier addOrder(@RequestBody Supplier sup) {
 		sups.addSupplier(sup);
 		return sup;
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	Supplier getSupplierByID(Integer id) {
+	Supplier getSupplierByID(@PathVariable int id) {
 		return sups.getSupplierById(id);
 	}
 	
@@ -36,23 +38,23 @@ public class SupplierController {
 		return sups.getSuppliers();
 	}
 	
-	/*@RequestMapping(method=RequestMethod.GET)
-	List<Supplier> getSuppliersCriteria() {
+	@RequestMapping(value="/search", method=RequestMethod.GET)
+	List<Supplier> getSuppliersCriteria(@RequestBody Supplier sup) {
 		return sups.getSuppliersCriteria();
-	}*/
+	}
 	
 	@RequestMapping(method=RequestMethod.PUT)
-	void updateSupplier( Supplier sup) {
+	void updateSupplier(@RequestBody Supplier sup) {
 		sups.updateSupplier(sup);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE)
-	void deleteSupplier( Supplier sup) {
+	void deleteSupplier(@RequestBody Supplier sup) {
 		sups.deleteSupplier(sup);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	void deleteSupplierById(Integer id) {
+	void deleteSupplierById(@PathVariable int id) {
 		sups.deleteSupplierById(id);
 	}
 	

@@ -1,6 +1,6 @@
 <!--Main Navigation-->
-<div *ngIf="isLoggedIn$">
-  <header>
+<div *ngIf="isLoggedIn$ | async">
+  <header class="navbar-custom">
     <!-- Sidebar -->
     <!-- <div class="sidebar-fixed position-fixed">
         <a class="logo-wrapper waves-effect">
@@ -19,10 +19,10 @@
     </div> -->
     <!-- Sidebar -->
     <!--Navbar-->
-    <mdb-navbar [containerInside]="false" SideClass="navbar navbar-expand-lg navbar-light white">
+    <mdb-navbar [containerInside]="false" SideClass="navbar navbar-expand-lg navbar-light ">
       <!-- Navbar brand -->
       <logo class="ml-3">
-        <a class="logo-wrapper waves-effect">
+        <a class="logo-wrapper waves-effect" [routerLink]="['/dashboard']">
           <img src="../../../../assets/img/corgi-cartoon-png-1.png" class="img-fluid logo-corgi" alt="corgi">
         </a>
       </logo>
@@ -31,21 +31,41 @@
         <!-- Links -->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/dashboard']" mdbWavesEffect>Dashboard</a>
+            <a class="nav-link white-text" [routerLink]="['/dashboard']" mdbWavesEffect>Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/orders']" mdbWavesEffect>Orders</a>
+            <a class="nav-link white-text" [routerLink]="['/orders']" mdbWavesEffect>Orders</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/profile']" mdbWavesEffect>Profile</a>
+            <a class="nav-link white-text" [routerLink]="['/employee/inventory']" mdbWavesEffect>Inventory</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/login']" mdbWavesEffect>Log Out</a>
+            <a class="nav-link white-text" [routerLink]="['/profile']" mdbWavesEffect>Profile</a>
+          </li>
+        </ul>
+        <!-- new ul -->
+        <ul class="navbar-nav nav-flex-icons">
+          <li class="nav-item">
+            <a class="nav-link" (click)="onLogout()" class="ml-1 nav-link white rounded danger-color-dark white-text"
+              mdbWavesEffect>Log Out</a>
           </li>
         </ul>
         <!-- Links -->
       </links>
       <!-- Collapsible content -->
+      <!-- <div class="btn-group" mdbDropdown>
+        <button mdbDropdownToggle type="button" mdbBtn color="primary" class="dropdown-toggle waves-light" mdbWavesEffect>
+            Basic dropdown
+        </button>
+    
+        <div class="dropdown-menu dropdown-primary">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="divider dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+        </div>
+    </div> -->
     </mdb-navbar>
     <!--/.Navbar-->
   </header>

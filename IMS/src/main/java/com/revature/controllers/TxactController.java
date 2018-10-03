@@ -1,11 +1,14 @@
 package com.revature.controllers;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +35,7 @@ public class TxactController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	Txact getTxactById(Integer id) {
+	Txact getTxactById(@PathVariable int id) {
 		return ts.getTxactById(id);
 	}
 
@@ -41,23 +44,23 @@ public class TxactController {
 		return ts.getTxacts();
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
-	Set<Txact> getTxactsCriteria() {
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	List<Txact> getTxactsCriteria(@RequestBody Txact txact) {
 		return ts.getTxactsCriteria();
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)
-	void updateTxact(Txact txa) {
+	void updateTxact(@RequestBody Txact txa) {
 		ts.updateTxact(txa);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE)
-	void deleteTxact(Txact txa) {
+	void deleteTxact(@RequestBody Txact txa) {
 		ts.deleteTxact(txa);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	void deleteTxactById(int id) {
+	void deleteTxactById(@PathVariable int id) {
 		ts.deleteTxactById(id);
 	}
 	

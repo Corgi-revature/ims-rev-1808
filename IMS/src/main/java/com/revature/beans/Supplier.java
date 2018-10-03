@@ -19,6 +19,9 @@ public class Supplier {
 	private String name;
 	@Column(name="email")
 	private String email;
+	public Supplier() {
+		super();
+	}
 	public Supplier(int id, String name, String email) {
 		super();
 		this.id = id;
