@@ -19,7 +19,7 @@
     </div> -->
     <!-- Sidebar -->
     <!--Navbar-->
-    <mdb-navbar [containerInside]="false"  SideClass="navbar navbar-expand-lg navbar-light ">
+    <mdb-navbar [containerInside]="false" SideClass="navbar navbar-expand-lg navbar-light ">
       <!-- Navbar brand -->
       <logo class="ml-3">
         <a class="logo-wrapper waves-effect" [routerLink]="['/dashboard']">
@@ -37,15 +37,19 @@
             <a class="nav-link white-text" [routerLink]="['/orders']" mdbWavesEffect>Orders</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link white-text" [routerLink]="['/employee/inventory']" mdbWavesEffect>Inventory</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link white-text" [routerLink]="['/profile']" mdbWavesEffect>Profile</a>
           </li>
         </ul>
         <!-- new ul -->
         <ul class="navbar-nav nav-flex-icons">
           <li class="nav-item">
-            <a class="nav-link" (click)="onLogout()" class="ml-1 nav-link white rounded danger-color-dark white-text" mdbWavesEffect>Log Out</a>
+            <a class="nav-link" (click)="onLogout()" class="ml-1 nav-link white rounded danger-color-dark white-text"
+              mdbWavesEffect>Log Out</a>
           </li>
-      </ul>
+        </ul>
         <!-- Links -->
       </links>
       <!-- Collapsible content -->

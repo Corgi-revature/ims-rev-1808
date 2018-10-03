@@ -29,11 +29,11 @@ const routes: Route[] = [
   },
   {
     path: 'modals',
-    children:[{path: 'modal', component: ModalsComponent}]
+    children: [{ path: 'modal', component: ModalsComponent }]
   },
   {
     path: 'tables',
-    children:[{path: 'table',component: BasicTableComponent}]
+    children: [{ path: 'table', component: BasicTableComponent }]
   },
   {
     path: 'employee',
@@ -41,7 +41,7 @@ const routes: Route[] = [
     canActivate: [AuthGuard]
   },
   {
-    path:'employee/inventory/:id', component: EditInventoryComponent, canActivate: [AuthGuard]
+    path: 'employee/inventory/:id', component: EditInventoryComponent, canActivate: [AuthGuard]
   },
   { path: '**', component: NotFoundComponent },
 

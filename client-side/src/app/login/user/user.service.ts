@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CoreService } from '../../core/core.service';
 import { User, Login } from '../../class';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +12,21 @@ export class UserService {
   private appUrl = this.coreService.getURL() + '/user';
   private appUrl2 = this.coreService.getURL() + '/usertype';
   private head = this.coreService.getHeader();
+  private admin = new BehaviorSubject<boolean>(false); // {1}
 
-  constructor(private http: HttpClient, private coreService: CoreService) {}
+  constructor(private http: HttpClient, private coreService: CoreService, private userService: UserService) {}
 
-  getAll() {
-    return this.http.get<User[]>(`${this.appUrl}/users`);
+  get isAdmin() {
+    return this.admin.asObservable(); // {2}
+  }
+
+  getAll(): Observable<User[]> {
+    this.admin.next(true);
+    return this.http.get<User[]>(`${this.appUrl}/all`);
   }
 
   getById(id: number) {
-    return this.http.get(`${this.appUrl}/users/` + id);
+    return this.http.get(`${this.appUrl}/` + id);
   }
 
   register(user: User) {
