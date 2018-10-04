@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { User } from '../../../class';
+import { User, Order } from '../../../class';
 import { CoreService } from '../../../core/core.service';
 import { UserService } from '../../../login/user/user.service';
+import { OrderService } from '../../../order/order/order.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +14,7 @@ export class DashboardComponent implements OnInit {
   usertype: number;
   user: User;
   users: User[];
+  orders: Order[];
   public chart1Type = 'bar';
 
   public chartDatasets: Array<any> = [
@@ -61,12 +63,17 @@ export class DashboardComponent implements OnInit {
     }
   };
 
-  constructor(private coreService: CoreService, private userService: UserService) {}
+  constructor(private coreService: CoreService, private userService: UserService, private orderService: OrderService) {}
 
   ngOnInit() {
     const l = this.coreService.getLStorage('user');
     this.user  = JSON.parse(l);
     this.usertype = this.user.usertype.id;
+    this.getOrders();
+  }
+
+  getOrders() {
+    this.orderService.getOrders().subscribe(orderList => (this.orders = orderList));
   }
 
   superPower() {

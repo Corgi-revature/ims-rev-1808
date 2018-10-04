@@ -19,7 +19,7 @@ export class OrderService {
 
   getOrders(): Observable<Order[]> {
     return this.http
-      .get(this.appUrl, { withCredentials: true })
+      .get(`${this.appUrl}/all`, { headers: this.headers})
       .pipe(map(resp => resp as Order[]));
   }
 
