@@ -11,13 +11,16 @@ import { Item, Inventory } from '../class';
 export class InventoryService {
   private appUrl = this.coreService.getURL() + '/inventory';
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  private header = this.coreService.getHeader();
   constructor(
     private http: HttpClient,
     private coreService: CoreService
   ) { }
 
-  getInventories(): Observable<Inventory[]> {
-    return this.http.get(this.appUrl + '/all', { withCredentials: true }).pipe(
+  getInventory(): Observable<Inventory[]> {
+    return this.http.get(this.appUrl + '/all', {
+       withCredentials: true
+      }).pipe(
       map(
         resp => resp as Inventory[]
       )
@@ -26,7 +29,9 @@ export class InventoryService {
 
   getInventoryById(id: string): Observable<Inventory> {
     const url: string = this.appUrl + '/' + id;
-    return this.http.get(url, { withCredentials: true }).pipe(
+    return this.http.get(url, {
+       withCredentials: true
+    }).pipe(
       map(resp => resp as Inventory)
     );
   }
@@ -44,11 +49,36 @@ export class InventoryService {
     return price;
   }
 
-  editInventory(inv: Inventory): void {
-    this.http.put(this.appUrl + '/' + inv.id, inv);
+  createInventoryItem(): Observable<Inventory> {
+    const body = '{}';
+    return this.http.post(this.appUrl, body,
+      { headers: this.headers, withCredentials: true
+      }).pipe(
+      map(
+      resp => resp as Inventory
+    ));
   }
 
-  deleteInventory(inv: Inventory): void {
-    this.http.delete(this.appUrl + '/' + inv.id);
+  // These affect the items in the database
+  updateInventoryItem(inv: Inventory) {
+    const url = this.appUrl + '/' + inv.id;
+    const body = JSON.stringify(inv);
+    console.log('url: ' + url);
+    console.log('body: ' + body);
+    console.log(this.header);
+    // return this.http.put(url, body, { headers: this.header, withCredentials: true }).pipe(
+    //   map(
+    //   resp => resp as Inventory
+    // ));
+    return this.http.put(url, body, {headers: this.header}).pipe(
+      map(resp => resp as Inventory )
+    );
+  }
+
+  deleteInventoryItem(inv: Inventory) {
+    const url = this.appUrl + '/' + inv.id;
+    return this.http.delete(url, {headers: this.header}).pipe(
+      map(resp => resp as Inventory)
+    );
   }
 }

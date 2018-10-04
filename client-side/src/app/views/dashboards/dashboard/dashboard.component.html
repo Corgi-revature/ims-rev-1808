@@ -80,14 +80,16 @@
               <th scope="col">Item</th>
               <th scope="col">Amount</th>
               <th scope="col">Total Cost</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
+            <tr *ngFor="let order of orders">
+              <th scope="row">{{order.id}}</th>
+              <td>{{order.inventoryitem.name}}</td>
+              <td>{{order.amount}}</td>
+              <td>{{order.inventoryitem.amount * order.inventoryitem.price}}</td>
+              <td>{{order.tx.status}}</td>
             </tr>
           </tbody>
         </table>
