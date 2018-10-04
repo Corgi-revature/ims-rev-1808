@@ -18,7 +18,6 @@ private appUrl = this.coreService.getURL() +'/item';
 
   getItems(): Observable<Item[]> {
     const url = this.appUrl + '/all';
-    console.log(url);
     return this.http.get(url, { withCredentials: true }).pipe(
     map(
         resp => resp as Item[]
