@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit {
 
   superPower() {
     if (this.usertype === 1) {
-      this.userService.getAll();
+      this.userService.getUser();
     }
   }
 }
