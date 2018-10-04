@@ -57,7 +57,6 @@ public class TxactHibernate implements TxactDAO {
 	public void updateTxact(Txact txa) {
 		Session ss = hu.getSession();
 		Transaction tx = ss.beginTransaction();
-
 	}
 
 	@Override
@@ -70,7 +69,5 @@ public class TxactHibernate implements TxactDAO {
 	public void deleteTxactById(int id) {
 		Session ss = hu.getSession();
 		Transaction tx = ss.beginTransaction();
-
 	}
-
 }
