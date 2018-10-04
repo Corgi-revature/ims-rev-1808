@@ -31,8 +31,7 @@ public class SupplierServiceImpl implements SupplierService {
 
 	@Override
 	public List<Supplier> getSuppliersCriteria() {
-		//return sd.getSuppliersCriteria();
-		return null;
+		return sd.getSuppliersCriteria();
 	}
 
 	@Override

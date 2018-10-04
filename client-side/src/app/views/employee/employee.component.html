@@ -1,49 +1,63 @@
-<div class="row mt-5">
-  <div class="col-md-12">
-    <div class="card card-cascade narrower mt-5">
-      <div class="view gradient-card-header blue darken-2">
-        <h4 class="h4-responsive text-white">Inventory Items</h4>
-      </div>
-                       <!--Table-->
-                       <table class="table table-striped">
+<mdb-card>
+  <mdb-card-body>
+    <!-- <div class="row mt-5"> -->
+    <mdb-card-title class="blue darken-2">
+          <h1 id="title" class="h1-responsive  title">Inventory Items</h1>
 
-                          <!--Table head-->
-                          <thead class="mdb-color darken-3">
-                              <tr class="text-white">
-                                  <th>#</th>
-                                  <th>Item</th>
-                                  <th>Package Date</th>
-                                  <th>Use By</th>
-                                  <th>Stock</th>
-                              </tr>
-                          </thead>
-                          <!--Table head-->
-      
-                          <!--Table body-->
-                          <tbody>
-                              <tr>
-                                  <th scope="row">1</th>
-                                  <td>Mark</td>
-                                  <td>Otto</td>
-                                  <td>@mdo</td>
-                              </tr>
-                              <tr>
-                                  <th scope="row">2</th>
-                                  <td>Jacob</td>
-                                  <td>Thornton</td>
-                                  <td>@fat</td>
-                              </tr>
-                              <tr>
-                                  <th scope="row">3</th>
-                                  <td>Larry</td>
-                                  <td>the Bird</td>
-                                  <td>@twitter</td>
-                              </tr>
-                          </tbody>
-                          <!--Table body-->
-                      </table>
-                      <!--Table-->
+            <a href="employee/inventory/add" class="btn btn-danger addbutton">
+              Add To Inventory</a>
 
-    </div>
-  </div>
-</div>
+    </mdb-card-title>
+
+    <!-- <div class="card card-cascade narrower mt-5">
+        <div class="view gradient-card-header blue darken-2">
+          <h1 id="title" class="h1-responsive text-white">Inventory Items</h1>
+          <div id="addbutton">
+              <a href="employee/inventory/add" class="btn btn-danger">
+              Add To Inventory</a>
+              </div>
+        </div> -->
+
+      <table class="table table-striped">
+        <thead class="mdb-color darken-3">
+          <tr class="text-white">
+            <th>ID</th>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Package Date</th>
+            <th>Use By</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <!--Table head-->
+        <tbody>
+          <tr *ngFor="let inventory of inventories">
+            <th scope="row">
+              <h5>{{inventory.id}}</h5>
+            </th>
+            <td>
+              <h5>{{inventory.item.name}}</h5>
+            </td>
+            <td>
+              <h5>${{EmployeeService.makeItemPriceString(inventory.item)}}</h5>
+            </td>
+            <td>
+              <h5>{{inventory.stock}}</h5>
+            </td>
+            <td>
+              <h5>{{inventory.packagedate.substring(0,10)}}</h5>
+            </td>
+            <td>
+              <h5>{{inventory.useby.substring(0,10)}}</h5>
+            </td>
+            <td><a href="employee/inventory/{{inventory.id}}" class="btn btn-primary">Edit</a></td>
+            <td><a href="/employee/inventory" class="btn btn-danger" (click)="EmployeeService.deleteInventoryAlert(inventory)">Delete</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+    <!-- </div> -->
+  </mdb-card-body>
+</mdb-card>

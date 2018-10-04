@@ -13,7 +13,7 @@ import { Txact } from '../../class/txact';
 })
 export class OrderService {
   private appUrl = this.coreService.getURL() + '/order';
-  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  private headers = this.coreService.getHeader();
 
   constructor(private http: HttpClient, private coreService: CoreService) {}
 
@@ -33,7 +33,7 @@ export class OrderService {
   getOrder(id: number): Observable<Order> {
     const url = this.appUrl + '/' + id;
     return this.http
-      .get(url, { withCredentials: true })
+      .get(url, { withCredentials: true, headers: this.headers})
       .pipe(map(resp => resp as Order));
   }
 

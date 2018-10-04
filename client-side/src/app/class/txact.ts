@@ -5,5 +5,6 @@ export class Txact {
     token: string;
     // Emulated transaction id
     txid: string;
+    status: string;
 
 }

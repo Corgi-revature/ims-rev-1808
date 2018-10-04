@@ -13,34 +13,33 @@ export class AuthService {
   // private headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
   private headers = new HttpHeaders();
   private loggedIn = new BehaviorSubject<boolean>(false); // {1}
-
   private error: any;
   constructor(private http: HttpClient, private coreService: CoreService) { }
 
-  setToken(token: string): void {
+  setToken(token: string): string {
     localStorage.setItem('token', token);
+    return token;
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
+  removeToken() {
+    localStorage.removeItem('token');
   }
 
   get isLoggedIn() {
     return this.loggedIn.asObservable(); // {2}
   }
 
-  postLogin(email: string, password: string): Observable<Login> {
+  postLogin(email: string, password: string): Observable<User> {
     console.log(email);
     console.log(password);
-    // let head: HttpHeaders = new HttpHeaders();
-    // head = head.append('Content-Type', 'application/json');
-    // head = head.append('Access-Control-Allow-Origin', '*' );
     const head = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     });
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type': 'application/x-www-form-urlencoded'
-    //     // 'Authorization': 'my-auth-token'
-    //   })
-    // };
     return this.http
       .post(
         `${this.appUrl}/user/login`,
@@ -54,8 +53,11 @@ export class AuthService {
           resp => {
             if (resp !== null) {
               this.loggedIn.next(true);
-              this.setToken('login-200-corgi');
-              return resp as Login;
+              // this.usertype.next(resp.usertype.id);
+              this.coreService.setLStorage('user', JSON.stringify(resp as User));
+              console.log(resp);
+              this.setToken('super-200-corgi');
+              return resp as User;
             }
             return this.error;
           },
@@ -67,6 +69,12 @@ export class AuthService {
     return this.http.get(`${this.appUrl}/user/login`).pipe(map(resp => resp as Login));
   }
 
+  checkLogin() {
+    if (localStorage.getItem('token')) {
+      this.loggedIn.next(true);
+    }
+  }
+
   getForgotten(email: string) {
     return this.http.get(`${this.appUrl}/forget`);
   }
@@ -76,6 +84,7 @@ export class AuthService {
   }
 
   logout() {                            // {4}
+    this.removeToken();
     this.loggedIn.next(false);
   }
 }

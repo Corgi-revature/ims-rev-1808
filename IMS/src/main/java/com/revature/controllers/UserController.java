@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.User;
+import com.revature.beans.UserType;
 import com.revature.services.UserService;
 
 @RestController
@@ -28,6 +29,38 @@ public class UserController {
 		}
 		return "RUN";
 	}
+	
+	@RequestMapping(value = "/employee/all",method = RequestMethod.GET)
+	public List<User> getEmp() {
+		List<User> emp= null;
+		try {
+			emp = us.getEmp();
+			if (emp.size() != 0) {
+				return emp;
+			}
+		} catch(Exception e) {
+			return null;
+		} finally {
+			
+		}
+		return emp;
+	}
+	
+	@RequestMapping(value = "/customer/all",method = RequestMethod.GET)
+	public List<User> getCust() {
+		List<User> cust= null;
+		try {
+			cust = us.getUserByType(1);
+			if (cust.size() != 0) {
+				return cust;
+			}
+		} catch(Exception e) {
+			return null;
+		} finally {
+			
+		}
+		return cust;
+	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public User login(@RequestBody User user) {
@@ -44,10 +77,25 @@ public class UserController {
 		}
 		return newUser;
 	}
+	
+	@RequestMapping(value="/new", method=RequestMethod.POST)
+	public int register(@RequestBody User user) {
+		User newUser = null;
+		try {
+			newUser=user;
+			int result = us.addUser(newUser);
+			return result;
+		} catch(Exception e) {
+			
+		} finally {
+			
+		}
+		return 0;
+	}
 
 	// testing
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String byPassLogin() {
-		return "/static/hello.html";
+		return "User Controller says Hello";
 	}
 }

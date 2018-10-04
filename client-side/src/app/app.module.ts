@@ -27,8 +27,7 @@ import { UserComponent } from './login/user/user.component';
 import { AuthGuard } from './core/_guards';
 import { AlertComponent } from './shared/services/alert/alert.component';
 import { AlertService } from './shared/services/alert/alert.service';
-import { OrderComponent } from './order/order/order.component';
-
+import { EditInventoryComponent } from './edit-inventory/edit-inventory.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +36,8 @@ import { OrderComponent } from './order/order/order.component';
     RegisterComponent,
     ForgetPasswordComponent,
     OrderComponent,
-    UserComponent
+    UserComponent,
+    EditInventoryComponent
   ],
   imports: [
     HttpClientModule,
@@ -59,7 +59,7 @@ import { OrderComponent } from './order/order/order.component';
     AlertService,
     AuthGuard,
   ],
-  schemas: [ NO_ERRORS_SCHEMA ],
+  schemas: [NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
