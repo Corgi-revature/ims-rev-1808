@@ -10,16 +10,16 @@ import { DashboardComponent } from './views/dashboards/dashboard/dashboard.compo
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './login/register/register.component';
 import { ForgetPasswordComponent } from './login/forget-password/forget-password.component';
-import { EmployeeComponent } from './views/employee/employee.component';
 import { OrderComponent } from './order/order/order.component';
 import { CheckoutComponent } from './order/checkout/checkout.component';
 import { DeliveryComponent } from './order/delivery/delivery.component';
 import { AuthGuard } from './core/_guards';
-import { EditInventoryComponent } from './edit-inventory/edit-inventory.component';
+import { EditInventoryComponent } from './inventory/edit-inventory/edit-inventory.component';
 import { UserComponent } from './login/user/user.component';
 // need to change to employee
-import { Employee2Component } from './login/user/employee2/employee2.component';
+import { EmployeeComponent } from './login/user/employee/employee.component';
 import { CustomerComponent } from './login/user/customer/customer.component';
+import { InventoryComponent } from './inventory/inventory.component';
 
 const routes: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
@@ -33,7 +33,7 @@ const routes: Route[] = [
   {
     path: 'users',
     children: [
-      { path: 'employee', component: Employee2Component },
+      { path: 'employee', component: EmployeeComponent },
       { path: 'customer', component: CustomerComponent }
     ],
     canActivate: [AuthGuard]
@@ -52,12 +52,9 @@ const routes: Route[] = [
     children: [{ path: 'table', component: BasicTableComponent }]
   },
   {
-    path: 'employee',
-    children: [{ path: 'inventory', component: EmployeeComponent }],
+    path: 'inventory', component: InventoryComponent,
+    children: [{ path: ':id', component: EditInventoryComponent }],
     canActivate: [AuthGuard]
-  },
-  {
-    path: 'employee/inventory/:id', component: EditInventoryComponent, canActivate: [AuthGuard]
   },
   { path: '**', component: NotFoundComponent },
 
