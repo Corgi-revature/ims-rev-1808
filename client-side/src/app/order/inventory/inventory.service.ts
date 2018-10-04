@@ -13,6 +13,7 @@ export class InventoryService {
 //  private appUrl = this.coreService.getURL()+'/item';
 private appUrl = this.coreService.getURL()+'/inventory';
   private headers = new HttpHeaders({'Content-Type': 'application/json' });
+  private header = this.coreService.getHeader();
   constructor(
     private http: HttpClient,
     private coreService: CoreService
@@ -35,13 +36,19 @@ private appUrl = this.coreService.getURL()+'/inventory';
   }
 
   // These affect the items in the database
-  updateInventoryItem(inv: Inventory): Observable<Inventory> {
+  updateInventoryItem(inv: Inventory) {
     const url = this.appUrl + '/' + inv.id;
     const body = JSON.stringify(inv);
-    return this.http.put(url, body, { headers: this.headers, withCredentials: true }).pipe(
-      map(
-      resp => resp as Inventory
-    ));
+    console.log('url: '+url);
+    console.log('body: '+body);
+    console.log(this.header);
+    // return this.http.put(url, body, { headers: this.header, withCredentials: true }).pipe(
+    //   map(
+    //   resp => resp as Inventory
+    // ));
+    return this.http.put(url,body,{headers: this.header}).pipe(
+      map(resp => resp as Inventory )
+    );
   }
 
   createInventoryItem(): Observable<Inventory> {
@@ -50,5 +57,12 @@ private appUrl = this.coreService.getURL()+'/inventory';
       map(
       resp => resp as Inventory
     ));
+  }
+
+  deleteInventoryItem(inv: Inventory) {
+    const url = this.appUrl + '/'+inv.id;
+    return this.http.delete(url,{headers: this.header}).pipe(
+      map(resp=> resp as Inventory)
+    );
   }
 }

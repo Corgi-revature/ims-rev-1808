@@ -43,13 +43,13 @@ public class InventoryController {
 		return is.getInventoryCriteria();
 	}
 
-	@RequestMapping(method = RequestMethod.PUT)
+	@RequestMapping(value = "/{id}",method = RequestMethod.PUT)
 	void updateItem(@RequestBody Inventory inv) {
 		is.updateInventory(inv);
 	}
 
-	@RequestMapping(value = "/{inventory}", method = RequestMethod.DELETE)
-	void deleteItem(Inventory inv) {
+	@RequestMapping(method = RequestMethod.DELETE)
+	void deleteItem(@RequestBody Inventory inv) {
 		is.deleteInventory(inv);
 	}
 	
