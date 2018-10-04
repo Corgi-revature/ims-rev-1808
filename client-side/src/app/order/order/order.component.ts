@@ -72,7 +72,6 @@ export class OrderComponent implements OnInit {
   }
 
   createOrder(ite: Item, amount: number){
-    console.log("create");
     let newOrder:Order=<any>{};
     newOrder.itemid = ite.id;
     newOrder.amount = amount;
@@ -82,7 +81,6 @@ export class OrderComponent implements OnInit {
   }
 
   updateOrder(amount:number){
-    console.log("update");
     this.curOrder.amount = amount;
     this.orders.splice(this.index, 1, this.curOrder);
   }
@@ -99,13 +97,9 @@ export class OrderComponent implements OnInit {
   }
 
   checkout(): void {
-    console.log(this.orders);
     this.orders.forEach(function(order){
-      //console.log(this.orders);
-      console.log(order);
       this.orderService.createOrder(order).subscribe(
         resp => {
-          console.log(resp);
           if (resp !== null) {
             order.id = resp;
           }
@@ -131,7 +125,6 @@ export class OrderComponent implements OnInit {
       resp => {
         if (resp !== null) {
           this.txid = resp;
-          console.log(this.txid);
         }
       }
     );
