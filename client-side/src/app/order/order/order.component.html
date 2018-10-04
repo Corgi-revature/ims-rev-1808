@@ -6,14 +6,10 @@
   <!--Card content-->
   <mdb-card-body class="px-lg-5 pt-0">
     <div class="mdb-card-title m-2">
-      <div class="float-left mt-4">
-        Search: <input class="well" [(ngModel)]="searchBar" type="text">
-      </div>
       <!-- optional if u like this search better -->
       <form class="d-flex md-form float-right w-vw-20">
         <!-- Default input -->
-        <input type="search" placeholder="Type your query" aria-label="Search" class="form-control" [(ngModel)]="searchBar"
-          type="text">
+        <input placeholder="Type your query" aria-label="Search" class="form-control" [(ngModel)]="searchBar" name="ItemSearch" type="text">
         <button class="btn btn-primary btn-sm my-0 p" type="submit">
           <i class="fa fa-search"></i>
         </button>
@@ -39,6 +35,7 @@
         </tr>
       </table>
       <button class="btn btn-primary" (click)="checkout()">Checkout</button>
+      <button class="btn btn-primary" (click)="openTransaction()">test</button>
       <button class="btn btn-danger" (click)="empty()">Cancel</button>
     </form>
     <!-- Form -->

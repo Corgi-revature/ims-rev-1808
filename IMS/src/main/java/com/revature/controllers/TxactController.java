@@ -31,6 +31,7 @@ public class TxactController {
 		txa.setToken("Test");
 		txa.setCreated((new Date()).toString());
 		txa.setTxid(generateUUID());
+		txa.setStatus("Pending");
 		return ts.addTxact(txa);
 	}
 

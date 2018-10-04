@@ -7,6 +7,7 @@ import { ItemService } from '../../core/item.service';
 import { OrderService } from '../../order/order/order.service';
 import { TxactService } from '../../order/txact/txact.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UserType } from '../../class/usertype';
 
 @Component({
   selector: 'app-order',
@@ -20,13 +21,20 @@ export class OrderComponent implements OnInit {
   @Input()
   curTxact:Txact=<any>{};
   @Input()
+  txid: Number;
+  @Input()
+  fakeUserType:UserType={
+    id: 10000,
+    name:"fake",
+  }
+  @Input()
   curUser:User={
     id: 1,
     first: "Mr.",
     last: "Dude",
     phone: "Nah",
     email: "Nope",
-    userType: 2,
+    usertype: this.fakeUserType,
     password: "1234"
   };
   @Input()
@@ -118,6 +126,14 @@ export class OrderComponent implements OnInit {
 
   openTransaction(){
     console.log("OpenTransaction");
-    this.txactSerivce.createTransaction();
+    console.log(this.curTxact);
+    this.txactSerivce.createTransaction(this.curTxact).subscribe(
+      resp => {
+        console.log(resp);
+        if (resp !== null) {
+          this.txid = resp;
+        }
+      }
+    );
   }
 }

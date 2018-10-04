@@ -38,7 +38,7 @@ import { EditInventoryComponent } from './edit-inventory/edit-inventory.componen
     RegisterComponent,
     ForgetPasswordComponent,
     OrderComponent,
-    EditInventoryComponent
+    EditInventoryComponent,
     CheckoutComponent,
     DeliveryComponent,
     UserComponent
