@@ -5,7 +5,7 @@ import { User } from '../../class/user';
 import { ItemService } from '../../core/item.service';
 import { TxactService } from '../../order/txact/txact.service';
 import { OrderService } from '../../order/order/order.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserType } from '../../class/usertype';
 
 @Component({
@@ -15,10 +15,6 @@ import { UserType } from '../../class/usertype';
 })
 
 export class OrderComponent implements OnInit {
-  @Input()
-  curOrder:Order=<any>{};
-  @Input()
-  txid: number;
   @Input()
   fakeUserType:UserType={
     id: 10000,
@@ -36,7 +32,8 @@ export class OrderComponent implements OnInit {
   };
   @Input()
   sessionId: string;
-  result: object;
+  public curOrder:Order=<any>{};
+  public txid: number;
   public index;
   public searchBar: string;
   public orders:Order[] = [];
@@ -46,7 +43,7 @@ export class OrderComponent implements OnInit {
     private router: Router,
     private itemService: ItemService,
     private orderService: OrderService,
-    private txactSerivce: TxactService
+    private txactService: TxactService
   ) {}
 
   ngOnInit() {
@@ -64,14 +61,14 @@ export class OrderComponent implements OnInit {
     document.getElementById(`${ite.id}_cart`).innerText = (<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value;
     this.findOrder(ite);
     if (this.index != -1){
-      this.updateOrder(amount);
+      this.updateCartOrder(amount);
     }
     else {
-      this.createOrder(ite, amount);
+      this.createCartOrder(ite, amount);
     }
   }
 
-  createOrder(ite: Item, amount: number){
+  createCartOrder(ite: Item, amount: number){
     console.log("create");
     let newOrder:Order=<any>{};
     newOrder.itemid = ite.id;
@@ -81,7 +78,7 @@ export class OrderComponent implements OnInit {
     this.orders.push(newOrder);
   }
 
-  updateOrder(amount:number){
+  updateCartOrder(amount:number){
     console.log("update");
     this.curOrder.amount = amount;
     this.orders.splice(this.index, 1, this.curOrder);
@@ -89,7 +86,7 @@ export class OrderComponent implements OnInit {
 
   findOrder(ite: Item){
     this.index =-1;
-    for (var x = 0; x < this.orders.length; x++){
+    for (let x = 0; x < this.orders.length; x++){
       if (this.orders[x].itemid == ite.id){
         this.curOrder = this.orders[x];
         this.index = x;
@@ -99,35 +96,44 @@ export class OrderComponent implements OnInit {
   }
 
   checkout(): void {
+    console.log("order from checkout")
     console.log(this.orders);
-    this.orders.forEach(function(order){
-      //console.log(this.orders);
-      console.log(order);
-      this.orderService.createOrder(order).subscribe(
-        resp => {
-          console.log(resp);
-          if (resp !== null) {
-            order.id = resp;
-          }
-        }
-      );
-    });
+    for (let x = 0; x < this.orders.length; x++){
+      console.log(this.orders[x]);
+      this.createOrder(this.orders[x]);
+    }
+    this.orderService.setTxid(this.txid);
     this.router.navigate(['/checkout']);
   }
 
+  createOrder(ord:Order){
+    console.log("made it to create order");
+    this.orderService.createOrder(ord).subscribe(
+      resp => {
+        if(resp !== null) {
+          ord.id = resp;
+          console.log("create order of resp");
+          console.log(resp);
+        }
+      }
+    );
+  }
+
   empty(): void {
-    for (var x = 0; x < this.orders.length; x++){
+    for (let x = 0; x < this.orders.length; x++){
     document.getElementById(`${this.orders[x].itemid}_cart`).innerText = "0";
     }
     this.orders.splice(0,this.orders.length);
   }
+
+ 
 
   goBack(){
     this.router.navigate(['/dashboard']);
   }
 
   openTransaction(){
-    this.txactSerivce.createTransaction().subscribe(
+    this.txactService.createTransaction().subscribe(
       resp => {
         if (resp !== null) {
           this.txid = resp;

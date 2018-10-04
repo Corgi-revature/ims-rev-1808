@@ -14,8 +14,21 @@ import { Txact } from '../../class/txact';
 export class OrderService {
   private appUrl = this.coreService.getURL() + '/order';
   private headers = this.coreService.getHeader();
+  public txid:number;
 
   constructor(private http: HttpClient, private coreService: CoreService) {}
+ 
+  setTxid(txactId){
+    console.log("service set id");
+    this.txid = txactId;
+    console.log(this.txid);
+  }
+
+  getTxid(){
+    console.log("service get id");
+    console.log(this.txid);
+    return this.txid;
+  }
 
   getOrders(): Observable<Order[]> {
     return this.http
@@ -23,10 +36,11 @@ export class OrderService {
       .pipe(map(resp => resp as Order[]));
   }
 
-  getOrdersByTxactid(txact: Txact): Observable<Order[]> {
-    const url = this.appUrl + '/' + txact.id;
+  getOrdersByTxactid(txid: number): Observable<Order[]> {
+    const url = this.appUrl + '/' + txid;
+    console.log(url);
     return this.http
-      .get(this.appUrl, { withCredentials: true })
+      .get(url, { withCredentials: true })
       .pipe(map(resp => resp as Order[]));
   }
 
@@ -39,6 +53,8 @@ export class OrderService {
 
   createOrder(ord:Order): Observable<number> {
     const body = JSON.stringify(ord);
+    console.log("this is the createorder thingy");
+    console.log(body);
     return this.http.post(this.appUrl,body,{ headers: this.headers, withCredentials: true }).pipe(
         map
         (resp => {

@@ -28,6 +28,11 @@ public class OrderServiceImpl implements OrderService {
 	public Set<Order> getOrders() {
 		return ds.getOrders();
 	}
+	
+	@Override
+	public Set<Order> getOrdersByTxid(int txid){
+		return ds.getOrdersByTxid(txid);
+	}
 
 	@Override
 	public 
