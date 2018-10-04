@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.User;
+import com.revature.beans.UserType;
 import com.revature.services.UserService;
 
 @RestController
@@ -30,21 +31,35 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/employee/all",method = RequestMethod.GET)
-	public String getEmployee(String session) {
-		if (session == null) {
-//			log.trace(session);
-//			log.trace(us.getUsers());
+	public List<User> getEmp() {
+		List<User> emp= null;
+		try {
+			emp = us.getEmp();
+			if (emp.size() != 0) {
+				return emp;
+			}
+		} catch(Exception e) {
+			return null;
+		} finally {
+			
 		}
-		return "RUN";
+		return emp;
 	}
 	
 	@RequestMapping(value = "/customer/all",method = RequestMethod.GET)
-	public String getCust(String session) {
-		if (session == null) {
-//			log.trace(session);
-//			log.trace(us.getUsers());
+	public List<User> getCust() {
+		List<User> cust= null;
+		try {
+			cust = us.getUserByType(1);
+			if (cust.size() != 0) {
+				return cust;
+			}
+		} catch(Exception e) {
+			return null;
+		} finally {
+			
 		}
-		return "RUN";
+		return cust;
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
