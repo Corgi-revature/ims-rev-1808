@@ -51,7 +51,9 @@ CREATE TABLE transactions(
 CREATE TABLE suppliers(
 	id number(20) PRIMARY KEY,
 	suppliername varchar2(255),
-	email varchar(255)
+    itemsup number(20),
+	email varchar(255),
+    CONSTRAINT fk_sup_item FOREIGN KEY (itemsup) REFERENCES items(id)
 );
 
 CREATE TABLE users(
@@ -76,14 +78,6 @@ CREATE TABLE orders(
 	CONSTRAINT fk_order_item FOREIGN KEY (inventoryitem) REFERENCES items(id),
 	CONSTRAINT fk_order_user FOREIGN KEY (userid) REFERENCES users(id),
 	CONSTRAINT fk_order_transaction FOREIGN KEY (transaction) REFERENCES transactions(id)
-);
-
-CREATE TABLE supplieritems(
-	id number(20) PRIMARY KEY,
-	supplier number(20),
-	item number(20),
-	CONSTRAINT fk_supplier_item FOREIGN KEY (item) REFERENCES items(id),
-	CONSTRAINT fk_suppliers FOREIGN KEY (supplier) REFERENCES suppliers(id)
 );
 
 CREATE TABLE deliveries(

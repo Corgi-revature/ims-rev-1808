@@ -37,9 +37,9 @@ public class SupplierController {
 		return sups.getSuppliers();
 	}
 	
-	@RequestMapping(value="/search", method=RequestMethod.GET)
+	@RequestMapping(value="/search", method=RequestMethod.POST)
 	List<Supplier> getSuppliersCriteria(@RequestBody Supplier sup) {
-		return sups.getSuppliersCriteria();
+		return sups.getSuppliersCriteria(sup);
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT)

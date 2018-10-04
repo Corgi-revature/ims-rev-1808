@@ -10,7 +10,7 @@ public interface TxactService {
 	int addTxact(Txact txa);
 	Txact getTxactById(int id);
 	Set<Txact> getTxacts();
-	List<Txact> getTxactsCriteria();	
+	List<Txact> getTxactsCriteria(Txact txa);	
 	void updateTxact(Txact txa);	
 	void deleteTxact(Txact txa);
 	void deleteTxactById(int id);

@@ -30,6 +30,7 @@ import { AuthGuard } from './core/_guards';
 import { AlertComponent } from './shared/services/alert/alert.component';
 import { AlertService } from './shared/services/alert/alert.service';
 import { EditInventoryComponent } from './edit-inventory/edit-inventory.component';
+import { SupplierComponent } from './supplier/supplier.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { EditInventoryComponent } from './edit-inventory/edit-inventory.componen
     RegisterComponent,
     ForgetPasswordComponent,
     OrderComponent,
+    SupplierComponent,
     EditInventoryComponent,
     CheckoutComponent,
     DeliveryComponent,

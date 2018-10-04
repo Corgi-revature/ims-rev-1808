@@ -18,6 +18,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="user")
 	@SequenceGenerator(name="user", sequenceName="user_seq", allocationSize=1)
+	@Column(name="id")
 	private int id;
 	@Column(name="fname")
 	private String first;
@@ -27,7 +28,7 @@ public class User {
 	private String phone;
 	@Column(name="email")
 	private String email;
-	@ManyToOne(fetch=FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="usertype")
 	private UserType usertype;
 	@Column(name="password")

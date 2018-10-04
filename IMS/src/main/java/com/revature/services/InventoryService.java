@@ -9,7 +9,7 @@ public interface InventoryService {
 	int addInventory(Inventory inv);
 	Inventory getInventoryById(int id);
 	Set<Inventory> getInventory();
-	List<Inventory> getInventoryCriteria();
+	List<Inventory> getInventoryCriteria(Inventory inv);
 	void updateInventory(Inventory inv);	
 	void deleteInventory(Inventory inv);
 	void deleteInventoryById(int id);

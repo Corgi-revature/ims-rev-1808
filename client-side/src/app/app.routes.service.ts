@@ -17,6 +17,7 @@ import { DeliveryComponent } from './order/delivery/delivery.component';
 import { AuthGuard } from './core/_guards';
 import { EditInventoryComponent } from './edit-inventory/edit-inventory.component';
 import { UserComponent } from './login/user/user.component';
+import { SupplierComponent } from './supplier/supplier.component';
 
 const routes: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
@@ -48,6 +49,9 @@ const routes: Route[] = [
   },
   {
     path: 'employee/inventory/:id', component: EditInventoryComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'supplier', component: SupplierComponent, canActivate: [AuthGuard]
   },
   { path: '**', component: NotFoundComponent },
 
