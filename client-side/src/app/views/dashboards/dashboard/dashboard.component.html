@@ -76,20 +76,24 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">Id</th>
-              <th scope="col">Item</th>
+              <th scope="col">ID</th>
+              <th scope="col">Address</th>
+              <th scope="col">Item Name</th>
               <th scope="col">Amount</th>
-              <th scope="col">Total Cost</th>
+              <th scope="col">Price (each)</th>
+              <th scope="col">Total</th>
               <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let order of orders">
               <th scope="row">{{order.id}}</th>
-              <td>{{order.inventoryitem.name}}</td>
+              <td>{{order.address}}</td>
+              <td>{{order.name}}</td>
               <td>{{order.amount}}</td>
-              <td>{{order.inventoryitem.amount * order.inventoryitem.price}}</td>
-              <td>{{order.tx.status}}</td>
+              <td>${{order.price}}</td>
+              <td>${{order.total}}</td>
+              <td>{{order.status}}</td>
             </tr>
           </tbody>
         </table>
