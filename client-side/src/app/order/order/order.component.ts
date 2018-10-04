@@ -91,19 +91,16 @@ export class OrderComponent implements OnInit {
   }
 
   updateOrder(amount:number){
-    console.log("update");
     this.curOrder.amount = amount;
     this.orders.splice(this.index, 1, this.curOrder);
   }
 
   findOrder(ite: Item){
-    console.log("findOrder");
     this.index =-1;
     for (var x = 0; x < this.orders.length; x++){
           if (this.orders[x].itemid == ite.id){
           this.curOrder = this.orders[x];
           let test = this.curOrder;
-         
           this.index = x;
           this.exists = true;
           break;
@@ -120,16 +117,11 @@ export class OrderComponent implements OnInit {
     document.getElementById(`${this.orders[x].itemid}_cart`).innerText = "0";
     }
     this.orders.splice(0,this.orders.length);
-    console.log("Empty");
-    console.log(this.orders);
   }
 
   openTransaction(){
-    console.log("OpenTransaction");
-    console.log(this.curTxact);
     this.txactSerivce.createTransaction(this.curTxact).subscribe(
       resp => {
-        console.log(resp);
         if (resp !== null) {
           this.txid = resp;
         }
