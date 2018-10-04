@@ -4,7 +4,7 @@
     <mdb-card-title class="blue darken-2">
           <h1 id="title" class="h1-responsive  title">Inventory Items</h1>
 
-            <a href="employee/inventory/add" class="btn btn-danger addbutton">
+            <a [routerLink]="['/employee/inventory/add']" class="btn btn-danger addbutton">
               Add To Inventory</a>
 
     </mdb-card-title>
@@ -41,7 +41,7 @@
               <h5>{{inventory.item.name}}</h5>
             </td>
             <td>
-              <h5>${{EmployeeService.makeItemPriceString(inventory.item)}}</h5>
+              <h5 id="price">${{EmployeeService.makeItemPriceString(inventory.item)}}</h5>
             </td>
             <td>
               <h5>{{inventory.stock}}</h5>
