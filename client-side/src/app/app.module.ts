@@ -23,12 +23,17 @@ import { ForgetPasswordComponent } from './login/forget-password/forget-password
 // services
 import { CoreService } from './core/core.service';
 import { OrderComponent } from './order/order/order.component';
+import { CheckoutComponent } from './order/checkout/checkout.component';
+import { DeliveryComponent } from './order/delivery/delivery.component';
 import { UserComponent } from './login/user/user.component';
 import { AuthGuard } from './core/_guards';
 import { AlertComponent } from './shared/services/alert/alert.component';
 import { AlertService } from './shared/services/alert/alert.service';
-import { EditInventoryComponent } from './inventory/edit-inventory/edit-inventory.component';
-import { AddInventoryComponent } from './inventory/add-inventory/add-inventory.component';
+import { EditInventoryComponent } from './edit-inventory/edit-inventory.component';
+import { Employee2Component } from './login/user/employee2/employee2.component';
+import { CustomerComponent } from './login/user/customer/customer.component';
+import { PhonePipe } from './shared/pipe/phone.pipe';
+import { ItemFilterPipe } from './item-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -37,9 +42,14 @@ import { AddInventoryComponent } from './inventory/add-inventory/add-inventory.c
     RegisterComponent,
     ForgetPasswordComponent,
     OrderComponent,
-    UserComponent,
     EditInventoryComponent,
-    AddInventoryComponent
+    CheckoutComponent,
+    DeliveryComponent,
+    Employee2Component,
+    CustomerComponent,
+    PhonePipe,
+    ItemFilterPipe,
+    UserComponent
   ],
   imports: [
     HttpClientModule,
