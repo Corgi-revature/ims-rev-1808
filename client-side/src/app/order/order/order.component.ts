@@ -2,10 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Order } from '../../class/order';
 import { Item } from '../../class/item';
 import { User } from '../../class/user';
-import { Txact } from '../../class/txact';
 import { ItemService } from '../../core/item.service';
-import { OrderService } from '../../order/order/order.service';
 import { TxactService } from '../../order/txact/txact.service';
+import { OrderService } from '../../order/order/order.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserType } from '../../class/usertype';
 
@@ -19,9 +18,7 @@ export class OrderComponent implements OnInit {
   @Input()
   curOrder:Order=<any>{};
   @Input()
-  curTxact:Txact=<any>{};
-  @Input()
-  txid: Number;
+  txid: number;
   @Input()
   fakeUserType:UserType={
     id: 10000,
@@ -40,13 +37,12 @@ export class OrderComponent implements OnInit {
   @Input()
   sessionId: string;
   result: object;
-  public exists = false;
-  public index = -1;
-  public orders = [];
+  public index;
+  public searchBar: string;
+  public orders:Order[] = [];
   public items: Item[];
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private itemService: ItemService,
     private orderService: OrderService,
@@ -54,6 +50,7 @@ export class OrderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.searchBar='';
     this.fillItemList();
     this.openTransaction();
   }
@@ -63,9 +60,6 @@ export class OrderComponent implements OnInit {
   }
 
   add(ite: Item): void {
-    // this.orderService.addItem(this.curOrder, ite, amount).subscribe(
-    //   add => (this.curOrder = add)
-    // );
     let amount:number = Number((<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value);
     document.getElementById(`${ite.id}_cart`).innerText = (<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value;
     this.findOrder(ite);
@@ -82,12 +76,13 @@ export class OrderComponent implements OnInit {
     let newOrder:Order=<any>{};
     newOrder.itemid = ite.id;
     newOrder.amount = amount;
-    newOrder.txid = this.curTxact.id;
+    newOrder.txid = this.txid;
     newOrder.userid = this.curUser.id;
     this.orders.push(newOrder);
   }
 
   updateOrder(amount:number){
+    console.log("update");
     this.curOrder.amount = amount;
     this.orders.splice(this.index, 1, this.curOrder);
   }
@@ -95,17 +90,28 @@ export class OrderComponent implements OnInit {
   findOrder(ite: Item){
     this.index =-1;
     for (var x = 0; x < this.orders.length; x++){
-          if (this.orders[x].itemid == ite.id){
-          this.curOrder = this.orders[x];
-          let test = this.curOrder;
-          this.index = x;
-          this.exists = true;
-          break;
-        }
+      if (this.orders[x].itemid == ite.id){
+        this.curOrder = this.orders[x];
+        this.index = x;
+        break;
+      }
     }
   }
 
   checkout(): void {
+    console.log(this.orders);
+    this.orders.forEach(function(order){
+      //console.log(this.orders);
+      console.log(order);
+      this.orderService.createOrder(order).subscribe(
+        resp => {
+          console.log(resp);
+          if (resp !== null) {
+            order.id = resp;
+          }
+        }
+      );
+    });
     this.router.navigate(['/checkout']);
   }
 
@@ -116,11 +122,16 @@ export class OrderComponent implements OnInit {
     this.orders.splice(0,this.orders.length);
   }
 
+  goBack(){
+    this.router.navigate(['/dashboard']);
+  }
+
   openTransaction(){
-    this.txactSerivce.createTransaction(this.curTxact).subscribe(
+    this.txactSerivce.createTransaction().subscribe(
       resp => {
         if (resp !== null) {
           this.txid = resp;
+          console.log(this.txid);
         }
       }
     );
