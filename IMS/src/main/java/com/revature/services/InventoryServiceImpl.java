@@ -32,7 +32,7 @@ public class InventoryServiceImpl implements InventoryService {
 	}
 
 	@Override
-	public List<Inventory> getInventoryCriteria() {
+	public List<Inventory> getInventoryCriteria(Inventory inv) {
 		return ivs.getInventoryCriteria();
 	}
 

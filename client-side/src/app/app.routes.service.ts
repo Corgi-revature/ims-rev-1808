@@ -16,6 +16,7 @@ import { DeliveryComponent } from './order/delivery/delivery.component';
 import { AuthGuard } from './core/_guards';
 import { EditInventoryComponent } from './inventory/edit-inventory/edit-inventory.component';
 import { UserComponent } from './login/user/user.component';
+import { SupplierComponent } from './supplier/supplier.component';
 // need to change to employee
 import { EmployeeComponent } from './login/user/employee/employee.component';
 import { CustomerComponent } from './login/user/customer/customer.component';
@@ -55,6 +56,9 @@ const routes: Route[] = [
     path: 'inventory', component: InventoryComponent,
     children: [{ path: ':id', component: EditInventoryComponent }],
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'supplier', component: SupplierComponent, canActivate: [AuthGuard]
   },
   { path: '**', component: NotFoundComponent },
 

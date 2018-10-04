@@ -40,7 +40,7 @@ public class TxactHibernate implements TxactDAO {
 	}
 
 	@Override
-	public List<Txact> getTxactsCriteria() {
+	public List<Txact> getTxactsCriteria(Txact txa) {
 		Session ss = hu.getSession();
 		Transaction tx = ss.beginTransaction();
 		return null;

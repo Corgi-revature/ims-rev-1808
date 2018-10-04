@@ -14,6 +14,7 @@ public class Txact {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="txact")
 	@SequenceGenerator(name="txact", sequenceName="tx_seq", allocationSize=1)
+	@Column(name="id")
 	private int id;
 	@Column(name="created")
 	private String created;

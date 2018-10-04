@@ -15,12 +15,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "orders")
 public class Order {
-	/*
-	 * id itemid amount userid txid address
-	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order")
 	@SequenceGenerator(name = "order", sequenceName = "order_seq", allocationSize = 1)
+	@Column(name="id")
 	private int id;
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="inventoryitem")
@@ -56,10 +54,10 @@ public class Order {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Item getinventoryitem() {
+	public Item getInventory() {
 		return inventoryitem;
 	}
-	public void setinventoryitem(Item inventoryitem) {
+	public void setInventory(Item inventoryitem) {
 		this.inventoryitem = inventoryitem;
 	}
 
