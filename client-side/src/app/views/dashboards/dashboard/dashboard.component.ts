@@ -16,19 +16,17 @@ export class DashboardComponent implements OnInit {
   public chart1Type = 'bar';
 
   public chartDatasets: Array<any> = [
-    { data: [50, 40, 60, 51, 56, 55, 40], label: 'Coffee' },
-    { data: [68, 80, 60, 69, 36, 37, 60], label: 'Salt' },
-    { data: [48, 58, 60, 88, 45, 65, 60], label: 'Meat' }
+    { data: [50, 40, 60, 51, 56], label: 'Coffee' },
+    { data: [68, 80, 60, 69, 36], label: 'Salt' },
+    { data: [48, 58, 60, 88, 45], label: 'Meat' }
   ];
 
   public chartLabels: Array<any> = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
     'May',
     'Jun',
-    'Jul'
+    'Jul',
+    'Aug',
+    'Sep',
   ];
 
   public chartColors: Array<any> = [];

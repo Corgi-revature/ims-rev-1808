@@ -31,6 +31,17 @@ export class UserService {
     );
   }
 
+  getCust(): Observable<User[]> {
+    this.admin.next(true);
+    return this.http.get<User[]>(`${this.appUrl}/customer/all`, {headers: this.coreService.getHeader()}).pipe(map(
+      resp => {
+        console.log(resp);
+        return resp as User[];
+      },
+      error => error)
+    );
+  }
+
   getById(id: number) {
     return this.http.get(`${this.appUrl}/` + id);
   }
