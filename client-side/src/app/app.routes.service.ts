@@ -12,16 +12,22 @@ import { RegisterComponent } from './login/register/register.component';
 import { ForgetPasswordComponent } from './login/forget-password/forget-password.component';
 import { EmployeeComponent } from './views/employee/employee.component';
 import { OrderComponent } from './order/order/order.component';
+import { CheckoutComponent } from './order/checkout/checkout.component';
+import { DeliveryComponent } from './order/delivery/delivery.component';
 import { AuthGuard } from './core/_guards';
 import { EditInventoryComponent } from './edit-inventory/edit-inventory.component';
+import { UserComponent } from './login/user/user.component';
 
 const routes: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   { path: 'login', component: LoginComponent },
-  { path: 'orders', component: OrderComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'forget', component: ForgetPasswordComponent },
+  { path: 'orders', component: OrderComponent, canActivate: [AuthGuard] },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
+  { path: 'delivery', component: DeliveryComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   {
     path: 'profile',
     children: [{ path: ':id', component: ProfileComponent }],

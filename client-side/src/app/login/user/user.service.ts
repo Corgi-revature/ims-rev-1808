@@ -22,7 +22,10 @@ export class UserService {
 
   getAll(): Observable<User[]> {
     this.admin.next(true);
-    return this.http.get<User[]>(`${this.appUrl}/all`);
+    return this.http.get<User[]>(`${this.appUrl}/all`, {headers: this.coreService.getHeader()}).pipe(map(
+      resp => resp as User[],
+      error => error)
+    );
   }
 
   getById(id: number) {

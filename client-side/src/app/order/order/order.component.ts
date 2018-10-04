@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Order } from '../../class/order';
 import { Item } from '../../class/item';
-import { Inventory } from '../../class/inventory';
 import { User } from '../../class/user';
 import { Txact } from '../../class/txact';
 import { ItemService } from '../../core/item.service';
-import { InventoryService } from '../../order/inventory/inventory.service'
 import { OrderService } from '../../order/order/order.service';
 import { TxactService } from '../../order/txact/txact.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { UserType } from '../../class/usertype';
 
 @Component({
   selector: 'app-order',
@@ -17,21 +17,37 @@ import { TxactService } from '../../order/txact/txact.service';
 
 export class OrderComponent implements OnInit {
   @Input()
-  curOrder: Order;
+  curOrder:Order=<any>{};
   @Input()
-  curTxact: Txact;
+  curTxact:Txact=<any>{};
   @Input()
-  curUser: User;
+  txid: Number;
   @Input()
-  amount: number;
+  fakeUserType:UserType={
+    id: 10000,
+    name:"fake",
+  }
+  @Input()
+  curUser:User={
+    id: 1,
+    first: "Mr.",
+    last: "Dude",
+    phone: "Nah",
+    email: "Nope",
+    usertype: this.fakeUserType,
+    password: "1234"
+  };
   @Input()
   sessionId: string;
-  public orders: Order[];
+  result: object;
+  public exists = false;
+  public index = -1;
+  public orders = [];
   public items: Item[];
-  //public invents: Inventory[];
 
   constructor(
-    private inventoryService: InventoryService,
+    private route: ActivatedRoute,
+    private router: Router,
     private itemService: ItemService,
     private orderService: OrderService,
     private txactSerivce: TxactService
@@ -40,9 +56,7 @@ export class OrderComponent implements OnInit {
   ngOnInit() {
     this.fillItemList();
     this.openTransaction();
-   // this.fillInventory();
   }
-
 
   fillItemList() {
     this.itemService.getItems().subscribe(itemList => (this.items = itemList));
@@ -52,25 +66,63 @@ export class OrderComponent implements OnInit {
     // this.orderService.addItem(this.curOrder, ite, amount).subscribe(
     //   add => (this.curOrder = add)
     // );
-   document.getElementById(`${ite.name}_cart`).innerText = (<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value;
+    let amount:number = Number((<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value);
+    document.getElementById(`${ite.id}_cart`).innerText = (<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value;
+    this.findOrder(ite);
+    if (this.index != -1){
+      this.updateOrder(amount);
+    }
+    else {
+      this.createOrder(ite, amount);
+    }
   }
-  
+
+  createOrder(ite: Item, amount: number){
+    console.log("create");
+    let newOrder:Order=<any>{};
+    newOrder.itemid = ite.id;
+    newOrder.amount = amount;
+    newOrder.txid = this.curTxact.id;
+    newOrder.userid = this.curUser.id;
+    this.orders.push(newOrder);
+  }
+
+  updateOrder(amount:number){
+    this.curOrder.amount = amount;
+    this.orders.splice(this.index, 1, this.curOrder);
+  }
+
+  findOrder(ite: Item){
+    this.index =-1;
+    for (var x = 0; x < this.orders.length; x++){
+          if (this.orders[x].itemid == ite.id){
+          this.curOrder = this.orders[x];
+          let test = this.curOrder;
+          this.index = x;
+          this.exists = true;
+          break;
+        }
+    }
+  }
+
   checkout(): void {
-    this.txactSerivce.updateTransaction;
+    this.router.navigate(['/checkout']);
   }
 
-  // This should check for a transaction is open
-  isOpen(): boolean {
-    return this.curTxact != null;
+  empty(): void {
+    for (var x = 0; x < this.orders.length; x++){
+    document.getElementById(`${this.orders[x].itemid}_cart`).innerText = "0";
+    }
+    this.orders.splice(0,this.orders.length);
   }
-
-  empty(): void {}
 
   openTransaction(){
-    this.txactSerivce.createTransaction();
-    this.curTxact.id = 1;
-    this.curTxact.token = `Token ${this.curTxact.id}`;
-    this.curTxact.created = "Now";
-    this.curTxact.txid = "012854 0415";
+    this.txactSerivce.createTransaction(this.curTxact).subscribe(
+      resp => {
+        if (resp !== null) {
+          this.txid = resp;
+        }
+      }
+    );
   }
 }
