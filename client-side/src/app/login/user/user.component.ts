@@ -16,10 +16,8 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.userService.getUser().subscribe(
       resp => {
-        console.log(resp);
         if (resp !== null) {
           this.users = resp;
-          console.log(this.users);
         }
       },
       error => (this.error = error)

@@ -8,22 +8,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "orders")
 public class Order {
-	/*
-	 * id itemid amount userid txid address
-	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order")
 	@SequenceGenerator(name = "order", sequenceName = "order_seq", allocationSize = 1)
+	@Column(name="id")
 	private int id;
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="inventoryitem")
-	private Inventory inventory;
+	private Item inventoryitem;
 	@Column(name="amount")
 	private int amount;
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -38,10 +37,10 @@ public class Order {
 	public Order() {
 		super();
 	}
-	public Order(int id, Inventory inventory, int amount, User user, Txact tx, String address) {
+	public Order(int id, Item inventoryitem, int amount, User user, Txact tx, String address) {
 		super();
 		this.id = id;
-		this.inventory = inventory;
+		this.inventoryitem = inventoryitem;
 		this.amount = amount;
 		this.user = user;
 		this.tx = tx;
@@ -55,11 +54,11 @@ public class Order {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Inventory getInventory() {
-		return inventory;
+	public Item getInventory() {
+		return inventoryitem;
 	}
-	public void setInventory(Inventory inventory) {
-		this.inventory = inventory;
+	public void setInventory(Item inventoryitem) {
+		this.inventoryitem = inventoryitem;
 	}
 
 	public int getAmount() {
@@ -101,7 +100,7 @@ public class Order {
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + amount;
 		result = prime * result + id;
-		result = prime * result + ((inventory == null) ? 0 : inventory.hashCode());
+		result = prime * result + ((inventoryitem == null) ? 0 : inventoryitem.hashCode());
 		result = prime * result + ((tx == null) ? 0 : tx.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
@@ -125,10 +124,10 @@ public class Order {
 			return false;
 		if (id != other.id)
 			return false;
-		if (inventory == null) {
-			if (other.inventory != null)
+		if (inventoryitem == null) {
+			if (other.inventoryitem != null)
 				return false;
-		} else if (!inventory.equals(other.inventory))
+		} else if (!inventoryitem.equals(other.inventoryitem))
 			return false;
 		if (tx == null) {
 			if (other.tx != null)
@@ -145,7 +144,7 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", inventory=" + inventory + ", amount=" + amount + ", user=" + user + ", tx=" + tx
+		return "Order [id=" + id + ", inventoryitem=" + inventoryitem + ", amount=" + amount + ", user=" + user + ", tx=" + tx
 				+ ", address=" + address + "]";
 	}
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { User } from '../../../class';
+import { User, Order } from '../../../class';
 import { CoreService } from '../../../core/core.service';
 import { UserService } from '../../../login/user/user.service';
+import { OrderService } from '../../../order/order/order.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,12 +14,13 @@ export class DashboardComponent implements OnInit {
   usertype: number;
   user: User;
   users: User[];
+  orders: Order[];
   public chart1Type = 'bar';
 
   public chartDatasets: Array<any> = [
-    { data: [50, 40, 60, 51, 56], label: 'Coffee' },
-    { data: [68, 80, 60, 69, 36], label: 'Salt' },
-    { data: [48, 58, 60, 88, 45], label: 'Meat' }
+    { data: [50, 40, 60, 51, 66], label: 'Coffee' },
+    { data: [68, 80, 60, 69, 56], label: 'Salt' },
+    { data: [48, 58, 60, 88, 65], label: 'Meat' }
   ];
 
   public chartLabels: Array<any> = [
@@ -61,12 +63,19 @@ export class DashboardComponent implements OnInit {
     }
   };
 
-  constructor(private coreService: CoreService, private userService: UserService) {}
+  constructor(private coreService: CoreService, private userService: UserService, private orderService: OrderService) { }
 
   ngOnInit() {
     const l = this.coreService.getLStorage('user');
-    this.user  = JSON.parse(l);
+    this.user = JSON.parse(l);
     this.usertype = this.user.usertype.id;
+    this.getOrders();
+  }
+
+  getOrders() {
+    this.orderService.getOrders().subscribe(
+      orderList => this.orders = orderList
+    );
   }
 
   superPower() {

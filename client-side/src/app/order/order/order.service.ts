@@ -3,10 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CoreService } from '../../core/core.service';
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Order } from '../../class/order';
-import { Item } from '../../class/item';
-import { Inventory } from '../../class/inventory';
-import { Txact } from '../../class/txact';
+import { Order, Item, Inventory, Txact } from '../../class';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +13,9 @@ export class OrderService {
   private headers = this.coreService.getHeader();
   public txid:number;
 
-  constructor(private http: HttpClient, private coreService: CoreService) {}
+  constructor(
+    private http: HttpClient,
+    private coreService: CoreService) { }
  
   setTxid(txactId){
     console.log("service set id");
@@ -32,8 +31,10 @@ export class OrderService {
 
   getOrders(): Observable<Order[]> {
     return this.http
-      .get(this.appUrl, { withCredentials: true })
-      .pipe(map(resp => resp as Order[]));
+      .get(this.appUrl + '/all', { headers: this.headers })
+      .pipe(map(
+        resp => resp as Order[]
+      ));
   }
 
   getOrdersByTxactid(txid: number): Observable<Order[]> {
@@ -47,11 +48,11 @@ export class OrderService {
   getOrder(id: number): Observable<Order> {
     const url = this.appUrl + '/' + id;
     return this.http
-      .get(url, { withCredentials: true, headers: this.headers})
+      .get(url, { withCredentials: true, headers: this.headers })
       .pipe(map(resp => resp as Order));
   }
 
-  createOrder(ord:Order): Observable<number> {
+  createOrder(ord: Order): Observable<number> {
     const body = JSON.stringify(ord);
     console.log("this is the createorder thingy");
     console.log(body);
@@ -60,9 +61,9 @@ export class OrderService {
         (resp => {
           if (resp !== null) {
             return resp as number;
+          }
         }
-      }
-    ));
+        ));
   }
 
   deleteOrder(ord: Order): Observable<Order> {

@@ -1,0 +1,33 @@
+<mdb-card>
+    <mdb-card-body>
+      <mdb-card-title> <h4>Suppliers</h4> </mdb-card-title>
+      <mdb-card-text> 
+        <table class="table">
+            <thead class="black white-text">
+              <tr>
+                <th scope="id">ID</th>
+                <th scope="Supplier">Supplier Name</th>
+                <th scope="Items">Items Supplied</th>
+                <th scope="Email">Email</th>
+                <th scope="Actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let i of suppliers">
+                    <td>{{i.id}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.itemsup.name}}</td>
+                    <td>{{i.email}}</td>
+                    <td>
+                    <a href="" class="btn btn-primary waves-light" mdbWavesEffect>Edit</a>
+                    <a href="" class="btn btn-danger" mdbWavesEffect>Delete</a>
+                    </td>
+              </tr>
+            </tbody>
+          </table>
+            
+
+      </mdb-card-text>
+      
+    </mdb-card-body>
+  </mdb-card>

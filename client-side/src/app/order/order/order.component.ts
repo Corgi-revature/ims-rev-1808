@@ -18,10 +18,10 @@ export class OrderComponent implements OnInit {
   @Input()
   fakeUserType:UserType={
     id: 10000,
-    name:"fake",
+    name: "fake",
   }
   @Input()
-  curUser:User={
+  curUser: User = {
     id: 1,
     first: "Mr.",
     last: "Dude",
@@ -36,7 +36,7 @@ export class OrderComponent implements OnInit {
   public txid: number;
   public index;
   public searchBar: string;
-  public orders:Order[] = [];
+  public orders: Order[] = [];
   public items: Item[];
 
   constructor(
@@ -47,7 +47,7 @@ export class OrderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.searchBar='';
+    this.searchBar = '';
     this.fillItemList();
     this.openTransaction();
   }
@@ -57,7 +57,7 @@ export class OrderComponent implements OnInit {
   }
 
   add(ite: Item): void {
-    let amount:number = Number((<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value);
+    let amount: number = Number((<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value);
     document.getElementById(`${ite.id}_cart`).innerText = (<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value;
     this.findOrder(ite);
     if (this.index != -1){
@@ -123,10 +123,8 @@ export class OrderComponent implements OnInit {
     for (let x = 0; x < this.orders.length; x++){
     document.getElementById(`${this.orders[x].itemid}_cart`).innerText = "0";
     }
-    this.orders.splice(0,this.orders.length);
+    this.orders.splice(0, this.orders.length);
   }
-
- 
 
   goBack(){
     this.router.navigate(['/dashboard']);

@@ -16,6 +16,7 @@ public class UserType {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="usertype")
 	@SequenceGenerator(name="usertype", sequenceName="usertype_seq")
+	@Column(name = "id")
 	private int id;
 	@Column(name="typetext")
 	private String usertype;

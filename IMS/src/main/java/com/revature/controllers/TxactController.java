@@ -47,7 +47,7 @@ public class TxactController {
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	List<Txact> getTxactsCriteria(@RequestBody Txact txact) {
-		return ts.getTxactsCriteria();
+		return ts.getTxactsCriteria(txact);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)
