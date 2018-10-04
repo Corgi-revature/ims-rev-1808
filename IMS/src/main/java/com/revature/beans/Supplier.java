@@ -1,10 +1,20 @@
 package com.revature.beans;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -12,22 +22,28 @@ import javax.persistence.Table;
 @Table(name="suppliers")
 public class Supplier {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="supplier")
-	@SequenceGenerator(name="supplier", sequenceName="supplier_seq", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="suppliergen")
+	@SequenceGenerator(name="suppliergen", sequenceName="supplier_seq", allocationSize=1)
 	private int id;
 	@Column(name="suppliername")
 	private String name;
 	@Column(name="email")
 	private String email;
+	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinTable(name="supplieritems", joinColumns = {@JoinColumn(name = "supplier")},
+	inverseJoinColumns = {@JoinColumn(name = "item")})
+	private Set<Item> supplieritemsm2m = new HashSet<>();
 	public Supplier() {
 		super();
 	}
+	
 	public Supplier(int id, String name, String email) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 	}
+
 	public int getId() {
 		return id;
 	}
@@ -46,6 +62,16 @@ public class Supplier {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public Set<Item> getItems() {
+		return supplieritemsm2m;
+	}
+	public void addItems(Item ite) {
+		supplieritemsm2m.add(ite);
+	}
+	public void setItems(Set<Item> newitems) {
+		supplieritemsm2m = newitems;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

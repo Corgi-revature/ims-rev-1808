@@ -26,8 +26,7 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String goLogin(String session) {
 		if (session == null) {
-//			log.trace(session);
-//			log.trace(us.getUsers());
+
 		}
 		return "RUN";
 	}

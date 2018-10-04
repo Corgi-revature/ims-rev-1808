@@ -1,19 +1,25 @@
 package com.revature.beans;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="items")
 public class Item {
-	/*
-	 * itemid itemname price stock created expires
-	 */
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "items")
 	@SequenceGenerator(name = "items", sequenceName = "item_seq", allocationSize = 1)
@@ -22,9 +28,12 @@ public class Item {
 	private String name;
 	@Column(name = "price")
 	private double price;
+	@ManyToMany(fetch=FetchType.LAZY, mappedBy = "supplieritemsm2m")
+    private Set<Supplier> suppliers = new HashSet<>();
 	public Item() {
 		super();
 	}
+	
 	public Item(int id, String name, double price) {
 		super();
 		this.id = id;
@@ -55,6 +64,19 @@ public class Item {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	public Set<Supplier> getSuppliers() {
+		return suppliers;
+	}
+	
+	public void addSupplier(Supplier sup)
+	{
+		suppliers.add(sup);
+	}
+	
+	public void setSuppliers(Set<Supplier> suppliers) {
+		this.suppliers = suppliers;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

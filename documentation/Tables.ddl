@@ -29,8 +29,8 @@ CREATE TABLE items(
 CREATE TABLE inventory(
 	id number(20) PRIMARY KEY,
 	item number(20),
-	packagedate date,
-	useby date,
+	packagedate varchar2(255),
+	useby varchar2(255),
 	stock number(20),
 	CONSTRAINT fk_item_inventory FOREIGN KEY (item) REFERENCES items(id)
 	);
@@ -42,9 +42,10 @@ CREATE TABLE usertypes(
 
 CREATE TABLE transactions(
 	id number(20) PRIMARY KEY,
-	created date,
+	created varchar2(255),
 	token varchar2(255),
-	txid varchar2(255)
+	txid varchar2(255),
+    status varchar2(255)
 );
 
 CREATE TABLE suppliers(
@@ -71,7 +72,7 @@ CREATE TABLE orders(
 	userid number(20),
 	transaction number(20),
 	address varchar2(255),
-	created date,
+	created varchar2(255),
 	CONSTRAINT fk_order_item FOREIGN KEY (inventoryitem) REFERENCES items(id),
 	CONSTRAINT fk_order_user FOREIGN KEY (userid) REFERENCES users(id),
 	CONSTRAINT fk_order_transaction FOREIGN KEY (transaction) REFERENCES transactions(id)
@@ -89,7 +90,7 @@ CREATE TABLE deliveries(
 	id number(20) PRIMARY KEY,
 	item number(20),
 	amount number(20),
-	datereceived date,
+	datereceived varchar2(255),
 	supplier number(20),
     CONSTRAINT fk_deliver_supplier FOREIGN KEY (supplier) REFERENCES suppliers(id),
 	CONSTRAINT fk_deliver_item FOREIGN KEY (item) REFERENCES items(id)

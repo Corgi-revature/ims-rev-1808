@@ -27,7 +27,7 @@ public class User {
 	private String phone;
 	@Column(name="email")
 	private String email;
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE})
 	@JoinColumn(name="usertype")
 	private UserType usertype;
 	@Column(name="password")

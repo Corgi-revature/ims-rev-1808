@@ -23,9 +23,8 @@ public class SupplierController {
 	SupplierService sups;
 	
 	@RequestMapping(method=RequestMethod.POST)	
-	Supplier addOrder(@RequestBody Supplier sup) {
-		sups.addSupplier(sup);
-		return sup;
+	int addSupplier(@RequestBody Supplier sup) {
+		return sups.addSupplier(sup);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)

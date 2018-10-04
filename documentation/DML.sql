@@ -19,4 +19,6 @@ INSERT INTO inventory (id,item,packagedate,useby,stock) VALUES (invent_seq.nextv
 INSERT INTO supplieritems (id, supplier, item) VALUES (supplieritem_seq.nextval,1,3);
 INSERT INTO supplieritems (id, supplier, item) VALUES (supplieritem_seq.nextval,2,2);
 
+INSERT INTO orders (id, inventoryitem, amount, userid, transaction, address, created) VALUES (order_seq.nextval,3,30,1,1,'1234 Fake Street','Today');
+
 commit;
