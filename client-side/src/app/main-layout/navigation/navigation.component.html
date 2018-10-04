@@ -19,9 +19,9 @@
           <li class="nav-item">
             <a class="nav-link white-text" [routerLink]="['/orders']" mdbWavesEffect>Orders</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="isAdmin$">
             <!-- add a NgIF -->
-            <a class="nav-link white-text" [routerLink]="['/employee/inventory']" mdbWavesEffect>Inventory</a>
+            <a class="nav-link white-text" [routerLink]="['/inventory']" mdbWavesEffect>Inventory</a>
           </li>
           <li class="nav-item">
             <a class="nav-link white-text" [routerLink]="['/profile/{id}']" mdbWavesEffect>Profile</a>
