@@ -1,0 +1,29 @@
+<div class="col-md-6">
+    <mdb-card>
+        <mdb-card-header class="info-color white-text text-center py-4">
+        </mdb-card-header>
+        <!--Card content-->
+        <mdb-card-body class="px-lg-5 pt-0">
+            <!-- Form -->
+            <form class="text-center" style="color: #757575;">
+                <table class="table order">
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr *ngFor="let o of orders"> 
+                    
+                        <td>{{o.item.name}}</td>
+                        <td>{{o.amount}}</td>
+                        <td>{{o.amount * o.item.price}}</td>
+                    </tr>
+                </table>         
+                <div>Total: $</div> 
+                <button class="btn btn-primary" (click)="purchase()">Purchase</button>
+                <button class="btn btn-danger" (click)="back()">Go back</button>   
+            </form>
+            <!-- Form -->
+        </mdb-card-body>
+    </mdb-card>
+</div>
