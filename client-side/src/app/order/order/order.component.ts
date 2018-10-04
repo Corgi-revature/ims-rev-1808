@@ -53,8 +53,6 @@ export class OrderComponent implements OnInit {
     private txactSerivce: TxactService
   ) {}
 
- 
-
   ngOnInit() {
     this.fillItemList();
     this.openTransaction();
@@ -68,7 +66,6 @@ export class OrderComponent implements OnInit {
     // this.orderService.addItem(this.curOrder, ite, amount).subscribe(
     //   add => (this.curOrder = add)
     // );
-
     let amount:number = Number((<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value);
     document.getElementById(`${ite.id}_cart`).innerText = (<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value;
     this.findOrder(ite);
