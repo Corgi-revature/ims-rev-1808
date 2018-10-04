@@ -17,6 +17,9 @@ import { DeliveryComponent } from './order/delivery/delivery.component';
 import { AuthGuard } from './core/_guards';
 import { EditInventoryComponent } from './edit-inventory/edit-inventory.component';
 import { UserComponent } from './login/user/user.component';
+// need to change to employee
+import { Employee2Component } from './login/user/employee2/employee2.component';
+import { CustomerComponent } from './login/user/customer/customer.component';
 
 const routes: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
@@ -27,7 +30,14 @@ const routes: Route[] = [
   { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
   { path: 'delivery', component: DeliveryComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
+  {
+    path: 'users',
+    children: [
+      { path: 'employee', component: Employee2Component },
+      { path: 'customer', component: CustomerComponent }
+    ],
+    canActivate: [AuthGuard]
+  },
   {
     path: 'profile',
     children: [{ path: ':id', component: ProfileComponent }],
