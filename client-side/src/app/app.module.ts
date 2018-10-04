@@ -47,7 +47,7 @@ import { ItemFilterPipe } from './item-filter.pipe';
     DeliveryComponent,
     Employee2Component,
     CustomerComponent,
-    PhonePipe
+    PhonePipe,
     ItemFilterPipe,
     UserComponent
   ],
