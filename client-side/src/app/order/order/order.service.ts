@@ -37,11 +37,16 @@ export class OrderService {
       .pipe(map(resp => resp as Order));
   }
 
-  createOrder(): Observable<Order> {
-    const body = '{}';
-    return this.http
-      .post(this.appUrl, body, { headers: this.headers, withCredentials: true })
-      .pipe(map(resp => resp as Order));
+  createOrder(ord:Order): Observable<number> {
+    const body = JSON.stringify(ord);
+    return this.http.post(this.appUrl,body,{ headers: this.headers, withCredentials: true }).pipe(
+        map
+        (resp => {
+          if (resp !== null) {
+            return resp as number;
+        }
+      }
+    ));
   }
 
   deleteOrder(ord: Order): Observable<Order> {
