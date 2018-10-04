@@ -18,8 +18,10 @@ export class OrderService {
 
   getOrders(): Observable<Order[]> {
     return this.http
-      .get(`${this.appUrl}/all`, { headers: this.headers })
-      .pipe(map(resp => resp as Order[]));
+      .get(this.appUrl + '/all', { headers: this.headers })
+      .pipe(map(
+        resp => resp as Order[]
+        ));
   }
 
   getOrdersByTxactid(txact: Txact): Observable<Order[]> {

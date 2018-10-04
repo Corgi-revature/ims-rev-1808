@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CoreService } from '../../core/core.service';
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Item, Inventory } from '../class';
+import { Item, Inventory } from '../../class';
 
 @Injectable({
   providedIn: 'root'
