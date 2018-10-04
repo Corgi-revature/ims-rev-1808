@@ -20,10 +20,24 @@ export class UserService {
     return this.admin.asObservable(); // {2}
   }
 
-  getAll(): Observable<User[]> {
+  getUser(): Observable<User[]> {
     this.admin.next(true);
-    return this.http.get<User[]>(`${this.appUrl}/all`, {headers: this.coreService.getHeader()}).pipe(map(
-      resp => resp as User[],
+    return this.http.get<User[]>(`${this.appUrl}/employee/all`, {headers: this.coreService.getHeader()}).pipe(map(
+      resp => {
+        console.log(resp);
+        return resp as User[];
+      },
+      error => error)
+    );
+  }
+
+  getCust(): Observable<User[]> {
+    this.admin.next(true);
+    return this.http.get<User[]>(`${this.appUrl}/customer/all`, {headers: this.coreService.getHeader()}).pipe(map(
+      resp => {
+        console.log(resp);
+        return resp as User[];
+      },
       error => error)
     );
   }

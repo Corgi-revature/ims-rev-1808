@@ -30,6 +30,9 @@ import { AuthGuard } from './core/_guards';
 import { AlertComponent } from './shared/services/alert/alert.component';
 import { AlertService } from './shared/services/alert/alert.service';
 import { EditInventoryComponent } from './edit-inventory/edit-inventory.component';
+import { Employee2Component } from './login/user/employee2/employee2.component';
+import { CustomerComponent } from './login/user/customer/customer.component';
+import { PhonePipe } from './shared/pipe/phone.pipe';
 import { ItemFilterPipe } from './item-filter.pipe';
 
 @NgModule({
@@ -42,6 +45,9 @@ import { ItemFilterPipe } from './item-filter.pipe';
     EditInventoryComponent,
     CheckoutComponent,
     DeliveryComponent,
+    Employee2Component,
+    CustomerComponent,
+    PhonePipe
     ItemFilterPipe,
     UserComponent
   ],
