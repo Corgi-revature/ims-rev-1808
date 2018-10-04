@@ -21,11 +21,11 @@ import { UserComponent } from './login/user/user.component';
 const routes: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   { path: 'login', component: LoginComponent },
-  { path: 'orders', component: OrderComponent, canActivate: [AuthGuard] },
-  { path: 'checkout', component: CheckoutComponent },
-  { path: 'delivery', component: DeliveryComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forget', component: ForgetPasswordComponent },
+  { path: 'orders', component: OrderComponent, canActivate: [AuthGuard] },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
+  { path: 'delivery', component: DeliveryComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   {
