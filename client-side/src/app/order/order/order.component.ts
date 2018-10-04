@@ -2,10 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Order } from '../../class/order';
 import { Item } from '../../class/item';
 import { User } from '../../class/user';
-import { Txact } from '../../class/txact';
 import { ItemService } from '../../core/item.service';
-import { OrderService } from '../../order/order/order.service';
 import { TxactService } from '../../order/txact/txact.service';
+import { OrderService } from '../../order/order/order.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserType } from '../../class/usertype';
 
@@ -17,18 +16,16 @@ import { UserType } from '../../class/usertype';
 
 export class OrderComponent implements OnInit {
   @Input()
-  curOrder:Order=<any>{};
+  curOrder: Order = <any>{};
   @Input()
-  curTxact:Txact=<any>{};
+  txid: number;
   @Input()
-  txid: Number;
-  @Input()
-  fakeUserType:UserType={
+  fakeUserType: UserType = {
     id: 10000,
-    name:"fake",
+    name: "fake",
   }
   @Input()
-  curUser:User={
+  curUser: User = {
     id: 1,
     first: "Mr.",
     last: "Dude",
@@ -40,20 +37,20 @@ export class OrderComponent implements OnInit {
   @Input()
   sessionId: string;
   result: object;
-  public exists = false;
-  public index = -1;
-  public orders = [];
+  public index;
+  public searchBar: string;
+  public orders: Order[] = [];
   public items: Item[];
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private itemService: ItemService,
     private orderService: OrderService,
     private txactSerivce: TxactService
-  ) {}
+  ) { }
 
   ngOnInit() {
+    this.searchBar = '';
     this.fillItemList();
     this.openTransaction();
   }
@@ -63,13 +60,10 @@ export class OrderComponent implements OnInit {
   }
 
   add(ite: Item): void {
-    // this.orderService.addItem(this.curOrder, ite, amount).subscribe(
-    //   add => (this.curOrder = add)
-    // );
-    let amount:number = Number((<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value);
+    let amount: number = Number((<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value);
     document.getElementById(`${ite.id}_cart`).innerText = (<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value;
     this.findOrder(ite);
-    if (this.index != -1){
+    if (this.index != -1) {
       this.updateOrder(amount);
     }
     else {
@@ -77,47 +71,57 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  createOrder(ite: Item, amount: number){
-    console.log("create");
-    let newOrder:Order=<any>{};
+  createOrder(ite: Item, amount: number) {
+    let newOrder: Order = <any>{};
     newOrder.itemid = ite.id;
     newOrder.amount = amount;
-    newOrder.txid = this.curTxact.id;
+    newOrder.txid = this.txid;
     newOrder.userid = this.curUser.id;
     this.orders.push(newOrder);
   }
 
-  updateOrder(amount:number){
+  updateOrder(amount: number) {
     this.curOrder.amount = amount;
     this.orders.splice(this.index, 1, this.curOrder);
   }
 
-  findOrder(ite: Item){
-    this.index =-1;
-    for (var x = 0; x < this.orders.length; x++){
-          if (this.orders[x].itemid == ite.id){
-          this.curOrder = this.orders[x];
-          let test = this.curOrder;
-          this.index = x;
-          this.exists = true;
-          break;
-        }
+  findOrder(ite: Item) {
+    this.index = -1;
+    for (var x = 0; x < this.orders.length; x++) {
+      if (this.orders[x].itemid === ite.id) {
+        this.curOrder = this.orders[x];
+        this.index = x;
+        break;
+      }
     }
   }
 
   checkout(): void {
+    this.orders.forEach(function (order) {
+      this.orderService.createOrder(order).subscribe(
+        resp => {
+          if (resp !== null) {
+            order.id = resp;
+          }
+        }
+      );
+    });
     this.router.navigate(['/checkout']);
   }
 
   empty(): void {
-    for (var x = 0; x < this.orders.length; x++){
-    document.getElementById(`${this.orders[x].itemid}_cart`).innerText = "0";
+    for (var x = 0; x < this.orders.length; x++) {
+      document.getElementById(`${this.orders[x].itemid}_cart`).innerText = "0";
     }
-    this.orders.splice(0,this.orders.length);
+    this.orders.splice(0, this.orders.length);
   }
 
-  openTransaction(){
-    this.txactSerivce.createTransaction(this.curTxact).subscribe(
+  goBack() {
+    this.router.navigate(['/dashboard']);
+  }
+
+  openTransaction() {
+    this.txactSerivce.createTransaction().subscribe(
       resp => {
         if (resp !== null) {
           this.txid = resp;

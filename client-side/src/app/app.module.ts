@@ -29,7 +29,12 @@ import { UserComponent } from './login/user/user.component';
 import { AuthGuard } from './core/_guards';
 import { AlertComponent } from './shared/services/alert/alert.component';
 import { AlertService } from './shared/services/alert/alert.service';
-import { EditInventoryComponent } from './edit-inventory/edit-inventory.component';
+import { EditInventoryComponent } from './inventory/edit-inventory/edit-inventory.component';
+import { EmployeeComponent } from './login/user/employee/employee.component';
+import { CustomerComponent } from './login/user/customer/customer.component';
+import { PhonePipe } from './shared/pipe/phone.pipe';
+import { ItemFilterPipe } from './shared/pipe/item-filter.pipe';
+import { InventoryComponent } from './inventory/inventory.component';
 import { SupplierComponent } from './supplier/supplier.component';
 
 @NgModule({
@@ -43,6 +48,11 @@ import { SupplierComponent } from './supplier/supplier.component';
     EditInventoryComponent,
     CheckoutComponent,
     DeliveryComponent,
+    EmployeeComponent,
+    InventoryComponent,
+    CustomerComponent,
+    PhonePipe,
+    ItemFilterPipe,
     UserComponent
   ],
   imports: [

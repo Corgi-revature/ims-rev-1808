@@ -17,6 +17,7 @@
 		
 		<mapping class="com.revature.beans.User"/>
 		<mapping class="com.revature.beans.Order"/>
+		<mapping class="com.revature.beans.OrderTotal"/>
 		<mapping class="com.revature.beans.Supplier"/>
 		<mapping class="com.revature.beans.Delivery"/>
 		<mapping class="com.revature.beans.Txact"/>

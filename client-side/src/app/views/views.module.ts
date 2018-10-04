@@ -25,9 +25,8 @@ import { UtilitiesComponent } from './css/utilities/utilities.component';
 import { ImagesComponent } from './css/images/images.component';
 import { ColorsComponent } from './css/colors/colors.component';
 import { ShadowComponent } from './css/shadow/shadow.component';
-import { ProfileComponent } from './profile/profile/profile.component';
+import { ProfileComponent } from './profile/profile.component';
 import { HelpComponent } from './help/help.component';
-import { EmployeeComponent } from './employee/employee.component';
 
 
 @NgModule({
@@ -62,8 +61,6 @@ import { EmployeeComponent } from './employee/employee.component';
     ShadowComponent,
     ProfileComponent,
     HelpComponent,
-    EmployeeComponent,
-
   ],
   exports: [
     FooterComponent,
@@ -73,7 +70,7 @@ import { EmployeeComponent } from './employee/employee.component';
     IconsComponent,
     Map1Component,
     StatsCardComponent,
-    StatsCard2Component,    
+    StatsCard2Component,
     DashboardComponent,
     GridComponent,
     MediaObjectComponent,
