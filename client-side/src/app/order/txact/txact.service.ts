@@ -27,12 +27,12 @@ private appUrl = this.coreService.getURL()+'/txact';
     ));
   }
 
-  createTransaction(tx: Txact): Observable<Number> {
-    return this.http.post(this.appUrl,tx,{headers: this.head}).pipe(
+  createTransaction(): Observable<number> {
+    return this.http.post(this.appUrl,{headers: this.head}).pipe(
       map
       (resp => {
         if (resp !== null) {
-          return resp as Number;
+          return resp as number;
       }
     }
     ));
