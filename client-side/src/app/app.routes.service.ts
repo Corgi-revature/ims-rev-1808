@@ -4,7 +4,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { Map1Component } from './views/maps/map1/map1.component';
 import { ModalsComponent } from './views/modals/modals.component';
 import { BasicTableComponent } from './views/tables/basic-table/basic-table.component';
-import { ProfileComponent } from './views/profile/profile/profile.component';
+import { ProfileComponent } from './views/profile/profile.component';
 import { NotFoundComponent } from './views/errors/not-found/not-found.component';
 import { DashboardComponent } from './views/dashboards/dashboard/dashboard.component';
 import { LoginComponent } from './login/login/login.component';

@@ -21,7 +21,7 @@ export class OrderService {
       .get(this.appUrl + '/all', { headers: this.headers })
       .pipe(map(
         resp => resp as Order[]
-        ));
+      ));
   }
 
   getOrdersByTxactid(txact: Txact): Observable<Order[]> {

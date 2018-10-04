@@ -74,9 +74,7 @@ export class DashboardComponent implements OnInit {
 
   getOrders() {
     this.orderService.getOrders().subscribe(
-      orderList => {
-        this.orders = orderList;
-      }
+      orderList => this.orders = orderList
     );
   }
 
