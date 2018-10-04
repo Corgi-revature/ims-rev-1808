@@ -16,16 +16,16 @@ import { UserType } from '../../class/usertype';
 
 export class OrderComponent implements OnInit {
   @Input()
-  curOrder:Order=<any>{};
+  curOrder: Order = <any>{};
   @Input()
   txid: number;
   @Input()
-  fakeUserType:UserType={
+  fakeUserType: UserType = {
     id: 10000,
-    name:"fake",
+    name: "fake",
   }
   @Input()
-  curUser:User={
+  curUser: User = {
     id: 1,
     first: "Mr.",
     last: "Dude",
@@ -39,7 +39,7 @@ export class OrderComponent implements OnInit {
   result: object;
   public index;
   public searchBar: string;
-  public orders:Order[] = [];
+  public orders: Order[] = [];
   public items: Item[];
 
   constructor(
@@ -47,10 +47,10 @@ export class OrderComponent implements OnInit {
     private itemService: ItemService,
     private orderService: OrderService,
     private txactSerivce: TxactService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.searchBar='';
+    this.searchBar = '';
     this.fillItemList();
     this.openTransaction();
   }
@@ -60,10 +60,10 @@ export class OrderComponent implements OnInit {
   }
 
   add(ite: Item): void {
-    let amount:number = Number((<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value);
+    let amount: number = Number((<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value);
     document.getElementById(`${ite.id}_cart`).innerText = (<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value;
     this.findOrder(ite);
-    if (this.index != -1){
+    if (this.index != -1) {
       this.updateOrder(amount);
     }
     else {
@@ -71,8 +71,8 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  createOrder(ite: Item, amount: number){
-    let newOrder:Order=<any>{};
+  createOrder(ite: Item, amount: number) {
+    let newOrder: Order = <any>{};
     newOrder.itemid = ite.id;
     newOrder.amount = amount;
     newOrder.txid = this.txid;
@@ -80,15 +80,15 @@ export class OrderComponent implements OnInit {
     this.orders.push(newOrder);
   }
 
-  updateOrder(amount:number){
+  updateOrder(amount: number) {
     this.curOrder.amount = amount;
     this.orders.splice(this.index, 1, this.curOrder);
   }
 
-  findOrder(ite: Item){
-    this.index =-1;
-    for (var x = 0; x < this.orders.length; x++){
-      if (this.orders[x].itemid == ite.id){
+  findOrder(ite: Item) {
+    this.index = -1;
+    for (var x = 0; x < this.orders.length; x++) {
+      if (this.orders[x].itemid === ite.id) {
         this.curOrder = this.orders[x];
         this.index = x;
         break;
@@ -97,7 +97,7 @@ export class OrderComponent implements OnInit {
   }
 
   checkout(): void {
-    this.orders.forEach(function(order){
+    this.orders.forEach(function (order) {
       this.orderService.createOrder(order).subscribe(
         resp => {
           if (resp !== null) {
@@ -110,17 +110,17 @@ export class OrderComponent implements OnInit {
   }
 
   empty(): void {
-    for (var x = 0; x < this.orders.length; x++){
-    document.getElementById(`${this.orders[x].itemid}_cart`).innerText = "0";
+    for (var x = 0; x < this.orders.length; x++) {
+      document.getElementById(`${this.orders[x].itemid}_cart`).innerText = "0";
     }
-    this.orders.splice(0,this.orders.length);
+    this.orders.splice(0, this.orders.length);
   }
 
-  goBack(){
+  goBack() {
     this.router.navigate(['/dashboard']);
   }
 
-  openTransaction(){
+  openTransaction() {
     this.txactSerivce.createTransaction().subscribe(
       resp => {
         if (resp !== null) {

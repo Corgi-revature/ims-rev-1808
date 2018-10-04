@@ -3,6 +3,8 @@ package com.revature.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,19 +65,20 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public User login(@RequestBody User user) {
+	public ResponseEntity<User> login(@RequestBody User user) {
 		User newUser = null;
 		try {
 			List<User> u = us.getUsersCriteria(user);
 			if (u.size() != 0) {
 				newUser = u.get(0);
+				return new ResponseEntity<User>(newUser, HttpStatus.OK);
 			}
 		} catch(Exception e) {
-			return null;
+			return new ResponseEntity<User>(newUser, HttpStatus.BAD_REQUEST);
 		} finally {
 			
 		}
-		return newUser;
+		return new ResponseEntity<User>(newUser, HttpStatus.BAD_REQUEST);
 	}
 	
 	@RequestMapping(value="/new", method=RequestMethod.POST)

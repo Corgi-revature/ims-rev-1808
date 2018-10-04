@@ -3,8 +3,7 @@
     <!-- <div class="row mt-5"> -->
     <mdb-card-title class="blue darken-2">
           <h1 id="title" class="h1-responsive  title">Inventory Items</h1>
-
-            <a [routerLink]="['/employee/inventory/add']" class="btn btn-danger addbutton">
+            <a [routerLink]="['/inventory/add']" class="btn btn-danger addbutton">
               Add To Inventory</a>
 
     </mdb-card-title>
@@ -41,7 +40,7 @@
               <h5>{{inventory.item.name}}</h5>
             </td>
             <td>
-              <h5 id="price">${{EmployeeService.makeItemPriceString(inventory.item)}}</h5>
+              <h5>${{inventoryService.makeItemPriceString(inventory.item)}}</h5>
             </td>
             <td>
               <h5>{{inventory.stock}}</h5>
@@ -52,8 +51,8 @@
             <td>
               <h5>{{inventory.useby.substring(0,10)}}</h5>
             </td>
-            <td><a href="employee/inventory/{{inventory.id}}" class="btn btn-primary">Edit</a></td>
-            <td><a href="/employee/inventory" class="btn btn-danger" (click)="EmployeeService.deleteInventoryAlert(inventory)">Delete</a></td>
+            <td><a [routerLink]="['/inventory/{:id}']" class="btn btn-primary">Edit</a></td>
+            <td><a class="btn btn-danger" (click)="EmployeeService.deleteInventoryAlert(inventory)">Delete</a></td>
           </tr>
         </tbody>
       </table>
