@@ -137,7 +137,6 @@ export class OrderComponent implements OnInit {
       resp => {
         if (resp !== null) {
           this.txid = resp;
-          console.log(this.txid);
         }
       }
     );
