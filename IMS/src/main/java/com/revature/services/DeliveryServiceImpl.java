@@ -32,22 +32,22 @@ public class DeliveryServiceImpl implements DeliveryService {
 
 	@Override
 	public Set<Delivery> getDeliveries() {
-		return null;
+		return dd.getDeliveries();
 	}
 
 	@Override
 	public void updateDelivery(Delivery deli) {
-	
+		dd.updateDelivery(deli);
 	}
 
 	@Override
 	public void deleteDelivery(Delivery deli) {
-		// TODO Auto-generated method stub
+		dd.deleteDelivery(deli);
 		
 	}
 
 	@Override
 	public void deleteDeliveryById(int id) {
-
+		dd.deleteDeliveryById(id);
 	}
 }

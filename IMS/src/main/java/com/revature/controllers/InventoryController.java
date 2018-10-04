@@ -39,8 +39,8 @@ public class InventoryController {
 	
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	List<Inventory> getItemsCriteria() {
-		return is.getInventoryCriteria();
+	List<Inventory> getItemsCriteria(@RequestBody Inventory inv) {
+		return is.getInventoryCriteria(inv);
 	}
 
 	@RequestMapping(value = "/{id}",method = RequestMethod.PUT)

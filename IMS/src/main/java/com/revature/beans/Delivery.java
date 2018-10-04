@@ -17,13 +17,14 @@ public class Delivery {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="deliveries")
 	@SequenceGenerator(name="deliveries", sequenceName="delivery_seq", allocationSize=1)
+	@Column(name="id")
 	private int id;
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="item")
 	private Item items;
 	@Column(name="amount")
 	private int amount;
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="supplier")
 	private Supplier supplier;
 	public Delivery() {

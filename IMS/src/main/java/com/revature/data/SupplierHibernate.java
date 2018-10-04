@@ -10,7 +10,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.revature.beans.Item;
 import com.revature.beans.Supplier;
 import com.revature.utils.HibernateUtil;
 
@@ -42,9 +41,12 @@ public class SupplierHibernate implements SupplierDAO {
 	}
 
 	@Override
-	public List<Supplier> getSuppliersCriteria() {
+	public List<Supplier> getSuppliersCriteria(Supplier sup) {
 		Session ss = hu.getSession();
-		return null;
+		Query<Supplier> que = ss.createQuery("SELECT s FROM Supplier AS s WHERE sup LIKE s");
+		que.setParameter("sup", sup);
+		List<Supplier> result = que.getResultList();
+		return result;
 	}
 
 	@Override
