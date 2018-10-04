@@ -22,6 +22,6 @@ export class InventoryComponent implements OnInit {
   }
 
   fillItemList() {
-    this.inventoryService.getInventories().subscribe(invList => (this.inventories = invList));
+    this.inventoryService.getInventory().subscribe(invList => (this.inventories = invList));
   }
 }

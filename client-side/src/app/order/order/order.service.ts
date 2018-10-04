@@ -3,10 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CoreService } from '../../core/core.service';
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Order } from '../../class/order';
-import { Item } from '../../class/item';
-import { Inventory } from '../../class/inventory';
-import { Txact } from '../../class/txact';
+import { Order, Item, Inventory, Txact } from '../../class';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +12,13 @@ export class OrderService {
   private appUrl = this.coreService.getURL() + '/order';
   private headers = this.coreService.getHeader();
 
-  constructor(private http: HttpClient, private coreService: CoreService) {}
+  constructor(
+    private http: HttpClient,
+    private coreService: CoreService) { }
 
   getOrders(): Observable<Order[]> {
     return this.http
-      .get(`${this.appUrl}/all`, { headers: this.headers})
+      .get(`${this.appUrl}/all`, { headers: this.headers })
       .pipe(map(resp => resp as Order[]));
   }
 
@@ -33,20 +32,20 @@ export class OrderService {
   getOrder(id: number): Observable<Order> {
     const url = this.appUrl + '/' + id;
     return this.http
-      .get(url, { withCredentials: true, headers: this.headers})
+      .get(url, { withCredentials: true, headers: this.headers })
       .pipe(map(resp => resp as Order));
   }
 
-  createOrder(ord:Order): Observable<number> {
+  createOrder(ord: Order): Observable<number> {
     const body = JSON.stringify(ord);
-    return this.http.post(this.appUrl,body,{ headers: this.headers, withCredentials: true }).pipe(
-        map
+    return this.http.post(this.appUrl, body, { headers: this.headers, withCredentials: true }).pipe(
+      map
         (resp => {
           if (resp !== null) {
             return resp as number;
+          }
         }
-      }
-    ));
+        ));
   }
 
   deleteOrder(ord: Order): Observable<Order> {
