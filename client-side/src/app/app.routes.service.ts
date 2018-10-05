@@ -23,14 +23,21 @@ import { CustomerComponent } from './login/user/customer/customer.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { AddInventoryComponent } from './inventory/add-inventory/add-inventory.component';
 import { ItemComponent } from './item/item.component';
-import { DeliveryManageComponent} from './delivery/delivery.component';
+import { DeliveryManageComponent } from './delivery/delivery.component';
+import { OrderListComponent } from './order/list/order-list.component';
 
 const routes: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forget', component: ForgetPasswordComponent },
-  { path: 'orders', component: OrderComponent, canActivate: [AuthGuard] },
+  {
+    path: 'orders',
+    children: [
+      { path: 'list', component: OrderListComponent },
+      { path: 'add', component: OrderComponent }
+    ], canActivate: [AuthGuard]
+  },
   { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
   { path: 'delivery', component: DeliveryComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -43,7 +50,7 @@ const routes: Route[] = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'profile',  component: ProfileComponent,
+    path: 'profile', component: ProfileComponent,
     // children: [{ path: ':id', component: ProfileComponent }],
     canActivate: [AuthGuard]
   },
