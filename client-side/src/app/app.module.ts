@@ -37,6 +37,7 @@ import { ItemFilterPipe } from './shared/pipe/item-filter.pipe';
 import { InventoryComponent } from './inventory/inventory.component';
 import { AddInventoryComponent} from './inventory/add-inventory/add-inventory.component';
 import { SupplierComponent } from './supplier/supplier.component';
+import { ProfileComponent } from './login/profile/profile.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { SupplierComponent } from './supplier/supplier.component';
     EditInventoryComponent,
     CustomerComponent,
     PhonePipe,
+    ProfileComponent,
     ItemFilterPipe,
     UserComponent
   ],

@@ -4,7 +4,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { Map1Component } from './views/maps/map1/map1.component';
 import { ModalsComponent } from './views/modals/modals.component';
 import { BasicTableComponent } from './views/tables/basic-table/basic-table.component';
-import { ProfileComponent } from './views/profile/profile.component';
+import { ProfileComponent } from './login/profile/profile.component';
 import { NotFoundComponent } from './views/errors/not-found/not-found.component';
 import { DashboardComponent } from './views/dashboards/dashboard/dashboard.component';
 import { LoginComponent } from './login/login/login.component';
@@ -24,7 +24,7 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { AddInventoryComponent } from './inventory/add-inventory/add-inventory.component';
 
 const routes: Route[] = [
-  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forget', component: ForgetPasswordComponent },
@@ -41,8 +41,8 @@ const routes: Route[] = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'profile',
-    children: [{ path: ':id', component: ProfileComponent }],
+    path: 'profile',  component: ProfileComponent,
+    // children: [{ path: ':id', component: ProfileComponent }],
     canActivate: [AuthGuard]
   },
   {
