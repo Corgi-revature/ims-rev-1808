@@ -1,6 +1,6 @@
 <mdb-card>
   <mdb-card-header class="info-color white-text text-center py-4">
-    <h2>Personal Info</h2>
+    <h2 class="h2-responsive title float-left">Personal Info</h2>
   </mdb-card-header>
   <!--Card content-->
   <mdb-card-body>
@@ -87,6 +87,11 @@
             <label for="materialRegisterFormPhone">Phone number</label>
           </div>
           <!-- Sign up button -->
+          <div class="md-form">
+              <input type="password" id="materialRegisterFormPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock"
+               mdbInputDirective formControlName="password">
+              <label for="materialRegisterFormPassword">Password</label>
+            </div>
 
           <button *ngIf="edit" mdbBtn type="button" color="danger" class="waves-light float-right" (click)="toggleForm()"
             mdbWavesEffect>Cancel</button>

@@ -8,4 +8,6 @@ import com.revature.beans.OrderTotal;
 public interface OrderTotalDAO {
 	public OrderTotal getOrdTotalById(int id);
 	public Set<OrderTotal> getOrdTotals();
+	public Set<OrderTotal> getOrdTotalsP();
+	public Set<OrderTotal> getOrdTotalsC();
 }

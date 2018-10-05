@@ -1,5 +1,6 @@
 package com.revature.beans;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,12 +20,12 @@ public class Delivery {
 	@SequenceGenerator(name="deliveries", sequenceName="delivery_seq", allocationSize=1)
 	@Column(name="id")
 	private int id;
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name="item")
 	private Item items;
 	@Column(name="amount")
 	private int amount;
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name="supplier")
 	private Supplier supplier;
 	public Delivery() {

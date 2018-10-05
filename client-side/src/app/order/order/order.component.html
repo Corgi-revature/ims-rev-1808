@@ -1,7 +1,7 @@
 <!-- <div class="col-md-6"> -->
 <mdb-card>
-  <mdb-card-header class="info-color white-text text-center py-4">
-    Order Creation
+  <mdb-card-header class="info-color white-text text-center pt-4">
+      <h1 id="title" class="h1-responsive float-left title">Add Order</h1>
   </mdb-card-header>
   <!--Card content-->
   <mdb-card-body class="px-lg-5 pt-0">
@@ -36,7 +36,7 @@
           <td id="{{i.id}}_cost">0</td>
         </tr>
       </table>
-      <div id="Order_Total">Total: ${{getTotal()}}</div>
+      <div id="Order_Total">Total: {{getTotal() | currency}}</div>
       <button type="button" class="btn btn-primary" (click)="frame.show()" >Checkout</button>
       <button type="button" class="btn btn-danger" (click)="goBack()">Cancel</button>  
     </form>

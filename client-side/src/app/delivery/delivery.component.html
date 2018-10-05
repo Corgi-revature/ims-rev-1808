@@ -1,0 +1,78 @@
+<mdb-card>
+  <mdb-card-header class="info-color white-text text-center pt-4">
+    <h1 id="title" class="h1-responsive float-left title">Delivery Items</h1>
+    <a class="btn float-right default-color mb-3" rounded="true" data-toggle="modal" data-target="#register" (click)="frame.show()">
+      New Delivery</a>
+  </mdb-card-header>
+  <mdb-card-body>
+    <mdb-card-text>
+      <table class="table">
+        <thead class="mdb-color darken-3">
+          <tr class="text-white">
+            <th scope="id">ID</th>
+            <th scope="Item">Item</th>
+            <th scope="Amount">Amount</th>
+            <th scope="Supplier">Supplier</th>
+            <th scope="Actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of deliveries">
+            <td>{{i.id}}</td>
+            <td>{{i.item.name}}</td>
+            <td>{{i.amount}}</td>
+            <td>{{i.supplier.name}}</td>
+            <td>
+              <button type="button" id="i.id" (click)="basicModal.show(); acceptDel(i)" class="btn btn-primary waves-light"
+                mdbWavesEffect>Received</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mdb-card-text>
+  </mdb-card-body>
+</mdb-card>
+
+<div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Add Delivery</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="row">
+        <label>Item Select</label>
+        <div class="col-md-6">
+          <select [(ngModel)]="del.item" class="browser-default">
+            <option value="" disabled selected>Choose Item</option>
+            <option *ngFor="let i of items" [ngValue]="i">{{i.name}}</option>
+          </select>
+        </div>
+        <div class="modal-body mx-3">
+          <div class="md-form mb-5">
+            <i class="fa fa-envelope prefix grey-text"></i>
+            <input type="number" id="defaultForm-email" [(ngModel)]="del.amount" class="form-control validate"
+              mdbInputDirective>
+            <label data-error="wrong" data-success="right" for="defaultForm-email">Amount</label>
+          </div>
+
+          <div class="row">
+            <label>Supplier Select</label>
+            <div class="col-md-6">
+              <select [(ngModel)]="del.supplier" class="browser-default">
+                <option value="" disabled selected>Choose Supplier</option>
+                <option *ngFor="let i of suppliers" [ngValue]="i">{{i.name}}</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button mdbBtn color="default" class="waves-light" (click)="submitModal() ; frame.hide()" mdbWavesEffect>Register</button>
+        </div>
+      </div>
+    </div>
+  </div>

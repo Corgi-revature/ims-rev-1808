@@ -47,6 +47,14 @@ public class OrderController {
 	Set<OrderTotal> getAllOrderT() {
 		return otd.getOrdTotals();
 	}
+	@RequestMapping(value="/total/pending",  method = RequestMethod.GET)
+	Set<OrderTotal> getAllOrderTP() {
+		return otd.getOrdTotalsP();
+	}
+	@RequestMapping(value="/total/complete",  method = RequestMethod.GET)
+	Set<OrderTotal> getAllOrderTC() {
+		return otd.getOrdTotalsC();
+	}
 	
 	@RequestMapping(value="/search", method=RequestMethod.GET)
 	List<Order> getOrdersCriteria(@RequestBody Order ord) {
