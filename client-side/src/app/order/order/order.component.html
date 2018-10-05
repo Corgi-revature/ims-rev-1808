@@ -36,7 +36,7 @@
           <td id="{{i.id}}_cost">0</td>
         </tr>
       </table>
-      <div id="Order_Total">Total: ${{getTotal()}}</div>
+      <div id="Order_Total">Total: {{getTotal() | currency}}</div>
       <button type="button" class="btn btn-primary" (click)="frame.show()" >Checkout</button>
       <button type="button" class="btn btn-danger" (click)="goBack()">Cancel</button>  
     </form>
