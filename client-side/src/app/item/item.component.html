@@ -1,14 +1,19 @@
 <mdb-card>
-  <mdb-card-body>
-    <mdb-card-title>
+    <mdb-card-header class="info-color white-text text-center pt-4">
+        <h1 id="title" class="h1-responsive float-left title">Items</h1>
+        <a class="btn default-color float-right addbutton" data-toggle="modal" data-target="#register" (click)="frame.show()">
+          Add Item</a>
+      </mdb-card-header>
+    <!-- <mdb-card-title>
       <h4 class="title">Items</h4>
       <button class="addbutton" type="button" mdbBtn color="default" rounded="true" data-toggle="modal" data-target="#register" (click)="frame.show()"
   mdbWavesEffect>Add Item</button>
-    </mdb-card-title>
+    </mdb-card-title> -->
+    <mdb-card-body>
     <mdb-card-text> 
-      <table class="table">
-          <thead class="black white-text">
-            <tr>
+      <table class="table table-striped">
+          <thead class="mdb-color darken-3">
+            <tr class="text-white">
               <th scope="id">ID</th>
               <th scope="Items">Item</th>
               <th scope="Email">Price</th>
@@ -18,9 +23,9 @@
           </thead>
           <tbody>
             <tr *ngFor="let i of items">
-                  <td>{{i.id}}</td>
-                  <td>{{i.name}}</td>
-                  <td>{{i.price}}</td>
+                  <td><h6>{{i.id}}</h6></td>
+                  <td><h6>{{i.name}}</h6></td>
+                  <td><h6>{{i.price}}</h6></td>
                   <td>
                       <button type="button" id="i.id" (click)="basicModal.show(); editItem(i)" class="btn btn-primary waves-light" mdbWavesEffect>Edit</button>
                   </td>
