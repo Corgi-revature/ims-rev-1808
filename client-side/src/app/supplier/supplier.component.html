@@ -13,14 +13,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let i of suppliers" id="sup_tab_{{i.id}}">
+              <tr *ngFor="let i of suppliers">
                     <td>{{i.id}}</td>
                     <td>{{i.name}}</td>
                     <td>{{i.itemsup.name}}</td>
                     <td>{{i.email}}</td>
                     <td>
-                    <button type="button" (click)="editSup()" class="btn btn-primary waves-light" mdbWavesEffect>Edit</button>
-                    <button type="button" (click)="deleteSup()" class="btn btn-danger" mdbWavesEffect>Delete</button>
+                    <button type="button" id="sup_edit_{{i.id}}" (click)="editSup()" class="btn btn-primary waves-light" mdbWavesEffect>Edit</button>
+                    <button type="button" id="sup_del_{{i.id}}" (click)="deleteSup()" class="btn btn-danger" mdbWavesEffect>Delete</button>
                     </td>
               </tr>
             </tbody>
