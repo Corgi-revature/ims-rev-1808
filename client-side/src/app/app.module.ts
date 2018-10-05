@@ -40,6 +40,7 @@ import { SupplierComponent } from './supplier/supplier.component';
 import { ItemComponent } from './item/item.component';
 import { ProfileComponent } from './login/profile/profile.component';
 import { BreadcrumbsComponent } from './main-layout/breadcrumbs/breadcrumbs.component';
+import { DeliveryManageComponent} from './delivery/delivery.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { BreadcrumbsComponent } from './main-layout/breadcrumbs/breadcrumbs.comp
     ItemFilterPipe,
     UserComponent,
     ItemComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    DeliveryManageComponent
   ],
   imports: [
     HttpClientModule,
