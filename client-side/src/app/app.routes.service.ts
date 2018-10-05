@@ -22,6 +22,8 @@ import { EmployeeComponent } from './login/user/employee/employee.component';
 import { CustomerComponent } from './login/user/customer/customer.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { AddInventoryComponent } from './inventory/add-inventory/add-inventory.component';
+import { ItemComponent } from './item/item.component';
+import { DeliveryManageComponent} from './delivery/delivery.component';
 
 const routes: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -67,6 +69,12 @@ const routes: Route[] = [
   },
   {
     path: 'supplier', component: SupplierComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'manage/delivery', component: DeliveryManageComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'item', component: ItemComponent, canActivate: [AuthGuard]
   },
   { path: '**', component: NotFoundComponent },
 

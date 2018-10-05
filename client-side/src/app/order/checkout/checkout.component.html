@@ -5,7 +5,7 @@
         <!--Card content-->
         <mdb-card-body class="px-lg-5 pt-0">
             <!-- Form -->
-            <form class="text-center" style="color: #757575;">
+            <form class="text-center" #checkoutForm="ngForm" (ngSubmit)="purchase()" style="color: #757575;">
                 <table class="table order">
                     <tr>
                         <th>Item</th>
@@ -13,15 +13,14 @@
                         <th>Total</th>
                     </tr>
                     <tr *ngFor="let o of orders"> 
-                    
-                        <td>{{o.item.name}}</td>
-                        <td>{{o.amount}}</td>
-                        <td>{{o.amount * o.item.price}}</td>
+                        <td>Hello</td>
+                     
                     </tr>
-                </table>         
+                </table>      
+                <input type="text" placeholder="Enter the address" id="delivery_address">
                 <div>Total: $</div> 
-                <button class="btn btn-primary" (click)="purchase()">Purchase</button>
-                <button class="btn btn-danger" (click)="back()">Go back</button>   
+                <button type="submit" class="btn btn-primary">Purchase</button>
+                <button type="button" class="btn btn-danger" (click)="goBack()">Go back</button>   
             </form>
             <!-- Form -->
         </mdb-card-body>

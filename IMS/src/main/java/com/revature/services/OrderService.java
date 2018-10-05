@@ -8,6 +8,7 @@ public interface OrderService {
 	public int addOrder(Order ord);
 	public Order getOrderById(int id);
 	Set<Order> getOrders();
+	Set<Order> getOrdersByTxid(int txid);
 	List<Order> getOrdersCriteria(Order ord);
 	public void updateOrder(Order ord);	
 	public void deleteOrder(Order ord);

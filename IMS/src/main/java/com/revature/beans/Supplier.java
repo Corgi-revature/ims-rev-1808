@@ -24,7 +24,7 @@ public class Supplier {
 	private String name;
 	@Column(name="email")
 	private String email;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "itemsup")
 	private Item itemsup;
 	

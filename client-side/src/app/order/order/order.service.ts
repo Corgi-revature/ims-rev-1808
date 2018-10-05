@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CoreService } from '../../core/core.service';
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Order, Item, Inventory, Txact } from '../../class';
+import { Order, Item, Txact, Inventory } from '../../class';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +11,19 @@ import { Order, Item, Inventory, Txact } from '../../class';
 export class OrderService {
   private appUrl = this.coreService.getURL() + '/order';
   private headers = this.coreService.getHeader();
+  public txid:number;
 
   constructor(
     private http: HttpClient,
     private coreService: CoreService) { }
+ 
+  setTxid(txactId){
+    this.txid = txactId;
+  }
+
+  getTxid(){
+    return this.txid;
+  }
 
   getOrders(): Observable<Order[]> {
     return this.http
@@ -32,10 +41,10 @@ export class OrderService {
       ));
   }
 
-  getOrdersByTxactid(txact: Txact): Observable<Order[]> {
-    const url = this.appUrl + '/' + txact.id;
+  getOrdersByTxactid(txid: number): Observable<Order[]> {
+    const url = this.appUrl + '/txact/' + txid;
     return this.http
-      .get(this.appUrl, { withCredentials: true })
+      .get(url, { withCredentials: true, headers: this.headers })
       .pipe(map(resp => resp as Order[]));
   }
 
@@ -48,8 +57,8 @@ export class OrderService {
 
   createOrder(ord: Order): Observable<number> {
     const body = JSON.stringify(ord);
-    return this.http.post(this.appUrl, body, { headers: this.headers, withCredentials: true }).pipe(
-      map
+    return this.http.post(this.appUrl,body,{ headers: this.headers, withCredentials: true }).pipe(
+        map
         (resp => {
           if (resp !== null) {
             return resp as number;
@@ -85,7 +94,7 @@ export class OrderService {
 
   // Deletes all Orders attached to this Txact id
   empty(ord: Order): Observable<Object> {
-    const url = this.appUrl + '/' + ord.txid;
+    const url = this.appUrl + '/' + ord.txact.id;
     console.log(url);
     return this.http
       .delete(url, { headers: this.headers, withCredentials: true })

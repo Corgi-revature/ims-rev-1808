@@ -30,6 +30,10 @@ public class OrderController {
 		return os.addOrder(ord);
 	}
 	
+	@RequestMapping(value="/txact/{id}", method=RequestMethod.GET)
+	Set<Order> getOrdersByTxid(@PathVariable int id){
+		return os.getOrdersByTxid(id);
+	}
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	Order getOrderByID(@PathVariable int id) {
 		return os.getOrderById(id);
