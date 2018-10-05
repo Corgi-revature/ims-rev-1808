@@ -33,5 +33,6 @@ export class NavigationComponent implements OnInit {
 
   setClicked(val: boolean): void {
     this.clicked = val;
+    this.userService.checkAdmin();
   }
 }
