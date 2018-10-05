@@ -54,6 +54,20 @@ export class OrderService {
         resp => resp as Order[]
       ));
   }
+  getOrdersViewBy(id, s): Observable<Order[]> {
+    return this.http
+      .get(this.appUrl + '/total/'+ id, { headers: this.headers, params:{'status': s} })
+      .pipe(map(
+        resp => resp as Order[]
+      ));
+  }
+  getOrdersViewByNoS(id): Observable<Order[]> {
+    return this.http
+      .get(this.appUrl + '/total/search/' + id, { headers: this.headers })
+      .pipe(map(
+        resp => resp as Order[]
+      ));
+  }
 
   getOrdersByTxactid(txid: number): Observable<Order[]> {
     const url = this.appUrl + '/txact/' + txid;

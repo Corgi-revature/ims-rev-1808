@@ -73,7 +73,8 @@ export class DashboardComponent implements OnInit {
   }
 
   getOrdersView() {
-    this.orderService.getOrdersView().subscribe(
+    let i = this.user.id;
+    this.orderService.getOrdersViewByNoS(i).subscribe(
       orderList => this.orders = orderList
     );
   }
