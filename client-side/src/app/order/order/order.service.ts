@@ -56,15 +56,9 @@ export class OrderService {
   }
 
   createOrder(ord: Order): Observable<number> {
-    const body = JSON.stringify(ord);
-    return this.http.post(this.appUrl,body,{ headers: this.headers, withCredentials: true }).pipe(
-        map
-        (resp => {
-          if (resp !== null) {
-            return resp as number;
-          }
-        }
-        ));
+    console.log(ord);
+    return this.http.post(this.appUrl,ord,{ headers: this.headers}).pipe(
+        map(resp => resp as number));
   }
 
   deleteOrder(ord: Order): Observable<Order> {
@@ -94,7 +88,7 @@ export class OrderService {
 
   // Deletes all Orders attached to this Txact id
   empty(ord: Order): Observable<Object> {
-    const url = this.appUrl + '/' + ord.txact.id;
+    const url = this.appUrl + '/' + ord.tx.id;
     console.log(url);
     return this.http
       .delete(url, { headers: this.headers, withCredentials: true })
