@@ -5,8 +5,9 @@
         <!--Card content-->
         <mdb-card-body class="px-lg-5 pt-0">
             <!-- Form -->
-            <form class="text-center" style="color: #757575;">
+            <form class="text-center" #deliveryForm="ngForm" style="color: #757575;">
               <div>Your request is being processed</div>
+              <button type="button" class="btn btn-danger" (click)="goBack()">Home</button>
             </form>
             <!-- Form -->
         </mdb-card-body>

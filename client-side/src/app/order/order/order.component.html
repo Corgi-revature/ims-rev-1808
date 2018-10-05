@@ -1,7 +1,7 @@
 <!-- <div class="col-md-6"> -->
 <mdb-card>
   <mdb-card-header class="info-color white-text text-center py-4">
-    New Order
+    Order Creation
   </mdb-card-header>
   <!--Card content-->
   <mdb-card-body class="px-lg-5 pt-0">
@@ -17,27 +17,54 @@
       </form>
     </div>
     <!-- Form -->
-    <form class="text-center" style="color: #757575;">
+    <form class="text-center" #orderForm="ngForm" (ngSubmit)="checkout()" style="color: #757575;">
       <table class="table inventory">
         <tr>
           <th>Item</th>
           <th>Quantity</th>
           <th>In Cart</th>
+          <th>Cost</th>
         </tr>
         <tr *ngFor="let i of items | itemFilter:searchBar">
 
           <td>{{i.name}}</td>
           <td>
             <input type="number" id="item_{{i.id}}" min="0" value="0">
-            <button class="btn-primary" (click)="add(i)">Add to cart</button>
+            <button type="button" class="btn-primary" (click)="add(i)">Add to cart</button>
           </td>
-          <td id="{{i.id}}_cart">0</td>
+          <td id="{{i.id}}_amount">0</td>
+          <td id="{{i.id}}_cost">0</td>
         </tr>
       </table>
-      <button class="btn btn-primary" (click)="checkout()">Checkout</button>
-      <button class="btn btn-danger" (click)="goBack()">Cancel</button>
+      <div id="Order_Total">Total: ${{getTotal()}}</div>
+      <button type="button" class="btn btn-primary" (click)="frame.show()" >Checkout</button>
+      <button type="button" class="btn btn-danger" (click)="goBack()">Cancel</button>  
     </form>
     <!-- Form -->
+  <div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">Give us your address!</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body mx-3">
+          <div class="md-form mb-5">
+            <i class="fa fa-user prefix grey-text"></i>
+            <input type="text" id="form34" class="form-control validate" mdbInputDirective [formControl]="contactFormModalAddress">
+            <label data-error="wrong" data-success="right" for="form34">Delivery Address</label>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="button" (click)="checkout()" class="btn btn-primary">Purchase
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
   </mdb-card-body>
 </mdb-card>
 <!-- </div> -->

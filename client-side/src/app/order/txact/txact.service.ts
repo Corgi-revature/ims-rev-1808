@@ -26,7 +26,13 @@ private appUrl = this.coreService.getURL()+'/txact';
       resp => resp as Txact
     ));
   }
-
+  getTransaction(id: number): Observable<Txact> {
+    const url = this.appUrl + '/' + id;
+    return this.http
+    .get(url,{withCredentials: true, headers: this.head})
+    .pipe(map(resp => resp as Txact));
+  }
+  
   createTransaction(): Observable<number> {
     return this.http.post(this.appUrl,{headers: this.head}).pipe(
       map

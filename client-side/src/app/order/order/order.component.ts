@@ -1,11 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Order } from '../../class/order';
 import { Item } from '../../class/item';
 import { User } from '../../class/user';
+import { Txact } from '../../class/txact';
 import { ItemService } from '../../core/item.service';
 import { TxactService } from '../../order/txact/txact.service';
 import { OrderService } from '../../order/order/order.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserType } from '../../class/usertype';
 
 @Component({
@@ -15,14 +17,11 @@ import { UserType } from '../../class/usertype';
 })
 
 export class OrderComponent implements OnInit {
+  contactFormModalAddress = new FormControl('', Validators.required);
   @Input()
-  curOrder: Order = <any>{};
-  @Input()
-  txid: number;
-  @Input()
-  fakeUserType: UserType = {
-    id: 10000,
-    name: "fake",
+  fakeUserType:UserType={
+     name: "fake",
+     id: 10000,
   }
   @Input()
   curUser: User = {
@@ -36,18 +35,33 @@ export class OrderComponent implements OnInit {
   };
   @Input()
   sessionId: string;
-  result: object;
-  public index;
+  public curOrder:Order={
+    id: 0,
+    item: null,
+    amount: null,
+    user: null,
+    txact: null,
+    address: null
+  };
+  public curTxact:Txact={
+    id: 0,
+    created: null,
+    token: null,
+    txid: null,
+    status: null
+  };
   public searchBar: string;
-  public orders: Order[] = [];
-  public items: Item[];
+  public orders:Order[] = [];
+  public items: Item[]; 
+  public txid:number=0;
+  public index;
 
   constructor(
     private router: Router,
     private itemService: ItemService,
     private orderService: OrderService,
-    private txactSerivce: TxactService
-  ) { }
+    private txactService: TxactService
+  ) {}
 
   ngOnInit() {
     this.searchBar = '';
@@ -61,34 +75,44 @@ export class OrderComponent implements OnInit {
 
   add(ite: Item): void {
     let amount: number = Number((<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value);
-    document.getElementById(`${ite.id}_cart`).innerText = (<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value;
+    let itemTotal: string = String(ite.price*amount);
+    document.getElementById(`${ite.id}_amount`).innerText = (<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value;
+    document.getElementById(`${ite.id}_cost`).innerText = itemTotal;
     this.findOrder(ite);
-    if (this.index != -1) {
-      this.updateOrder(amount);
+    if (this.index != -1){
+      this.updateCartOrder(amount);
     }
     else {
-      this.createOrder(ite, amount);
+      this.createCartOrder(ite, amount);
     }
   }
 
-  createOrder(ite: Item, amount: number) {
+  createCartOrder(ite: Item, amount: number){
+    console.log("create");
     let newOrder: Order = <any>{};
-    newOrder.itemid = ite.id;
+    newOrder.item = ite;
     newOrder.amount = amount;
-    newOrder.txid = this.txid;
-    newOrder.userid = this.curUser.id;
+    newOrder.txact = this.curTxact;
+    newOrder.user = this.curUser;
+    newOrder.address = "";
     this.orders.push(newOrder);
+    console.log(this.orders);
   }
 
-  updateOrder(amount: number) {
+  updateCartOrder(amount:number){
+    console.log("update");
     this.curOrder.amount = amount;
     this.orders.splice(this.index, 1, this.curOrder);
   }
 
-  findOrder(ite: Item) {
-    this.index = -1;
-    for (var x = 0; x < this.orders.length; x++) {
-      if (this.orders[x].itemid === ite.id) {
+  findOrder(ite: Item){
+    this.index =-1;
+    console.log("length: " +this.orders.length);
+    for (let x = 0; x < this.orders.length; x++){
+      console.log("x: " +x);
+      console.log(this.orders[x]);
+      console.log(ite);
+      if (this.orders[x].item.id == ite.id){
         this.curOrder = this.orders[x];
         this.index = x;
         break;
@@ -97,36 +121,64 @@ export class OrderComponent implements OnInit {
   }
 
   checkout(): void {
-    this.orders.forEach(function (order) {
-      this.orderService.createOrder(order).subscribe(
-        resp => {
-          if (resp !== null) {
-            order.id = resp;
-          }
+    console.log("checkout");
+    for (let x = 0; x < this.orders.length; x++){
+      this.orders[x].address = this.contactFormModalAddress.value;
+      this.createOrder(this.orders[x]);
+    }
+    this.orderService.setTxid(this.txid);
+    this.router.navigate(['/delivery']);
+  }
+
+  createOrder(ord:Order){
+    console.log("create order");
+    this.orderService.createOrder(ord).subscribe(
+      resp => {
+        if(resp !== null) {
+          ord.id = resp;
         }
-      );
-    });
-    this.router.navigate(['/checkout']);
+      }
+    );
   }
 
   empty(): void {
-    for (var x = 0; x < this.orders.length; x++) {
-      document.getElementById(`${this.orders[x].itemid}_cart`).innerText = "0";
+    for (let x = 0; x < this.orders.length; x++){
+    document.getElementById(`${this.orders[x].item.id}_cart`).innerText = "0";
     }
     this.orders.splice(0, this.orders.length);
   }
 
-  goBack() {
+  goBack(){
     this.router.navigate(['/dashboard']);
   }
 
-  openTransaction() {
-    this.txactSerivce.createTransaction().subscribe(
+  openTransaction(){
+    console.log("Open Transaction");
+    this.txactService.createTransaction().subscribe(
       resp => {
         if (resp !== null) {
           this.txid = resp;
+          this.findTransactionById(this.txid);
         }
       }
     );
+  }
+
+  findTransactionById(id:number){
+    this.txactService.getTransaction(id).subscribe(
+      resp => {
+        if (resp !== null) {
+          this.curTxact = resp;
+        }
+      }
+    );
+  }
+
+  getTotal(){
+    var txactTotal = 0;
+    for (let x = 0; x < this.orders.length; x++){
+      txactTotal = txactTotal + (this.orders[x].item.price * this.orders[x].amount);
+    }
+    return txactTotal;
   }
 }
