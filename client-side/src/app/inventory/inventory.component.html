@@ -51,7 +51,7 @@
             <td>
               <h5>{{inventory.useby.substring(0,10)}}</h5>
             </td>
-            <td><a [routerLink]="['/inventory/{:id}']" class="btn btn-primary">Edit</a></td>
+            <td><a [routerLink]="['/inventory',inventory.id]" class="btn btn-primary">Edit</a></td>
             <td><a class="btn btn-danger" (click)="EmployeeService.deleteInventoryAlert(inventory)">Delete</a></td>
           </tr>
         </tbody>
