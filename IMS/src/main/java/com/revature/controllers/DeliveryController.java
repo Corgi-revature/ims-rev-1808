@@ -22,7 +22,7 @@ public class DeliveryController {
 	private DeliveryService ds;
 
 	@RequestMapping(method = RequestMethod.POST)
-	int addDelivery(Delivery deli) {
+	int addDelivery(@RequestBody Delivery deli) {
 		return ds.addDelivery(deli);
 	}
 
@@ -52,7 +52,7 @@ public class DeliveryController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	void deleteDeliveryById(Integer id) {
+	void deleteDeliveryById(@PathVariable Integer id) {
 		ds.deleteDeliveryById(id);
 	}
 }
