@@ -38,18 +38,4 @@ export class EditInventoryComponent implements OnInit {
         this.router.navigate(['inventory']);
       });
   }
-
-  deleteFromInventoryAlert(inv) {
-    const mess = 'Are you sure you want to delete the following inventory entry?';
-    const age = 'id: ' + inv.id + 'item: ' + inv.item.name;
-    const conf = confirm(mess + age);
-    if (conf) {
-      this.inventoryService.deleteInventoryItem(inv).subscribe(
-        resp => {
-          inv=resp;
-          this.router.navigate(['inventory']);
-        }
-      );
-    }
-  }
 }

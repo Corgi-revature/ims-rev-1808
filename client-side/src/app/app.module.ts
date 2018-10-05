@@ -37,8 +37,9 @@ import { ItemFilterPipe } from './shared/pipe/item-filter.pipe';
 import { InventoryComponent } from './inventory/inventory.component';
 import { AddInventoryComponent} from './inventory/add-inventory/add-inventory.component';
 import { SupplierComponent } from './supplier/supplier.component';
+import { ItemComponent } from './item/item.component';
 import { ProfileComponent } from './login/profile/profile.component';
-
+import { BreadcrumbsComponent } from './main-layout/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,9 @@ import { ProfileComponent } from './login/profile/profile.component';
     PhonePipe,
     ProfileComponent,
     ItemFilterPipe,
-    UserComponent
+    UserComponent,
+    ItemComponent,
+    BreadcrumbsComponent
   ],
   imports: [
     HttpClientModule,
