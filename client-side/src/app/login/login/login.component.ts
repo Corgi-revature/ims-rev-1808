@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from '../../shared/services/alert/alert.service';
 import { LowerCasePipe } from '@angular/common';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +31,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -62,10 +64,14 @@ export class LoginComponent implements OnInit {
         console.log(resp);
         if (resp !== null) {
           this.login = resp;
+          this.userService.checkAdmin();
           this.router.navigate([this.returnUrl]);
         }
       },
-      error => (this.error = error)
+      error => {
+        this.error = error;
+        this.loading = false;
+      }
     );
   }
 
