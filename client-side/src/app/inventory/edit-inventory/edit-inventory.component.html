@@ -22,7 +22,7 @@
             <tbody>
               <tr>
                   <th><h5 class="label">Price:</h5></th>
-                  <td><h5>$<input id="price" value="{{inventory.item.price}}" type="number" min="0" step="0.01"></h5></td>
+                  <td><h5>$<input id="price" value="{{InventoryService.makeItemPriceString(inventory.item)}}" type="number" min="0" step="0.01"></h5></td>
               </tr>
               <tr>
                   <th><h5 class="label">Stock:</h5></th>
@@ -36,7 +36,7 @@
     <!-- <a href="employee/inventory" class="btn btn-primary"
             (click)="addToInventory(inventory)">Submit</a> -->
     <button class="btn btn-primary" (click)="addToInventory(inventory)">Submit</button>
-    <a href="employee/inventory" class="btn btn-danger">Cancel</a>
+    <a [routerLink]="['../']" class="btn btn-danger">Cancel</a>
   <!-- </div> -->
   </mdb-card-body>
 </mdb-card>

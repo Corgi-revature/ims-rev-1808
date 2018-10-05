@@ -42,8 +42,8 @@ private appUrl = this.coreService.getURL() +'/item';
     ));
   }
 
-  createItem(): Observable<Item> {
-    const body = '{}';
+  createItem(ite: Item): Observable<Item> {
+    const body = JSON.stringify(ite);
     return this.http.post(this.appUrl, body, { headers: this.headers, withCredentials: true }).pipe(
       map(
       resp => resp as Item

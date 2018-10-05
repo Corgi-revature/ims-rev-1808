@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Inventory } from 'src/app/class/inventory';
 import { Router, ActivatedRoute } from '@angular/router';
-import { EmployeeService } from 'src/app/views/employee/employee.service';
-import { InventoryService } from '../../order/inventory/inventory.service';
+import { InventoryService } from '../../inventory/inventory.service';
 @Component({
   selector: 'app-edit-inventory',
   templateUrl: './edit-inventory.component.html',
@@ -15,14 +14,13 @@ export class EditInventoryComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private EmployeeService: EmployeeService,
     private InventoryService: InventoryService
   ) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = +this.route.snapshot.paramMap.get('id');
     if(id) {
-      this.EmployeeService.getInventoryById(id).subscribe(
+      this.InventoryService.getInventoryById(id).subscribe(
         inv => (this.inventory = inv)
       );
     }
@@ -36,7 +34,7 @@ export class EditInventoryComponent implements OnInit {
     this.InventoryService.updateInventoryItem(inv).subscribe(
       resp => {
         inv=resp;
-        this.router.navigate(['employee/inventory']);
+        this.router.navigate(['inventory']);
       });
   }
 
@@ -48,7 +46,7 @@ export class EditInventoryComponent implements OnInit {
       this.InventoryService.deleteInventoryItem(inv).subscribe(
         resp => {
           inv=resp;
-          this.router.navigate(['employee/inventory']);
+          this.router.navigate(['inventory']);
         }
       );
     }

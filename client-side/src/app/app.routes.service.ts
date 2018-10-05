@@ -20,6 +20,7 @@ import { UserComponent } from './login/user/user.component';
 import { EmployeeComponent } from './login/user/employee/employee.component';
 import { CustomerComponent } from './login/user/customer/customer.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { AddInventoryComponent } from './inventory/add-inventory/add-inventory.component';
 
 const routes: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
@@ -53,7 +54,14 @@ const routes: Route[] = [
   },
   {
     path: 'inventory', component: InventoryComponent,
-    children: [{ path: ':id', component: EditInventoryComponent }],
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'inventory/add', component: AddInventoryComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'inventory/:id', component: EditInventoryComponent,
     canActivate: [AuthGuard]
   },
   { path: '**', component: NotFoundComponent },

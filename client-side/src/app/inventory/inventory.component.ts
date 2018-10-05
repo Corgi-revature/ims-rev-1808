@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-// import { ItemService } from '../../core/item.service';
-// import { Item } from '../../class/item';
 import { Inventory } from '../class';
 import { InventoryService } from './inventory.service';
 
@@ -22,6 +20,11 @@ export class InventoryComponent implements OnInit {
   }
 
   fillItemList() {
-    this.inventoryService.getInventories().subscribe(invList => (this.inventories = invList));
+    this.inventoryService.getInventory().subscribe(
+      invList => {
+        invList.sort(function(a,b){return a.id-b.id});
+        this.inventories = invList
+      }
+    );
   }
 }

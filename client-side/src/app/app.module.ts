@@ -35,6 +35,7 @@ import { CustomerComponent } from './login/user/customer/customer.component';
 import { PhonePipe } from './shared/pipe/phone.pipe';
 import { ItemFilterPipe } from './shared/pipe/item-filter.pipe';
 import { InventoryComponent } from './inventory/inventory.component';
+import { AddInventoryComponent} from './inventory/add-inventory/add-inventory.component';
 
 @NgModule({
   declarations: [
@@ -43,11 +44,12 @@ import { InventoryComponent } from './inventory/inventory.component';
     RegisterComponent,
     ForgetPasswordComponent,
     OrderComponent,
-    EditInventoryComponent,
     CheckoutComponent,
     DeliveryComponent,
     EmployeeComponent,
     InventoryComponent,
+    AddInventoryComponent,
+    EditInventoryComponent,
     CustomerComponent,
     PhonePipe,
     ItemFilterPipe,
