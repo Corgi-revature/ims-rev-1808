@@ -1,5 +1,7 @@
 package com.revature.data;
 
+import java.util.List;
+
 import javax.persistence.TypedQuery;
 
 import org.hibernate.Session;
@@ -19,7 +21,7 @@ public class TotalReportHibernate implements TotalReportDAO {
 		Session ss = hu.getSession();
 		String hql = "FROM com.revature.beans.TotalReport";
 		TypedQuery<TotalReport> que = ss.createQuery(hql, TotalReport.class);
-		TotalReport orderList = que.getSingleResult();
-		return orderList;
+		List<TotalReport> orderList = que.getResultList();
+		return orderList.get(0);
 	}
 }
