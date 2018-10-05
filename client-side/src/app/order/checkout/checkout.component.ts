@@ -15,7 +15,7 @@ export class CheckoutComponent implements OnInit {
   @Input()
   tx:number;
 
-  public orders: Order[];
+  public orders: Order[]=[];
 
   constructor(
     private coreService: CoreService,
@@ -24,16 +24,16 @@ export class CheckoutComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    console.log("on init");
     this.tx = this.orderService.getTxid();
-    console.log("on init");
     console.log(this.tx);
     this.retrieveOrders();
   }
 
   retrieveOrders(){
     console.log("about to fuck shit up fam");
+    console.log(this.orders);
     this.orderService.getOrdersByTxactid(this.tx).subscribe(orderList => (this.orders = orderList));
+    console.log(this.orders);
   }
   purchase(){
     this.router.navigate(['/delivery']);

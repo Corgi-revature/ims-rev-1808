@@ -30,6 +30,7 @@ public class TxactHibernate implements TxactDAO {
 		} finally {
 			
 		}
+		System.out.println(result);
 		return result;
 	}
 

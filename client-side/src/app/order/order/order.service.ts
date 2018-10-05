@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CoreService } from '../../core/core.service';
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Order, Item, Inventory, Txact } from '../../class';
+import { Order, Item, Txact, Inventory } from '../../class';
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +18,10 @@ export class OrderService {
     private coreService: CoreService) { }
  
   setTxid(txactId){
-    console.log("service set id");
     this.txid = txactId;
-    console.log(this.txid);
   }
 
   getTxid(){
-    console.log("service get id");
-    console.log(this.txid);
     return this.txid;
   }
 
@@ -38,10 +34,10 @@ export class OrderService {
   }
 
   getOrdersByTxactid(txid: number): Observable<Order[]> {
-    const url = this.appUrl + '/' + txid;
+    const url = this.appUrl + '/txact/' + txid;
     console.log(url);
     return this.http
-      .get(url, { withCredentials: true })
+      .get(url, { withCredentials: true, headers: this.headers })
       .pipe(map(resp => resp as Order[]));
   }
 
@@ -93,7 +89,7 @@ export class OrderService {
 
   // Deletes all Orders attached to this Txact id
   empty(ord: Order): Observable<Object> {
-    const url = this.appUrl + '/' + ord.txid;
+    const url = this.appUrl + '/' + ord.txact.id;
     console.log(url);
     return this.http
       .delete(url, { headers: this.headers, withCredentials: true })
