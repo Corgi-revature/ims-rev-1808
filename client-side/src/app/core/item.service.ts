@@ -49,4 +49,11 @@ private appUrl = this.coreService.getURL() +'/item';
       resp => resp as Item
     ));
   }
+
+  deleteItem(ite: Item) {
+    //const body = JSON.stringify(ite);
+    return this.http.delete(this.appUrl+'/'+ite.id, {headers: this.headers}).pipe(
+      map(resp=> resp as Item)
+    );
+  }
 }

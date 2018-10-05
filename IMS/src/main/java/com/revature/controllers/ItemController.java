@@ -47,10 +47,10 @@ public class ItemController {
 		is.updateItem(ite);
 	}
 
-	@RequestMapping(value = "/{item}", method = RequestMethod.DELETE)
-	void deleteItem(@RequestBody Item ite) {
-		is.deleteItem(ite);
-	}
+//	@RequestMapping(value = "/{item}", method = RequestMethod.DELETE)
+//	void deleteItem(@RequestBody Item ite) {
+//		is.deleteItem(ite);
+//	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	void deleteItemById(@PathVariable int id) {
