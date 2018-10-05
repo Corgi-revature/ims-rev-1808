@@ -18,10 +18,7 @@ private appUrl = this.coreService.getURL() +'/delivery';
 
   getDeliveries(): Observable<Delivery[]> {
     const url = this.appUrl + '/all';
-    return this.http.get(url, { withCredentials: true }).pipe(
-    map(
-        resp => resp as Delivery[]
-    ));
+    return this.http.get(url, { headers: this.headers }).pipe(map(resp => resp as Delivery[]));
   }
 
   getDeliveryById(id: number): Observable<Delivery> {
@@ -33,6 +30,7 @@ private appUrl = this.coreService.getURL() +'/delivery';
   }
 
   createDelivery(del: Delivery): Observable<Number> {
+    console.log(del);
     return this.http
       .post(this.appUrl, del, { headers: this.headers})
       .pipe(map(resp => resp as Number));

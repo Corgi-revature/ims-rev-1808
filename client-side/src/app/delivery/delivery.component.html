@@ -17,13 +17,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let i of deliveries">
-            <td>{{i.id}}</td>
-            <td>{{i.item.name}}</td>
-            <td>{{i.amount}}</td>
-            <td>{{i.supplier.name}}</td>
+          <tr *ngFor="let deli of deliveries">
+            <td>{{deli.id}}</td>
+            <td>{{deli.items.name}}</td>
+            <td>{{deli.amount}}</td>
+            <td>{{deli.supplier.name}}</td>
             <td>
-              <button type="button" id="i.id" (click)="basicModal.show(); acceptDel(i)" class="btn btn-primary waves-light"
+              <button type="button" id="deli.id" (click)="acceptDel(deli)" class="btn btn-primary waves-light"
                 mdbWavesEffect>Received</button>
             </td>
           </tr>
@@ -43,28 +43,31 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="row">
-        <label>Item Select</label>
-        <div class="col-md-6">
-          <select [(ngModel)]="del.item" class="browser-default">
-            <option value="" disabled selected>Choose Item</option>
-            <option *ngFor="let i of items" [ngValue]="i">{{i.name}}</option>
-          </select>
-        </div>
-        <div class="modal-body mx-3">
-          <div class="md-form mb-5">
-            <i class="fa fa-envelope prefix grey-text"></i>
-            <input type="number" id="defaultForm-email" [(ngModel)]="del.amount" class="form-control validate"
-              mdbInputDirective>
-            <label data-error="wrong" data-success="right" for="defaultForm-email">Amount</label>
+      <div class="modal-body mx-3">
+        <div class="row">
+          <label>Item Select</label>
+          <div class="col-md-6">
+            <select [(ngModel)]="del.items" class="browser-default">
+              <option value="" disabled selected>Choose Item</option>
+              <option *ngFor="let ite of getitems" [ngValue]="ite">{{ite.name}}</option>
+            </select>
+            </div>
           </div>
+          <div class="row">
+          <div class="md-form mb-5">
+            <i class="fa fa-plus prefix grey-text"></i>
+            <input type="number" id="defaultForm-amount" [(ngModel)]="del.amount" class="form-control"
+              mdbInputDirective>
+            <label data-error="wrong" data-success="right" for="defaultForm-amount">Amount</label>
+          </div>
+        </div>
 
           <div class="row">
             <label>Supplier Select</label>
             <div class="col-md-6">
               <select [(ngModel)]="del.supplier" class="browser-default">
                 <option value="" disabled selected>Choose Supplier</option>
-                <option *ngFor="let i of suppliers" [ngValue]="i">{{i.name}}</option>
+                <option *ngFor="let sup of suppliers" [ngValue]="sup">{{sup.name}}</option>
               </select>
             </div>
           </div>

@@ -35,7 +35,7 @@ export class InventoryService {
   
   getInventory(): Observable<Inventory[]> {
     const url = this.appUrl + '/all';
-    return this.http.get(url, { withCredentials: true }).pipe(
+    return this.http.get(url, { headers: this.headers }).pipe(
     map(
         resp => resp as Inventory[]
     ));

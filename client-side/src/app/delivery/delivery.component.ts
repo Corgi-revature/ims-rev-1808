@@ -18,7 +18,7 @@ import { Inventory } from '../class/inventory';
 export class DeliveryManageComponent implements OnInit {
 
   public suppliers: Supplier[];
-  public items: Item[];
+  public getitems: Item[];
   public deliveries: Delivery[];
 
   del : Delivery = {id: 0, items: {id: 0, name: '', price: 0.00}, amount: 0, supplier: {id: 0, name: '', itemsup: {id: 0, name: '', price: 0.00}, email: ''}}
@@ -43,12 +43,12 @@ export class DeliveryManageComponent implements OnInit {
     this.inv.item = del.items;
     this.inv.packagedate = this.inputToSQLDate(this.today());
     this.inv.stock = del.amount;
-    this.inv.useby = this.inputToSQLDate(this.today()+30);
-    this.inventoryservice.createInventoryItem(this.inv);
-    this.deliveryservice.deleteDelivery(del.id);
+    this.inv.useby = this.inputToSQLDate(this.nextDate());
+    this.inventoryservice.createInventoryItem(this.inv).subscribe();
+    this.deliveryservice.deleteDelivery(del.id).subscribe();
   }
   fillItems(){
-    this.itemservice.getItems().subscribe(itemList => (this.items = itemList));
+    this.itemservice.getItems().subscribe(itemList => (this.getitems = itemList));
     
   }
   fillSups(){
@@ -63,6 +63,11 @@ export class DeliveryManageComponent implements OnInit {
     return today;
   }
 
+  nextDate(){
+    const date = new Date().getTime()+300000;
+    return this.inputToSQLDate(date);
+  }
+
   inputToSQLDate(str) {
     const year = str.substring(2,4);
     const day = str.substring(8);
@@ -75,6 +80,6 @@ export class DeliveryManageComponent implements OnInit {
   submitModal(){
     this.deliveryservice.createDelivery(this.del).subscribe(value=>{console.log('Got it: ',value)},
     error=>{console.log('Did not get it')},
-    ()=>{this.fillSups()});
+    ()=>{this.fillDel()});
   }
 }
