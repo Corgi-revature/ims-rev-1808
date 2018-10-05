@@ -1,3 +1,23 @@
-<p>
-  user works!
-</p>
+<!--Card-->
+<div class="row">
+<div class="col-lg-3 col-md-4 col-sm-12 "  *ngFor="let user of users">
+  <mdb-card cascade="true" narrower="true">
+    <div class="view view-cascade profile-card p-2 pt-3">
+      <img src="../../../../assets/img/corgi-2.png" class="img-fluid _shape mr-4" alt="corgi">
+      <div>
+        <h4 class="card-header-title">{{user.first}}, {{user.last}}</h4>
+        <p>The Employee</p>
+      </div>
+    </div>
+    <mdb-card-body cascade="true" class="text-center">
+      <!--Card content-->
+      <mdb-card-text>
+        <p>Phone: {{user.phone}}</p>
+        <p>Email: {{user.email}}</p>
+      </mdb-card-text>
+    </mdb-card-body>
+    <!--/.Card content-->
+  </mdb-card>
+  <!--/.Card-->
+</div>
+</div>

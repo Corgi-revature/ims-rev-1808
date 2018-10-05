@@ -1,0 +1,45 @@
+<mdb-card>
+  <mdb-card-header class="info-color white-text text-center pt-4">
+    <h1 id="title" class="h1-responsive float-left title pt-2">Orders</h1>
+    <a class="btn float-right default-color mb-3" [routerLink]="['/orders/add']">
+      Add Order</a>
+  </mdb-card-header>
+  <mdb-card-body>
+    <!--  -->
+        <div class="btn-group mb-3" role="group" id="admin" *ngIf="usertype!==2">
+          <a class="card-link btn btn-light-blue waves-effect waves-light" (click)="getOrdersView()">All</a>
+          <a class="card-link btn btn-light-blue waves-effect waves-light" (click)="getOrdersViewC()">Complete</a>
+          <a class="card-link btn btn-light-blue waves-effect waves-light" (click)="getOrdersViewP()">Pending</a>
+        </div>
+        <div class="btn-group mb-3" role="group" id="admin" *ngIf="usertype===2">
+            <a class="card-link btn btn-light-blue waves-effect waves-light" (click)="getOrdersViewByNoS(user.id)">All</a>
+            <a class="card-link btn btn-light-blue waves-effect waves-light" (click)="getOrdersViewBy(user.id, 'Completed')">Complete</a>
+            <a class="card-link btn btn-light-blue waves-effect waves-light" (click)="getOrdersViewBy(user.id, 'Pending')">Pending</a>
+          </div>
+    <!--  -->
+    <table class="table table-striped">
+      <thead class="mdb-color darken-3">
+        <tr class="text-white">
+          <th scope="col">ID</th>
+          <th scope="col">Address</th>
+          <th scope="col">Item Name</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Price (each)</th>
+          <th scope="col">Total</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <th scope="row">{{order.id}}</th>
+          <td>{{order.address}}</td>
+          <td>{{order.name}}</td>
+          <td>{{order.amount}}</td>
+          <td>${{order.price}}</td>
+          <td>${{order.total}}</td>
+          <td>{{order.status}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </mdb-card-body>
+</mdb-card>

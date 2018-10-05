@@ -8,7 +8,6 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.revature.beans.Supplier;
 import com.revature.beans.Txact;
 import com.revature.utils.HibernateUtil;
 
@@ -19,8 +18,8 @@ public class TxactHibernate implements TxactDAO {
 
 	@Override
 	public int addTxact(Txact txa) {
-		Session ss = hu.getSession();
 		int result = 0;
+		Session ss = hu.getSession();
 		Transaction tx = null;
 		try {
 			tx = ss.beginTransaction();
@@ -29,7 +28,7 @@ public class TxactHibernate implements TxactDAO {
 		} catch(Exception e) {
 			tx.rollback();
 		} finally {
-
+			
 		}
 		return result;
 	}
@@ -41,7 +40,7 @@ public class TxactHibernate implements TxactDAO {
 	}
 
 	@Override
-	public List<Txact> getTxactsCriteria() {
+	public List<Txact> getTxactsCriteria(Txact txa) {
 		Session ss = hu.getSession();
 		Transaction tx = ss.beginTransaction();
 		return null;
@@ -58,7 +57,6 @@ public class TxactHibernate implements TxactDAO {
 	public void updateTxact(Txact txa) {
 		Session ss = hu.getSession();
 		Transaction tx = ss.beginTransaction();
-
 	}
 
 	@Override
@@ -71,7 +69,5 @@ public class TxactHibernate implements TxactDAO {
 	public void deleteTxactById(int id) {
 		Session ss = hu.getSession();
 		Transaction tx = ss.beginTransaction();
-
 	}
-
 }

@@ -1,0 +1,103 @@
+<mdb-card>
+    <mdb-card-header class="info-color white-text text-center pt-4">
+        <h1 id="title" class="h1-responsive float-left title">Items</h1>
+        <a class="btn default-color float-right addbutton" data-toggle="modal" data-target="#register" (click)="frame.show()">
+          Add Item</a>
+      </mdb-card-header>
+    <!-- <mdb-card-title>
+      <h4 class="title">Items</h4>
+      <button class="addbutton" type="button" mdbBtn color="default" rounded="true" data-toggle="modal" data-target="#register" (click)="frame.show()"
+  mdbWavesEffect>Add Item</button>
+    </mdb-card-title> -->
+    <mdb-card-body>
+    <mdb-card-text> 
+      <table class="table table-striped">
+          <thead class="mdb-color darken-3">
+            <tr class="text-white">
+              <th scope="id">ID</th>
+              <th scope="Items">Item</th>
+              <th scope="Email">Price</th>
+              <th scope="Edit"></th>
+              <th scope="Delete"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let i of items">
+                  <td><h6>{{i.id}}</h6></td>
+                  <td><h6>{{i.name}}</h6></td>
+                  <td><h6>${{inventoryService.makeItemPriceString(i)}}</h6></td>
+                  <td>
+                      <button type="button" id="i.id" (click)="basicModal.show(); editItem(i)" class="btn btn-primary waves-light" mdbWavesEffect>Edit</button>
+                  </td>
+                  <td>
+                      <button type="button" id="i.id" (click)="deleteItem(i)" class="btn btn-danger" mdbWavesEffect>Delete</button>
+                  </td>
+            </tr>
+          </tbody>
+        </table>
+    </mdb-card-text>
+    
+  </mdb-card-body>
+</mdb-card>
+
+<div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header text-center">
+      <h4 class="modal-title w-100 font-weight-bold">Add Item</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body mx-3">
+      <div class="md-form mb-5">
+        <i class="fa prefix grey-text">Aa</i>
+        <input type="text" id="itemtext" [(ngModel)]="item.name" class="form-control validate" mdbInputDirective>
+        <label data-error="wrong" data-success="right" for="itemtext">Item</label>
+      </div>
+
+      <div class="md-form mb-4">
+        <i class="fa prefix grey-text">$</i>
+        <input type="number" id="Form-price" [(ngModel)]="item.price" class="form-control validate" min="0.00" step="0.01" mdbInputDirective>
+        <label data-error="wrong" data-success="right" for="Form-price">Price</label>
+      </div>
+    </div>
+    <div class="modal-footer d-flex justify-content-center">
+      <button mdbBtn color="default" class="waves-light" (click)="submitModal(); frame.hide()" mdbWavesEffect>Add</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<div mdbModal #basicModal="mdbModal" id="editModal" class="modal fade right" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+   aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="myModalLabel">Edit Item</h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body mx-3">
+                    <div class="md-form mb-5">
+                      <i class="fa prefix grey-text">Aa</i>
+                      <input type="text" id="defaultForm-name" [(ngModel)]="edititem.name" class="form-control validate" mdbInputDirective>
+                      <label data-error="wrong" data-success="right" for="defaultForm-name">Name</label>
+                    </div>
+            
+                    <div class="md-form mb-4">
+                      <i class="fa prefix grey-text">$</i>
+                      <input type="number" id="Form-price" [(ngModel)]="edititem.price" class="form-control validate" min="0.00" step="0.01" mdbInputDirective>
+                      <label data-error="wrong" data-success="right" for="Form-price">Price</label>
+                    </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+                <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="submitEdit(); basicModal.hide()" mdbWavesEffect>Save</button>
+            </div>
+        </div>
+    </div >
+</div >

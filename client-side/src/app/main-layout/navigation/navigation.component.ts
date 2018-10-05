@@ -23,6 +23,7 @@ export class NavigationComponent implements OnInit {
     this.isLoggedIn$ = this.authService.isLoggedIn;
     this.isAdmin$ = this.userService.isAdmin;
     this.authService.checkLogin();
+    this.userService.checkAdmin();
   }
 
   onLogout() {

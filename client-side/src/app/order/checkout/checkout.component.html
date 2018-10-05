@@ -1,0 +1,28 @@
+<div class="col-md-6">
+    <mdb-card>
+        <mdb-card-header class="info-color white-text text-center py-4">
+        </mdb-card-header>
+        <!--Card content-->
+        <mdb-card-body class="px-lg-5 pt-0">
+            <!-- Form -->
+            <form class="text-center" #checkoutForm="ngForm" (ngSubmit)="purchase()" style="color: #757575;">
+                <table class="table order">
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr *ngFor="let o of orders"> 
+                        <td>Hello</td>
+                     
+                    </tr>
+                </table>      
+                <input type="text" placeholder="Enter the address" id="delivery_address">
+                <div>Total: $</div> 
+                <button type="submit" class="btn btn-primary">Purchase</button>
+                <button type="button" class="btn btn-danger" (click)="goBack()">Go back</button>   
+            </form>
+            <!-- Form -->
+        </mdb-card-body>
+    </mdb-card>
+</div>

@@ -46,7 +46,17 @@ public class OrderHibernate implements OrderDAO{
 		Order ord = ss.get(Order.class,  id);
 		return ord;
 	}
-
+	
+	@Override
+	public Set<Order> getOrdersByTxid(int txactid){
+		Session ss = hu.getSession();
+		String hql = "SELECT o FROM com.revature.beans.Order AS o WHERE o.tx.id = :txid";
+		Query<Order> que = ss.createQuery(hql, Order.class);
+		que.setParameter("txid", txactid);
+		List<Order> orderList = que.getResultList();
+		System.out.println(orderList);
+		return new HashSet<Order>(orderList);
+	}
 	@Override
 	public List<Order> getOrdersCriteria(Order ord) {
 		Session ss = hu.getSession();

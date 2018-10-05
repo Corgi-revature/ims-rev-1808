@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.revature.beans.User;
 import com.revature.utils.HibernateUtil;
+import com.revature.beans.UserType;
 
 @Component
 public class UserHibernate implements UserDAO {
@@ -38,6 +39,40 @@ public class UserHibernate implements UserDAO {
 		Session ss = hu.getSession();
 		return ss.get(User.class, id);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> getUserByType(int i){
+		Session ss = hu.getSession();
+		List<User> result = null;
+		try {
+			String hql = "FROM User WHERE usertype.id = ?";
+//			Query query = ss.createQuery(hql);
+			result = ss.createQuery(hql).setParameter(0, i).list();
+		} catch (Exception e) {
+
+		} finally {
+
+		}
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> getEmp(){
+		Session ss = hu.getSession();
+		List<User> result = null;
+		try {
+			String hql = "FROM User WHERE usertype.id != 2";
+//			Query query = ss.createQuery(hql);
+			result = ss.createQuery(hql).list();
+		} catch (Exception e) {
+			
+		} finally {
+
+		}
+		return result;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -49,7 +84,6 @@ public class UserHibernate implements UserDAO {
 //			Query query = ss.createQuery(hql);
 			result = ss.createQuery(hql).setParameter(0, user.getEmail().toLowerCase()).setParameter(1, user.getPassword()).list();
 		} catch (Exception e) {
-	         e.printStackTrace();
 	         
 		} finally {
 

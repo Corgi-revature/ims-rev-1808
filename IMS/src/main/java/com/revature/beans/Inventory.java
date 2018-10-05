@@ -1,5 +1,6 @@
 package com.revature.beans;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,8 +18,9 @@ public class Inventory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inventory")
 	@SequenceGenerator(name = "inventory", sequenceName = "invent_seq", allocationSize = 1)
+	@Column(name="id")
 	private int id;
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="item")
 	private Item item;
 	@Column(name="packagedate")

@@ -1,7 +1,9 @@
 package com.revature.controllers;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,9 +24,14 @@ public class TxactController {
 	private TxactService ts;
 
 	@RequestMapping(method = RequestMethod.POST)
-	Txact addTxact(@RequestBody Txact txa) {
-		ts.addTxact(txa);
-		return txa;
+	int addTxact() {
+		Txact txa = new Txact();
+		txa.setId(0);
+		txa.setToken("Test");
+		txa.setCreated((new Date()).toString());
+		txa.setTxid(generateUUID());
+		txa.setStatus("Pending");
+		return ts.addTxact(txa);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -39,7 +46,7 @@ public class TxactController {
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	List<Txact> getTxactsCriteria(@RequestBody Txact txact) {
-		return ts.getTxactsCriteria();
+		return ts.getTxactsCriteria(txact);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)
@@ -55,5 +62,13 @@ public class TxactController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	void deleteTxactById(@PathVariable int id) {
 		ts.deleteTxactById(id);
+	}
+	
+	String generateUUID(){
+		String newID = UUID.randomUUID().toString();
+//		System.out.println(stringID);
+//		int newID = stringID.hashCode();
+//		System.out.println(newID);
+		return newID;
 	}
 }

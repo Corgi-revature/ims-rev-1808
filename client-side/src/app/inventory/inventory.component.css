@@ -1,0 +1,15 @@
+.title {
+    float: left;
+}
+.addbutton {
+    float: right;
+    margin-top:0px;
+    margin-bottom: 1rem;
+}
+/* #price {
+    text-align: center;
+} */
+
+td h6 {
+    padding-top:0.8rem;
+}

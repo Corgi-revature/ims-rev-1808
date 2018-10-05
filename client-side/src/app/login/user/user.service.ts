@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserService {
+
   private appUrl = this.coreService.getURL() + '/user';
   private appUrl2 = this.coreService.getURL() + '/usertype';
   private head = this.coreService.getHeader();
@@ -20,24 +21,52 @@ export class UserService {
     return this.admin.asObservable(); // {2}
   }
 
-  getAll(): Observable<User[]> {
+  getUser(): Observable<User[]> {
     this.admin.next(true);
-    return this.http.get<User[]>(`${this.appUrl}/all`);
+    return this.http.get<User[]>(`${this.appUrl}/employee/all`, {headers: this.coreService.getHeader()}).pipe(map(
+      resp => {
+        console.log(resp);
+        return resp as User[];
+      },
+      error => error)
+    );
+  }
+
+  getCust(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.appUrl}/customer/all`, {headers: this.coreService.getHeader()}).pipe(map(
+      resp => {
+        console.log(resp);
+        return resp as User[];
+      },
+      error => error)
+    );
+  }
+
+  checkAdmin() {
+    const user: User = JSON.parse(localStorage.getItem('user'));
+    if (user.usertype.id !== 2) {
+      this.admin.next(true);
+    }
   }
 
   getById(id: number) {
-    return this.http.get(`${this.appUrl}/` + id);
+    return this.http.get(`${this.appUrl}/` + id, { headers: this.head}).pipe(map(
+      resp => {
+        return resp as User;
+      },
+      error => error)
+    );
   }
 
   register(user: User) {
     return this.http.post(`${this.appUrl}/new`, user, {headers: this.head});
   }
   gettype(id: number) {
-    return this.http.get(`${this.appUrl2}`+ id);
+    return this.http.get(`${this.appUrl2}` + id);
   }
 
-  update(user: User) {
-    return this.http.put(`${this.appUrl}/users/` + user.id, user);
+  update(user: User, id) {
+    return this.http.put(`${this.appUrl}/${id}`, user, {headers: this.head , withCredentials: true});
   }
 
   delete(id: number) {

@@ -1,10 +1,12 @@
-//import { Txact } from "./txact";
+import { Txact } from "./txact";
+import { Item } from "./item";
+import { User } from "./user";
 
 export class Order {
     id: number;
-    itemid: number;
+    inventoryitem: Item;
     amount: number;
-    userid: number;
-    txid: number;
+    user: User;
+    tx: Txact;
     address: string;
 }

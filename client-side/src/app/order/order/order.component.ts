@@ -1,13 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Order } from '../../class/order';
 import { Item } from '../../class/item';
-import { Inventory } from '../../class/inventory';
 import { User } from '../../class/user';
 import { Txact } from '../../class/txact';
 import { ItemService } from '../../core/item.service';
-import { InventoryService } from '../../order/inventory/inventory.service'
-import { OrderService } from '../../order/order/order.service';
 import { TxactService } from '../../order/txact/txact.service';
+import { OrderService } from '../../order/order/order.service';
+import { Router } from '@angular/router';
+import { UserType } from '../../class/usertype';
+import { CoreService } from '../../core/core.service';
 
 @Component({
   selector: 'app-order',
@@ -16,61 +18,184 @@ import { TxactService } from '../../order/txact/txact.service';
 })
 
 export class OrderComponent implements OnInit {
+  contactFormModalAddress = new FormControl('', Validators.required);
   @Input()
-  curOrder: Order;
+  fakeUserType:UserType={
+     name: "fake",
+     id: 10000,
+  }
   @Input()
-  curTxact: Txact;
-  @Input()
-  curUser: User;
-  @Input()
-  amount: number;
+  curUser: User = {
+    id: 1,
+    first: "Mr.",
+    last: "Dude",
+    phone: "Nah",
+    email: "Nope",
+    usertype: this.fakeUserType,
+    password: "1234"
+  };
   @Input()
   sessionId: string;
-  public orders: Order[];
-  public items: Item[];
-  //public invents: Inventory[];
+  public curOrder:Order={
+    id: 0,
+    inventoryitem: {id: 0, name: '', price: 0},
+    amount: 0,
+    user: {id: 0, first: '', last: '', phone: '', email: '', password: '', usertype: {id: 0, name: ''}},
+    tx: {id: 0, created: '', token: '', txid: '', status: ''},
+    address: ''
+  };
+  public curTxact:Txact=
+    {id: 0, created: '', token: '', txid: '', status: ''};
+  public searchBar: string;
+  public orders:Order[] = [];
+  public items: Item[]; 
+  public txid:number=0;
+  public index;
+  
 
   constructor(
-    private inventoryService: InventoryService,
+    private router: Router,
     private itemService: ItemService,
     private orderService: OrderService,
-    private txactSerivce: TxactService
+    private txactService: TxactService,
+    private coreservice: CoreService
   ) {}
 
   ngOnInit() {
+    this.searchBar = '';
     this.fillItemList();
     this.openTransaction();
-   // this.fillInventory();
   }
-
 
   fillItemList() {
     this.itemService.getItems().subscribe(itemList => (this.items = itemList));
   }
 
   add(ite: Item): void {
-    // this.orderService.addItem(this.curOrder, ite, amount).subscribe(
-    //   add => (this.curOrder = add)
-    // );
-   document.getElementById(`${ite.name}_cart`).innerText = (<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value;
+    let amount: number = Number((<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value);
+    let itemTotal: string = String(ite.price*amount);
+    document.getElementById(`${ite.id}_amount`).innerText = (<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value;
+    document.getElementById(`${ite.id}_cost`).innerText = itemTotal;
+    this.findOrder(ite);
+    if (this.index != -1){
+      this.updateCartOrder(amount);
+    }
+    else {
+      this.createCartOrder(ite, amount);
+    }
   }
-  
+
+  createCartOrder(ite: Item, amount: number){
+    console.log("create");
+    let ord: Order = {
+      id: 0, 
+      inventoryitem: {id: 0, name: '', price: 0}, 
+      amount: 0, 
+      user: {id: 0, first: '', last: '', phone: '', email: '', password: '', usertype: {id: 0, name: ''}}, 
+      tx: {id: 0, created: '', token: '', txid: '', status: ''}, 
+      address: ''}
+    ord.id = 0;
+    ord.inventoryitem.id = ite.id;
+    ord.inventoryitem.name = ite.name;
+    ord.inventoryitem.price = ite.price;
+    ord.amount = amount;
+    ord.tx.id = this.curTxact.id;
+    ord.tx.created = this.curTxact.created;
+    ord.tx.status = this.curTxact.status;
+    ord.tx.token = this.curTxact.token;
+    ord.tx.txid = this.curTxact.txid;
+    ord.user = JSON.parse(this.coreservice.getLStorage('user'));
+    ord.address = "";
+    this.orders.push(ord);
+    console.log(this.orders);
+  }
+
+  updateCartOrder(amount:number){
+    console.log("update");
+    this.curOrder.amount = amount;
+    this.orders.splice(this.index, 1, this.curOrder);
+  }
+
+  findOrder(ite: Item){
+    this.index =-1;
+    console.log("length: " +this.orders.length);
+    for (let x = 0; x < this.orders.length; x++){
+      console.log("x: " +x);
+      console.log(this.orders[x]);
+      console.log(ite);
+      if (this.orders[x].inventoryitem.id == ite.id){
+        this.curOrder = this.orders[x];
+        this.index = x;
+        break;
+      }
+    }
+  }
+
   checkout(): void {
-    this.txactSerivce.updateTransaction;
+    console.log("checkout");
+    for (let x = 0; x < this.orders.length; x++){
+      this.orders[x].address = this.contactFormModalAddress.value;
+      this.createOrder(this.orders[x]);
+    }
+    this.orderService.setTxid(this.txid);
+    this.router.navigate(['/delivery']);
   }
 
-  // This should check for a transaction is open
-  isOpen(): boolean {
-    return this.curTxact != null;
+  createOrder(ord:Order){
+    console.log("create order");
+    this.orderService.createOrder(ord).subscribe(
+      resp => {
+        if(resp !== null) {
+          ord.id = resp;
+        }
+      }
+    );
   }
 
-  empty(): void {}
+  empty(): void {
+    for (let x = 0; x < this.orders.length; x++){
+    document.getElementById(`${this.orders[x].inventoryitem.id}_cart`).innerText = "0";
+    }
+    this.orders.splice(0, this.orders.length);
+  }
+
+  goBack(){
+    this.router.navigate(['/dashboard']);
+  }
 
   openTransaction(){
-    this.txactSerivce.createTransaction();
-    this.curTxact.id = 1;
-    this.curTxact.token = `Token ${this.curTxact.id}`;
-    this.curTxact.created = "Now";
-    this.curTxact.txid = "012854 0415";
+    console.log("Open Transaction");
+    this.txactService.createTransaction().subscribe(
+      resp => {
+        if (resp !== null) {
+          this.txid = resp;
+          this.findTransactionById(this.txid);
+        }
+      }
+    );
+  }
+
+  findTransactionById(id:number){
+    this.txactService.getTransaction(id).subscribe(
+      resp => {
+        if (resp !== null) {
+          this.curTxact = resp;
+        }
+      }
+    );
+  }
+
+  getOrderTotal(){
+    var total = 0;
+    for (let x = 0; x < this.orders.length; x++){
+      total = total + (this.orders[x].inventoryitem.price * this.orders[x].amount);
+    }
+    return total;
+  }
+
+  getItemTotal(ite:Item){
+    let amount: number = Number((<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value);
+    let total = ite.price*amount;
+    return total;
   }
 }

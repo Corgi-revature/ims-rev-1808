@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.User;
+import com.revature.beans.UserType;
 import com.revature.data.UserDAO;
-//this is how u do a service?
+
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired
@@ -22,6 +23,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUserById(int id) {
 		return ud.getUserById(id);
+	}
+	
+	@Override
+	public List<User> getEmp() {
+		return ud.getEmp();
+	}
+	
+	@Override
+	public List<User> getUserByType(int i) {
+		return ud.getUserByType(i);
 	}
 
 	@Override

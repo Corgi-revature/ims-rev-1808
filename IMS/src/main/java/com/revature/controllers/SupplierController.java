@@ -23,9 +23,8 @@ public class SupplierController {
 	SupplierService sups;
 	
 	@RequestMapping(method=RequestMethod.POST)	
-	Supplier addOrder(@RequestBody Supplier sup) {
-		sups.addSupplier(sup);
-		return sup;
+	int addSupplier(@RequestBody Supplier sup) {
+		return sups.addSupplier(sup);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
@@ -38,9 +37,9 @@ public class SupplierController {
 		return sups.getSuppliers();
 	}
 	
-	@RequestMapping(value="/search", method=RequestMethod.GET)
+	@RequestMapping(value="/search", method=RequestMethod.POST)
 	List<Supplier> getSuppliersCriteria(@RequestBody Supplier sup) {
-		return sups.getSuppliersCriteria();
+		return sups.getSuppliersCriteria(sup);
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT)

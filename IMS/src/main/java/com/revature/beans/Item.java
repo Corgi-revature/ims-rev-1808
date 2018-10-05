@@ -11,20 +11,22 @@ import javax.persistence.Table;
 @Entity
 @Table(name="items")
 public class Item {
-	/*
-	 * itemid itemname price stock created expires
-	 */
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "items")
-	@SequenceGenerator(name = "items", sequenceName = "item_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "itemseq")
+	@SequenceGenerator(name = "itemseq", sequenceName = "item_seq", allocationSize = 1)
+	@Column(name="id")
 	private int id;
 	@Column(name = "itemname")
 	private String name;
 	@Column(name = "price")
 	private double price;
+	
+	
 	public Item() {
 		super();
 	}
+	
 	public Item(int id, String name, double price) {
 		super();
 		this.id = id;
@@ -55,6 +57,7 @@ public class Item {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
