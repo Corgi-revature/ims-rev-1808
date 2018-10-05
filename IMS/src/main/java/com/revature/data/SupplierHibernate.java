@@ -79,6 +79,7 @@ public class SupplierHibernate implements SupplierDAO {
 		Transaction tx = ss.beginTransaction();
 		try {
 			ss.delete(sup);
+			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
 		}
@@ -90,6 +91,7 @@ public class SupplierHibernate implements SupplierDAO {
 		Transaction tx = ss.beginTransaction();
 		try {
 			ss.delete(ss.get(Supplier.class, id));
+			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
 		}

@@ -99,6 +99,7 @@ public class DeliveryHibernate implements DeliveryDAO {
 		for(Delivery deli : deliveries) {
 			if(deli.getId()==id) {
 				ss.delete(deli);
+				tx.commit();
 				break;
 			}
 		}
