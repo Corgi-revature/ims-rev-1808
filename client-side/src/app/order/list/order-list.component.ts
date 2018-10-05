@@ -23,7 +23,11 @@ export class OrderListComponent implements OnInit {
     const l = this.coreService.getLStorage('user');
     this.user = JSON.parse(l);
     this.usertype = this.user.usertype.id;
-    this.getOrdersView();
+    if (this.usertype !== 2) {
+      this.getOrdersView();
+    } else {
+      this.getOrdersViewByNoS(this.user.id);
+    }
   }
 
   getOrdersView() {
