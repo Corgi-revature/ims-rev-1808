@@ -39,6 +39,7 @@ import { AddInventoryComponent} from './inventory/add-inventory/add-inventory.co
 import { SupplierComponent } from './supplier/supplier.component';
 import { ItemComponent } from './item/item.component';
 import { ProfileComponent } from './login/profile/profile.component';
+import { BreadcrumbsComponent } from './main-layout/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { ProfileComponent } from './login/profile/profile.component';
     ProfileComponent,
     ItemFilterPipe,
     UserComponent,
-    ItemComponent
+    ItemComponent,
+    BreadcrumbsComponent
   ],
   imports: [
     HttpClientModule,
