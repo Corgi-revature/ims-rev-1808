@@ -43,8 +43,6 @@ export class OrderComponent implements OnInit {
     txact: null,
     address: null
   };
-  public txid:number=0;
-  public index;
   public curTxact:Txact={
     id: 0,
     created: null,
@@ -54,7 +52,9 @@ export class OrderComponent implements OnInit {
   };
   public searchBar: string;
   public orders:Order[] = [];
-  public items: Item[];
+  public items: Item[]; 
+  public txid:number=0;
+  public index;
 
   constructor(
     private router: Router,
@@ -75,7 +75,9 @@ export class OrderComponent implements OnInit {
 
   add(ite: Item): void {
     let amount: number = Number((<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value);
-    document.getElementById(`${ite.id}_cart`).innerText = (<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value;
+    let itemTotal: string = String(ite.price*amount);
+    document.getElementById(`${ite.id}_amount`).innerText = (<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value;
+    document.getElementById(`${ite.id}_cost`).innerText = itemTotal;
     this.findOrder(ite);
     if (this.index != -1){
       this.updateCartOrder(amount);
@@ -87,21 +89,13 @@ export class OrderComponent implements OnInit {
 
   createCartOrder(ite: Item, amount: number){
     console.log("create");
-    // let newOrder:Order=<any>{};
-    // newOrder.item = ite;
-    // newOrder.amount = amount;
-    // console.log(this.curTxact);
-    // newOrder.txact = this.curTxact;
-    // newOrder.user = this.curUser;
-    // console.log(newOrder);
-    // this.orders.push(newOrder);
-    // 
-    this.curOrder.item=ite;
-    this.curOrder.amount=amount;
-    this.curOrder.txact=this.curTxact;
-    this.curOrder.user=this.curUser;
-    this.curOrder.address="";
-    this.orders.push(this.curOrder);
+    let newOrder: Order = <any>{};
+    newOrder.item = ite;
+    newOrder.amount = amount;
+    newOrder.txact = this.curTxact;
+    newOrder.user = this.curUser;
+    newOrder.address = "";
+    this.orders.push(newOrder);
     console.log(this.orders);
   }
 
@@ -113,8 +107,12 @@ export class OrderComponent implements OnInit {
 
   findOrder(ite: Item){
     this.index =-1;
+    console.log("length: " +this.orders.length);
     for (let x = 0; x < this.orders.length; x++){
-      if (this.orders[x].item == ite){
+      console.log("x: " +x);
+      console.log(this.orders[x]);
+      console.log(ite);
+      if (this.orders[x].item.id == ite.id){
         this.curOrder = this.orders[x];
         this.index = x;
         break;
@@ -124,13 +122,12 @@ export class OrderComponent implements OnInit {
 
   checkout(): void {
     console.log("checkout");
-    console.log(this.contactFormModalAddress.value);
     for (let x = 0; x < this.orders.length; x++){
-      console.log(this.orders[x]);
       this.orders[x].address = this.contactFormModalAddress.value;
       this.createOrder(this.orders[x]);
     }
     this.orderService.setTxid(this.txid);
+    this.router.navigate(['/delivery']);
   }
 
   createOrder(ord:Order){
@@ -159,7 +156,6 @@ export class OrderComponent implements OnInit {
     console.log("Open Transaction");
     this.txactService.createTransaction().subscribe(
       resp => {
-        console.log(resp);
         if (resp !== null) {
           this.txid = resp;
           this.findTransactionById(this.txid);
@@ -171,12 +167,18 @@ export class OrderComponent implements OnInit {
   findTransactionById(id:number){
     this.txactService.getTransaction(id).subscribe(
       resp => {
-        console.log("response form gettransaction");
-        console.log(resp);
         if (resp !== null) {
           this.curTxact = resp;
         }
       }
     );
+  }
+
+  getTotal(){
+    var txactTotal = 0;
+    for (let x = 0; x < this.orders.length; x++){
+      txactTotal = txactTotal + (this.orders[x].item.price * this.orders[x].amount);
+    }
+    return txactTotal;
   }
 }

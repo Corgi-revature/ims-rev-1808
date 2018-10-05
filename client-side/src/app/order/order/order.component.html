@@ -23,6 +23,7 @@
           <th>Item</th>
           <th>Quantity</th>
           <th>In Cart</th>
+          <th>Cost</th>
         </tr>
         <tr *ngFor="let i of items | itemFilter:searchBar">
 
@@ -31,9 +32,11 @@
             <input type="number" id="item_{{i.id}}" min="0" value="0">
             <button type="button" class="btn-primary" (click)="add(i)">Add to cart</button>
           </td>
-          <td id="{{i.id}}_cart">0</td>
+          <td id="{{i.id}}_amount">0</td>
+          <td id="{{i.id}}_cost">0</td>
         </tr>
       </table>
+      <div id="Order_Total">Total: ${{getTotal()}}</div>
       <button type="button" class="btn btn-primary" (click)="frame.show()" >Checkout</button>
       <button type="button" class="btn btn-danger" (click)="goBack()">Cancel</button>  
     </form>
