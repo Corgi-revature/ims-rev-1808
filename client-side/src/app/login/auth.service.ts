@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, pipe, BehaviorSubject } from 'rxjs';
 import { CoreService } from '../core/core.service';
 import { map } from 'rxjs/operators';
+import { UserService } from './user/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
   private headers = new HttpHeaders();
   private loggedIn = new BehaviorSubject<boolean>(false); // {1}
   private error: any;
-  constructor(private http: HttpClient, private coreService: CoreService) { }
+  constructor(private http: HttpClient, private coreService: CoreService, private userService: UserService) { }
 
   setToken(token: string): string {
     localStorage.setItem('token', token);
@@ -73,6 +74,7 @@ export class AuthService {
   checkLogin() {
     if (localStorage.getItem('token')) {
       this.loggedIn.next(true);
+      this.userService.checkAdmin();
     }
   }
 
