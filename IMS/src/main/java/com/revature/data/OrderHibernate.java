@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -65,7 +67,6 @@ public class OrderHibernate implements OrderDAO{
 		String hql = "FROM com.revature.beans.Order";
 		Query<Order> que = ss.createQuery(hql, Order.class);
 		List<Order> orderList = que.getResultList();
-
 		return new HashSet<Order>(orderList);
 	}
 

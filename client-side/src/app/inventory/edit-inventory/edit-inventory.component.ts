@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Inventory } from 'src/app/class/inventory';
 import { Router, ActivatedRoute } from '@angular/router';
-import { InventoryService } from '../../inventory/inventory.service';
+import { InventoryService } from '../inventory.service';
+
 @Component({
   selector: 'app-edit-inventory',
   templateUrl: './edit-inventory.component.html',
@@ -14,24 +15,24 @@ export class EditInventoryComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private InventoryService: InventoryService
+    private inventoryService: InventoryService
   ) { }
 
   ngOnInit() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    if(id) {
-      this.InventoryService.getInventoryById(id).subscribe(
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.inventoryService.getInventoryById(id).subscribe(
         inv => (this.inventory = inv)
       );
     }
   }
 
   addToInventory(inv) {
-    console.log("click");
-    inv.item.price = +(<HTMLInputElement>document.getElementById("price")).value;
-    inv.stock = +(<HTMLInputElement>document.getElementById("stock")).value;
+    console.log('click');
+    inv.item.price = +(<HTMLInputElement>document.getElementById('price')).value;
+    inv.stock = +(<HTMLInputElement>document.getElementById('stock')).value;
     console.log(inv);
-    this.InventoryService.updateInventoryItem(inv).subscribe(
+    this.inventoryService.updateInventoryItem(inv).subscribe(
       resp => {
         inv=resp;
         this.router.navigate(['inventory']);
@@ -39,11 +40,11 @@ export class EditInventoryComponent implements OnInit {
   }
 
   deleteFromInventoryAlert(inv) {
-    const mess = "Are you sure you want to delete the following inventory entry?\n";
-    const age = "id: "+inv.id+"\nitem: "+inv.item.name;
-    const conf = confirm(mess+age);
-    if(conf) {
-      this.InventoryService.deleteInventoryItem(inv).subscribe(
+    const mess = 'Are you sure you want to delete the following inventory entry?';
+    const age = 'id: ' + inv.id + 'item: ' + inv.item.name;
+    const conf = confirm(mess + age);
+    if (conf) {
+      this.inventoryService.deleteInventoryItem(inv).subscribe(
         resp => {
           inv=resp;
           this.router.navigate(['inventory']);

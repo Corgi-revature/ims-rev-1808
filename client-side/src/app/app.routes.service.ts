@@ -4,7 +4,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { Map1Component } from './views/maps/map1/map1.component';
 import { ModalsComponent } from './views/modals/modals.component';
 import { BasicTableComponent } from './views/tables/basic-table/basic-table.component';
-import { ProfileComponent } from './views/profile/profile/profile.component';
+import { ProfileComponent } from './views/profile/profile.component';
 import { NotFoundComponent } from './views/errors/not-found/not-found.component';
 import { DashboardComponent } from './views/dashboards/dashboard/dashboard.component';
 import { LoginComponent } from './login/login/login.component';
@@ -16,6 +16,7 @@ import { DeliveryComponent } from './order/delivery/delivery.component';
 import { AuthGuard } from './core/_guards';
 import { EditInventoryComponent } from './inventory/edit-inventory/edit-inventory.component';
 import { UserComponent } from './login/user/user.component';
+import { SupplierComponent } from './supplier/supplier.component';
 // need to change to employee
 import { EmployeeComponent } from './login/user/employee/employee.component';
 import { CustomerComponent } from './login/user/customer/customer.component';
@@ -63,6 +64,9 @@ const routes: Route[] = [
   {
     path: 'inventory/:id', component: EditInventoryComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'supplier', component: SupplierComponent, canActivate: [AuthGuard]
   },
   { path: '**', component: NotFoundComponent },
 

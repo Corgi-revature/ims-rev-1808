@@ -36,6 +36,8 @@ import { PhonePipe } from './shared/pipe/phone.pipe';
 import { ItemFilterPipe } from './shared/pipe/item-filter.pipe';
 import { InventoryComponent } from './inventory/inventory.component';
 import { AddInventoryComponent} from './inventory/add-inventory/add-inventory.component';
+import { SupplierComponent } from './supplier/supplier.component';
+
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { AddInventoryComponent} from './inventory/add-inventory/add-inventory.co
     RegisterComponent,
     ForgetPasswordComponent,
     OrderComponent,
+    SupplierComponent,
+    EditInventoryComponent,
     CheckoutComponent,
     DeliveryComponent,
     EmployeeComponent,

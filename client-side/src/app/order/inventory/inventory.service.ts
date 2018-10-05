@@ -3,15 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CoreService } from '../../core/core.service';
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Item } from '../../class/item';
-import { Inventory } from '../../class/inventory';
+import { Item, Inventory } from '../../class';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InventoryService {
 //  private appUrl = this.coreService.getURL()+'/item';
-private appUrl = this.coreService.getURL()+'/inventory';
+private appUrl = this.coreService.getURL() + '/inventory';
   private headers = new HttpHeaders({'Content-Type': 'application/json' });
   private header = this.coreService.getHeader();
   constructor(
@@ -53,9 +52,9 @@ private appUrl = this.coreService.getURL()+'/inventory';
   }
 
   deleteInventoryItem(inv: Inventory) {
-    const url = this.appUrl + '/'+inv.id;
-    return this.http.delete(url,{headers: this.header}).pipe(
-      map(resp=> resp as Inventory)
+    const url = this.appUrl + '/' + inv.id;
+    return this.http.delete(url, {headers: this.header}).pipe(
+      map(resp => resp as Inventory)
     );
   }
 }

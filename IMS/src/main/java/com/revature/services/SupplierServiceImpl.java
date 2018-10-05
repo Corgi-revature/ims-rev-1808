@@ -30,8 +30,8 @@ public class SupplierServiceImpl implements SupplierService {
 	}
 
 	@Override
-	public List<Supplier> getSuppliersCriteria() {
-		return sd.getSuppliersCriteria();
+	public List<Supplier> getSuppliersCriteria(Supplier sup) {
+		return sd.getSuppliersCriteria(sup);
 	}
 
 	@Override

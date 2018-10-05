@@ -32,7 +32,7 @@ export class InventoryService {
     }
     return price;
   }
-
+  
   getInventory(): Observable<Inventory[]> {
     const url = this.appUrl + '/all';
     return this.http.get(url, { withCredentials: true }).pipe(

@@ -1,23 +1,6 @@
 <!--Main Navigation-->
 <div *ngIf="isLoggedIn$ | async">
   <header class="navbar-custom">
-    <!-- Sidebar -->
-    <!-- <div class="sidebar-fixed position-fixed">
-        <a class="logo-wrapper waves-effect">
-            <img src="../../../../assets/img/corgi-cartoon-png-1.png" class="img-fluid" alt="">
-        </a>
-        <div class="list-group list-group-flush">
-            <a routerLink="dashboards/v1" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
-                <i class="fa fa-pie-chart mr-3"></i>Dashboard</a>
-            <a routerLink="profiles/profile1" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
-                <i class="fa fa-user mr-3"></i>Profile</a>
-            <a routerLink="tables/table1" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
-                <i class="fa fa-table mr-3"></i>Orders</a>
-            <a routerLink="maps/map1" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
-                <i class="fa fa-map mr-3"></i>Inventory</a>
-        </div>
-    </div> -->
-    <!-- Sidebar -->
     <!--Navbar-->
     <mdb-navbar [containerInside]="false" SideClass="navbar navbar-expand-lg navbar-light ">
       <!-- Navbar brand -->
@@ -40,7 +23,7 @@
             <a class="nav-link white-text" [routerLink]="['/inventory']" mdbWavesEffect>Inventory</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link white-text" [routerLink]="['/profile']" mdbWavesEffect>Profile</a>
+            <a class="nav-link white-text" [routerLink]="['/profile/{id}']" mdbWavesEffect>Profile</a>
           </li>
         </ul>
         <!-- new ul -->

@@ -1,0 +1,29 @@
+<mdb-card>
+  <mdb-card-header class="info-color white-text text-center py-4">
+    <h2>Personal Info</h2>
+  </mdb-card-header>
+  <!--Card content-->
+  <mdb-card-body>
+    <!--Text-->
+    <!-- <mdb-card-text> Some quick example text to build on the card title and make up the bulk of the card's content. </mdb-card-text> -->
+    <div class="row">
+      <div class="col-3">
+        <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+          <!-- Card img -->
+          <mdb-card-img src="assets/img/corgeek1.png" alt="card-img-corgeek" class="user-img img-responsive"></mdb-card-img>
+        </div>
+        <!-- <img src="assets/img/corgeek1.png" class="img-fluid user-img"> -->
+      </div>
+      <div class="col-9">
+       <form>
+          <div class="md-form">
+              <input mdbInputDirective [value]="name" type="text" id="form58" class="form-control" disabled>
+              <label for="form58">Name</label>
+            </div>
+       </form>
+      </div>
+    </div>
+    <hr class="my-2">
+    <a class="btn btn-primary waves-light float-right " role="button" mdbWavesEffect>Edit</a>
+  </mdb-card-body>
+</mdb-card>

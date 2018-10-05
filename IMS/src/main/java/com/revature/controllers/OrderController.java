@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Order;
+import com.revature.beans.OrderTotal;
+import com.revature.data.OrderTotalDAO;
 import com.revature.services.OrderService;
 
 @RestController
@@ -20,6 +22,8 @@ import com.revature.services.OrderService;
 public class OrderController {
 	@Autowired
 	private OrderService os;
+	@Autowired
+	private OrderTotalDAO otd;
 	
 	@RequestMapping(method=RequestMethod.POST)	
 	int addOrder(@RequestBody Order ord) {
@@ -33,6 +37,11 @@ public class OrderController {
 	@RequestMapping(value="/all",  method = RequestMethod.GET)
 	Set<Order> getOrders() {
 		return os.getOrders();
+	}
+	
+	@RequestMapping(value="/total/all",  method = RequestMethod.GET)
+	Set<OrderTotal> getAllOrderT() {
+		return otd.getOrdTotals();
 	}
 	
 	@RequestMapping(value="/search", method=RequestMethod.GET)
