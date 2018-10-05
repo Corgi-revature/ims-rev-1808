@@ -25,7 +25,6 @@ public class TxactController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	int addTxact() {
-		System.out.println("here we are in add txact");
 		Txact txa = new Txact();
 		txa.setId(0);
 		txa.setToken("Test");

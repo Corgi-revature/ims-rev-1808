@@ -13,4 +13,5 @@ public interface OrderDAO{
 	public void updateOrder(Order ord);
 	public void deleteOrder(Order ord);
 	public void deleteOrderById(int id);
+	public Set<Order> getOrdersByTxid(int txid);
 }
