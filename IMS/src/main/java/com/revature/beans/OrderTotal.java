@@ -18,24 +18,28 @@ public class OrderTotal {
 	private int id;
 	@Column(name = "address")
 	private String address;
-	@Column(name = "amount")
+	@Column(name = "name")
 	private String name;
+	@Column(name = "amount")
+	private String amount;
 	@Column(name = "price")
 	private double price;
 	@Column(name = "total")
-	private int amount;
+	private int total;
 	@Column(name = "status")
 	private String status;
 	public OrderTotal() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	public OrderTotal(int id, String address, String name, double price, int amount, String status) {
+	public OrderTotal(int id, String address, String name, String amount, double price, int total, String status) {
 		super();
 		this.id = id;
 		this.address = address;
 		this.name = name;
-		this.price = price;
 		this.amount = amount;
+		this.price = price;
+		this.total = total;
 		this.status = status;
 	}
 	public int getId() {
@@ -56,17 +60,23 @@ public class OrderTotal {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getAmount() {
+		return amount;
+	}
+	public void setAmount(String amount) {
+		this.amount = amount;
+	}
 	public double getPrice() {
 		return price;
 	}
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public int getAmount() {
-		return amount;
+	public int getTotal() {
+		return total;
 	}
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setTotal(int total) {
+		this.total = total;
 	}
 	public String getStatus() {
 		return status;
@@ -79,13 +89,14 @@ public class OrderTotal {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + amount;
+		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(price);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + total;
 		return result;
 	}
 	@Override
@@ -102,7 +113,10 @@ public class OrderTotal {
 				return false;
 		} else if (!address.equals(other.address))
 			return false;
-		if (amount != other.amount)
+		if (amount == null) {
+			if (other.amount != null)
+				return false;
+		} else if (!amount.equals(other.amount))
 			return false;
 		if (id != other.id)
 			return false;
@@ -118,11 +132,14 @@ public class OrderTotal {
 				return false;
 		} else if (!status.equals(other.status))
 			return false;
+		if (total != other.total)
+			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "OrderTotal [id=" + id + ", address=" + address + ", name=" + name + ", price=" + price + ", amount="
-				+ amount + ", status=" + status + "]";
+		return "OrderTotal [id=" + id + ", address=" + address + ", name=" + name + ", amount=" + amount + ", price="
+				+ price + ", total=" + total + ", status=" + status + "]";
 	}
+	
 }

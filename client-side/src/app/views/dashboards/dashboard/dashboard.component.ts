@@ -69,11 +69,11 @@ export class DashboardComponent implements OnInit {
     const l = this.coreService.getLStorage('user');
     this.user = JSON.parse(l);
     this.usertype = this.user.usertype.id;
-    this.getOrders();
+    this.getOrdersView();
   }
 
-  getOrders() {
-    this.orderService.getOrders().subscribe(
+  getOrdersView() {
+    this.orderService.getOrdersView().subscribe(
       orderList => this.orders = orderList
     );
   }
