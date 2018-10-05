@@ -71,7 +71,7 @@ export class DashboardComponent implements OnInit {
     this.user = JSON.parse(l);
     this.usertype = this.user.usertype.id;
     this.getOrdersView();
-    this.getReport()
+    this.getReport();
   }
 
   getOrdersView() {
@@ -90,5 +90,10 @@ export class DashboardComponent implements OnInit {
     if (this.usertype === 1) {
       this.userService.getUser();
     }
+  }
+  updateReport() {
+    this.orderService.getReport().subscribe(
+      report => this.report = report
+    );
   }
 }

@@ -66,10 +66,19 @@ export class ProfileComponent implements OnInit {
         (data) => {
           if (data !== 0) {
             this.router.navigate(['/profile']); // success path
+            this.edit=false;
+            this.updateC();
           }
           return false;
         },
         error => this.error = error // error path
       );
+  }
+  updateC() {
+    this.userService.getById(this.currentUser.id).subscribe(data1 => {
+      const newU = JSON.stringify(data1);
+      this.coreService.setLStorage('user', newU);
+      this.currentUser = JSON.parse(this.coreService.getLStorage('user'));
+    });
   }
 }

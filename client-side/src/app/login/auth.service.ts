@@ -59,6 +59,7 @@ export class AuthService {
               this.coreService.setLStorage('user', JSON.stringify(resp as User));
               console.log(resp);
               this.setToken('super-200-corgi');
+              this.userService.checkAdmin();
               return resp as User;
             }
             return this.error;
