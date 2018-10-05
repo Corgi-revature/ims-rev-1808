@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Order;
 import com.revature.beans.OrderTotal;
+import com.revature.beans.TotalReport;
 import com.revature.data.OrderTotalDAO;
+import com.revature.data.TotalReportDAO;
 import com.revature.services.OrderService;
 
 @RestController
@@ -26,12 +28,13 @@ public class OrderController {
 	private OrderService os;
 	@Autowired
 	private OrderTotalDAO otd;
+	@Autowired
+	private TotalReportDAO trd;
 	
 	@RequestMapping(method=RequestMethod.POST)	
 	int addOrder(@RequestBody Order ord) {
 		return os.addOrder(ord);
 	}
-	
 	@RequestMapping(value="/txact/{id}", method=RequestMethod.GET)
 	Set<Order> getOrdersByTxid(@PathVariable int id){
 		return os.getOrdersByTxid(id);
@@ -44,7 +47,10 @@ public class OrderController {
 	Set<Order> getOrders() {
 		return os.getOrders();
 	}
-	
+	@RequestMapping(value="/report",  method = RequestMethod.GET)
+	TotalReport getReport() {
+		return trd.getReport();
+	}
 	@RequestMapping(value="/total/all",  method = RequestMethod.GET)
 	Set<OrderTotal> getAllOrderT() {
 		return otd.getOrdTotals();
@@ -65,22 +71,18 @@ public class OrderController {
 	Set<OrderTotal> getAllOrderTC() {
 		return otd.getOrdTotalsC();
 	}
-	
 	@RequestMapping(value="/search", method=RequestMethod.GET)
 	List<Order> getOrdersCriteria(@RequestBody Order ord) {
 		return os.getOrdersCriteria(ord);
 	}
-	
 	@RequestMapping(method=RequestMethod.PUT)
 	void updateOrder(@RequestBody Order ord) {
 		os.updateOrder(ord);
 	}
-	
 	@RequestMapping(method=RequestMethod.DELETE)
 	void deleteOrder(@RequestBody Order ord) {
 		os.deleteOrder(ord);
 	}
-	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	void deleteOrderById(@PathVariable int id) {
 		os.deleteOrderById(id);

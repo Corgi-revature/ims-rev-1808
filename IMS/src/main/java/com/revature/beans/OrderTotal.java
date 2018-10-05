@@ -10,8 +10,6 @@ import org.hibernate.annotations.Immutable;
 
 @Entity
 @Immutable
-@NamedQueries({
-})
 public class OrderTotal {
 	@Id
 	@Column(name = "id", updatable = false, nullable = false)

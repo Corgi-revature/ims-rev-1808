@@ -6,20 +6,16 @@
   </mdb-card-header>
   <mdb-card-body>
     <!--  -->
-    <mdb-card class="mb-2 ">
-      <mdb-card-body class="p-1">
-        <div class="btn-group" role="group" id="admin" *ngIf="usertype!==2">
+        <div class="btn-group mb-3" role="group" id="admin" *ngIf="usertype!==2">
           <a class="card-link btn btn-light-blue waves-effect waves-light" (click)="getOrdersView()">All</a>
           <a class="card-link btn btn-light-blue waves-effect waves-light" (click)="getOrdersViewC()">Complete</a>
           <a class="card-link btn btn-light-blue waves-effect waves-light" (click)="getOrdersViewP()">Pending</a>
         </div>
-        <div class="btn-group" role="group" id="admin" *ngIf="usertype===2">
+        <div class="btn-group mb-3" role="group" id="admin" *ngIf="usertype===2">
             <a class="card-link btn btn-light-blue waves-effect waves-light" (click)="getOrdersViewByNoS(user.id)">All</a>
             <a class="card-link btn btn-light-blue waves-effect waves-light" (click)="getOrdersViewBy(user.id, 'Completed')">Complete</a>
             <a class="card-link btn btn-light-blue waves-effect waves-light" (click)="getOrdersViewBy(user.id, 'Pending')">Pending</a>
           </div>
-      </mdb-card-body>
-    </mdb-card>
     <!--  -->
     <table class="table table-striped">
       <thead class="mdb-color darken-3">

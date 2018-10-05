@@ -18,11 +18,11 @@ import { Inventory } from '../class/inventory';
 export class DeliveryManageComponent implements OnInit {
 
   public suppliers: Supplier[];
-  public items: Item[];
+  public getitems: Item[];
   public deliveries: Delivery[];
 
-  del : Delivery = {id: 0, items: {id: 0, name: '', price: 0.00}, amount: 0, supplier: {id: 0, name: '', itemsup: {id: 0, name: '', price: 0.00}, email: ''}};
-  inv : Inventory = {id: 0, item: {id: 0, name: '', price: 0.00}, packagedate: '', useby: '', stock: 0};
+  del : Delivery = {id: 0, items: {id: 0, name: '', price: 0.00}, amount: 0, supplier: {id: 0, name: '', itemsup: {id: 0, name: '', price: 0.00}, email: ''}}
+  inv : Inventory = {id: 0, item: {id: 0, name: '', price: 0.00}, packagedate: '', useby: '', stock: 0}
   constructor(
     private supplierservice: SupplierService,
     private itemservice: ItemService,
@@ -41,15 +41,45 @@ export class DeliveryManageComponent implements OnInit {
   }
   acceptDel(del: Delivery){
     this.inv.item = del.items;
-    this.inv.packagedate = '';
+    this.inv.packagedate = this.inputToSQLDate(this.today());
     this.inv.stock = del.amount;
-    this.inv.useby = '';
+    this.inv.useby = this.inputToSQLDate(this.nextDate());
+    this.inventoryservice.createInventoryItem(this.inv).subscribe();
+    this.deliveryservice.deleteDelivery(del.id).subscribe();
   }
   fillItems(){
-    this.itemservice.getItems().subscribe(itemList => (this.items = itemList));
+    this.itemservice.getItems().subscribe(itemList => (this.getitems = itemList));
     
   }
   fillSups(){
     this.supplierservice.getSuppliers().subscribe(supplierList => (this.suppliers = supplierList));
+  }
+  today() {
+    const date = new Date();
+    const year = date.toDateString().substring(date.toDateString().length-4);
+    const month = date.getMonth()>=9 ? (date.getMonth()+1).toString() : "0"+(date.getMonth()+1).toString();
+    const day = date.getDate()>9 ? (date.getMonth()).toString() : "0"+(date.getDate()).toString();
+    const today = year+'-'+month+'-'+day;
+    return today;
+  }
+
+  nextDate(){
+    const date = new Date().getTime()+300000;
+    return this.inputToSQLDate(date);
+  }
+
+  inputToSQLDate(str) {
+    const year = str.substring(2,4);
+    const day = str.substring(8);
+    const months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+    const month = months[parseInt(str.substring(5,7))-1];
+    const date = day+'-'+month+'-'+year;
+    return date;
+  }
+
+  submitModal(){
+    this.deliveryservice.createDelivery(this.del).subscribe(value=>{console.log('Got it: ',value)},
+    error=>{console.log('Did not get it')},
+    ()=>{this.fillDel()});
   }
 }

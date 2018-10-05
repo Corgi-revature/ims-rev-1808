@@ -9,6 +9,7 @@ import { TxactService } from '../../order/txact/txact.service';
 import { OrderService } from '../../order/order/order.service';
 import { Router } from '@angular/router';
 import { UserType } from '../../class/usertype';
+import { CoreService } from '../../core/core.service';
 
 @Component({
   selector: 'app-order',
@@ -37,30 +38,27 @@ export class OrderComponent implements OnInit {
   sessionId: string;
   public curOrder:Order={
     id: 0,
-    item: null,
-    amount: null,
-    user: null,
-    txact: null,
-    address: null
+    inventoryitem: {id: 0, name: '', price: 0},
+    amount: 0,
+    user: {id: 0, first: '', last: '', phone: '', email: '', password: '', usertype: {id: 0, name: ''}},
+    tx: {id: 0, created: '', token: '', txid: '', status: ''},
+    address: ''
   };
-  public curTxact:Txact={
-    id: 0,
-    created: null,
-    token: null,
-    txid: null,
-    status: null
-  };
+  public curTxact:Txact=
+    {id: 0, created: '', token: '', txid: '', status: ''};
   public searchBar: string;
   public orders:Order[] = [];
   public items: Item[]; 
   public txid:number=0;
   public index;
+  
 
   constructor(
     private router: Router,
     private itemService: ItemService,
     private orderService: OrderService,
-    private txactService: TxactService
+    private txactService: TxactService,
+    private coreservice: CoreService
   ) {}
 
   ngOnInit() {
@@ -89,13 +87,26 @@ export class OrderComponent implements OnInit {
 
   createCartOrder(ite: Item, amount: number){
     console.log("create");
-    let newOrder: Order = <any>{};
-    newOrder.item = ite;
-    newOrder.amount = amount;
-    newOrder.txact = this.curTxact;
-    newOrder.user = this.curUser;
-    newOrder.address = "";
-    this.orders.push(newOrder);
+    let ord: Order = {
+      id: 0, 
+      inventoryitem: {id: 0, name: '', price: 0}, 
+      amount: 0, 
+      user: {id: 0, first: '', last: '', phone: '', email: '', password: '', usertype: {id: 0, name: ''}}, 
+      tx: {id: 0, created: '', token: '', txid: '', status: ''}, 
+      address: ''}
+    ord.id = 0;
+    ord.inventoryitem.id = ite.id;
+    ord.inventoryitem.name = ite.name;
+    ord.inventoryitem.price = ite.price;
+    ord.amount = amount;
+    ord.tx.id = this.curTxact.id;
+    ord.tx.created = this.curTxact.created;
+    ord.tx.status = this.curTxact.status;
+    ord.tx.token = this.curTxact.token;
+    ord.tx.txid = this.curTxact.txid;
+    ord.user = JSON.parse(this.coreservice.getLStorage('user'));
+    ord.address = "";
+    this.orders.push(ord);
     console.log(this.orders);
   }
 
@@ -112,7 +123,7 @@ export class OrderComponent implements OnInit {
       console.log("x: " +x);
       console.log(this.orders[x]);
       console.log(ite);
-      if (this.orders[x].item.id == ite.id){
+      if (this.orders[x].inventoryitem.id == ite.id){
         this.curOrder = this.orders[x];
         this.index = x;
         break;
@@ -143,7 +154,7 @@ export class OrderComponent implements OnInit {
 
   empty(): void {
     for (let x = 0; x < this.orders.length; x++){
-    document.getElementById(`${this.orders[x].item.id}_cart`).innerText = "0";
+    document.getElementById(`${this.orders[x].inventoryitem.id}_cart`).innerText = "0";
     }
     this.orders.splice(0, this.orders.length);
   }
@@ -174,11 +185,17 @@ export class OrderComponent implements OnInit {
     );
   }
 
-  getTotal(){
-    var txactTotal = 0;
+  getOrderTotal(){
+    var total = 0;
     for (let x = 0; x < this.orders.length; x++){
-      txactTotal = txactTotal + (this.orders[x].item.price * this.orders[x].amount);
+      total = total + (this.orders[x].inventoryitem.price * this.orders[x].amount);
     }
-    return txactTotal;
+    return total;
+  }
+
+  getItemTotal(ite:Item){
+    let amount: number = Number((<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value);
+    let total = ite.price*amount;
+    return total;
   }
 }

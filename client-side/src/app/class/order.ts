@@ -4,9 +4,9 @@ import { User } from "./user";
 
 export class Order {
     id: number;
-    item: Item;
+    inventoryitem: Item;
     amount: number;
     user: User;
-    txact: Txact;
+    tx: Txact;
     address: string;
 }
