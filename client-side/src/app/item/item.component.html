@@ -1,0 +1,30 @@
+<mdb-card>
+  <mdb-card-body>
+    <mdb-card-title> <h4>Items</h4> </mdb-card-title>
+    <mdb-card-text> 
+      <table class="table">
+          <thead class="black white-text">
+            <tr>
+              <th scope="id">ID</th>
+              <th scope="Items">Item</th>
+              <th scope="Email">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let i of items">
+                  <td>{{i.id}}</td>
+                  <td>{{i.name}}</td>
+                  <td>{{i.price}}</td>
+                  <td>
+                  <a href="" class="btn btn-primary waves-light" mdbWavesEffect>Edit</a>
+                  <a href="" class="btn btn-danger" mdbWavesEffect>Delete</a>
+                  </td>
+            </tr>
+          </tbody>
+        </table>
+          
+
+    </mdb-card-text>
+    
+  </mdb-card-body>
+</mdb-card>
