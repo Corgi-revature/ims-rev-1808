@@ -51,13 +51,7 @@ export class OrderComponent implements OnInit {
   public items: Item[]; 
   public txid:number=0;
   public index;
-  ord: Order = {
-    id: 0, 
-    inventoryitem: {id: 0, name: '', price: 0}, 
-    amount: 0, 
-    user: {id: 0, first: '', last: '', phone: '', email: '', password: '', usertype: {id: 0, name: ''}}, 
-    tx: {id: 0, created: '', token: '', txid: '', status: ''}, 
-    address: ''}
+  
 
   constructor(
     private router: Router,
@@ -93,18 +87,26 @@ export class OrderComponent implements OnInit {
 
   createCartOrder(ite: Item, amount: number){
     console.log("create");
-    this.ord.inventoryitem.id = ite.id;
-    this.ord.inventoryitem.name = ite.name;
-    this.ord.inventoryitem.price = ite.price;
-    this.ord.amount = amount;
-    this.ord.tx.id = this.curTxact.id;
-    this.ord.tx.created = this.curTxact.created;
-    this.ord.tx.status = this.curTxact.status;
-    this.ord.tx.token = this.curTxact.token;
-    this.ord.tx.txid = this.curTxact.txid;
-    this.ord.user = JSON.parse(this.coreservice.getLStorage('user'));
-    this.ord.address = "";
-    this.orders.push(this.ord);
+    let ord: Order = {
+      id: 0, 
+      inventoryitem: {id: 0, name: '', price: 0}, 
+      amount: 0, 
+      user: {id: 0, first: '', last: '', phone: '', email: '', password: '', usertype: {id: 0, name: ''}}, 
+      tx: {id: 0, created: '', token: '', txid: '', status: ''}, 
+      address: ''}
+    ord.id = 0;
+    ord.inventoryitem.id = ite.id;
+    ord.inventoryitem.name = ite.name;
+    ord.inventoryitem.price = ite.price;
+    ord.amount = amount;
+    ord.tx.id = this.curTxact.id;
+    ord.tx.created = this.curTxact.created;
+    ord.tx.status = this.curTxact.status;
+    ord.tx.token = this.curTxact.token;
+    ord.tx.txid = this.curTxact.txid;
+    ord.user = JSON.parse(this.coreservice.getLStorage('user'));
+    ord.address = "";
+    this.orders.push(ord);
     console.log(this.orders);
   }
 
