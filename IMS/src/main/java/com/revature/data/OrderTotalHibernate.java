@@ -26,11 +26,26 @@ public class OrderTotalHibernate implements OrderTotalDAO {
 		return ord;
 	}
 
-
 	@Override	
 	public Set<OrderTotal> getOrdTotals() {
 		Session ss = hu.getSession();
 		String hql = "FROM com.revature.beans.OrderTotal";
+		TypedQuery<OrderTotal> que = ss.createQuery(hql, OrderTotal.class);
+		List<OrderTotal> orderList = que.getResultList();
+		return new HashSet<OrderTotal>(orderList);
+	}
+	@Override	
+	public Set<OrderTotal> getOrdTotalsP() {
+		Session ss = hu.getSession();
+		String hql = "FROM com.revature.beans.OrderTotal WHERE status = 'Pending'";
+		TypedQuery<OrderTotal> que = ss.createQuery(hql, OrderTotal.class);
+		List<OrderTotal> orderList = que.getResultList();
+		return new HashSet<OrderTotal>(orderList);
+	}
+	@Override	
+	public Set<OrderTotal> getOrdTotalsC() {
+		Session ss = hu.getSession();
+		String hql = "FROM com.revature.beans.OrderTotal WHERE status = 'Completed'";
 		TypedQuery<OrderTotal> que = ss.createQuery(hql, OrderTotal.class);
 		List<OrderTotal> orderList = que.getResultList();
 		return new HashSet<OrderTotal>(orderList);
