@@ -50,8 +50,6 @@ export class OrderService {
 
   createOrder(ord: Order): Observable<number> {
     const body = JSON.stringify(ord);
-    console.log("this is the createorder thingy");
-    console.log(body);
     return this.http.post(this.appUrl,body,{ headers: this.headers, withCredentials: true }).pipe(
         map
         (resp => {
