@@ -15,8 +15,8 @@ export class SupplierComponent implements OnInit {
 
   public suppliers: Supplier[];
   public items: Item[];
-  private optionSelect: Array<any>;
-
+  
+  editsup : Supplier = {id: 0, name: '', itemsup: {id: 0, name: '', price: 0.00}, email: ''}
   sup : Supplier = {id: 0, name: '', itemsup: {id: 0, name: '', price: 0.00}, email: ''}
   constructor(
     private supplierservice: SupplierService,
@@ -25,7 +25,6 @@ export class SupplierComponent implements OnInit {
     ) {}
 
   ngOnInit() {
-    this.optionSelect = new Array<any>();
     this.fillSups();
     this.fillItems();
     
@@ -34,11 +33,12 @@ export class SupplierComponent implements OnInit {
   fillSups(){
     this.supplierservice.getSuppliers().subscribe(supplierList => (this.suppliers = supplierList));
   }
-  editSup(){
+  editSup(id: Number){
+    this.supplierservice.getSupplier(id).subscribe(resp=>(this.editsup = resp));
   }
-  deleteSup(){
-
-    //this.supplierservice.deleteSupplier(id);
+  deleteSup(id: Number){
+    this.supplierservice.deleteSupplier(id);
+    this.fillSups();
   }
   fillItems(){
     this.itemservice.getItems().subscribe(itemList => (this.items = itemList));
@@ -47,6 +47,6 @@ export class SupplierComponent implements OnInit {
   submitModal(){
     this.supplierservice.addSupplier(this.sup).subscribe(value=>{console.log('Got it: ',value)},
     error=>{console.log('Did not get it')},
-    ()=>{console.log('finsihed')});
+    ()=>{this.fillSups()});
   }
 }

@@ -19,8 +19,8 @@
                     <td>{{i.itemsup.name}}</td>
                     <td>{{i.email}}</td>
                     <td>
-                    <button type="button" id="sup_edit_{{i.id}}" (click)="editSup()" class="btn btn-primary waves-light" mdbWavesEffect>Edit</button>
-                    <button type="button" id="sup_del_{{i.id}}" (click)="deleteSup()" class="btn btn-danger" mdbWavesEffect>Delete</button>
+                    <button type="button" id="{{i.id}}" (click)="basicModal.show(); editSup(i.id)" class="btn btn-primary waves-light" mdbWavesEffect>Edit</button>
+                    <button type="button" id="{{i.id}}" (click)="deleteSup(i.id)" class="btn btn-danger" mdbWavesEffect>Delete</button>
                     </td>
               </tr>
             </tbody>
@@ -67,8 +67,49 @@
 
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <button mdbBtn color="default" class="waves-light" (click)="submitModal()" mdbWavesEffect>Register</button>
+        <button mdbBtn color="default" class="waves-light" (click)="submitModal() ; frame.hide()" mdbWavesEffect>Register</button>
       </div>
     </div>
   </div>
 </div>
+
+<div mdbModal #basicModal="mdbModal" id="editModal" class="modal fade right" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+   aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body mx-3">
+                    <div class="md-form mb-5">
+                      <i class="fa fa-envelope prefix grey-text"></i>
+                      <input type="email" id="defaultForm-email" [(ngModel)]="editsup.email" class="form-control validate" mdbInputDirective>
+                      <label data-error="wrong" data-success="right" for="defaultForm-email">Email</label>
+                    </div>
+            
+                    <div class="md-form mb-4">
+                      <i class="fa fa-user prefix grey-text"></i>
+                      <input type="text" id="Form-name" [(ngModel)]="editsup.name" class="form-control validate" mdbInputDirective>
+                      <label data-error="wrong" data-success="right" for="Form-email">Name</label>
+                    </div>
+                    <div class="row">
+                        <label>Item Select</label>
+                      <div class="col-md-6">
+                          <select [(ngModel)]="editsup.itemsup" class="browser-default">
+                              <option value="{{editsup.itemsup}}" disabled selected>{{editsup.itemsup.name}}</option>
+                              <option *ngFor="let i of items" [ngValue]="i" >{{i.name}}</option>
+                          </select>
+                      </div>
+                  </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+                <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.hide()" mdbWavesEffect>Save</button>
+            </div>
+        </div>
+    </div >
+</div >

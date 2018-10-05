@@ -21,6 +21,11 @@ import { Item } from '../class/Item';
           .get(this.appUrl + '/all')
           .pipe(map(resp => resp as Supplier[]));
       }
+    getSupplier(id: Number): Observable<Supplier> {
+    return this.http
+        .get(this.appUrl + '/' + id)
+        .pipe(map(resp => resp as Supplier));
+    }
     addSupplier(sup: Supplier): Observable<Supplier>{
         const body = {};
         return this.http
@@ -32,9 +37,8 @@ import { Item } from '../class/Item';
             .put(this.appUrl, sup,{headers: this.headers})
             .pipe(map(resp => resp as Supplier))
     }
-    deleteSupplier(id: Number): Observable<Supplier>{
-        return this.http
+    deleteSupplier(id: Number){
+        this.http
             .delete(this.appUrl+'/'+id, {headers: this.headers})
-            .pipe(map(resp => resp as Supplier))
     }
 }
