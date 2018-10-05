@@ -42,7 +42,6 @@ export class SupplierComponent implements OnInit {
   }
   fillItems(){
     this.itemservice.getItems().subscribe(itemList => (this.items = itemList));
-    
   }
   editSubmit(){
     this.supplierservice.updateSupplier(this.editsup).subscribe(()=>{this.fillSups()});
