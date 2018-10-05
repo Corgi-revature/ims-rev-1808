@@ -54,10 +54,11 @@ public class Order {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Item getInventory() {
+	
+	public Item getInventoryitem() {
 		return inventoryitem;
 	}
-	public void setInventory(Item inventoryitem) {
+	public void setInventoryitem(Item inventoryitem) {
 		this.inventoryitem = inventoryitem;
 	}
 
