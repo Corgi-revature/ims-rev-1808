@@ -87,6 +87,7 @@ public class InventoryHibernate implements InventoryDAO {
 		Transaction tx = ss.beginTransaction();
 		try {
 			ss.delete(inv);
+			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
 		}
@@ -99,6 +100,7 @@ public class InventoryHibernate implements InventoryDAO {
 		try {
 			Inventory inv = getInventoryById(id);
 			ss.delete(inv);
+			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
 		}

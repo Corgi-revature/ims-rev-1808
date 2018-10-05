@@ -106,6 +106,7 @@ public class UserTypeHibernate implements UserTypeDAO {
 		try {
 			UserType utype = getUserTypeById(id);
 			ss.delete(utype);
+			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
 		}
