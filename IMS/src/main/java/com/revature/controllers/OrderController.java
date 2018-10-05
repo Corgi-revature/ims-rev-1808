@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Order;
@@ -46,6 +48,14 @@ public class OrderController {
 	@RequestMapping(value="/total/all",  method = RequestMethod.GET)
 	Set<OrderTotal> getAllOrderT() {
 		return otd.getOrdTotals();
+	}
+	@RequestMapping(value="/total/search/{id}",  method = RequestMethod.GET)
+	Set<OrderTotal> getAllOrderBy(@PathVariable int id) {
+		return otd.getOrdTotalsBy(id);
+	}
+	@RequestMapping(value="/total/{id}",  method = RequestMethod.GET)
+	Set<OrderTotal> getAllOrderBy(@PathVariable int id, @RequestParam("status") String s) {
+		return otd.getOrdTotalsBy(id, s);
 	}
 	@RequestMapping(value="/total/pending",  method = RequestMethod.GET)
 	Set<OrderTotal> getAllOrderTP() {
