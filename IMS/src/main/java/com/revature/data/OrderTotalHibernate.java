@@ -35,6 +35,22 @@ public class OrderTotalHibernate implements OrderTotalDAO {
 		return new HashSet<OrderTotal>(orderList);
 	}
 	@Override	
+	public Set<OrderTotal> getOrdTotalsBy(int id) {
+		Session ss = hu.getSession();
+		String hql = "FROM com.revature.beans.OrderTotal where userid = ?";
+		TypedQuery<OrderTotal> que = ss.createQuery(hql, OrderTotal.class);
+		List<OrderTotal> orderList = que.setParameter(0, id).getResultList();
+		return new HashSet<OrderTotal>(orderList);
+	}
+	@Override	
+	public Set<OrderTotal> getOrdTotalsBy(int id, String s) {
+		Session ss = hu.getSession();
+		String hql = "FROM com.revature.beans.OrderTotal where status = ? and userid = ?";
+		TypedQuery<OrderTotal> que = ss.createQuery(hql, OrderTotal.class);
+		List<OrderTotal> orderList = que.setParameter(0, s).setParameter(1, id).getResultList();
+		return new HashSet<OrderTotal>(orderList);
+	}
+	@Override	
 	public Set<OrderTotal> getOrdTotalsP() {
 		Session ss = hu.getSession();
 		String hql = "FROM com.revature.beans.OrderTotal WHERE status = 'Pending'";

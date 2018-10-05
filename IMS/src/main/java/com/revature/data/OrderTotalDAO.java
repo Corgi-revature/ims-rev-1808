@@ -10,4 +10,6 @@ public interface OrderTotalDAO {
 	public Set<OrderTotal> getOrdTotals();
 	public Set<OrderTotal> getOrdTotalsP();
 	public Set<OrderTotal> getOrdTotalsC();
+	public Set<OrderTotal> getOrdTotalsBy(int id);
+	public Set<OrderTotal> getOrdTotalsBy(int id, String s);
 }
