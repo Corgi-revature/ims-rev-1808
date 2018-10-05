@@ -23,6 +23,14 @@
             <!-- add a NgIF -->
             <a class="nav-link white-text" [routerLink]="['/inventory']" mdbWavesEffect>Inventory</a>
           </li>
+          <li class="nav-item" *ngIf="isAdmin$ | async">
+            <!-- add a NgIF -->
+            <a class="nav-link white-text" [routerLink]="['/supplier']" mdbWavesEffect>Suppliers</a>
+          </li>
+          <li class="nav-item" *ngIf="isAdmin$ | async">
+            <!-- add a NgIF -->
+            <a class="nav-link white-text" [routerLink]="['manage/delivery']" mdbWavesEffect>Deliveries</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link white-text" [routerLink]="['/profile']" mdbWavesEffect>Profile</a>
           </li>

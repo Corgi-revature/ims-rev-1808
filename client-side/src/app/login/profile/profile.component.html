@@ -87,6 +87,11 @@
             <label for="materialRegisterFormPhone">Phone number</label>
           </div>
           <!-- Sign up button -->
+          <div class="md-form">
+              <input type="password" id="materialRegisterFormPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock"
+               mdbInputDirective formControlName="password">
+              <label for="materialRegisterFormPassword">Password</label>
+            </div>
 
           <button *ngIf="edit" mdbBtn type="button" color="danger" class="waves-light float-right" (click)="toggleForm()"
             mdbWavesEffect>Cancel</button>
