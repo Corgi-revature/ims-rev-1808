@@ -32,21 +32,19 @@ private appUrl = this.coreService.getURL() +'/delivery';
     ));
   }
 
-  // These affect the items in the database
-  updateDelivery(del: Delivery): Observable<Delivery> {
-    const url = this.appUrl + '/' + del.id;
-    const body = JSON.stringify(del);
-    return this.http.put(url, body, { headers: this.headers, withCredentials: true }).pipe(
-      map(
-      resp => resp as Delivery
-    ));
+  createDelivery(del: Delivery): Observable<Number> {
+    return this.http
+      .post(this.appUrl, del, { headers: this.headers})
+      .pipe(map(resp => resp as Number));
   }
-
-  createDelivery(del: Delivery): Observable<Delivery> {
-    const body = JSON.stringify(del);
-    return this.http.post(this.appUrl, body, { headers: this.headers, withCredentials: true }).pipe(
-      map(
-      resp => resp as Delivery
-    ));
-  }
+  updateDelivery(deli: Delivery): Observable<any>{
+    return this.http
+        .put(this.appUrl, deli,{headers: this.headers})
+        .pipe(map(resp => resp as string));
+}
+deleteDelivery(id: Number): Observable<any>{
+    return this.http
+        .delete(this.appUrl+'/'+id, {headers: this.headers})
+        .pipe(map(resp => resp as string));
+}
 }
