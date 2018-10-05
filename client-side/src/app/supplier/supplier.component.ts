@@ -33,16 +33,19 @@ export class SupplierComponent implements OnInit {
   fillSups(){
     this.supplierservice.getSuppliers().subscribe(supplierList => (this.suppliers = supplierList));
   }
-  editSup(id: Number){
-    this.supplierservice.getSupplier(id).subscribe(resp=>(this.editsup = resp));
+  editSup(sup: Supplier){
+    this.supplierservice.getSupplier(sup.id).subscribe(resp=>(this.editsup = resp));
   }
-  deleteSup(id: Number){
-    this.supplierservice.deleteSupplier(id);
-    this.fillSups();
+  deleteSup(sup: Supplier){
+    this.supplierservice.deleteSupplier(sup.id).subscribe(()=>{this.fillSups()});
+    //this.fillSups();
   }
   fillItems(){
     this.itemservice.getItems().subscribe(itemList => (this.items = itemList));
     
+  }
+  editSubmit(){
+    this.supplierservice.updateSupplier(this.editsup).subscribe(()=>{this.fillSups()});
   }
   submitModal(){
     this.supplierservice.addSupplier(this.sup).subscribe(value=>{console.log('Got it: ',value)},

@@ -30,15 +30,16 @@ import { Item } from '../class/Item';
         const body = {};
         return this.http
             .post(this.appUrl, sup,{ headers: this.headers})
-            .pipe(map(resp => resp as Supplier))
+            .pipe(map(resp => resp as Supplier));
     }
-    updateSupplier(sup: Supplier): Observable<Supplier>{
+    updateSupplier(sup: Supplier): Observable<any>{
         return this.http
             .put(this.appUrl, sup,{headers: this.headers})
-            .pipe(map(resp => resp as Supplier))
+            .pipe(map(resp => resp as string));
     }
-    deleteSupplier(id: Number){
-        this.http
+    deleteSupplier(id: Number): Observable<any>{
+        return this.http
             .delete(this.appUrl+'/'+id, {headers: this.headers})
+            .pipe(map(resp => resp as string));
     }
 }

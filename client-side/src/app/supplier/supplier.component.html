@@ -19,8 +19,8 @@
                     <td>{{i.itemsup.name}}</td>
                     <td>{{i.email}}</td>
                     <td>
-                    <button type="button" id="{{i.id}}" (click)="basicModal.show(); editSup(i.id)" class="btn btn-primary waves-light" mdbWavesEffect>Edit</button>
-                    <button type="button" id="{{i.id}}" (click)="deleteSup(i.id)" class="btn btn-danger" mdbWavesEffect>Delete</button>
+                    <button type="button" id="i.id" (click)="basicModal.show(); editSup(i)" class="btn btn-primary waves-light" mdbWavesEffect>Edit</button>
+                    <button type="button" id="i.id" (click)="deleteSup(i)" class="btn btn-danger" mdbWavesEffect>Delete</button>
                     </td>
               </tr>
             </tbody>
@@ -94,7 +94,7 @@
                     <div class="md-form mb-4">
                       <i class="fa fa-user prefix grey-text"></i>
                       <input type="text" id="Form-name" [(ngModel)]="editsup.name" class="form-control validate" mdbInputDirective>
-                      <label data-error="wrong" data-success="right" for="Form-email">Name</label>
+                      <label data-error="wrong" data-success="right" for="Form-name">Name</label>
                     </div>
                     <div class="row">
                         <label>Item Select</label>
@@ -108,7 +108,7 @@
             </div>
             <div class="modal-footer justify-content-center">
                 <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
-                <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.hide()" mdbWavesEffect>Save</button>
+                <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="editSubmit() ; basicModal.hide()" mdbWavesEffect>Save</button>
             </div>
         </div>
     </div >
