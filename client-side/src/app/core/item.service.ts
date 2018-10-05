@@ -9,7 +9,6 @@ import { Item } from '../class/item';
   providedIn: 'root'
 })
 export class ItemService {
-//  private appUrl = this.coreService.getURL()+'/item';
 private appUrl = this.coreService.getURL() +'/item';
   private headers = new HttpHeaders({'Content-Type': 'application/json' });
   constructor(
@@ -43,8 +42,8 @@ private appUrl = this.coreService.getURL() +'/item';
     ));
   }
 
-  createItem(): Observable<Item> {
-    const body = '{}';
+  createItem(ite: Item): Observable<Item> {
+    const body = JSON.stringify(ite);
     return this.http.post(this.appUrl, body, { headers: this.headers, withCredentials: true }).pipe(
       map(
       resp => resp as Item

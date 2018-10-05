@@ -87,6 +87,7 @@ public class ItemHibernate implements ItemDAO {
 		Transaction tx = ss.beginTransaction();
 		try {
 			ss.delete(ite);
+			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
 		}
@@ -99,6 +100,7 @@ public class ItemHibernate implements ItemDAO {
 		try {
 			Item ite = getItemById(id);
 			ss.delete(ite);
+			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
 		}

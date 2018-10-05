@@ -4,7 +4,6 @@ DROP TABLE usertypes CASCADE CONSTRAINTS;
 DROP TABLE transactions CASCADE CONSTRAINTS;
 DROP TABLE suppliers CASCADE CONSTRAINTS;
 DROP TABLE orders CASCADE CONSTRAINTS;
-DROP TABLE supplieritems CASCADE CONSTRAINTS;
 DROP TABLE deliveries CASCADE CONSTRAINTS;
 DROP TABLE users CASCADE CONSTRAINTS;
 DROP TABLE inventory CASCADE CONSTRAINTS;
@@ -29,10 +28,10 @@ CREATE TABLE items(
 CREATE TABLE inventory(
 	id number(20) PRIMARY KEY,
 	item number(20),
-	packagedate date,
-	useby date,
+	packagedate varchar2(255),
+	useby varchar2(255),
 	stock number(20),
-	CONSTRAINT fk_item_inventory FOREIGN KEY (item) REFERENCES items(id)
+	CONSTRAINT fk_item_inventory FOREIGN KEY (item) REFERENCES items(id) ON DELETE CASCADE
 	);
 
 CREATE TABLE usertypes(
@@ -42,15 +41,18 @@ CREATE TABLE usertypes(
 
 CREATE TABLE transactions(
 	id number(20) PRIMARY KEY,
-	created date,
+	created varchar2(255),
 	token varchar2(255),
-	txid varchar2(255)
+	txid varchar2(255),
+    status varchar2(255)
 );
 
 CREATE TABLE suppliers(
 	id number(20) PRIMARY KEY,
 	suppliername varchar2(255),
-	email varchar(255)
+    itemsup number(20),
+	email varchar(255),
+    CONSTRAINT fk_sup_item FOREIGN KEY (itemsup) REFERENCES items(id) ON DELETE CASCADE
 );
 
 CREATE TABLE users(
@@ -61,7 +63,7 @@ CREATE TABLE users(
 	email varchar2(255),
 	password varchar2(255),
 	usertype number(20),
-	CONSTRAINT fk_usertype FOREIGN KEY (usertype) REFERENCES usertypes(id)
+	CONSTRAINT fk_usertype FOREIGN KEY (usertype) REFERENCES usertypes(id) ON DELETE CASCADE
 );
 
 CREATE TABLE orders(
@@ -71,28 +73,20 @@ CREATE TABLE orders(
 	userid number(20),
 	transaction number(20),
 	address varchar2(255),
-	created date,
-	CONSTRAINT fk_order_item FOREIGN KEY (inventoryitem) REFERENCES items(id),
-	CONSTRAINT fk_order_user FOREIGN KEY (userid) REFERENCES users(id),
-	CONSTRAINT fk_order_transaction FOREIGN KEY (transaction) REFERENCES transactions(id)
-);
-
-CREATE TABLE supplieritems(
-	id number(20) PRIMARY KEY,
-	supplier number(20),
-	item number(20),
-	CONSTRAINT fk_supplier_item FOREIGN KEY (item) REFERENCES items(id),
-	CONSTRAINT fk_suppliers FOREIGN KEY (supplier) REFERENCES suppliers(id)
+	created varchar2(255),
+	CONSTRAINT fk_order_item FOREIGN KEY (inventoryitem) REFERENCES items(id) ON DELETE CASCADE,
+	CONSTRAINT fk_order_user FOREIGN KEY (userid) REFERENCES users(id) ON DELETE CASCADE,
+	CONSTRAINT fk_order_transaction FOREIGN KEY (transaction) REFERENCES transactions(id) ON DELETE CASCADE
 );
 
 CREATE TABLE deliveries(
 	id number(20) PRIMARY KEY,
 	item number(20),
 	amount number(20),
-	datereceived date,
+	datereceived varchar2(255),
 	supplier number(20),
-    CONSTRAINT fk_deliver_supplier FOREIGN KEY (supplier) REFERENCES suppliers(id),
-	CONSTRAINT fk_deliver_item FOREIGN KEY (item) REFERENCES items(id)
+    CONSTRAINT fk_deliver_supplier FOREIGN KEY (supplier) REFERENCES suppliers(id) ON DELETE CASCADE,
+	CONSTRAINT fk_deliver_item FOREIGN KEY (item) REFERENCES items(id) ON DELETE CASCADE
 );
 
 

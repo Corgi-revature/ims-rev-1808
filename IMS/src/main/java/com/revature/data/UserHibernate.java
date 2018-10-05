@@ -50,7 +50,7 @@ public class UserHibernate implements UserDAO {
 //			Query query = ss.createQuery(hql);
 			result = ss.createQuery(hql).setParameter(0, i).list();
 		} catch (Exception e) {
-	         e.printStackTrace();
+
 		} finally {
 
 		}
@@ -67,7 +67,7 @@ public class UserHibernate implements UserDAO {
 //			Query query = ss.createQuery(hql);
 			result = ss.createQuery(hql).list();
 		} catch (Exception e) {
-	         e.printStackTrace();
+			
 		} finally {
 
 		}
@@ -84,7 +84,6 @@ public class UserHibernate implements UserDAO {
 //			Query query = ss.createQuery(hql);
 			result = ss.createQuery(hql).setParameter(0, user.getEmail().toLowerCase()).setParameter(1, user.getPassword()).list();
 		} catch (Exception e) {
-	         e.printStackTrace();
 	         
 		} finally {
 

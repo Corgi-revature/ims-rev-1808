@@ -30,7 +30,7 @@ public class UserTypeHibernate implements UserTypeDAO {
 	public int addUserType(UserType utype) {
 		Session ss = hu.getSession();
 		int result = 0;
-		Transaction tx = ss.beginTransaction();
+		Transaction tx = null;
 		try {
 			tx = ss.beginTransaction();
 			result = (int)ss.save(utype);
@@ -106,6 +106,7 @@ public class UserTypeHibernate implements UserTypeDAO {
 		try {
 			UserType utype = getUserTypeById(id);
 			ss.delete(utype);
+			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
 		}

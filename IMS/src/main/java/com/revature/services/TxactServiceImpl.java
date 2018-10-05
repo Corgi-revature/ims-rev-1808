@@ -21,38 +21,33 @@ public class TxactServiceImpl implements TxactService {
 
 	@Override
 	public Txact getTxactById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return ts.getTxactById(id);
 	}
 
 	@Override
 	public Set<Txact> getTxacts() {
-		// TODO Auto-generated method stub
-		return null;
+		return ts.getTxacts();
 	}
 
 	@Override
-	public List<Txact> getTxactsCriteria() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Txact> getTxactsCriteria(Txact txa) {
+		return ts.getTxactsCriteria(txa);
 	}
 
 	@Override
 	public void updateTxact(Txact txa) {
-		// TODO Auto-generated method stub
+		ts.updateTxact(txa);
 		
 	}
 
 	@Override
 	public void deleteTxact(Txact txa) {
-		// TODO Auto-generated method stub
-		
+		ts.deleteTxact(txa);
 	}
 
 	@Override
 	public void deleteTxactById(int id) {
-		// TODO Auto-generated method stub
-		
+		ts.deleteTxactById(id);
 	}
 
 	
