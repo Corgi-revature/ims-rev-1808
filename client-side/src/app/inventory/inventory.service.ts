@@ -41,7 +41,7 @@ export class InventoryService {
     ));
   }
 
-  getInventoryById(id: number): Observable<Inventory> {
+  getInventoryById(id: string): Observable<Inventory> {
     const url = this.appUrl + '/' + id;
     return this.http.get(url, { withCredentials: true }).pipe(
       map(
