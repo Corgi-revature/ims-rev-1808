@@ -1,3 +1,40 @@
-<p>
-  add-inventory works!
-</p>
+<mdb-card>
+  <mdb-card-body>
+    <mdb-card-title class="blue darken-2">
+        <h1 id="title" class="h1-responsive title">Add Inventory Item</h1>
+    </mdb-card-title>
+          <table class="table table-striped">
+            <thead class="mdb-color darken-3">
+                <tr class="text-white">
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <!--Table head-->
+            <tbody>
+                <tr>
+                    <th><h5 class="label">Item:</h5></th>
+                    <td><h5>&nbsp;&nbsp;<input id="it_name" type="text"></h5></td>
+                </tr>
+              <tr>
+                  <th><h5 class="label">Price:</h5></th>
+                  <td><h5>$<input id="it_price" value="0.00" type="number" min="0" step="0.01"></h5></td>
+              </tr>
+              <tr>
+                  <th><h5 class="label">Stock:</h5></th>
+                  <td><h5>&nbsp;&nbsp;<input id="inv_stock" value="0" type="number" min="0" step="1"></h5></td>
+              </tr>
+              <tr>
+                <th><h5 class="label">Package Date:</h5></th>
+                <td><h5>&nbsp;&nbsp;<input id="inv_pkgdt" type="date" max="{{today()}}"></h5></td>
+              </tr>
+              <tr>
+                <th><h5 class="label">Use By:</h5></th>
+                <td><h5>&nbsp;&nbsp;<input id="inv_useby" type="date" min="{{today()}}"></h5></td>
+              </tr>
+            </tbody>
+        </table>
+    <button class="btn btn-primary" (click)="submit()">Submit</button>
+    <a href="inventory" class="btn btn-danger">Cancel</a>
+  </mdb-card-body>
+</mdb-card>
