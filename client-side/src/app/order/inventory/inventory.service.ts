@@ -38,14 +38,7 @@ private appUrl = this.coreService.getURL() + '/inventory';
   updateInventoryItem(inv: Inventory) {
     const url = this.appUrl + '/' + inv.id;
     const body = JSON.stringify(inv);
-    console.log('url: ' + url);
-    console.log('body: ' + body);
-    console.log(this.header);
-    // return this.http.put(url, body, { headers: this.header, withCredentials: true }).pipe(
-    //   map(
-    //   resp => resp as Inventory
-    // ));
-    return this.http.put(url, body, {headers: this.header}).pipe(
+    return this.http.put(url,body,{headers: this.header}).pipe(
       map(resp => resp as Inventory )
     );
   }

@@ -13,21 +13,62 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let i of suppliers">
+              <tr *ngFor="let i of suppliers" id="sup_tab_{{i.id}}">
                     <td>{{i.id}}</td>
                     <td>{{i.name}}</td>
                     <td>{{i.itemsup.name}}</td>
                     <td>{{i.email}}</td>
                     <td>
-                    <a href="" class="btn btn-primary waves-light" mdbWavesEffect>Edit</a>
-                    <a href="" class="btn btn-danger" mdbWavesEffect>Delete</a>
+                    <button type="button" (click)="editSup()" class="btn btn-primary waves-light" mdbWavesEffect>Edit</button>
+                    <button type="button" (click)="deleteSup()" class="btn btn-danger" mdbWavesEffect>Delete</button>
                     </td>
               </tr>
             </tbody>
           </table>
-            
+          <button type="button" mdbBtn color="default" rounded="true" data-toggle="modal" data-target="#register" (click)="frame.show()"
+  mdbWavesEffect>New Supplier</button>
 
       </mdb-card-text>
       
     </mdb-card-body>
   </mdb-card>
+
+  <div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Add Supplier</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <i class="fa fa-envelope prefix grey-text"></i>
+          <input type="email" id="defaultForm-email" [(ngModel)]="sup.email" class="form-control validate" mdbInputDirective>
+          <label data-error="wrong" data-success="right" for="defaultForm-email">Email</label>
+        </div>
+
+        <div class="md-form mb-4">
+          <i class="fa fa-user prefix grey-text"></i>
+          <input type="text" id="Form-name" [(ngModel)]="sup.name" class="form-control validate" mdbInputDirective>
+          <label data-error="wrong" data-success="right" for="Form-email">Name</label>
+        </div>
+        <div class="row">
+            <label>Item Select</label>
+          <div class="col-md-6">
+              <select [(ngModel)]="sup.itemsup" class="browser-default">
+                  <option value="" disabled selected>Choose Item</option>
+                  <option *ngFor="let i of items" [ngValue]="i" >{{i.name}}</option>
+              </select>
+          </div>
+      </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button mdbBtn color="default" class="waves-light" (click)="submitModal()" mdbWavesEffect>Register</button>
+      </div>
+    </div>
+  </div>
+</div>

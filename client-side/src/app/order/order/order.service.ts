@@ -33,9 +33,16 @@ export class OrderService {
       ));
   }
 
+  getOrdersView(): Observable<Order[]> {
+    return this.http
+      .get(this.appUrl + '/total/all', { headers: this.headers })
+      .pipe(map(
+        resp => resp as Order[]
+      ));
+  }
+
   getOrdersByTxactid(txid: number): Observable<Order[]> {
     const url = this.appUrl + '/txact/' + txid;
-    console.log(url);
     return this.http
       .get(url, { withCredentials: true, headers: this.headers })
       .pipe(map(resp => resp as Order[]));

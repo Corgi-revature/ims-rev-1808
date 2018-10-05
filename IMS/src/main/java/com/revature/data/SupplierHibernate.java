@@ -1,5 +1,6 @@
 package com.revature.data;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,8 +44,30 @@ public class SupplierHibernate implements SupplierDAO {
 	@Override
 	public List<Supplier> getSuppliersCriteria(Supplier sup) {
 		Session ss = hu.getSession();
-		Query<Supplier> que = ss.createQuery("SELECT s FROM Supplier AS s WHERE sup LIKE s");
-		que.setParameter("sup", sup);
+		ArrayList<String> query = new ArrayList<String>();
+		Query<Supplier> que = ss.createQuery("SELECT s FROM Supplier AS s "
+				+ "WHERE s.name = :supname "
+				+ "AND s.email = :supmail "
+				+ "AND s.itemsup = :supitem");
+		
+		if(null!=sup.getName()) {
+			que.setParameter("supname", sup.getName());
+		}
+		else {
+			que.setParameter("supname", "%");
+		}
+		if(null!=sup.getEmail()) {
+			que.setParameter("supmail", sup.getEmail());
+		}
+		else {
+			que.setParameter("supmail", "%");
+		}
+		if(null!=sup.getItemsup()) {
+			que.setParameter("supitem", sup.getItemsup());
+		}
+		else {
+			que.setParameter("supitem", "%");
+		}
 		List<Supplier> result = que.getResultList();
 		return result;
 	}
@@ -79,6 +102,7 @@ public class SupplierHibernate implements SupplierDAO {
 		Transaction tx = ss.beginTransaction();
 		try {
 			ss.delete(sup);
+			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
 		}
@@ -90,6 +114,7 @@ public class SupplierHibernate implements SupplierDAO {
 		Transaction tx = ss.beginTransaction();
 		try {
 			ss.delete(ss.get(Supplier.class, id));
+			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
 		}

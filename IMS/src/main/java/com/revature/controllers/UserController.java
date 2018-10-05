@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.beans.Order;
 import com.revature.beans.User;
 import com.revature.beans.UserType;
 import com.revature.services.UserService;
@@ -54,7 +55,7 @@ public class UserController {
 	public List<User> getCust() {
 		List<User> cust= null;
 		try {
-			cust = us.getUserByType(1);
+			cust = us.getUserByType(2);
 			if (cust.size() != 0) {
 				return cust;
 			}
@@ -98,10 +99,9 @@ public class UserController {
 		}
 		return 0;
 	}
-
-	// testing
-	@RequestMapping(value = "/hello", method = RequestMethod.GET)
-	public String byPassLogin() {
-		return "User Controller says Hello";
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public void updateUser(@RequestBody User u) {
+		us.updateUser(u);
 	}
 }

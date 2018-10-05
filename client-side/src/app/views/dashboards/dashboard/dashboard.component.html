@@ -5,17 +5,16 @@
       <h4 class="mb-sm-0">
         Dashboard
       </h4>
-      <div class="btn-group float-right" role="group" aria-label="Basic example"> 
-        <a *ngIf="usertype===1" class="btn btn-primary waves-light nav-link float-right ml-1"
-          [routerLink]="['/user']" mdbWavesEffect>Employee</a>
-        <a *ngIf="usertype!=2" class="btn btn-primary waves-light nav-link float-right ml-1" [routerLink]="['/user']"
+      <div class="btn-group float-right" role="group" aria-label="Basic example">
+        <a *ngIf="usertype===1" class="btn btn-primary waves-light nav-link float-right ml-1" [routerLink]="['/users/employee']"
+          mdbWavesEffect>Employee</a>
+        <a *ngIf="usertype!=2" class="btn btn-primary waves-light nav-link float-right ml-1" [routerLink]="['/users/customer']"
           mdbWavesEffect>Customer</a></div>
-
     </div>
   </div>
   <div>
     <app-stats-card></app-stats-card>
-    <div class="row wow fadeIn mt-5">
+    <div class="row wow fadeIn mt-4">
       <!--Grid column-->
       <div class="col-md-9 mb-4">
         <!--Card-->
@@ -42,16 +41,19 @@
                   <i class="fa fa-arrow-up ml-1"></i>
                 </span>
               </a>
-              <a class="list-group-item list-group-item-action waves-effect">Traffic
-                <span class="badge badge-danger badge-pill pull-right">5%
-                  <i class="fa fa-arrow-down ml-1"></i>
+              <a class="list-group-item list-group-item-action waves-effect">Profit
+                <span class="badge badge-success badge-pill pull-right">8%
+                  <i class="fa fa-arrow-up ml-1"></i>
                 </span>
+              </a>
+              <a class="list-group-item list-group-item-action waves-effect">Inventory Level
+                <span class="badge badge-info badge-pill pull-right">65%</span>
               </a>
               <a class="list-group-item list-group-item-action waves-effect">Orders
                 <span class="badge badge-primary badge-pill pull-right">14</span>
               </a>
               <a class="list-group-item list-group-item-action waves-effect">Issues
-                <span class="badge badge-primary badge-pill pull-right">123</span>
+                <span class="badge badge-danger badge-pill pull-right">1</span>
               </a>
               <a class="list-group-item list-group-item-action waves-effect">Messages
                 <span class="badge badge-primary badge-pill pull-right">8</span>
@@ -67,32 +69,40 @@
   </div>
 </div>
 <div id="customerDash" *ngIf="usertype === 2">
-  <div id="customerDash">
-    <mdb-card>
-      <mdb-card-body>
-        <mdb-card-title>
-          <h4>Active Orders</h4>
-        </mdb-card-title>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">Id</th>
-              <th scope="col">Item</th>
-              <th scope="col">Amount</th>
-              <th scope="col">Total Cost</th>
-              <th scope="col">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let order of orders">
-              <th scope="row">{{order.id}}</th>
-              <td>{{order.inventoryitem.name}}</td>
-              <td>{{order.amount}}</td>
-              <td>{{order.inventoryitem.amount * order.inventoryitem.price}}</td>
-              <td>{{order.tx.status}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </mdb-card-body>
-    </mdb-card>
-  </div>
+
+  <app-stats-card2></app-stats-card2>
+
+  <!-- <div class="row wow fadeIn mt-4"> -->
+  <mdb-card class="wow fadeIn mt-4">
+    <mdb-card-body>
+      <mdb-card-title>
+        <h4>Orders</h4>
+      </mdb-card-title>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Address</th>
+            <th scope="col">Item Name</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Price (each)</th>
+            <th scope="col">Total</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <th scope="row">{{order.id}}</th>
+            <td>{{order.address}}</td>
+            <td>{{order.name}}</td>
+            <td>{{order.amount}}</td>
+            <td>${{order.price}}</td>
+            <td>${{order.total}}</td>
+            <td>{{order.status}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mdb-card-body>
+  </mdb-card>
+  <!-- </div> -->
+</div>

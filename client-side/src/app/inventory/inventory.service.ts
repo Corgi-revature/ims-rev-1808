@@ -4,6 +4,7 @@ import { CoreService } from '../core/core.service';
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Item, Inventory } from '../class';
+import { ItemService } from 'src/app/core/item.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,29 +13,12 @@ export class InventoryService {
   private appUrl = this.coreService.getURL() + '/inventory';
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   private header = this.coreService.getHeader();
+
   constructor(
     private http: HttpClient,
-    private coreService: CoreService
+    private coreService: CoreService,
+    private itemService: ItemService
   ) { }
-
-  getInventory(): Observable<Inventory[]> {
-    return this.http.get(this.appUrl + '/all', {
-       withCredentials: true
-      }).pipe(
-      map(
-        resp => resp as Inventory[]
-      )
-    );
-  }
-
-  getInventoryById(id: string): Observable<Inventory> {
-    const url: string = this.appUrl + '/' + id;
-    return this.http.get(url, {
-       withCredentials: true
-    }).pipe(
-      map(resp => resp as Inventory)
-    );
-  }
 
   makeItemPriceString(item: Item): string {
     let price = item.price.toString();
@@ -48,12 +32,18 @@ export class InventoryService {
     }
     return price;
   }
+  
+  getInventory(): Observable<Inventory[]> {
+    const url = this.appUrl + '/all';
+    return this.http.get(url, { withCredentials: true }).pipe(
+    map(
+        resp => resp as Inventory[]
+    ));
+  }
 
-  createInventoryItem(): Observable<Inventory> {
-    const body = '{}';
-    return this.http.post(this.appUrl, body,
-      { headers: this.headers, withCredentials: true
-      }).pipe(
+  getInventoryById(id: string): Observable<Inventory> {
+    const url = this.appUrl + '/' + id;
+    return this.http.get(url, { withCredentials: true }).pipe(
       map(
       resp => resp as Inventory
     ));
@@ -63,22 +53,23 @@ export class InventoryService {
   updateInventoryItem(inv: Inventory) {
     const url = this.appUrl + '/' + inv.id;
     const body = JSON.stringify(inv);
-    console.log('url: ' + url);
-    console.log('body: ' + body);
-    console.log(this.header);
-    // return this.http.put(url, body, { headers: this.header, withCredentials: true }).pipe(
-    //   map(
-    //   resp => resp as Inventory
-    // ));
-    return this.http.put(url, body, {headers: this.header}).pipe(
+    return this.http.put(url,body,{headers: this.header}).pipe(
       map(resp => resp as Inventory )
     );
   }
 
+  createInventoryItem(inv: Inventory): Observable<Inventory> {
+    const body = JSON.stringify(inv);
+    return this.http.post(this.appUrl, body, { headers: this.headers, withCredentials: true }).pipe(
+      map(
+      resp => resp as Inventory
+    ));
+  }
+
   deleteInventoryItem(inv: Inventory) {
-    const url = this.appUrl + '/' + inv.id;
-    return this.http.delete(url, {headers: this.header}).pipe(
-      map(resp => resp as Inventory)
+    const url = this.appUrl + '/'+inv.id;
+    return this.http.delete(url,{headers: this.header}).pipe(
+      map(resp=> resp as Inventory)
     );
   }
 }

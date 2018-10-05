@@ -35,7 +35,11 @@ import { CustomerComponent } from './login/user/customer/customer.component';
 import { PhonePipe } from './shared/pipe/phone.pipe';
 import { ItemFilterPipe } from './shared/pipe/item-filter.pipe';
 import { InventoryComponent } from './inventory/inventory.component';
+import { AddInventoryComponent} from './inventory/add-inventory/add-inventory.component';
 import { SupplierComponent } from './supplier/supplier.component';
+import { ProfileComponent } from './login/profile/profile.component';
+import { BreadcrumbsComponent } from './main-layout/breadcrumbs/breadcrumbs.component';
+
 
 @NgModule({
   declarations: [
@@ -50,10 +54,14 @@ import { SupplierComponent } from './supplier/supplier.component';
     DeliveryComponent,
     EmployeeComponent,
     InventoryComponent,
+    AddInventoryComponent,
+    EditInventoryComponent,
     CustomerComponent,
     PhonePipe,
+    ProfileComponent,
     ItemFilterPipe,
-    UserComponent
+    UserComponent,
+    BreadcrumbsComponent
   ],
   imports: [
     HttpClientModule,

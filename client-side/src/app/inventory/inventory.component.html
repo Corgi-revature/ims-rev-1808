@@ -1,13 +1,11 @@
 <mdb-card>
-  <mdb-card-body>
     <!-- <div class="row mt-5"> -->
-    <mdb-card-title class="blue darken-2">
+    <mdb-card-header class="info-color white-text text-center pb-2 pt-4">
           <h1 id="title" class="h1-responsive  title">Inventory Items</h1>
             <a [routerLink]="['/inventory/add']" class="btn btn-danger addbutton">
               Add To Inventory</a>
-
-    </mdb-card-title>
-
+    </mdb-card-header>
+    <mdb-card-body>
     <!-- <div class="card card-cascade narrower mt-5">
         <div class="view gradient-card-header blue darken-2">
           <h1 id="title" class="h1-responsive text-white">Inventory Items</h1>
@@ -16,7 +14,6 @@
               Add To Inventory</a>
               </div>
         </div> -->
-
       <table class="table table-striped">
         <thead class="mdb-color darken-3">
           <tr class="text-white">
@@ -51,12 +48,11 @@
             <td>
               <h5>{{inventory.useby.substring(0,10)}}</h5>
             </td>
-            <td><a [routerLink]="['/inventory/{:id}']" class="btn btn-primary">Edit</a></td>
-            <td><a class="btn btn-danger" (click)="EmployeeService.deleteInventoryAlert(inventory)">Delete</a></td>
+            <td><a [routerLink]="['/inventory',inventory.id]" class="btn btn-primary">Edit</a></td>
+            <td><a class="btn btn-danger" (click)="deleteInventoryAlert(inventory)">Delete</a></td>
           </tr>
         </tbody>
       </table>
-
     <!-- </div> -->
   </mdb-card-body>
 </mdb-card>
