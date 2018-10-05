@@ -25,7 +25,6 @@ import { UtilitiesComponent } from './css/utilities/utilities.component';
 import { ImagesComponent } from './css/images/images.component';
 import { ColorsComponent } from './css/colors/colors.component';
 import { ShadowComponent } from './css/shadow/shadow.component';
-import { ProfileComponent } from './profile/profile.component';
 import { HelpComponent } from './help/help.component';
 
 
@@ -59,7 +58,6 @@ import { HelpComponent } from './help/help.component';
     ImagesComponent,
     ColorsComponent,
     ShadowComponent,
-    ProfileComponent,
     HelpComponent,
   ],
   exports: [

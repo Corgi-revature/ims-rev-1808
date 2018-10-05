@@ -1,0 +1,98 @@
+<mdb-card>
+  <mdb-card-header class="info-color white-text text-center py-4">
+    <h2>Personal Info</h2>
+  </mdb-card-header>
+  <!--Card content-->
+  <mdb-card-body>
+    <!--Text-->
+    <!-- <mdb-card-text> Some quick example text to build on the card title and make up the bulk of the card's content. </mdb-card-text> -->
+    <div class="row">
+      <div class="col-3">
+        <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+          <!-- Card img -->
+          <mdb-card-img src="assets/img/corgeek1.png" alt="card-img-corgeek" class="user-img img-responsive"></mdb-card-img>
+        </div>
+        <!-- <img src="assets/img/corgeek1.png" class="img-fluid user-img"> -->
+      </div>
+      <div class="col-9">
+        <!-- <div class="row" *ngIf="!edit">
+          <p>
+            Name: {{"currentUser.first"}}, {{"currentUser.first"}}<br>
+            Phone: {{"currentUser.first"}} <br>
+            Email: {{"currentUser.first"}} <br>
+          </p>
+        </div> -->
+        <form *ngIf="edit===false">
+          <div class="form-row">
+            <div class="col">
+              <!-- First name -->
+              <div class="md-form">
+                <input type="text" id="x1" class="form-control" [value]="currentUser.first" mdbInputDirective disabled>
+                <label for="x1">First Name</label>
+              </div>
+            </div>
+            <div class="col">
+              <!-- Last name -->
+              <div class="md-form">
+                <input type="text" id="x2" class="form-control" [value]="currentUser.last" mdbInputDirective disabled>
+                <label for="x2">Last Name</label>
+              </div>
+            </div>
+          </div>
+          <!-- E-mail -->
+          <div class="md-form mt-0">
+            <input type="email" id="x3" class="form-control" [value]="currentUser.email" mdbInputDirective disabled>
+            <label for="x3">E-mail</label>
+          </div>
+          <!-- Phone number -->
+          <div class="md-form">
+            <input type="text" id="x4" class="form-control" [value]="currentUser.phone" mdbInputDirective disabled>
+            <label for="x4">Phone number</label>
+          </div>
+          <button *ngIf="edit===false" mdbBtn type="button" color="info" class="waves-light float-right" (click)="toggleForm()"
+            mdbWavesEffect>Edit</button>
+        </form>
+
+        <!-- Form -->
+        <form class="text-center" style="color: #757575;" [formGroup]="profileForm" *ngIf="edit">
+          <div class="form-row">
+            <div class="col">
+              <!-- First name -->
+              <div class="md-form">
+                <!-- ngModel goes with the name tag -->
+                <input type="text" id="materialRegisterFormFirstName" class="form-control" [value]="currentUser.first"
+                  mdbInputDirective formControlName="first">
+                <label for="materialRegisterFormFirstName">First Name</label>
+              </div>
+            </div>
+            <div class="col">
+              <!-- Last name -->
+              <div class="md-form">
+                <input type="text" id="materialRegisterFormLastName" class="form-control" [value]="currentUser.last"
+                  mdbInputDirective formControlName="last">
+                <label for="materialRegisterFormLastName">Last Name</label>
+              </div>
+            </div>
+          </div>
+          <!-- E-mail -->
+          <div class="md-form mt-0">
+            <input type="email" id="materialRegisterFormEmail" class="form-control" [value]="currentUser.email"
+              mdbInputDirective formControlName="email">
+            <label for="materialRegisterFormEmail">E-mail</label>
+          </div>
+          <!-- Phone number -->
+          <div class="md-form">
+            <input type="text" id="materialRegisterFormPhone" class="form-control" [value]="currentUser.phone"
+              aria-describedby="materialRegisterFormPhoneHelpBlock" mdbInputDirective formControlName="phone">
+            <label for="materialRegisterFormPhone">Phone number</label>
+          </div>
+          <!-- Sign up button -->
+
+          <button *ngIf="edit" mdbBtn type="button" color="danger" class="waves-light float-right" (click)="toggleForm()"
+            mdbWavesEffect>Cancel</button>
+          <button *ngIf="edit" mdbBtn type="submit" color="dark-green" class="waves-light float-right" (click)="update()" mdbWavesEffect>Update</button>
+        </form>
+      </div>
+    </div>
+  </mdb-card-body>
+</mdb-card>

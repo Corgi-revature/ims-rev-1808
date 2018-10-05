@@ -38,7 +38,7 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { AddInventoryComponent} from './inventory/add-inventory/add-inventory.component';
 import { SupplierComponent } from './supplier/supplier.component';
 import { ItemComponent } from './item/item.component';
-
+import { ProfileComponent } from './login/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +57,7 @@ import { ItemComponent } from './item/item.component';
     EditInventoryComponent,
     CustomerComponent,
     PhonePipe,
+    ProfileComponent,
     ItemFilterPipe,
     UserComponent,
     ItemComponent

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Item } from '../class/item';
+import { Item } from 'src/app/class/item';
 import { ItemService } from 'src/app/core/item.service';
 
 @Component({
@@ -10,6 +10,7 @@ import { ItemService } from 'src/app/core/item.service';
 export class ItemComponent implements OnInit {
   public items: Item[];
 
+  item: Item = {id:0, name:'',price:0};
   constructor(
     private itemService: ItemService
   ) { }
@@ -20,16 +21,26 @@ export class ItemComponent implements OnInit {
 
   fillItems() {
     this.itemService.getItems().subscribe(
-      resp=>this.items=resp
+      resp=>{      
+        this.items=resp;
+      }
     );
   }
 
   addItem() {
+    
+  }
+
+  editItem() {
 
   }
 
-  deleteItemAlert() {
-    
+  deleteItem() {
+
+  }
+
+  submitModal() {
+
   }
 
 }
