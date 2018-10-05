@@ -183,11 +183,17 @@ export class OrderComponent implements OnInit {
     );
   }
 
-  getTotal(){
-    var txactTotal = 0;
+  getOrderTotal(){
+    var total = 0;
     for (let x = 0; x < this.orders.length; x++){
-      txactTotal = txactTotal + (this.orders[x].inventoryitem.price * this.orders[x].amount);
+      total = total + (this.orders[x].inventoryitem.price * this.orders[x].amount);
     }
-    return txactTotal;
+    return total;
+  }
+
+  getItemTotal(ite:Item){
+    let amount: number = Number((<HTMLInputElement>document.getElementById(`item_${ite.id}`)).value);
+    let total = ite.price*amount;
+    return total;
   }
 }
