@@ -17,7 +17,7 @@ export class InventoryService {
   constructor(
     private http: HttpClient,
     private coreService: CoreService,
-    private ItemService: ItemService
+    private itemService: ItemService
   ) { }
 
   makeItemPriceString(item: Item): string {
