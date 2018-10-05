@@ -13,41 +13,25 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  // @Input() private first: string;
-  // @Input() private last: string;
-  // @Input() private email: string;
-  // @Input() private password: string;
-  // @Input() private phone: string;
-  // @Input() private error: string;
   submitted = false;
   loading = false;
   registerForm: FormGroup;
   error: string;
-  // user: User = {
-  //   id: null,
-  //   first: this.first,
-  //   last: this.last,
-  //   email: this.email,
-  //   password: this.password,
-  //   userType: 2,
-  //   phone: this.phone
-  // };
 
   constructor(
     private coreService: CoreService,
     private userService: UserService,
     private router: Router,
     private fb: FormBuilder
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.registerForm = this.fb.group({
       'email': [null, Validators.email],
       'password': [null, Validators.minLength(6)],
-      'first': [null, Validators.required],
-      'last': [null, Validators.required],
-      'phone': [null, Validators.minLength(10)],
+      'first': [null, [Validators.required, Validators.minLength(6)]],
+      'last': [null, [Validators.required, Validators.minLength(6)]],
+      'phone': [null,  [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.maxLength(10), Validators.minLength(9)]],
       'usertype': [{id: '2', usertype: 'Customer'}]
     });
   }

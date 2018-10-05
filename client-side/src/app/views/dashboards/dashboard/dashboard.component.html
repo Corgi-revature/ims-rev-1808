@@ -5,17 +5,17 @@
       <h4 class="mb-sm-0">
         Dashboard
       </h4>
-      <div class="btn-group float-right" role="group" aria-label="Basic example"> 
-        <a *ngIf="usertype===1" class="btn btn-primary waves-light nav-link float-right ml-1"
-          [routerLink]="['/user']" mdbWavesEffect>Employee</a>
-        <a *ngIf="usertype!=2" class="btn btn-primary waves-light nav-link float-right ml-1" [routerLink]="['/user']"
+      <div class="btn-group float-right" role="group" aria-label="Basic example">
+        <a *ngIf="usertype===1" class="btn btn-primary waves-light nav-link float-right ml-1" [routerLink]="['/users/employee']"
+          mdbWavesEffect>Employee</a>
+        <a *ngIf="usertype!=2" class="btn btn-primary waves-light nav-link float-right ml-1" [routerLink]="['/users/customer']"
           mdbWavesEffect>Customer</a></div>
 
     </div>
   </div>
   <div>
     <app-stats-card></app-stats-card>
-    <div class="row wow fadeIn mt-5">
+    <div class="row wow fadeIn mt-4">
       <!--Grid column-->
       <div class="col-md-9 mb-4">
         <!--Card-->
@@ -67,11 +67,14 @@
   </div>
 </div>
 <div id="customerDash" *ngIf="usertype === 2">
-  <div id="customerDash">
-    <mdb-card>
+
+  <app-stats-card2></app-stats-card2>
+
+  <!-- <div class="row wow fadeIn mt-4"> -->
+    <mdb-card class="wow fadeIn mt-4">
       <mdb-card-body>
         <mdb-card-title>
-          <h4>Active Orders</h4>
+          <h4>Orders</h4>
         </mdb-card-title>
         <table class="table table-striped">
           <thead>
@@ -99,4 +102,5 @@
         </table>
       </mdb-card-body>
     </mdb-card>
-  </div>
+  <!-- </div> -->
+</div>
