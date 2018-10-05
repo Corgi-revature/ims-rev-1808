@@ -11,17 +11,17 @@ import { Order, Item, Txact, Inventory } from '../../class';
 export class OrderService {
   private appUrl = this.coreService.getURL() + '/order';
   private headers = this.coreService.getHeader();
-  public txid:number;
+  public txid: number;
 
   constructor(
     private http: HttpClient,
     private coreService: CoreService) { }
- 
-  setTxid(txactId){
+
+  setTxid(txactId) {
     this.txid = txactId;
   }
 
-  getTxid(){
+  getTxid() {
     return this.txid;
   }
 
@@ -36,6 +36,20 @@ export class OrderService {
   getOrdersView(): Observable<Order[]> {
     return this.http
       .get(this.appUrl + '/total/all', { headers: this.headers })
+      .pipe(map(
+        resp => resp as Order[]
+      ));
+  }
+  getOrdersViewP(): Observable<Order[]> {
+    return this.http
+      .get(this.appUrl + '/total/pending', { headers: this.headers })
+      .pipe(map(
+        resp => resp as Order[]
+      ));
+  }
+  getOrdersViewF(): Observable<Order[]> {
+    return this.http
+      .get(this.appUrl + '/total/complete', { headers: this.headers })
       .pipe(map(
         resp => resp as Order[]
       ));
@@ -57,8 +71,8 @@ export class OrderService {
 
   createOrder(ord: Order): Observable<number> {
     const body = JSON.stringify(ord);
-    return this.http.post(this.appUrl,body,{ headers: this.headers, withCredentials: true }).pipe(
-        map
+    return this.http.post(this.appUrl, body, { headers: this.headers, withCredentials: true }).pipe(
+      map
         (resp => {
           if (resp !== null) {
             return resp as number;

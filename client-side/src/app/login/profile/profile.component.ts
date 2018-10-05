@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
     this.currentUser = JSON.parse(this.coreService.getLStorage('user'));
     this.profileForm = this.fb.group({
       'id': [this.currentUser.id],
-      'password': [this.currentUser.password],
+      'password': [this.currentUser.password, Validators.minLength(6)],
       'email': [this.currentUser.email, Validators.email],
       'first': [this.currentUser.first, Validators.required],
       'last': [this.currentUser.last, Validators.required],
