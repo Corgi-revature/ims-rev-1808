@@ -67,6 +67,10 @@ const routes: Route[] = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'item', component: ItemComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'inventory/add', component: AddInventoryComponent,
     canActivate: [AuthGuard]
   },
