@@ -25,7 +25,7 @@
             <tr *ngFor="let i of items">
                   <td><h6>{{i.id}}</h6></td>
                   <td><h6>{{i.name}}</h6></td>
-                  <td><h6>{{i.price}}</h6></td>
+                  <td><h6>${{inventoryService.makeItemPriceString(i)}}</h6></td>
                   <td>
                       <button type="button" id="i.id" (click)="basicModal.show(); editItem(i)" class="btn btn-primary waves-light" mdbWavesEffect>Edit</button>
                   </td>
