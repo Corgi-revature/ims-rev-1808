@@ -1,41 +1,33 @@
 <mdb-card>
     <mdb-card-header class="info-color white-text text-center pt-4">
-      <h1 id="title" class="h1-responsive float-left title">Order</h1>
+      <h1 id="title" class="h1-responsive float-left title pt-2">Orders</h1>
       <a class="btn float-right default-color mb-3"  [routerLink]="['/orders/add']">
         Add Order</a>
     </mdb-card-header>
     <mdb-card-body>
-      <table class="table table-striped">
-        <thead class="mdb-color darken-3">
-          <tr class="text-white">
-            <th>ID</th>
-            <th>Supplier Name</th>
-            <th>Items Supplied</th>
-            <th>Email</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let i of suppliers">
-            <td>
-              <h6>{{i.id}}</h6>
-            </td>
-            <td>
-              <h6>{{i.name}}</h6>
-            </td>
-            <td>
-              <h6>{{i.itemsup.name}}</h6>
-            </td>
-            <td>
-              <h6>{{i.email}}</h6>
-            </td>
-            <td>
-              <button type="button" id="i.id" (click)="basicModal.show(); editSup(i)" class="btn btn-primary waves-light"
-                mdbWavesEffect>Edit</button>
-              <button type="button" id="i.id" (click)="deleteSup(i)" class="btn btn-danger" mdbWavesEffect>Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        <table class="table table-striped">
+            <thead class="mdb-color darken-3">
+              <tr class="text-white">
+                <th scope="col">ID</th>
+                <th scope="col">Address</th>
+                <th scope="col">Item Name</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Price (each)</th>
+                <th scope="col">Total</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of orders">
+                <th scope="row">{{order.id}}</th>
+                <td>{{order.address}}</td>
+                <td>{{order.name}}</td>
+                <td>{{order.amount}}</td>
+                <td>${{order.price}}</td>
+                <td>${{order.total}}</td>
+                <td>{{order.status}}</td>
+              </tr>
+            </tbody>
+          </table>
     </mdb-card-body>
   </mdb-card>
