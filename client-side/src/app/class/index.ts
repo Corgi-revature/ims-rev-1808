@@ -5,3 +5,4 @@ export * from './txact';
 export * from './user';
 export * from './inventory';
 export * from './usertype';
+export * from './report';

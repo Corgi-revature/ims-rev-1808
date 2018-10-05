@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/app/class/item';
 import { ItemService } from 'src/app/core/item.service';
+import { InventoryService } from '../inventory/inventory.service';
 
 @Component({
   selector: 'app-item',
@@ -13,7 +14,8 @@ export class ItemComponent implements OnInit {
   item: Item = {id:0, name:'',price:0};
   edititem: Item = {id:0, name:'',price:0}
   constructor(
-    private itemService: ItemService
+    private itemService: ItemService,
+    private inventoryService: InventoryService
   ) { }
 
   ngOnInit() {

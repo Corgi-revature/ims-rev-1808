@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { User, Order } from '../../../class';
+import { User, Order, Report } from '../../../class';
 import { CoreService } from '../../../core/core.service';
 import { UserService } from '../../../login/user/user.service';
 import { OrderService } from '../../../order/order/order.service';
@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   user: User;
   users: User[];
   orders: Order[];
+  report: Report;
   public chart1Type = 'bar';
 
   public chartDatasets: Array<any> = [
@@ -70,6 +71,7 @@ export class DashboardComponent implements OnInit {
     this.user = JSON.parse(l);
     this.usertype = this.user.usertype.id;
     this.getOrdersView();
+    this.getReport()
   }
 
   getOrdersView() {
@@ -79,6 +81,11 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  getReport() {
+    this.orderService.getReport().subscribe(
+      report => this.report = report
+    );
+  }
   superPower() {
     if (this.usertype === 1) {
       this.userService.getUser();
