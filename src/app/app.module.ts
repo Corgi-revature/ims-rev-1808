@@ -42,6 +42,7 @@ import { ProfileComponent } from './login/profile/profile.component';
 import { BreadcrumbsComponent } from './main-layout/breadcrumbs/breadcrumbs.component';
 import { DeliveryManageComponent} from './delivery/delivery.component';
 import { OrderListComponent } from './order/list/order-list.component';
+import { TxactComponent } from './order/txact/txact.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,9 @@ import { OrderListComponent } from './order/list/order-list.component';
     ItemComponent,
     BreadcrumbsComponent,
     DeliveryManageComponent,
-    OrderListComponent
+    OrderListComponent,
+    TxactComponent,
+    AlertComponent
   ],
   imports: [
     HttpClientModule,

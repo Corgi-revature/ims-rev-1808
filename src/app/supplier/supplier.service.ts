@@ -4,7 +4,6 @@ import { CoreService } from '../core/core.service';
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Supplier } from '../class/supplier';
-import { Item } from '../class/Item';
 
 @Injectable({
     providedIn: 'root'
