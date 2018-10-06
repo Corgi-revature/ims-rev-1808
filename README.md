@@ -1,94 +1,27 @@
-# Project Corgi
+# Project2Rev
 
-An Inventory Management System built using Angular as the front-end framework with Java back-end that utilize Hibernate to interact with our database hosted on AWS RDS
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.1.
 
-## Getting Started
+## Development server
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-### Prerequisites
+## Code scaffolding
 
-What things you need to install the software and how to install them
-Ensure you have JRE8 or above.
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-```
-Give examples
-```
+## Build
 
-### Installing
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-To get the front end development environment setup
+## Running unit tests
 
-Please follow the steps below:
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-```
-npm install 
-```
+## Running end-to-end tests
 
-Starting the project in a Java IDE will allow maven to auto create and install. 
-Once this is done, please use the command below 
-*The default port ng serve command serves to localhost port 4200*
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-```
-ng serve
-```
+## Further help
 
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Java] - Programming Language
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [Angular](https://angular.io/) - Front-end Framework
-* [Angular Material](https://material.angular.io/) - Angular CSS Framework
-
-## Contributing
-
-Please read [CONTRIBUTING.md] for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Steven Hang** 
-* **Chen Sia** 
-* **David Velez** - 
-* **William Shook** - 
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
