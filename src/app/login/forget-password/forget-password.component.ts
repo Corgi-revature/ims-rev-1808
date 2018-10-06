@@ -17,4 +17,7 @@ export class ForgetPasswordComponent implements OnInit {
   initForgetPass(): void {
     this.authService.getForgotten(this.email);
    }
+   getForgetten() {
+     return true;
+   }
 }
