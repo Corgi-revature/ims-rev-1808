@@ -2,9 +2,11 @@
   "name": "project2-rev",
   "version": "0.0.0",
   "scripts": {
+    "preinstall": "npm install -g @angular/cli @angular/compiler-cli typescript",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "postinstall": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -14,6 +16,10 @@
     "copy": "cp dist/angular-bootstrap-md-6.* ./",
     "compile": "npm run build:lib && npm run pack && npm run copy",
     "version": "sync-json -v --property version --source package.json src/package.json"
+  },
+  "engines": {
+    "node": "8.11.3",
+    "npm": "6.1.0"
   },
   "private": true,
   "dependencies": {
