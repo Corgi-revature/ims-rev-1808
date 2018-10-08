@@ -1,6 +1,14 @@
 import { TestBed, async } from '@angular/core/testing';
+import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { DashboardComponent } from './views/dashboards/dashboard/dashboard.component';
+import { LoginComponent } from './login/login/login.component';
+
 describe('AppComponent', () => {
+  const routes: Routes = [
+    {path: 'dashboard', component: DashboardComponent},
+    {path: 'login', component: LoginComponent}
+  ];
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
