@@ -37,6 +37,7 @@
     "@angular/router": "^6.1.9",
     "angular-bootstrap-md": "file:angular-bootstrap-md-6.2.4.tgz",
     "angular-calendar": "^0.25.2",
+    "auth0-js": "^9.8.0",
     "chart.js": "^2.7.2",
     "classlist.js": "1.1.x",
     "core-js": "^2.5.4",
